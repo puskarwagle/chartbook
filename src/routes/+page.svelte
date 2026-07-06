@@ -18,16 +18,12 @@
 
 	type TierKey = '1' | '2' | '3' | '4' | 'unknown';
 
-	let selectedTier = $state<TierKey>('1');
+	let filterTier = $state<TierKey | null>(null);
 	let countryTiers = $state<Record<string, TierKey>>({});
 	let hovered = $state<string | null>(null);
 	let showNames = $state(false);
 	let takingScreenshot = $state(false);
 
-	/**
-	 * Build the initial tier assignment map from countryStatus.json.
-	 * Called on load and when the user clicks "Reset".
-	 */
 	function loadInitialTiers(): Record<string, TierKey> {
 		const result: Record<string, TierKey> = {};
 		for (const [iso2, entry] of Object.entries(statusData.countries)) {
@@ -50,25 +46,16 @@
 		{ key: 'unknown', label: 'Unknown', hex: COLORS.unknown }
 	];
 
-	/** Returns the hex fill color for a country based on its current tier assignment. */
 	function fillFor(iso2: string): string {
-		const tier = countryTiers[iso2];
-		return tier ? COLORS[tier] : COLORS.unknown;
+		const tier = countryTiers[iso2] ?? 'unknown';
+		if (filterTier !== null && tier !== filterTier) return '#1a1a2e';
+		return COLORS[tier] ?? COLORS.unknown;
 	}
 
-	/**
-	 * Toggle a country's tier assignment.
-	 * If the country already has the selected tier, it's removed (reset to default).
-	 * Otherwise, it's assigned the currently selected tier.
-	 * Uses spread-to-replace to trigger Svelte's reactivity.
-	 */
-	function toggleCountry(iso2: string) {
-		if (countryTiers[iso2] === selectedTier) {
-			delete countryTiers[iso2];
-			countryTiers = { ...countryTiers };
-		} else {
-			countryTiers = { ...countryTiers, [iso2]: selectedTier };
-		}
+	function tierOpacity(iso2: string): number {
+		const tier = countryTiers[iso2] ?? 'unknown';
+		if (filterTier !== null && tier !== filterTier) return 0.15;
+		return 1;
 	}
 
 	/** Look up a country's full status entry from countryStatus.json by ISO alpha-2 code. */
@@ -117,14 +104,13 @@
 				<path
 					d={c.path}
 					fill={fillFor(c.iso2)}
+					opacity={tierOpacity(c.iso2)}
 					stroke="#fff"
 					stroke-width={hovered === c.iso2 ? 1.5 : 0.5}
 					class="country"
 					role="button"
 					tabindex="0"
 					aria-label={c.name}
-					onclick={() => toggleCountry(c.iso2)}
-					onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && toggleCountry(c.iso2)}
 					onmouseenter={() => (hovered = c.iso2)}
 					onmouseleave={() => (hovered = null)}
 				/>
@@ -173,8 +159,8 @@
 			{#each PALETTE as p}
 				<button
 					class="tier-btn"
-					class:active={selectedTier === p.key}
-					onclick={() => (selectedTier = p.key)}
+					class:active={filterTier === p.key}
+					onclick={() => (filterTier = filterTier === p.key ? null : p.key)}
 				>
 					<span class="tier-dot" style="background:{p.hex}"></span>
 					{p.label}
@@ -193,18 +179,12 @@
 				</svg>
 				Names
 			</button>
-			<button class="action-btn reset-btn" onclick={() => (countryTiers = loadInitialTiers())}>
+			<button class="action-btn reset-btn" onclick={() => { countryTiers = loadInitialTiers(); filterTier = null; }}>
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<path d="M1 4v6h6M23 20v-6h-6"/>
 					<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
 				</svg>
 				Reset
-			</button>
-			<button class="action-btn" onclick={() => (countryTiers = {})}>
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
-				</svg>
-				Clear
 			</button>
 			<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -248,7 +228,7 @@
 
 	.country {
 		cursor: pointer;
-		transition: fill 0.15s, stroke-width 0.1s;
+		transition: fill 0.15s, opacity 0.3s, stroke-width 0.1s;
 	}
 
 	.country:hover {
@@ -353,9 +333,9 @@
 	}
 
 	.toggle-btn.active {
-		background: rgba(46, 204, 113, 0.15);
-		border-color: rgba(46, 204, 113, 0.3);
-		color: #2ecc71;
+		background: rgba(16, 185, 129, 0.15);
+		border-color: rgba(16, 185, 129, 0.3);
+		color: #10b981;
 	}
 
 	.screenshot-btn {
@@ -429,16 +409,16 @@
 	}
 
 	.approved-yes {
-		background: rgba(46, 204, 113, 0.2);
-		color: #2ecc71;
+		background: rgba(16, 185, 129, 0.2);
+		color: #10b981;
 		padding: 0.1rem 0.4rem;
 		border-radius: 4px;
 		font-size: 0.7rem;
 	}
 
 	.approved-no {
-		background: rgba(231, 76, 60, 0.15);
-		color: #e74c3c;
+		background: rgba(220, 38, 38, 0.15);
+		color: #dc2626;
 		padding: 0.1rem 0.4rem;
 		border-radius: 4px;
 		font-size: 0.7rem;
