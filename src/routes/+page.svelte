@@ -1,4 +1,15 @@
 <script lang="ts">
+	/**
+	 * +page.svelte — Main application page
+	 *
+	 * Renders the interactive world map SVG, tier-selection palette,
+	 * hover tooltip, and control buttons. All state lives here via Svelte 5 runes.
+	 *
+	 * Data flow:
+	 *   countryStatus.json → loadInitialTiers() → countryTiers (reactive state)
+	 *   countryTiers + COLORS → fillFor(iso2) → SVG path fill attribute
+	 *   hovered → tooltip rendering (country name, tier info, drug approvals)
+	 */
 	import { tick } from 'svelte';
 	import html2canvas from 'html2canvas';
 	import { countryFeatures, bordersPath } from '$lib/mapData';
@@ -13,6 +24,10 @@
 	let showNames = $state(false);
 	let takingScreenshot = $state(false);
 
+	/**
+	 * Build the initial tier assignment map from countryStatus.json.
+	 * Called on load and when the user clicks "Reset".
+	 */
 	function loadInitialTiers(): Record<string, TierKey> {
 		const result: Record<string, TierKey> = {};
 		for (const [iso2, entry] of Object.entries(statusData.countries)) {
@@ -23,6 +38,10 @@
 
 	countryTiers = loadInitialTiers();
 
+	/**
+	 * Tier palette for the bottom control bar.
+	 * Each entry maps a TierKey to its display label and hex color.
+	 */
 	const PALETTE: { key: TierKey; label: string; hex: string }[] = [
 		{ key: '1', label: 'Amphetamine', hex: COLORS['1'] },
 		{ key: '2', label: 'Methylphenidate Only', hex: COLORS['2'] },
@@ -31,11 +50,18 @@
 		{ key: 'unknown', label: 'Unknown', hex: COLORS.unknown }
 	];
 
+	/** Returns the hex fill color for a country based on its current tier assignment. */
 	function fillFor(iso2: string): string {
 		const tier = countryTiers[iso2];
 		return tier ? COLORS[tier] : COLORS.unknown;
 	}
 
+	/**
+	 * Toggle a country's tier assignment.
+	 * If the country already has the selected tier, it's removed (reset to default).
+	 * Otherwise, it's assigned the currently selected tier.
+	 * Uses spread-to-replace to trigger Svelte's reactivity.
+	 */
 	function toggleCountry(iso2: string) {
 		if (countryTiers[iso2] === selectedTier) {
 			delete countryTiers[iso2];
@@ -45,16 +71,27 @@
 		}
 	}
 
+	/** Look up a country's full status entry from countryStatus.json by ISO alpha-2 code. */
 	function getEntry(iso2: string) {
 		return (statusData.countries as any)[iso2] ?? null;
 	}
 
+	/**
+	 * Extract the first M command coordinates from an SVG path string.
+	 * Used to position country name labels at the start of each country's shape.
+	 * This is a rough centroid — good enough for label placement at small font sizes.
+	 */
 	function getCentroid(path: string): { x: number; y: number } {
 		const match = path.match(/M([\d.]+),([\d.]+)/);
 		if (match) return { x: parseFloat(match[1]), y: parseFloat(match[2]) };
 		return { x: 0, y: 0 };
 	}
 
+	/**
+	 * Capture the map container as a PNG screenshot.
+	 * Uses html2canvas to render the DOM element to a canvas, then triggers
+	 * a download via a temporary <a> element. Hides UI controls during capture.
+	 */
 	async function takeScreenshot() {
 		takingScreenshot = true;
 		await tick();
@@ -74,22 +111,6 @@
 </script>
 
 <div id="app">
-	<header id="toolbar" class:hidden={takingScreenshot}>
-		<div class="toolbar-group">
-			{#each PALETTE as p}
-				<button
-					class="tier-btn"
-					class:active={selectedTier === p.key}
-					onclick={() => (selectedTier = p.key)}
-				>
-					<span class="tier-dot" style="background:{p.hex}"></span>
-					{p.label}
-				</button>
-			{/each}
-		</div>
-	
-	</header>
-
 	<div id="map-container">
 		<svg viewBox="0 0 960 500" id="map">
 			{#each countryFeatures as c (c.iso2)}
@@ -147,38 +168,52 @@
 		</div>
 	{/if}
 
-	<div id="bottom-bar" class:hidden={takingScreenshot}>
-		<button
-			class="toggle-btn"
-			class:active={showNames}
-			onclick={() => (showNames = !showNames)}
-		>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-				<circle cx="12" cy="12" r="3"/>
-			</svg>
-			Names
-		</button>
-		<button class="action-btn reset-btn" onclick={() => (countryTiers = loadInitialTiers())}>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M1 4v6h6M23 20v-6h-6"/>
-				<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
-			</svg>
-			Reset
-		</button>
-		<button class="action-btn" onclick={() => (countryTiers = {})}>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
-			</svg>
-			Clear
-		</button>
-		<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-				<circle cx="12" cy="13" r="4"/>
-			</svg>
-			Screenshot
-		</button>
+	<div id="controls" class:hidden={takingScreenshot}>
+		<div class="controls-row">
+			{#each PALETTE as p}
+				<button
+					class="tier-btn"
+					class:active={selectedTier === p.key}
+					onclick={() => (selectedTier = p.key)}
+				>
+					<span class="tier-dot" style="background:{p.hex}"></span>
+					{p.label}
+				</button>
+			{/each}
+		</div>
+		<div class="controls-row">
+			<button
+				class="toggle-btn"
+				class:active={showNames}
+				onclick={() => (showNames = !showNames)}
+			>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+					<circle cx="12" cy="12" r="3"/>
+				</svg>
+				Names
+			</button>
+			<button class="action-btn reset-btn" onclick={() => (countryTiers = loadInitialTiers())}>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M1 4v6h6M23 20v-6h-6"/>
+					<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+				</svg>
+				Reset
+			</button>
+			<button class="action-btn" onclick={() => (countryTiers = {})}>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+				</svg>
+				Clear
+			</button>
+			<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+					<circle cx="12" cy="13" r="4"/>
+				</svg>
+				Screenshot
+			</button>
+		</div>
 	</div>
 </div>
 
@@ -188,36 +223,78 @@
 		background: #1a1a2e;
 		color: #e0e0e0;
 		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		overflow: hidden;
 	}
 
 	#app {
+		position: relative;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
+
+	#map-container {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#map {
+		width: 100%;
+		height: 100%;
+	}
+
+	.country {
+		cursor: pointer;
+		transition: fill 0.15s, stroke-width 0.1s;
+	}
+
+	.country:hover {
+		filter: brightness(1.3);
+	}
+
+	.country-label {
+		font-size: 5px;
+		text-anchor: middle;
+		dominant-baseline: central;
+		fill: rgba(255, 255, 255, 0.7);
+		pointer-events: none;
+		font-weight: 600;
+		paint-order: stroke;
+		stroke: rgba(0, 0, 0, 0.6);
+		stroke-width: 1.5px;
+	}
+
+	#controls {
+		position: fixed;
+		bottom: 1.5rem;
+		left: 50%;
+		transform: translateX(-50%);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		min-height: 100vh;
-	}
-
-	#toolbar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-		max-width: 1200px;
-		padding: 0.75rem 1.5rem;
-		gap: 1rem;
-		box-sizing: border-box;
+		gap: 0.5rem;
+		background: rgba(15, 15, 30, 0.85);
+		backdrop-filter: blur(10px);
+		padding: 0.75rem 1rem;
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		z-index: 50;
 		transition: opacity 0.2s;
 	}
 
-	#toolbar.hidden {
+	#controls.hidden {
 		opacity: 0;
 		pointer-events: none;
 	}
 
-	.toolbar-group {
+	.controls-row {
 		display: flex;
 		gap: 0.35rem;
 		align-items: center;
+		justify-content: center;
 	}
 
 	.tier-btn {
@@ -292,55 +369,6 @@
 		color: #a5b4fc;
 	}
 
-	#map-container {
-		width: 95vw;
-		max-width: 1100px;
-	}
-
-	#map {
-		width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	.country {
-		cursor: pointer;
-		transition: fill 0.15s, stroke-width 0.1s;
-	}
-
-	.country:hover {
-		filter: brightness(1.3);
-	}
-
-	.country-label {
-		font-size: 5px;
-		text-anchor: middle;
-		dominant-baseline: central;
-		fill: rgba(255, 255, 255, 0.7);
-		pointer-events: none;
-		font-weight: 600;
-		paint-order: stroke;
-		stroke: rgba(0, 0, 0, 0.6);
-		stroke-width: 1.5px;
-	}
-
-	#bottom-bar {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		padding: 0.75rem 1.5rem;
-		width: 100%;
-		max-width: 1200px;
-		box-sizing: border-box;
-		transition: opacity 0.2s;
-	}
-
-	#bottom-bar.hidden {
-		opacity: 0;
-		pointer-events: none;
-	}
-
 	.reset-btn {
 		background: rgba(243, 156, 18, 0.12);
 		border-color: rgba(243, 156, 18, 0.25);
@@ -354,7 +382,7 @@
 
 	#tooltip {
 		position: fixed;
-		bottom: 4.5rem;
+		bottom: 8rem;
 		left: 50%;
 		transform: translateX(-50%);
 		background: rgba(15, 15, 30, 0.95);

@@ -1,3 +1,19 @@
+/**
+ * mapData.ts — Geographic data pipeline
+ *
+ * Loads world country boundaries from the `world-atlas` TopoJSON dataset,
+ * converts them to GeoJSON features, and projects them into SVG path strings
+ * using a Natural Earth projection fitted to a 960×500 viewport.
+ *
+ * Exports:
+ * - countryFeatures: Array of {id, iso2, name, path} for every renderable country.
+ * - bordersPath:     SVG path string for internal country borders.
+ * - iso2ToName():    Look up country name from ISO 3166-1 alpha-2 code.
+ * - nameToIso2():    Look up ISO alpha-2 code from country name (case-insensitive).
+ *
+ * The NUMERIC_TO_ISO2 table maps ISO 3166-1 numeric codes (used by world-atlas)
+ * to alpha-2 codes (used by the rest of the app for tier lookups).
+ */
 import { geoNaturalEarth1, geoPath } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import countriesTopo from 'world-atlas/countries-110m.json';
@@ -16,6 +32,12 @@ const borders = topojson.mesh(world, world.objects.countries, (a: any, b: any) =
 const projection = geoNaturalEarth1().fitSize([960, 500], countries);
 const pathGen = geoPath(projection);
 
+/**
+ * ISO 3166-1 numeric → alpha-2 code mapping.
+ * world-atlas uses numeric IDs; the rest of the app uses alpha-2 codes
+ * to key into countryStatus.json. This table bridges the two.
+ * Sourced from https://en.wikipedia.org/wiki/ISO_3166-1_numeric
+ */
 const NUMERIC_TO_ISO2: Record<string, string> = {
 	'004': 'AF', '008': 'AL', '012': 'DZ', '024': 'AO', '010': 'AQ',
 	'032': 'AR', '051': 'AM', '036': 'AU', '040': 'AT', '031': 'AZ',
@@ -54,6 +76,12 @@ const NUMERIC_TO_ISO2: Record<string, string> = {
 	'887': 'YE', '894': 'ZM', '716': 'ZW'
 };
 
+/**
+ * Pre-computed array of all renderable countries.
+ * Each entry has an ISO alpha-2 code, display name, and pre-generated
+ * SVG path string ready for use in <path d={...}> elements.
+ * Countries without a numeric→alpha-2 mapping are excluded.
+ */
 export const countryFeatures: CountryFeature[] = countries.features
 	.filter((f: any) => f.id && NUMERIC_TO_ISO2[f.id])
 	.map((f: any) => ({
@@ -63,12 +91,18 @@ export const countryFeatures: CountryFeature[] = countries.features
 		path: pathGen(f) ?? ''
 	}));
 
+/**
+ * SVG path string for all internal country borders.
+ * Rendered as a thin overlay stroke on top of the filled country paths.
+ */
 export const bordersPath = pathGen(borders) ?? '';
 
+/** Look up a country's display name from its ISO alpha-2 code. Falls back to the code itself. */
 export function iso2ToName(iso2: string): string {
 	return countryFeatures.find(c => c.iso2 === iso2)?.name ?? iso2;
 }
 
+/** Look up a country's ISO alpha-2 code from its display name (case-insensitive). */
 export function nameToIso2(name: string): string | undefined {
 	return countryFeatures.find(c => c.name.toLowerCase() === name.toLowerCase())?.iso2;
 }

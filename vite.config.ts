@@ -1,3 +1,9 @@
+/**
+ * vite.config.ts — Build configuration
+ *
+ * Uses adapter-auto for deployment flexibility. Forces Svelte 5 runes mode
+ * for all project source files (excludes node_modules for library compat).
+ */
 import adapter from '@sveltejs/adapter-auto';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';

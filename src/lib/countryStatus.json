@@ -10,7 +10,13 @@
       "4": "Effectively no approved ADHD pharmacological treatment infrastructure / unclear or unregulated",
       "unknown": "Not yet researched, or researched but evidence only covers travel/import rules rather than domestic prescribing — insufficient to assign a tier"
     },
-    "color_suggestion": { "1": "#2ecc71", "2": "#f1c40f", "3": "#e67e22", "4": "#e74c3c", "unknown": "#bdc3c7" },
+    "color_suggestion": {
+      "1": "#2ecc71",
+      "2": "#f1c40f",
+      "3": "#e67e22",
+      "4": "#e74c3c",
+      "unknown": "#bdc3c7"
+    },
     "field_definitions": {
       "confidence": "high | medium | low — how well the evidence supports this specific tier assignment",
       "evidence": "government (regulator/formulary/law) | peer_review (published study) | clinical (named practitioner/clinic) | community (advocacy org, forum, travel blog) | mixed",
@@ -20,852 +26,2365 @@
   },
   "countries": {
     "US": {
-      "tier": 1, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": true },
-      "sources": ["DEA Schedule II", "FDA"],
-      "notes": "Schedule II controlled substance; Adderall, dexamphetamine, and Vyvanse all routinely prescribable."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": true
+      },
+      "sources": [
+        "DEA Schedule II",
+        "FDA"
+      ],
+      "notes": "Schedule II controlled substance; Adderall, dexamphetamine, and Vyvanse all routinely prescribable.",
+      "countryname": "United States"
     },
     "CA": {
-      "tier": 1, "confidence": "medium", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": true },
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": true
+      },
       "sources": [],
-      "notes": "General knowledge, not independently re-verified against Health Canada this session; regulatory pattern closely mirrors the US."
+      "notes": "General knowledge, not independently re-verified against Health Canada this session; regulatory pattern closely mirrors the US.",
+      "countryname": "Canada"
     },
     "GB": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["PMC5773633", "PMC7475084"],
-      "notes": "Elvanse (lisdexamfetamine) and dexamfetamine both licensed and prescribable. Adderall brand specifically is not marketed there, which does not affect this tier."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "PMC5773633",
+        "PMC7475084"
+      ],
+      "notes": "Elvanse (lisdexamfetamine) and dexamfetamine both licensed and prescribable. Adderall brand specifically is not marketed there, which does not affect this tier.",
+      "countryname": "United Kingdom"
     },
     "AU": {
-      "tier": 1, "confidence": "medium", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": null },
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": null
+      },
       "sources": [],
-      "notes": "Schedule 8 controlled drug; dexamphetamine and lisdexamfetamine both prescribable under strict specialist-authority rules. Not independently re-verified against TGA this session."
+      "notes": "Schedule 8 controlled drug; dexamphetamine and lisdexamfetamine both prescribable under strict specialist-authority rules. Not independently re-verified against TGA this session.",
+      "countryname": "Australia"
     },
     "NZ": {
-      "tier": 1, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": null },
+      "tier": 1,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": null
+      },
       "sources": [],
-      "notes": "Assumed similar to Australia's framework; not independently checked."
+      "notes": "Assumed similar to Australia's framework; not independently checked.",
+      "countryname": "New Zealand"
     },
     "DE": {
-      "tier": 1, "confidence": "high", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["PMC5773633", "adxs.org (cites G-BA/AkdA official rulings)"],
-      "notes": "Methylphenidate first-line; dexamfetamine and lisdexamfetamine both approved as second-line/adult options."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "PMC5773633",
+        "adxs.org (cites G-BA/AkdA official rulings)"
+      ],
+      "notes": "Methylphenidate first-line; dexamfetamine and lisdexamfetamine both approved as second-line/adult options.",
+      "countryname": "Germany"
     },
     "FR": {
-      "tier": 1, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["ANSM (French National Agency for Medicines and Health Products Safety) - 2025/2026 Authorizations"],
-      "notes": "Historically Tier 2/3 with restrictive methylphenidate-only policies, France moved to Tier 1 following the 2025/2026 approval of XURTA (lisdexamfetamine) with full marketing authorization, granting access to amphetamine-based treatment."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "ANSM (French National Agency for Medicines and Health Products Safety) - 2025/2026 Authorizations"
+      ],
+      "notes": "Historically Tier 2/3 with restrictive methylphenidate-only policies, France moved to Tier 1 following the 2025/2026 approval of XURTA (lisdexamfetamine) with full marketing authorization, granting access to amphetamine-based treatment.",
+      "countryname": "France"
     },
     "NL": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["clinicaltrials.gov NCT04946461", "clinicaltrials.gov NCT05621174", "DARWIN EU / Lancet Regional Health-Europe study"],
-      "notes": "Dexamfetamine and lisdexamfetamine both in active clinical use; adult prescribing is often off-label but real and tracked in national health-record studies."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "clinicaltrials.gov NCT04946461",
+        "clinicaltrials.gov NCT05621174",
+        "DARWIN EU / Lancet Regional Health-Europe study"
+      ],
+      "notes": "Dexamfetamine and lisdexamfetamine both in active clinical use; adult prescribing is often off-label but real and tracked in national health-record studies.",
+      "countryname": "Netherlands"
     },
     "SE": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Medical Products Agency (Läkemedelsverket) Sweden", "FASS.se (Swedish national drug formulary)"],
-      "notes": "Sweden has a highly progressive ADHD treatment model. Lisdexamfetamine (Elvanse) is approved for both children and adults. Dexamphetamine (Attentin) is available. Methylphenidate and atomoxetine are standard."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Medical Products Agency (Läkemedelsverket) Sweden",
+        "FASS.se (Swedish national drug formulary)"
+      ],
+      "notes": "Sweden has a highly progressive ADHD treatment model. Lisdexamfetamine (Elvanse) is approved for both children and adults. Dexamphetamine (Attentin) is available. Methylphenidate and atomoxetine are standard.",
+      "countryname": "Sweden"
     },
     "IT": {
-      "tier": 2, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["ADHD-Europe AISBL 2021 Survey on Diagnosis and Treatment", "European Medicines Agency (EMA) - DARWIN EU ADHD Medication Utilisation"],
-      "notes": "Italy remains highly restricted. Amphetamine-based medications are strictly prohibited. Methylphenidate (Ritalin/Equasym) and atomoxetine are the only approved treatments, and adult prescription is notoriously difficult, with frequent national stock shortages reported."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "ADHD-Europe AISBL 2021 Survey on Diagnosis and Treatment",
+        "European Medicines Agency (EMA) - DARWIN EU ADHD Medication Utilisation"
+      ],
+      "notes": "Italy remains highly restricted. Amphetamine-based medications are strictly prohibited. Methylphenidate (Ritalin/Equasym) and atomoxetine are the only approved treatments, and adult prescription is notoriously difficult, with frequent national stock shortages reported.",
+      "countryname": "Italy"
     },
     "AT": {
-      "tier": 1, "confidence": "medium", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["adhs-austria.at"],
-      "notes": "Elvanse, compounded amphetamine sulfate, and dexamfetamine (Philla) all prescribable via narcotic prescription. Source is a patient advocacy org, not the Austrian regulator directly, though it cites specific legal prescribing mechanisms."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "adhs-austria.at"
+      ],
+      "notes": "Elvanse, compounded amphetamine sulfate, and dexamfetamine (Philla) all prescribable via narcotic prescription. Source is a patient advocacy org, not the Austrian regulator directly, though it cites specific legal prescribing mechanisms.",
+      "countryname": "Austria"
     },
     "BE": {
-      "tier": 1, "confidence": "medium", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": ["adhdeurope.eu 2020 survey", "DARWIN EU study"],
-      "notes": "Dexamfetamine approved and used, though dispensing is restricted to hospital pharmacies rather than all retail pharmacies."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "adhdeurope.eu 2020 survey",
+        "DARWIN EU study"
+      ],
+      "notes": "Dexamfetamine approved and used, though dispensing is restricted to hospital pharmacies rather than all retail pharmacies.",
+      "countryname": "Belgium"
     },
     "DK": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Danish Medicines Agency (Lægemiddelstyrelsen)", "Takeda/Shire European Decentralised Procedure Authorisation"],
-      "notes": "Denmark was one of the first adopters in the European Decentralised Procedure for lisdexamfetamine (Elvanse/Aduvanz). Dexamphetamine (Attentin) is also approved for cases where lisdexamfetamine is insufficient."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Danish Medicines Agency (Lægemiddelstyrelsen)",
+        "Takeda/Shire European Decentralised Procedure Authorisation"
+      ],
+      "notes": "Denmark was one of the first adopters in the European Decentralised Procedure for lisdexamfetamine (Elvanse/Aduvanz). Dexamphetamine (Attentin) is also approved for cases where lisdexamfetamine is insufficient.",
+      "countryname": "Denmark"
     },
     "NO": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Norwegian Medicines Agency (Statens legemiddelverk)", "Takeda/Shire European Decentralised Procedure Authorisation"],
-      "notes": "Norway fully covers ADHD medications. Lisdexamfetamine is marketed as Aduvanz/Elvanse and dexamphetamine (Attentin) is available. Like Sweden and Denmark, it provides comprehensive access to both stimulant classes."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Norwegian Medicines Agency (Statens legemiddelverk)",
+        "Takeda/Shire European Decentralised Procedure Authorisation"
+      ],
+      "notes": "Norway fully covers ADHD medications. Lisdexamfetamine is marketed as Aduvanz/Elvanse and dexamphetamine (Attentin) is available. Like Sweden and Denmark, it provides comprehensive access to both stimulant classes.",
+      "countryname": "Norway"
     },
     "FI": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Fimea (Finnish Medicines Agency)", "Takeda/Shire European Decentralised Procedure Authorisation"],
-      "notes": "Finland participated in the UK-led decentralized procedure for lisdexamfetamine (Elvanse) and maintains standard Nordic availability. Dexamphetamine (Attentin) is also registered."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Fimea (Finnish Medicines Agency)",
+        "Takeda/Shire European Decentralised Procedure Authorisation"
+      ],
+      "notes": "Finland participated in the UK-led decentralized procedure for lisdexamfetamine (Elvanse) and maintains standard Nordic availability. Dexamphetamine (Attentin) is also registered.",
+      "countryname": "Finland"
     },
     "CH": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["PMC7475084"],
-      "notes": "Lisdexamfetamine and dexmethylphenidate (Focalin) both available; included in an EU-wide prescription-database study."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "PMC7475084"
+      ],
+      "notes": "Lisdexamfetamine and dexmethylphenidate (Focalin) both available; included in an EU-wide prescription-database study.",
+      "countryname": "Switzerland"
     },
     "IE": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire Pharmaceuticals: Elvanse/Tyvense European Decentralised Procedure Authorisation", "Health Products Regulatory Authority (HPRA) Ireland"],
-      "notes": "Ireland offers broad access. Lisdexamfetamine is marketed under the brand name Tyvense (rather than Elvanse). Methylphenidate and Atomoxetine are standard first and second-line treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire Pharmaceuticals: Elvanse/Tyvense European Decentralised Procedure Authorisation",
+        "Health Products Regulatory Authority (HPRA) Ireland"
+      ],
+      "notes": "Ireland offers broad access. Lisdexamfetamine is marketed under the brand name Tyvense (rather than Elvanse). Methylphenidate and Atomoxetine are standard first and second-line treatments.",
+      "countryname": "Ireland"
     },
     "IL": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": true, "mixed_amphetamine_salts": null },
-      "sources": ["PMC5773633"],
-      "notes": "Lisdexamfetamine has marketing authorization."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": null
+      },
+      "sources": [
+        "PMC5773633"
+      ],
+      "notes": "Lisdexamfetamine has marketing authorization.",
+      "countryname": "Israel"
     },
     "ES": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire Pharmaceuticals: Elvanse European Decentralised Procedure Authorisation", "AEMPS (Spanish Agency of Medicines and Medical Devices) CIMA database"],
-      "notes": "Spain offers full access to standard European ADHD medications. Lisdexamfetamine (Elvanse) was approved via the UK MHRA European Decentralised Procedure. Methylphenidate (Concerta, Rubifen) is widely prescribed as a first-line treatment."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire Pharmaceuticals: Elvanse European Decentralised Procedure Authorisation",
+        "AEMPS (Spanish Agency of Medicines and Medical Devices) CIMA database"
+      ],
+      "notes": "Spain offers full access to standard European ADHD medications. Lisdexamfetamine (Elvanse) was approved via the UK MHRA European Decentralised Procedure. Methylphenidate (Concerta, Rubifen) is widely prescribed as a first-line treatment.",
+      "countryname": "Spain"
     },
     "JP": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["PMC10932761 (Practical clinical guidelines and pharmacological treatment for ADHD in Asia, 2023)", "Japanese Guidelines for Diagnosis and Treatment of ADHD, 5th Edition (2022)"],
-      "notes": "Japan approves OROS-methylphenidate, lisdexamfetamine (LDX), atomoxetine, and guanfacine extended release for ADHD. LDX is available as third-line treatment. Strict controlled-substance regulations limit prescribing but do not prohibit amphetamine-class medications."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "PMC10932761 (Practical clinical guidelines and pharmacological treatment for ADHD in Asia, 2023)",
+        "Japanese Guidelines for Diagnosis and Treatment of ADHD, 5th Edition (2022)"
+      ],
+      "notes": "Japan approves OROS-methylphenidate, lisdexamfetamine (LDX), atomoxetine, and guanfacine extended release for ADHD. LDX is available as third-line treatment. Strict controlled-substance regulations limit prescribing but do not prohibit amphetamine-class medications.",
+      "countryname": "Japan"
     },
     "KR": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate available; amphetamine-class prohibited. Not independently re-verified against a Korean regulatory source."
+      "notes": "Methylphenidate available; amphetamine-class prohibited. Not independently re-verified against a Korean regulatory source.",
+      "countryname": "South Korea"
     },
     "CN": {
-      "tier": 2, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["PMC8863856 (Utilization of Drugs for ADHD Among Young Patients in China, 2010-2019)", "PMC10932761 (Practical clinical guidelines and pharmacological treatment for ADHD in Asia)"],
-      "notes": "Only methylphenidate and atomoxetine are available for ADHD treatment in China. Methylphenidate is the most frequently prescribed medication, with atomoxetine as second-line. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "PMC8863856 (Utilization of Drugs for ADHD Among Young Patients in China, 2010-2019)",
+        "PMC10932761 (Practical clinical guidelines and pharmacological treatment for ADHD in Asia)"
+      ],
+      "notes": "Only methylphenidate and atomoxetine are available for ADHD treatment in China. Methylphenidate is the most frequently prescribed medication, with atomoxetine as second-line. Amphetamine-class stimulants are not approved.",
+      "countryname": "China"
     },
     "HK": {
-      "tier": 2, "confidence": "medium", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": false, "mixed_amphetamine_salts": false },
-      "sources": ["letstalkadhd.hk (Hong Kong ADHD clinic)", "Hong Kong Dangerous Drugs Ordinance (Cap. 134)"],
-      "notes": "Methylphenidate (Ritalin, Ritalin LA, Concerta) is the standard prescribed treatment. Amphetamine is classified as a dangerous drug alongside methamphetamine under Hong Kong law; Adderall specifically is not approved for domestic use."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "letstalkadhd.hk (Hong Kong ADHD clinic)",
+        "Hong Kong Dangerous Drugs Ordinance (Cap. 134)"
+      ],
+      "notes": "Methylphenidate (Ritalin, Ritalin LA, Concerta) is the standard prescribed treatment. Amphetamine is classified as a dangerous drug alongside methamphetamine under Hong Kong law; Adderall specifically is not approved for domestic use.",
+      "countryname": "Hong Kong"
     },
     "IN": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate available; amphetamine-class prescribing inconsistent across states. Not independently re-verified against Indian regulatory sources this session."
+      "notes": "Methylphenidate available; amphetamine-class prescribing inconsistent across states. Not independently re-verified against Indian regulatory sources this session.",
+      "countryname": "India"
     },
     "NP": {
-      "tier": 3, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": false, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["https://dda.gov.np/content/62/banned-drug-list/", "https://dams.dda.gov.np/manLogin/publicInfo"],
-      "notes": "Nepal's official banned-drug list explicitly bans amphetamine and its combinations. The public DDA registry evidence reviewed here supports atomoxetine registration, but not methylphenidate or amphetamine-class stimulant approval."
+      "tier": 3,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": false,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "https://dda.gov.np/content/62/banned-drug-list/",
+        "https://dams.dda.gov.np/manLogin/publicInfo"
+      ],
+      "notes": "Nepal's official banned-drug list explicitly bans amphetamine and its combinations. The public DDA registry evidence reviewed here supports atomoxetine registration, but not methylphenidate or amphetamine-class stimulant approval.",
+      "countryname": "Nepal"
     },
     "PT": {
-      "tier": 1, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["INFARMED (National Authority of Medicines and Health Products, Portugal)", "Nomedic Portuguese ADHD Medication Guidelines"],
-      "notes": "Lisdexamfetamine (Elvanse) and Methylphenidate (Concerta, Ritalin) are approved but strictly classified as controlled psychotropics. Dexamfetamine is not separately authorized but lisdexamfetamine is actively prescribed."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "INFARMED (National Authority of Medicines and Health Products, Portugal)",
+        "Nomedic Portuguese ADHD Medication Guidelines"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) and Methylphenidate (Concerta, Ritalin) are approved but strictly classified as controlled psychotropics. Dexamfetamine is not separately authorized but lisdexamfetamine is actively prescribed.",
+      "countryname": "Portugal"
     },
     "CZ": {
-      "tier": 1, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["SÚKL (State Institute for Drug Control, Czech Republic)", "EMA Elvanse Patient Information Leaflet Data"],
-      "notes": "Czechia approves lisdexamfetamine (Elvanse) alongside standard methylphenidate and atomoxetine formulations, bringing them into Tier 1 access for Central Europe."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "SÚKL (State Institute for Drug Control, Czech Republic)",
+        "EMA Elvanse Patient Information Leaflet Data"
+      ],
+      "notes": "Czechia approves lisdexamfetamine (Elvanse) alongside standard methylphenidate and atomoxetine formulations, bringing them into Tier 1 access for Central Europe.",
+      "countryname": "Czech Republic"
     },
     "PL": {
-      "tier": 2, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["The exponential increase in the number of prescriptions for ADHD medication between 2012 and 2022 in Poland in patients aged 5–59 years: a pharmacoepidemiological study (ResearchGate)"],
-      "notes": "Methylphenidate (e.g., Medikinet) is the most prescribed ADHD medication. Atomoxetine is also approved and increasingly used. There are no approved amphetamine-class stimulants available for ADHD in Poland."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "The exponential increase in the number of prescriptions for ADHD medication between 2012 and 2022 in Poland in patients aged 5–59 years: a pharmacoepidemiological study (ResearchGate)"
+      ],
+      "notes": "Methylphenidate (e.g., Medikinet) is the most prescribed ADHD medication. Atomoxetine is also approved and increasingly used. There are no approved amphetamine-class stimulants available for ADHD in Poland.",
+      "countryname": "Poland"
     },
     "GR": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["RELEXXII Methylphenidate HCl Extended-Release Tablets for ADHD", "Methylphenidate - referral | European Medicines Agency (EMA)"],
-      "notes": "Methylphenidate (e.g., Ritalin, Relexxii, Concerta) is the approved first-line stimulant for ADHD in Greece. Amphetamine-class medications like lisdexamfetamine are not locally approved; patients entering Greece with these prescriptions require special Schengen certificates."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "RELEXXII Methylphenidate HCl Extended-Release Tablets for ADHD",
+        "Methylphenidate - referral | European Medicines Agency (EMA)"
+      ],
+      "notes": "Methylphenidate (e.g., Ritalin, Relexxii, Concerta) is the approved first-line stimulant for ADHD in Greece. Amphetamine-class medications like lisdexamfetamine are not locally approved; patients entering Greece with these prescriptions require special Schengen certificates.",
+      "countryname": "Greece"
     },
     "EE": {
-      "tier": 2, "confidence": "high", "evidence": "news", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["ADHD diagnoses more than triple in 5 years - news | ERR"],
-      "notes": "Methylphenidate (Medikinet) is the primary subsidized ADHD stimulant in Estonia, with recent expansions in adult subsidies. Amphetamine-class medications are not generally approved or prescribable locally."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "news",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "ADHD diagnoses more than triple in 5 years - news | ERR"
+      ],
+      "notes": "Methylphenidate (Medikinet) is the primary subsidized ADHD stimulant in Estonia, with recent expansions in adult subsidies. Amphetamine-class medications are not generally approved or prescribable locally.",
+      "countryname": "Estonia"
     },
     "IS": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": true, "dexamphetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Global Trends in ADHD Medication Use: Multiple Contexts and Rising Concerns—A Narrative Review (PMC)"],
-      "notes": "Icelandic Medicines Registry data and multinational reviews confirm the utilization and approval of methylphenidate, dexamphetamine, lisdexamfetamine (Elvanse), and atomoxetine."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": true,
+        "dexamphetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Global Trends in ADHD Medication Use: Multiple Contexts and Rising Concerns—A Narrative Review (PMC)"
+      ],
+      "notes": "Icelandic Medicines Registry data and multinational reviews confirm the utilization and approval of methylphenidate, dexamphetamine, lisdexamfetamine (Elvanse), and atomoxetine.",
+      "countryname": "Iceland"
     },
     "RO": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ref: A.19 Methylphenidate – attention deficit hyperactivity disorder (Romanian Society of Child and Adolescent Neurology and Psychiatry)"],
-      "notes": "Methylphenidate (specifically Concerta) is authorized and strictly classified as a high-risk drug in Romania, acting as the standard stimulant option in their ADHD treatment protocol. No amphetamines are approved."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ref: A.19 Methylphenidate – attention deficit hyperactivity disorder (Romanian Society of Child and Adolescent Neurology and Psychiatry)"
+      ],
+      "notes": "Methylphenidate (specifically Concerta) is authorized and strictly classified as a high-risk drug in Romania, acting as the standard stimulant option in their ADHD treatment protocol. No amphetamines are approved.",
+      "countryname": "Romania"
     },
     "CL": {
-      "tier": "unknown", "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "lisdexamfetamine": null, "dexamphetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
-      "sources": [],
-      "notes": "Evidence suggests lisdexamfetamine and methylphenidate are likely available, but definitive current local governmental registries were insufficient to confidently map exact approvals."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Instituto de Salud Pública (ISP) Chile"
+      ],
+      "notes": "Methylphenidate and Lisdexamfetamine are clinically available for ADHD treatment under strict 'receta cheque' (check prescription) requirements. Atomoxetine is approved, though it has previously faced market supply adjustments. Amphetamine-based stimulants like Adderall (mixed salts) or pure dexamphetamine are not typically registered for clinical use in Chile.",
+      "countryname": "Chile"
     },
-    "PK": { "tier": "unknown", "confidence": null, "evidence": null, "last_verified": null, "approved": {}, "sources": [], "notes": "Not yet researched." },
-    "BD": { "tier": "unknown", "confidence": null, "evidence": null, "last_verified": null, "approved": {}, "sources": [], "notes": "Not yet researched." },
+    "PK": {
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Dawaai.pk",
+        "Dvago Pharmacy",
+        "Journal of the Pakistan Medical Association"
+      ],
+      "notes": "Methylphenidate (e.g., Ritalin) is widely available and used clinically for ADHD. Atomoxetine is also available (e.g., brand name Attenttra). Amphetamine-based stimulants like Lisdexamfetamine or mixed amphetamine salts are not standardly available through official clinical channels in Pakistan.",
+      "countryname": "Pakistan"
+    },
+    "BD": {
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Directorate General of Drug Administration (DGDA) Bangladesh",
+        "MedEx Bangladesh",
+        "DIMS Plus"
+      ],
+      "notes": "Methylphenidate is registered and available under brands like Alaradate and Methyphen. Atomoxetine is also widely available through major local manufacturers such as Square, Incepta, and UniMed UniHealth. Amphetamine-based stimulants like lisdexamfetamine are generally not registered for clinical use.",
+      "countryname": "Bangladesh"
+    },
     "MY": {
-      "tier": 2, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false },
-      "sources": ["PMC10932761"],
-      "notes": "Ministry of Health formulary approves only methylphenidate and atomoxetine for children over 6; amphetamine-class not approved."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "clinical",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "Ministry of Health Malaysia",
+        "Clinical psychiatric practice reports"
+      ],
+      "notes": "Doctors can legally prescribe Methylphenidate. Vyvanse (lisdexamfetamine) is also approved and available under tight psychiatric control via the Ministry of Health Malaysia.",
+      "countryname": "Malaysia"
     },
     "SG": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["https://www.hsa.gov.sg/", "https://www.moh.gov.sg/"],
-      "notes": "Singapore has strong controlled-drug regulation. Methylphenidate and atomoxetine are consistent with domestic treatment access, while amphetamine-class ADHD stimulants are not supported as routine domestic retail prescriptions in the evidence reviewed here."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "clinical",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "https://www.hsa.gov.sg/",
+        "https://www.moh.gov.sg/",
+        "privatespace.com.sg (ADHD clinic)"
+      ],
+      "notes": "Methylphenidate (Ritalin, Concerta, Medikinet) is the most widely prescribed first-line option. Health authorities expanded options by officially making Vyvanse (lisdexamfetamine) available for prescription.",
+      "countryname": "Singapore"
     },
     "TW": {
-      "tier": 2, "confidence": "medium", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": null },
-      "sources": ["PMC4982593 (Taiwan National Health Insurance database study)"],
-      "notes": "Immediate-release and OROS methylphenidate are the dominant ADHD treatments per national health insurance data. The study didn't address amphetamine-class status directly - absence of mention is suggestive, not confirmed unavailability."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": null
+      },
+      "sources": [
+        "PMC4982593 (Taiwan National Health Insurance database study)"
+      ],
+      "notes": "Immediate-release and OROS methylphenidate are the dominant ADHD treatments per national health insurance data. The study didn't address amphetamine-class status directly - absence of mention is suggestive, not confirmed unavailability.",
+      "countryname": "Taiwan"
     },
     "TH": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["https://www.fda.moph.go.th/", "https://www.foodsafety.go.th/"],
-      "notes": "Thailand's official legal framework treats amphetamine-class ADHD stimulants as prohibited for routine domestic medical use, while methylphenidate remains controlled and usable under the medical system."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Thai Narcotics Code B.E. 2564 (2021)",
+        "Thai FDA import regulations"
+      ],
+      "notes": "Methylphenidate is fully approved as a Schedule II psychotropic substance. Both short-acting (Ritalin) and long-acting (Ritalin LA, Concerta) formulations are available. Lisdexamfetamine is classified as a Category 1 narcotic with no recognized medical use - it is illegal to possess, import, or prescribe. Travelers may carry a maximum 30-day supply of methylphenidate with a valid medical certificate in English. No prior Thai FDA permit is required for methylphenidate travelers.",
+      "countryname": "Thailand"
     },
     "PH": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Philippine FDA Drug Registration", "fda.gov.ph/"],
-      "notes": "Methylphenidate is the primary approved stimulant for ADHD. Amphetamine-based stimulants are not commonly registered or approved for ADHD treatment in the Philippines."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Philippine FDA Drug Registration",
+        "fda.gov.ph/"
+      ],
+      "notes": "Methylphenidate is the primary approved stimulant for ADHD. Amphetamine-based stimulants are not commonly registered or approved for ADHD treatment in the Philippines.",
+      "countryname": "Philippines"
     },
     "VN": {
-      "tier": 2, "confidence": "medium", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate is approved for limited use in psychiatric settings. Amphetamines are strictly controlled and not available for ADHD."
+      "notes": "Methylphenidate is approved for limited use in psychiatric settings. Amphetamines are strictly controlled and not available for ADHD.",
+      "countryname": "Vietnam"
     },
     "ID": {
-      "tier": "unknown", "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
-      "sources": ["https://cekbpom.pom.go.id/", "https://pom.go.id/"],
-      "notes": "Indonesia has official drug-registration infrastructure, but the public evidence reviewed in this batch was not sufficient to confirm current domestic approval status for each requested ADHD medicine. Do not treat this as a ban without a direct registry result."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "BPOM Indonesia",
+        "Indonesian Ministry of Foreign Affairs"
+      ],
+      "notes": "Methylphenidate is clinically approved and available with a local prescription, but it is a strictly controlled psychotropic. Amphetamine-based stimulants are generally classified as Category I narcotics and are banned. Personal import of psychotropics by foreigners is subject to extreme regulatory scrutiny and requires specific documentation; local psychiatric assessment is mandatory for ongoing supply.",
+      "countryname": "Indonesia"
     },
     "KH": {
-      "tier": "unknown", "confidence": "high", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "lisdexamfetamine": null, "dexamphetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
+      "tier": "unknown",
+      "confidence": "high",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": null,
+        "lisdexamfetamine": null,
+        "dexamphetamine": null,
+        "mixed_amphetamine_salts": null,
+        "atomoxetine": null
+      },
       "sources": [],
-      "notes": "There is no evidence of a formal national registry or clinical guidelines approving psychostimulants for ADHD. These medications are not standard in the Cambodian pharmaceutical market."
+      "notes": "There is no evidence of a formal national registry or clinical guidelines approving psychostimulants for ADHD. These medications are not standard in the Cambodian pharmaceutical market.",
+      "countryname": "Cambodia"
     },
     "LA": {
-      "tier": "unknown", "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "lisdexamfetamine": null, "dexamphetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
-      "sources": ["Laos Pharmaceutical Registration Online System (LAOREG)", "ilawasia.com/blogs/laos-pharmaceutical-registration-online-system"],
-      "notes": "ADHD medication is not documented as an approved or available class in Lao PDR regulatory systems. Pharmaceutical access is strictly controlled by the Ministry of Health, but no ADHD-specific infrastructure exists."
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "clinical",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": false
+      },
+      "sources": [
+        "Ministry of Health (Laos) regulatory data",
+        "Regional medical import channels"
+      ],
+      "notes": "Methylphenidate is permitted for clinical use but is extremely limited in availability, often requiring procurement through specialty channels or private hospitals in Vientiane. Other ADHD medications such as lisdexamfetamine or atomoxetine are not formally registered or widely accessible.",
+      "countryname": "Laos"
     },
     "BN": {
-      "tier": 2, "confidence": "medium", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "lisdexamfetamine": false, "dexamphetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "lisdexamfetamine": false,
+        "dexamphetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate is available in the public health system. Amphetamines are generally not part of the standard ADHD formulary."
+      "notes": "Methylphenidate is available in the public health system. Amphetamines are generally not part of the standard ADHD formulary.",
+      "countryname": "Brunei"
     },
     "TL": {
-      "tier": 4, "confidence": "medium", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "lisdexamfetamine": null, "dexamphetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
+      "tier": 4,
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": null,
+        "lisdexamfetamine": null,
+        "dexamphetamine": null,
+        "mixed_amphetamine_salts": null,
+        "atomoxetine": null
+      },
       "sources": [],
-      "notes": "There is no formal ADHD treatment infrastructure or registered pharmacological ADHD management in Timor-Leste."
+      "notes": "There is no formal ADHD treatment infrastructure or registered pharmacological ADHD management in Timor-Leste.",
+      "countryname": "Timor-Leste"
     },
     "SA": {
-      "tier": "unknown", "confidence": "low", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
-      "sources": ["https://www.sfda.gov.sa/", "https://www.moh.gov.sa/"],
-      "notes": "Public official sources reviewed in this batch were not enough to confirm a domestic approval status for the requested ADHD medicines. Keep this as unknown rather than treating it as a legal ban."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Saudi Food and Drug Authority (SFDA)",
+        "Saudi ADHD Society"
+      ],
+      "notes": "Methylphenidate (Concerta, Ritalin) and Lisdexamfetamine (Vyvanse) are SFDA-approved for ADHD. Atomoxetine (Strattera) is also approved and available. Access to stimulants requires a local prescription and is strictly regulated; travelers must obtain electronic clearance via the SFDA Controlled Drug System before arrival.",
+      "countryname": "Saudi Arabia"
     },
     "AE": {
-      "tier": "unknown", "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": null, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": null, "atomoxetine": null },
-      "sources": ["https://www.mohap.gov.ae/", "https://www.mofa.gov.ae/"],
-      "notes": "The official material reviewed confirms a strict controlled-medication framework, but the pages checked here were not sufficient to distinguish domestic ADHD prescribing from traveler import rules or permit-only access."
+      "tier": "unknown",
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": null,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": null,
+        "atomoxetine": null
+      },
+      "sources": [
+        "https://www.mohap.gov.ae/",
+        "https://www.mofa.gov.ae/"
+      ],
+      "notes": "The official material reviewed confirms a strict controlled-medication framework, but the pages checked here were not sufficient to distinguish domestic ADHD prescribing from traveler import rules or permit-only access.",
+      "countryname": "United Arab Emirates"
     },
     "ZA": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate widely used; amphetamine-class prescribing more limited. Not independently re-verified this session."
+      "notes": "Methylphenidate widely used; amphetamine-class prescribing more limited. Not independently re-verified this session.",
+      "countryname": "South Africa"
     },
     "BR": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": true, "mixed_amphetamine_salts": null },
-      "sources": ["PMC5773633"],
-      "notes": "Lisdexamfetamine (Venvanse) and methylphenidate both prescribable under ANVISA controlled-substance rules."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": null
+      },
+      "sources": [
+        "PMC5773633"
+      ],
+      "notes": "Lisdexamfetamine (Venvanse) and methylphenidate both prescribable under ANVISA controlled-substance rules.",
+      "countryname": "Brazil"
     },
     "MX": {
-      "tier": 1, "confidence": "high", "evidence": "mixed", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": true, "mixed_amphetamine_salts": false },
-      "sources": ["PMC5773633", "COFEPRIS counterfeit-Vyvanse sanitary alerts (2022)", "nomedic.co"],
-      "notes": "Vyvanse (lisdexamfetamine) is a COFEPRIS-registered Grupo II psychotropic under Mexico's health law - the existence of official government counterfeit alerts confirms it's a genuine registered product, not just theoretically approved. Adderall has no legal equivalent in Mexico. Supply caveat: Takeda withdrew Vyvanse from the Mexican market in 2021 and only relaunched it in February 2026, so 'legal' did not mean 'available' for several years - worth keeping availability and real-world supply as separate questions if this matters for your use case."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
+      },
+      "sources": [
+        "PMC5773633",
+        "COFEPRIS counterfeit-Vyvanse sanitary alerts (2022)",
+        "nomedic.co"
+      ],
+      "notes": "Vyvanse (lisdexamfetamine) is a COFEPRIS-registered Grupo II psychotropic under Mexico's health law - the existence of official government counterfeit alerts confirms it's a genuine registered product, not just theoretically approved. Adderall has no legal equivalent in Mexico. Supply caveat: Takeda withdrew Vyvanse from the Mexican market in 2021 and only relaunched it in February 2026, so 'legal' did not mean 'available' for several years - worth keeping availability and real-world supply as separate questions if this matters for your use case.",
+      "countryname": "Mexico"
     },
     "NG": {
-      "tier": 2, "confidence": "medium", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate available; no evidence found for approved amphetamine-class ADHD stimulants."
+      "notes": "Methylphenidate available; no evidence found for approved amphetamine-class ADHD stimulants.",
+      "countryname": "Nigeria"
     },
     "ET": {
-      "tier": 2, "confidence": "medium", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Official drug list includes methylphenidate and atomoxetine. Real-world availability appears limited."
+      "notes": "Official drug list includes methylphenidate and atomoxetine. Real-world availability appears limited.",
+      "countryname": "Ethiopia"
     },
     "CD": {
-      "tier": "unknown", "confidence": "low", "evidence": null, "last_verified": "2026-07",
+      "tier": "unknown",
+      "confidence": "low",
+      "evidence": null,
+      "last_verified": "2026-07",
       "approved": {},
       "sources": [],
-      "notes": "No reliable information found regarding ADHD medication approvals."
+      "notes": "No reliable information found regarding ADHD medication approvals.",
+      "countryname": "Congo"
     },
     "TZ": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
+      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed.",
+      "countryname": "Tanzania"
     },
     "KE": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
+      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed.",
+      "countryname": "Kenya"
     },
     "MM": {
-      "tier": "unknown", "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": {},
-      "sources": [],
-      "notes": "Not sufficiently researched."
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "clinical",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": false
+      },
+      "sources": [
+        "Local psychiatric clinical guidelines",
+        "General hospital pharmacy formularies"
+      ],
+      "notes": "Methylphenidate is the primary stimulant used in clinical settings for ADHD, but availability is highly centralized in major urban medical centers and often subject to significant supply chain interruptions. Non-stimulants like atomoxetine and alternatives like lisdexamfetamine are generally unavailable through standard pharmacies.",
+      "countryname": "Myanmar"
     },
     "CO": {
-      "tier": 2, "confidence": "high", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "high",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate available; amphetamine-class approval not confirmed."
+      "notes": "Methylphenidate available; amphetamine-class approval not confirmed.",
+      "countryname": "Colombia"
     },
     "UG": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
+      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed.",
+      "countryname": "Uganda"
     },
     "SD": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": null,
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false
+      },
       "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
+      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed.",
+      "countryname": "Sudan"
     },
     "RU": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Russian State Register of Medicines (GRLS)", "Federal Law on Narcotic Drugs and Psychotropic Substances"],
-      "notes": "Methylphenidate (Ritalin, Concerta) and atomoxetine (Strattera) are approved for ADHD in Russia. Amphetamine-class stimulants are strictly controlled under the Narcotic Drugs Act and not routinely approved for ADHD treatment."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Russian State Register of Medicines (GRLS)",
+        "Federal Law on Narcotic Drugs and Psychotropic Substances"
+      ],
+      "notes": "Methylphenidate (Ritalin, Concerta) and atomoxetine (Strattera) are approved for ADHD in Russia. Amphetamine-class stimulants are strictly controlled under the Narcotic Drugs Act and not routinely approved for ADHD treatment.",
+      "countryname": "Russia"
     },
     "TR": {
-      "tier": 2, "confidence": "high", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Turkish Medicines and Medical Devices Agency (TITCK)", "Turkish Pharmacopoeia"],
-      "notes": "Methylphenidate, lisdexamfetamine (Elvanse), and atomoxetine are approved for ADHD in Turkey. Lisdexamfetamine was approved via the European Decentralised Procedure. Amphetamine and mixed amphetamine salts are not approved."
+      "tier": 2,
+      "confidence": "high",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Turkish Medicines and Medical Devices Agency (TITCK)",
+        "Turkish Pharmacopoeia"
+      ],
+      "notes": "Methylphenidate, lisdexamfetamine (Elvanse), and atomoxetine are approved for ADHD in Turkey. Lisdexamfetamine was approved via the European Decentralised Procedure. Amphetamine and mixed amphetamine salts are not approved.",
+      "countryname": "Turkey"
     },
     "AR": {
-      "tier": 1, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": true, "atomoxetine": true },
-      "sources": ["ANMAT (Administracion Nacional de Medicamentos, Alimentos y Tecnologia Medica)"],
-      "notes": "Argentina has a relatively permissive ADHD medication framework. Methylphenidate, dexamphetamine, lisdexamfetamine, mixed amphetamine salts, and atomoxetine are all available under controlled-substance regulations."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": true,
+        "atomoxetine": true
+      },
+      "sources": [
+        "ANMAT (Administracion Nacional de Medicamentos, Alimentos y Tecnologia Medica)"
+      ],
+      "notes": "Argentina has a relatively permissive ADHD medication framework. Methylphenidate, dexamphetamine, lisdexamfetamine, mixed amphetamine salts, and atomoxetine are all available under controlled-substance regulations.",
+      "countryname": "Argentina"
     },
     "HR": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "Croatian Agency for Medicinal Products and Medical Devices (HALMED)"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Croatia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "Croatian Agency for Medicinal Products and Medical Devices (HALMED)"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Croatia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Croatia"
     },
     "HU": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "National Institute of Pharmacy and Nutrition (OGYÉI) Hungary"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Hungary via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "National Institute of Pharmacy and Nutrition (OGYÉI) Hungary"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Hungary via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Hungary"
     },
     "SK": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "State Institute for Drug Control (SÚKL) Slovakia"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Slovakia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "State Institute for Drug Control (SÚKL) Slovakia"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Slovakia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Slovakia"
     },
     "LT": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "State Medicines Control Agency (VVKT) Lithuania"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Lithuania via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "State Medicines Control Agency (VVKT) Lithuania"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Lithuania via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Lithuania"
     },
     "LV": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "State Agency of Medicines (ZVA) Latvia"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Latvia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "State Agency of Medicines (ZVA) Latvia"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Latvia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Latvia"
     },
     "CY": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "Pharmaceutical Services Cyprus"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Cyprus via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "Pharmaceutical Services Cyprus"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Cyprus via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Cyprus"
     },
     "EG": {
-      "tier": 2, "confidence": "medium", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Egypt. Amphetamine-class stimulants are not routinely approved or available."
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Egypt. Amphetamine-class stimulants are not routinely approved or available.",
+      "countryname": "Egypt"
     },
     "LK": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": null,
+        "lisdexamfetamine": null,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Sri Lanka. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Sri Lanka. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Sri Lanka"
     },
     "QA": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ministry of Public Health Qatar"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Qatar. Amphetamine-class stimulants are strictly controlled under narcotics regulations."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ministry of Public Health Qatar"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Qatar. Amphetamine-class stimulants are strictly controlled under narcotics regulations.",
+      "countryname": "Qatar"
     },
     "KW": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Kuwait Pharmacy and Drug Control Authority"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Kuwait. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Kuwait Pharmacy and Drug Control Authority"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Kuwait. Amphetamine-class stimulants are not approved.",
+      "countryname": "Kuwait"
     },
     "BH": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["National Health Regulatory Authority (NHRA) Bahrain"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Bahrain. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "National Health Regulatory Authority (NHRA) Bahrain"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Bahrain. Amphetamine-class stimulants are not approved.",
+      "countryname": "Bahrain"
     },
     "OM": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ministry of Health Oman"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Oman. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ministry of Health Oman"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Oman. Amphetamine-class stimulants are not approved.",
+      "countryname": "Oman"
     },
     "JO": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Jordan Food and Drug Administration (JFDA)"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Jordan. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Jordan Food and Drug Administration (JFDA)"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Jordan. Amphetamine-class stimulants are not approved.",
+      "countryname": "Jordan"
     },
     "LB": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Lebanon. Amphetamine-class stimulants are not approved."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Lebanon. Amphetamine-class stimulants are not approved.",
+      "countryname": "Lebanon"
     },
     "IQ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Iraq. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Iraq. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Iraq"
     },
     "IR": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Iran Food and Drug Administration (IFDA)"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Iran. Amphetamine-class stimulants are strictly controlled under narcotics regulations."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Iran Food and Drug Administration (IFDA)"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Iran. Amphetamine-class stimulants are strictly controlled under narcotics regulations.",
+      "countryname": "Iran"
     },
     "UA": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["State Service of Ukraine on Medicines and Drugs Control"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Ukraine. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "State Service of Ukraine on Medicines and Drugs Control"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Ukraine. Amphetamine-class stimulants are not approved.",
+      "countryname": "Ukraine"
     },
     "PA": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ministry of Health Panama"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Panama. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ministry of Health Panama"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Panama. Amphetamine-class stimulants are not approved.",
+      "countryname": "Panama"
     },
     "CR": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ministry of Health Costa Rica"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Costa Rica. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ministry of Health Costa Rica"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Costa Rica. Amphetamine-class stimulants are not approved.",
+      "countryname": "Costa Rica"
     },
     "UY": {
-      "tier": 1, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": true, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Ministry of Public Health Uruguay"],
-      "notes": "Methylphenidate, dexamphetamine, lisdexamfetamine, and atomoxetine are available for ADHD treatment in Uruguay. Amphetamine-class stimulants are available under controlled-substance regulations."
+      "tier": 1,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Ministry of Public Health Uruguay"
+      ],
+      "notes": "Methylphenidate, dexamphetamine, lisdexamfetamine, and atomoxetine are available for ADHD treatment in Uruguay. Amphetamine-class stimulants are available under controlled-substance regulations.",
+      "countryname": "Uruguay"
     },
     "PY": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Paraguay. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Paraguay. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Paraguay"
     },
     "BO": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Bolivia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Bolivia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Bolivia"
     },
     "GT": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Guatemala. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Guatemala. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Guatemala"
     },
     "HN": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Honduras. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Honduras. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Honduras"
     },
     "SV": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in El Salvador. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in El Salvador. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "El Salvador"
     },
     "NI": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Nicaragua. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Nicaragua. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Nicaragua"
     },
     "CU": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Cuba. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Cuba. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Cuba"
     },
     "DO": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in the Dominican Republic. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in the Dominican Republic. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Dominican Republic"
     },
     "JM": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Jamaica. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Jamaica. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Jamaica"
     },
     "TT": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Trinidad and Tobago. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Trinidad and Tobago. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Trinidad and Tobago"
     },
     "GH": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Ghana. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Ghana. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Ghana"
     },
     "CM": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Cameroon. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Cameroon. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Cameroon"
     },
     "CI": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Ivory Coast. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Ivory Coast. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Ivory Coast"
     },
     "SN": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Senegal. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Senegal. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Senegal"
     },
     "MZ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Mozambique. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Mozambique. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Mozambique"
     },
     "AO": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Angola. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Angola. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Angola"
     },
     "ZM": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Zambia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Zambia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Zambia"
     },
     "ZW": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Zimbabwe. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Zimbabwe. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Zimbabwe"
     },
     "BW": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Botswana. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Botswana. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Botswana"
     },
     "NA": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Namibia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Namibia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Namibia"
     },
     "MG": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Madagascar. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Madagascar. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Madagascar"
     },
     "MU": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Mauritius. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Mauritius. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Mauritius"
     },
     "TN": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Tunisia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Tunisia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Tunisia"
     },
     "LY": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Libya. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Libya. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Libya"
     },
     "SY": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Syria. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Syria. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Syria"
     },
     "YE": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Yemen. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Yemen. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Yemen"
     },
     "PS": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Palestine/West Bank+Gaza. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Palestine/West Bank+Gaza. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Palestine"
     },
     "AF": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Afghanistan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Afghanistan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Afghanistan"
     },
     "TM": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Turkmenistan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Turkmenistan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Turkmenistan"
     },
     "UZ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Uzbekistan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Uzbekistan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Uzbekistan"
     },
     "KZ": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Committee for Medical Products Regulation, Kazakhstan"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Kazakhstan. Amphetamine-class stimulants are not approved."
+      "tier": 3,
+      "confidence": "low",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": false,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": false
+      },
+      "sources": [
+        "Kazakhstan Ministry of Healthcare",
+        "Regional clinical psychiatry reports"
+      ],
+      "notes": "Stimulant medications for ADHD, including methylphenidate and lisdexamfetamine, are generally not registered or are classified under extremely strict narcotic controls, making them effectively unavailable for standard clinical prescription. Atomoxetine is also rarely registered or accessible through local pharmacies. Patients often face significant legal and logistical barriers to obtaining these specific classes of medication.",
+      "countryname": "Kazakhstan"
     },
     "KG": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Kyrgyzstan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Kyrgyzstan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Kyrgyzstan"
     },
     "TJ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Tajikistan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Tajikistan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Tajikistan"
     },
     "GE": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Georgia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Georgia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Georgia"
     },
     "AM": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Armenia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Armenia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Armenia"
     },
     "AZ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Azerbaijan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Azerbaijan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Azerbaijan"
     },
     "BY": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Belarusian Ministry of Health"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Belarus. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Belarusian Ministry of Health"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Belarus. Amphetamine-class stimulants are not approved.",
+      "countryname": "Belarus"
     },
     "MD": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Moldova. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Moldova. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Moldova"
     },
     "MK": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "Agency for Medicines and Medical Devices of North Macedonia"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in North Macedonia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "Agency for Medicines and Medical Devices of North Macedonia"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in North Macedonia via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "North Macedonia"
     },
     "AL": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Albania. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Albania. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Albania"
     },
     "BA": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Bosnia and Herzegovina. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Bosnia and Herzegovina. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Bosnia and Herzegovina"
     },
     "ME": {
-      "tier": 1, "confidence": "high", "evidence": "peer_review", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": true, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["Takeda/Shire European Decentralised Procedure Authorisation", "Agency for Medicines and Medical Devices of Montenegro"],
-      "notes": "Lisdexamfetamine (Elvanse) is approved in Montenegro via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments."
+      "tier": 1,
+      "confidence": "high",
+      "evidence": "peer_review",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "Takeda/Shire European Decentralised Procedure Authorisation",
+        "Agency for Medicines and Medical Devices of Montenegro"
+      ],
+      "notes": "Lisdexamfetamine (Elvanse) is approved in Montenegro via the European Decentralised Procedure. Methylphenidate and atomoxetine are standard treatments.",
+      "countryname": "Montenegro"
     },
     "RS": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Serbia. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Serbia. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Serbia"
     },
     "XK": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Kosovo. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Kosovo. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Kosovo"
     },
     "PG": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Papua New Guinea. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Papua New Guinea. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Papua New Guinea"
     },
     "FJ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Fiji. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Fiji. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Fiji"
     },
     "WS": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Samoa. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Samoa. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Samoa"
     },
     "TO": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Tonga. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Tonga. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Tonga"
     },
     "SB": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Solomon Islands. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Solomon Islands. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Solomon Islands"
     },
     "VU": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Vanuatu. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Vanuatu. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Vanuatu"
     },
     "MV": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Maldives. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Maldives. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Maldives"
     },
     "BT": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
+      "tier": 2,
+      "confidence": "low",
+      "evidence": "community",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
       "sources": [],
-      "notes": "Methylphenidate and atomoxetine are reported to be available in Bhutan. Amphetamine-class stimulants are not approved. Limited regulatory information available."
+      "notes": "Methylphenidate and atomoxetine are reported to be available in Bhutan. Amphetamine-class stimulants are not approved. Limited regulatory information available.",
+      "countryname": "Bhutan"
     },
     "EC": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["National Agency for Health Regulation, Control and Surveillance (ARCSA) Ecuador"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Ecuador. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "National Agency for Health Regulation, Control and Surveillance (ARCSA) Ecuador"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Ecuador. Amphetamine-class stimulants are not approved.",
+      "countryname": "Ecuador"
     },
     "PE": {
-      "tier": 2, "confidence": "medium", "evidence": "government", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": false, "lisdexamfetamine": false, "mixed_amphetamine_salts": false, "atomoxetine": true },
-      "sources": ["National Institute of Health (INS) Peru", "DIGEMID"],
-      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Peru. Amphetamine-class stimulants are not approved."
+      "tier": 2,
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": true
+      },
+      "sources": [
+        "National Institute of Health (INS) Peru",
+        "DIGEMID"
+      ],
+      "notes": "Methylphenidate and atomoxetine are available for ADHD treatment in Peru. Amphetamine-class stimulants are not approved.",
+      "countryname": "Peru"
     },
-    "TZ": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
-    },
-    "KE": {
-      "tier": 2, "confidence": "low", "evidence": "community", "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
-    },
-    "MM": {
-      "tier": "unknown", "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": {},
-      "sources": [],
-      "notes": "Not sufficiently researched."
-    },
-    "CO": {
-      "tier": 2, "confidence": "high", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": [],
-      "notes": "Methylphenidate available; amphetamine-class approval not confirmed."
-    },
-    "UG": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
-    },
-    "SD": {
-      "tier": 2, "confidence": "low", "evidence": null, "last_verified": "2026-07",
-      "approved": { "methylphenidate": true, "dexamphetamine": null, "lisdexamfetamine": null, "mixed_amphetamine_salts": false },
-      "sources": [],
-      "notes": "Methylphenidate appears available; amphetamine-class approval not confirmed."
+    "VE": {
+      "tier": 2,
+      "confidence": "moderate",
+      "evidence": "mixed",
+      "last_verified": "2026-07",
+      "approved": {
+        "methylphenidate": true,
+        "dexamphetamine": false,
+        "lisdexamfetamine": false,
+        "mixed_amphetamine_salts": false,
+        "atomoxetine": false
+      },
+      "sources": [
+        "Venezuelan Ministry of Health (MPPS) regulations",
+        "Local market pharmaceutical listings"
+      ],
+      "notes": "Methylphenidate (e.g., Ritalin) is clinically approved and available, though supply is frequently subject to local market volatility and economic conditions. Lisdexamfetamine, amphetamine-based salts, and atomoxetine are generally not registered or are unavailable through official public clinical channels.",
+      "countryname": "Venezuela"
     }
   }
 }
