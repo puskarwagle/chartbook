@@ -23,13 +23,15 @@ export interface CountryFeature {
 	iso2: string;
 	name: string;
 	path: string;
+	cx: number;
+	cy: number;
 }
 
 const world = countriesTopo as any;
 const countries = topojson.feature(world, world.objects.countries) as any;
 const borders = topojson.mesh(world, world.objects.countries, (a: any, b: any) => a !== b) as any;
 
-const projection = geoNaturalEarth1().fitSize([960, 500], countries);
+const projection = geoNaturalEarth1().fitExtent([[30, 30], [930, 470]], countries);
 const pathGen = geoPath(projection);
 
 /**
@@ -84,12 +86,17 @@ const NUMERIC_TO_ISO2: Record<string, string> = {
  */
 export const countryFeatures: CountryFeature[] = countries.features
 	.filter((f: any) => f.id && NUMERIC_TO_ISO2[f.id])
-	.map((f: any) => ({
-		id: f.id,
-		iso2: NUMERIC_TO_ISO2[f.id],
-		name: f.properties.name,
-		path: pathGen(f) ?? ''
-	}));
+	.map((f: any) => {
+		const centroid = pathGen.centroid(f);
+		return {
+			id: f.id,
+			iso2: NUMERIC_TO_ISO2[f.id],
+			name: f.properties.name,
+			path: pathGen(f) ?? '',
+			cx: centroid[0],
+			cy: centroid[1]
+		};
+	});
 
 /**
  * SVG path string for all internal country borders.

@@ -63,15 +63,20 @@
 		return (statusData.countries as any)[iso2] ?? null;
 	}
 
-	/**
-	 * Extract the first M command coordinates from an SVG path string.
-	 * Used to position country name labels at the start of each country's shape.
-	 * This is a rough centroid — good enough for label placement at small font sizes.
-	 */
-	function getCentroid(path: string): { x: number; y: number } {
-		const match = path.match(/M([\d.]+),([\d.]+)/);
-		if (match) return { x: parseFloat(match[1]), y: parseFloat(match[2]) };
-		return { x: 0, y: 0 };
+	const SHORT_NAMES: Record<string, string> = {
+		US: 'USA', GB: 'UK', AE: 'UAE', NL: 'NED',
+		SA: 'KSA', KP: 'N.Korea', KR: 'S.Korea',
+		CD: 'DRC', CG: 'Congo', CF: 'CAR', GQ: 'Eq.Guinea',
+		PG: 'PNG', TL: 'Timor', BA: 'Bosnia', CI: 'Côte',
+		EH: 'W.Sahara', GN: 'Guinea', GW: 'G.Bissau',
+		MK: 'N.Macedonia', MM: 'Myanmar', SS: 'S.Sudan',
+		SZ: 'Eswatini', TF: 'Fr.S.Ant.', VA: 'Vatican',
+	};
+
+	function splitName(name: string): [string, string | null] {
+		const idx = name.indexOf(' ');
+		if (idx === -1 || name.length <= 8) return [name, null];
+		return [name.slice(0, idx), name.slice(idx + 1)];
 	}
 
 	/**
@@ -99,7 +104,7 @@
 
 <div id="app">
 	<div id="map-container">
-		<svg viewBox="0 0 960 500" id="map">
+		<svg viewBox="0 -10 960 520" id="map">
 			{#each countryFeatures as c (c.iso2)}
 				<path
 					d={c.path}
@@ -115,13 +120,17 @@
 					onmouseleave={() => (hovered = null)}
 				/>
 				{#if showNames && c.iso2 !== 'AQ'}
-					{@const pos = getCentroid(c.path)}
+					{@const label = SHORT_NAMES[c.iso2] ?? c.name}
+					{@const [line1, line2] = splitName(label)}
 					<text
-						x={pos.x}
-						y={pos.y}
+						x={c.cx}
+						y={c.cy}
 						class="country-label"
 						class:hidden={takingScreenshot && false}
-					>{c.iso2}</text>
+					>
+						<tspan x={c.cx} dy={line2 ? '-0.4em' : '0'}>{line1}</tspan>
+						{#if line2}<tspan x={c.cx} dy="1.1em">{line2}</tspan>{/if}
+					</text>
 				{/if}
 			{/each}
 			<path d={bordersPath} fill="none" stroke="#999" stroke-width={0.3} />
@@ -236,15 +245,15 @@
 	}
 
 	.country-label {
-		font-size: 5px;
+		font-size: 3.5px;
 		text-anchor: middle;
 		dominant-baseline: central;
-		fill: rgba(255, 255, 255, 0.7);
+		fill: #fff;
 		pointer-events: none;
-		font-weight: 600;
+		font-weight: 700;
 		paint-order: stroke;
-		stroke: rgba(0, 0, 0, 0.6);
-		stroke-width: 1.5px;
+		stroke: rgba(0, 0, 0, 0.8);
+		stroke-width: 2px;
 	}
 
 	#controls {
