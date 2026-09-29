@@ -11,6 +11,8 @@
 		barSeries
 	} from '$lib/echartsTheme';
 	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/adolescents_young_adults_10_24.json (by_age_group).
 	const byAge = (
@@ -26,47 +28,47 @@
 		{ group: '20–24', prevalence: byAge['20_to_24'].prevalence_rate_2021_per_100k, incidence: 0 }
 	];
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
-		tooltip: baseTooltip((v) => `${v.toLocaleString()} / 100k`),
-		legend: legendBottom(['Prevalence (per 100k)', 'Incidence (per 100k)']),
+		tooltip: baseTooltip((v) => interpolate(t('views.age.tooltip'), { value: v.toLocaleString() })),
+		legend: legendBottom([t('views.age.legendPrevalence'), t('views.age.legendIncidence')]),
 		grid: { left: 64, right: 56, top: 32, bottom: 56 },
 		xAxis: categoryXAxis(ageData.map((d) => d.group)),
 		yAxis: [
-			valueYAxis('prevalence / 100k'),
+			valueYAxis(t('views.age.axisPrevalence')),
 			{
-				...valueYAxis('incidence / 100k'),
+				...valueYAxis(t('views.age.axisIncidence')),
 				position: 'right',
 				axisLabel: { color: PALETTE.green }
 			}
 		],
 		series: [
-			barSeries('Prevalence (per 100k)', ageData.map((d) => d.prevalence), PALETTE.blue, (v) =>
+			barSeries(t('views.age.legendPrevalence'), ageData.map((d) => d.prevalence), PALETTE.blue, (v) =>
 				v.toFixed(0)
 			),
 			barSeries(
-				'Incidence (per 100k)',
+				t('views.age.legendIncidence'),
 				ageData.map((d) => d.incidence),
 				PALETTE.green,
 				(v) => v.toFixed(v > 0 ? 2 : 0),
 				1
 			)
 		]
-	};
+	});
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD Prevalence by Age Group</h1>
-	<p class="subtitle">Ages 10–24, global rates per 100k (2021) — ECharts · JSON-driven</p>
+	<h1 class="title">{t('views.age.title')}</h1>
+	<p class="subtitle">{t('views.age.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} />
 	</div>
 
 	<div class="card">
-		<span class="card-label">All ADHD incidence occurs ages 10–14</span>
-		<span class="card-note">Onset is before age 12 per GBD definition</span>
+		<span class="card-label">{t('views.age.cardLabel')}</span>
+		<span class="card-note">{t('views.age.cardNote')}</span>
 	</div>
 </div>
 

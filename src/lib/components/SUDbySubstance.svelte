@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import sudRaw from '../../../data/sud_by_substance.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/sud_by_substance.json (Rohner 2023).
 	interface Substance {
@@ -41,7 +43,7 @@
 		};
 	}
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
 		tooltip: {
@@ -51,7 +53,14 @@
 			formatter: (params: unknown) => {
 				const p = (params as { dataIndex: number; marker: string }[])[0];
 				const s = substances[p.dataIndex];
-				return `<b>${s.name}</b><br/>${p.marker} ADHD prevalence: <b>${s.percent}%</b> (95% CI ${s.ci_low}–${s.ci_high})<br/><span style="color:#888">n = ${s.n_studies} studies</span>`;
+				return interpolate(t('views.sud.tooltip'), {
+					name: s.name,
+					marker: p.marker,
+					pct: s.percent,
+					lo: s.ci_low,
+					hi: s.ci_high,
+					n: s.n_studies
+				});
 			}
 		},
 		grid: { left: 8, right: 88, top: 32, bottom: 32, containLabel: true },
@@ -76,7 +85,7 @@
 					fontWeight: 700,
 					formatter: (p: any) => {
 						const s = substances[p.dataIndex as number];
-						return `{b|${s.percent}%}\n{s|n=${s.n_studies} studies}`;
+						return `{b|${s.percent}%}\n{s|${interpolate(t('views.sud.barSub'), { n: s.n_studies })}}`;
 					},
 					rich: {
 						b: { color: PALETTE.text, fontSize: 13, fontWeight: 700, lineHeight: 18 },
@@ -86,7 +95,12 @@
 				markLine: {
 					symbol: 'none',
 					lineStyle: { color: PALETTE.blue, type: 'dashed', width: 1.5 },
-					label: { color: PALETTE.blue, fontSize: 10, fontWeight: 600, formatter: `Overall: ${overall.percent}%` },
+					label: {
+						color: PALETTE.blue,
+						fontSize: 10,
+						fontWeight: 600,
+						formatter: () => interpolate(t('views.sud.overall'), { value: overall.percent })
+					},
 					data: [{ xAxis: overall.percent }]
 				}
 			},
@@ -99,12 +113,19 @@
 				z: 3
 			}
 		]
-	};
+	});
+
+	const card1Note = $derived(
+		interpolate(t('views.sud.card1Note'), {
+			patients: raw.meta_analysis.n_patients.toLocaleString(),
+			studies: raw.meta_analysis.n_studies
+		})
+	);
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD in Substance Use Disorder</h1>
-	<p class="subtitle">Prevalence of comorbid ADHD by substance type (Rohner 2023) — ECharts · JSON-driven</p>
+	<h1 class="title">{t('views.sud.title')}</h1>
+	<p class="subtitle">{t('views.sud.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} />
@@ -112,12 +133,12 @@
 
 	<div class="cards">
 		<div class="card">
-			<span class="card-label">~1 in 5 SUD patients have ADHD</span>
-			<span class="card-note">Rohner 2023 — n={raw.meta_analysis.n_patients.toLocaleString()} across {raw.meta_analysis.n_studies} studies</span>
+			<span class="card-label">{t('views.sud.card1Label')}</span>
+			<span class="card-note">{card1Note}</span>
 		</div>
 		<div class="card">
-			<span class="card-label">Alcohol highest at 25%</span>
-			<span class="card-note">Cocaine 19%, Opioid 18% — wide CIs due to small n</span>
+			<span class="card-label">{t('views.sud.card2Label')}</span>
+			<span class="card-note">{t('views.sud.card2Note')}</span>
 		</div>
 	</div>
 </div>

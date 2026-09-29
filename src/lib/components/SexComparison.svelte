@@ -11,57 +11,70 @@
 		barSeries
 	} from '$lib/echartsTheme';
 	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/adolescents_young_adults_10_24.json (by_sex),
 	// not hardcoded. Edit the JSON and this chart updates.
 	const bySex = (adolescentsRaw as unknown as Record<string, Record<string, Record<string, number>>>).by_sex;
+	const source = (adolescentsRaw as unknown as Record<string, string>).source;
 	const sexData = [
 		{
-			sex: 'Male',
+			sexKey: 'male' as const,
 			prevalence: bySex.male.prevalence_rate_2021_per_100k,
 			incidence: bySex.male.incidence_rate_2021_per_100k
 		},
 		{
-			sex: 'Female',
+			sexKey: 'female' as const,
 			prevalence: bySex.female.prevalence_rate_2021_per_100k,
 			incidence: bySex.female.incidence_rate_2021_per_100k
 		}
 	];
 
-	const option: echarts.EChartsCoreOption = {
+	const sexLabel = (key: 'male' | 'female') => t(`common.${key}`);
+
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
-		tooltip: baseTooltip((v) => `${v.toLocaleString()} / 100k`),
-		legend: legendBottom(['Prevalence (per 100k)', 'Incidence (per 100k)']),
+		tooltip: baseTooltip((v) => interpolate(t('views.sex.tooltip'), { value: v.toLocaleString() })),
+		legend: legendBottom([t('views.sex.legendPrevalence'), t('views.sex.legendIncidence')]),
 		grid: { left: 64, right: 56, top: 32, bottom: 56 },
-		xAxis: categoryXAxis(sexData.map((d) => d.sex)),
+		xAxis: categoryXAxis(sexData.map((d) => sexLabel(d.sexKey))),
 		yAxis: [
-			valueYAxis('prevalence / 100k'),
+			valueYAxis(t('views.sex.axisPrevalence')),
 			{
-				...valueYAxis('incidence / 100k'),
+				...valueYAxis(t('views.sex.axisIncidence')),
 				position: 'right',
 				axisLabel: { color: PALETTE.green }
 			}
 		],
 		series: [
-			barSeries('Prevalence (per 100k)', sexData.map((d) => d.prevalence), PALETTE.blue, (v) =>
+			barSeries(t('views.sex.legendPrevalence'), sexData.map((d) => d.prevalence), PALETTE.blue, (v) =>
 				v.toFixed(0)
 			),
 			barSeries(
-				'Incidence (per 100k)',
+				t('views.sex.legendIncidence'),
 				sexData.map((d) => d.incidence),
 				PALETTE.green,
 				(v) => v.toFixed(1),
 				1
 			)
 		]
-	};
+	});
+
+	const cardNote = $derived(
+		interpolate(t('views.sex.cardNote'), {
+			male: sexData[0].prevalence.toLocaleString(),
+			female: sexData[1].prevalence.toLocaleString(),
+			source
+		})
+	);
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD by Sex</h1>
+	<h1 class="title">{t('views.sex.title')}</h1>
 	<p class="subtitle">
-		Global prevalence & incidence rates per 100k (ages 10–24, 2021) — ECharts · JSON-driven
+		{t('views.sex.subtitle')}
 	</p>
 
 	<div class="chart-container">
@@ -69,11 +82,8 @@
 	</div>
 
 	<div class="card">
-		<span class="card-label">Males diagnosed 2.5x more often</span>
-		<span class="card-note"
-			>Prevalence: {sexData[0].prevalence.toLocaleString()} vs {sexData[1].prevalence.toLocaleString()} per
-			100k · source: {(adolescentsRaw as unknown as Record<string, string>).source}</span
-		>
+		<span class="card-label">{t('views.sex.cardLabel')}</span>
+		<span class="card-note">{cardNote}</span>
 	</div>
 </div>
 

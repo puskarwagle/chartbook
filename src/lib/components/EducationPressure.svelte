@@ -3,18 +3,20 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { educationData, getIncomeGroup, countryName } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	type GroupKey = 'all' | 'Low Income' | 'Lower Middle' | 'Upper Middle' | 'High Income';
 
 	let group = $state<GroupKey>('all');
 	let sortKey = $state<'ptrPrimary' | 'ptrSecondary'>('ptrPrimary');
 
-	const GROUPS: { key: GroupKey; label: string }[] = [
-		{ key: 'all', label: 'All Countries' },
-		{ key: 'High Income', label: 'High Income' },
-		{ key: 'Upper Middle', label: 'Upper Middle' },
-		{ key: 'Lower Middle', label: 'Lower Middle' },
-		{ key: 'Low Income', label: 'Low Income' }
+	const GROUPS: { key: GroupKey; labelKey: string }[] = [
+		{ key: 'all', labelKey: 'views.education.groupAll' },
+		{ key: 'High Income', labelKey: 'views.education.groupHigh' },
+		{ key: 'Upper Middle', labelKey: 'views.education.groupUpperMiddle' },
+		{ key: 'Lower Middle', labelKey: 'views.education.groupLowerMiddle' },
+		{ key: 'Low Income', labelKey: 'views.education.groupLow' }
 	];
 
 	const filteredRows = $derived.by(() => {
@@ -42,14 +44,14 @@
 			backgroundColor: 'transparent',
 			...BASE_ANIMATION,
 			tooltip: {
-				...baseTooltip((v) => `${Number(v).toFixed(1)} pupils/teacher`),
+				...baseTooltip((v) => interpolate(t('views.education.tooltip'), { value: Number(v).toFixed(1) })),
 				trigger: 'axis',
 				axisPointer: { type: 'shadow' }
 			},
 			legend: {
 				bottom: 0,
 				textStyle: { color: PALETTE.muted },
-				data: ['Primary', 'Secondary']
+				data: [t('views.education.primary'), t('views.education.secondary')]
 			},
 			grid: { left: 8, right: 48, top: 16, bottom: 56, containLabel: true },
 			xAxis: valueXAxis(),
@@ -63,7 +65,7 @@
 			},
 			series: [
 				{
-					name: 'Primary',
+					name: t('views.education.primary'),
 					type: 'bar',
 					data: rows.map((r) => r.primary),
 					itemStyle: { color: PALETTE.blue, borderRadius: [0, 4, 4, 0], opacity: 0.85 },
@@ -78,7 +80,7 @@
 					}
 				},
 				{
-					name: 'Secondary',
+					name: t('views.education.secondary'),
 					type: 'bar',
 					data: rows.map((r) => r.secondary),
 					itemStyle: { color: PALETTE.purple, borderRadius: [0, 4, 4, 0], opacity: 0.85 },
@@ -98,18 +100,18 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Education Context</h1>
-	<p class="subtitle">Pupil-teacher ratios — more students per teacher means less individual attention — ECharts</p>
+	<h1 class="title">{t('views.education.title')}</h1>
+	<p class="subtitle">{t('views.education.subtitle')}</p>
 
 	<div class="controls">
 		<div class="control-group">
 			{#each GROUPS as g}
-				<button class="filter-btn" class:active={group === g.key} onclick={() => group = g.key}>{g.label}</button>
+				<button class="filter-btn" class:active={group === g.key} onclick={() => group = g.key}>{t(g.labelKey)}</button>
 			{/each}
 		</div>
 		<div class="control-group">
-			<button class="sort-btn" class:active={sortKey === 'ptrPrimary'} onclick={() => sortKey = 'ptrPrimary'}>Primary</button>
-			<button class="sort-btn" class:active={sortKey === 'ptrSecondary'} onclick={() => sortKey = 'ptrSecondary'}>Secondary</button>
+			<button class="sort-btn" class:active={sortKey === 'ptrPrimary'} onclick={() => sortKey = 'ptrPrimary'}>{t('views.education.primary')}</button>
+			<button class="sort-btn" class:active={sortKey === 'ptrSecondary'} onclick={() => sortKey = 'ptrSecondary'}>{t('views.education.secondary')}</button>
 		</div>
 	</div>
 
@@ -118,8 +120,8 @@
 	</div>
 
 	<div class="card">
-		<span class="card-label">High ratios = missed ADHD</span>
-		<span class="card-note">In countries with 50+ pupils per teacher, individual learning differences go unnoticed. ADHD children in under-resourced schools are less likely to be identified or supported.</span>
+		<span class="card-label">{t('views.education.cardLabel')}</span>
+		<span class="card-note">{t('views.education.cardNote')}</span>
 	</div>
 </div>
 

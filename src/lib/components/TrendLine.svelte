@@ -1,41 +1,40 @@
 <script lang="ts">
-	const metrics = [
+	import { t } from '$lib/i18n/store.svelte';
+
+	const metrics = $derived([
 		{
-			label: 'Prevalence',
+			labelKey: 'views.trends.labelPrevalence',
 			start: 2382,
 			end: 2173,
 			change: -5.7,
-			unit: 'per 100k',
 			period: '1990 → 2021'
 		},
 		{
-			label: 'Incidence',
+			labelKey: 'views.trends.labelIncidence',
 			start: 12.6,
 			end: 11.9,
 			change: -5.7,
-			unit: 'per 100k',
 			period: '1990 → 2021'
 		},
 		{
-			label: 'DALYs',
+			labelKey: 'views.trends.labelDalys',
 			start: 30.3,
 			end: 26.6,
 			change: -12.4,
-			unit: 'per 100k',
 			period: '1990 → 2021'
 		}
-	];
+	]);
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD Global Trends</h1>
-	<p class="subtitle">Ages 10–24, rates per 100k (1990 → 2021)</p>
+	<h1 class="title">{t('views.trends.title')}</h1>
+	<p class="subtitle">{t('views.trends.subtitle')}</p>
 
 	<div class="cards">
 		{#each metrics as m}
 			<div class="card">
 				<div class="card-header">
-					<span class="card-label">{m.label}</span>
+					<span class="card-label">{t(m.labelKey)}</span>
 					<span class="card-period">{m.period}</span>
 				</div>
 				<div class="card-values">
@@ -45,12 +44,12 @@
 				</div>
 				<div class="card-change">
 					<span class="change-badge">{m.change}%</span>
-					<span class="change-label">decline</span>
+					<span class="change-label">{t('views.trends.decline')}</span>
 				</div>
 				<div class="card-bar-track">
 					<div class="card-bar-fill" style="width:{((m.end / m.start) * 100).toFixed(1)}%"></div>
 				</div>
-				<span class="card-unit">{m.unit}</span>
+				<span class="card-unit">{t('views.trends.unit')}</span>
 			</div>
 		{/each}
 	</div>

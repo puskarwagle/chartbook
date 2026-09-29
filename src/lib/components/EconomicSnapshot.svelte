@@ -3,16 +3,17 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { gdpPerCapita, povertyRate, giniIndex, populationData, gdpLatestRows, countryName } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
 
 	type Metric = 'gdp' | 'poverty' | 'gini' | 'population';
 
 	let metric = $state<Metric>('gdp');
 
-	const METRICS: { key: Metric; label: string; unit: string; color: string }[] = [
-		{ key: 'gdp', label: 'GDP per Capita', unit: 'USD', color: PALETTE.blue },
-		{ key: 'poverty', label: 'Poverty Rate', unit: '% below $2.15/day', color: PALETTE.red },
-		{ key: 'gini', label: 'Inequality (Gini)', unit: '0–100', color: PALETTE.amber },
-		{ key: 'population', label: 'Population', unit: 'total', color: PALETTE.green }
+	const METRICS: { key: Metric; labelKey: string; color: string }[] = [
+		{ key: 'gdp', labelKey: 'indicators.gdp', color: PALETTE.blue },
+		{ key: 'poverty', labelKey: 'indicators.poverty', color: PALETTE.red },
+		{ key: 'gini', labelKey: 'indicators.gini', color: PALETTE.amber },
+		{ key: 'population', labelKey: 'indicators.population', color: PALETTE.green }
 	];
 
 	const metricMaps: Record<Metric, Map<string, number>> = {
@@ -95,28 +96,28 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Economic Overview</h1>
-	<p class="subtitle">Global economic indicators — latest available data by country — ECharts</p>
+	<h1 class="title">{t('views.economy.title')}</h1>
+	<p class="subtitle">{t('views.economy.subtitle')}</p>
 
 	<div class="controls">
 		{#each METRICS as m}
 			<button class="metric-btn" class:active={metric === m.key} onclick={() => metric = m.key} style="--c:{m.color}">
-				{m.label}
+				{t(m.labelKey)}
 			</button>
 		{/each}
 	</div>
 
 	<div class="stats-row">
 		<div class="stat">
-			<span class="stat-label">Countries</span>
+			<span class="stat-label">{t('views.economy.statCountries')}</span>
 			<span class="stat-value">{globalStats.count}</span>
 		</div>
 		<div class="stat">
-			<span class="stat-label">Global Average</span>
+			<span class="stat-label">{t('views.economy.statAverage')}</span>
 			<span class="stat-value">{formatVal(metric, globalStats.avg)}</span>
 		</div>
 		<div class="stat">
-			<span class="stat-label">Median</span>
+			<span class="stat-label">{t('views.economy.statMedian')}</span>
 			<span class="stat-value">{formatVal(metric, globalStats.median)}</span>
 		</div>
 	</div>
