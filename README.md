@@ -1,6 +1,6 @@
-# Graphics for ADHD — Global ADHD & Mental Health Data Dashboard
+# Chartbook — Interactive Data Chart Collections
 
-Interactive multi-view dashboard for exploring **ADHD prevalence, treatment access, comorbidities, and global mental health indicators** across countries. Combines data from WHO, World Bank, World Happiness Report, UNDP HDI, and more.
+Interactive multi-view dashboard for exploring **curated chart collections** — from ADHD prevalence, treatment access, and comorbidities to global mental health, wellbeing, and socioeconomic indicators — across countries. Combines data from WHO, World Bank, World Happiness Report, UNDP HDI, and more.
 
 **This is NOT legal or medical advice.** Data is research-sourced and tagged with confidence/evidence metadata.
 

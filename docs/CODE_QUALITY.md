@@ -1,4 +1,4 @@
-# Code Quality Report — graphicsForADHD
+# Code Quality Report — chartbook
 
 **Date:** 2026-07-18
 **Scope:** Full codebase review — architecture, tooling, patterns, and maintainability

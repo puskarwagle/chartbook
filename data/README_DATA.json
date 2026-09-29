@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Master index of all data files in the graphicsForADHD project. Each entry documents the file's source, schema, and which components consume it.",
+    "description": "Master index of all data files in the chartbook project. Each entry documents the file's source, schema, and which components consume it.",
     "last_updated": "2026-07-18",
     "pipeline_entrypoint": "src/lib/data.ts",
     "notes": "data.ts imports the 7 API-sourced JSON files and exports derived maps/functions. Components import from data.ts, not directly from JSON."
