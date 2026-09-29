@@ -85,6 +85,48 @@
 	}
 </script>
 
+<div class="map-layout">
+<div id="controls" class:hidden={takingScreenshot}>
+	<div class="controls-row">
+		{#each PALETTE as p}
+			<button
+				class="tier-btn"
+				class:active={filterTier === p.key}
+				onclick={() => (filterTier = filterTier === p.key ? null : p.key)}
+			>
+				<span class="tier-dot" style="background:{p.hex}"></span>
+				{p.label}
+			</button>
+		{/each}
+	</div>
+	<div class="controls-row">
+		<button
+			class="toggle-btn"
+			class:active={showNames}
+			onclick={() => (showNames = !showNames)}
+		>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+				<circle cx="12" cy="12" r="3"/>
+			</svg>
+			Names
+		</button>
+		<button class="action-btn reset-btn" onclick={() => { countryTiers = loadInitialTiers(); filterTier = null; selected = null; }}>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M1 4v6h6M23 20v-6h-6"/>
+				<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+			</svg>
+			Reset
+		</button>
+		<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+				<circle cx="12" cy="13" r="4"/>
+			</svg>
+			Screenshot
+		</button>
+	</div>
+</div>
 <div id="map-container">
 	<svg viewBox="0 -10 960 520" id="map">
 		{#each countryFeatures as c (c.iso2)}
@@ -155,56 +197,27 @@
 		{/if}
 	</div>
 {/if}
-
-<div id="controls" class:hidden={takingScreenshot}>
-	<div class="controls-row">
-		{#each PALETTE as p}
-			<button
-				class="tier-btn"
-				class:active={filterTier === p.key}
-				onclick={() => (filterTier = filterTier === p.key ? null : p.key)}
-			>
-				<span class="tier-dot" style="background:{p.hex}"></span>
-				{p.label}
-			</button>
-		{/each}
-	</div>
-	<div class="controls-row">
-		<button
-			class="toggle-btn"
-			class:active={showNames}
-			onclick={() => (showNames = !showNames)}
-		>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-				<circle cx="12" cy="12" r="3"/>
-			</svg>
-			Names
-		</button>
-		<button class="action-btn reset-btn" onclick={() => { countryTiers = loadInitialTiers(); filterTier = null; selected = null; }}>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M1 4v6h6M23 20v-6h-6"/>
-				<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
-			</svg>
-			Reset
-		</button>
-		<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-				<circle cx="12" cy="13" r="4"/>
-			</svg>
-			Screenshot
-		</button>
-	</div>
 </div>
 
 <style>
-	#map-container {
+	.map-layout {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
+		min-height: 0;
+		overflow: hidden;
+		position: relative;
+	}
+
+	#map-container {
+		flex: 1 1 auto;
+		min-height: 0;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
 	}
 
 	#map {
@@ -234,20 +247,20 @@
 	}
 
 	#controls {
-		position: fixed;
-		bottom: 1.5rem;
-		left: 50%;
-		transform: translateX(-50%);
+		flex: 0 0 auto;
+		align-self: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		gap: 0.5rem;
+		max-width: calc(100% - 2rem);
 		background: rgba(15, 15, 30, 0.85);
 		backdrop-filter: blur(10px);
 		padding: 0.75rem 1rem;
+		margin-top: 1rem;
 		border-radius: 16px;
 		border: 1px solid rgba(255, 255, 255, 0.08);
-		z-index: 50;
 		transition: opacity 0.2s;
 	}
 
@@ -258,9 +271,14 @@
 
 	.controls-row {
 		display: flex;
+		flex-direction: row;
 		gap: 0.35rem;
 		align-items: center;
 		justify-content: center;
+		flex-wrap: nowrap;
+		flex-shrink: 0;
+		max-width: 100%;
+		overflow-x: auto;
 	}
 
 	.tier-btn {
@@ -277,6 +295,7 @@
 		color: #bbb;
 		transition: all 0.15s;
 		white-space: nowrap;
+		flex-shrink: 0;
 	}
 
 	.tier-btn:hover {
@@ -311,6 +330,8 @@
 		cursor: pointer;
 		color: #999;
 		transition: all 0.15s;
+		white-space: nowrap;
+		flex-shrink: 0;
 	}
 
 	.toggle-btn:hover, .action-btn:hover {
@@ -347,8 +368,8 @@
 	}
 
 	#tooltip {
-		position: fixed;
-		bottom: 8rem;
+		position: absolute;
+		bottom: 1.5rem;
 		left: 50%;
 		transform: translateX(-50%);
 		background: rgba(15, 15, 30, 0.95);
@@ -357,7 +378,7 @@
 		border-radius: 10px;
 		font-size: 0.82rem;
 		pointer-events: none;
-		max-width: 520px;
+		max-width: min(520px, calc(100% - 2rem));
 		line-height: 1.45;
 		z-index: 100;
 		backdrop-filter: blur(8px);

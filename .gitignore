@@ -21,6 +21,9 @@ Thumbs.db
 # Local tooling
 .mimocode/
 
+# Lockfiles — npm (package-lock.json) is canonical
+bun.lock
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

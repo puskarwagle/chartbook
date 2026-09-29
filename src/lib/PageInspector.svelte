@@ -1,22 +1,22 @@
 <script lang="ts">
 	// PageInspector — per-page gear drawer (top-right of every view).
-	// Dynamic: shows current page id, JSON dump, and media (custom pages may
-	// have an image; built-ins have none).
+	// Shows the "About this chart" info for the active built-in view.
+	import ViewInfo from '$lib/components/ViewInfo.svelte';
+	import type { ViewInfoEntry } from '$lib/viewInfo';
+
 	let {
 		open,
-		pageId,
 		title,
+		sub,
+		info,
 		isCustom,
-		jsonText,
-		imageUrl,
 		onClose
 	}: {
 		open: boolean;
-		pageId: string;
 		title: string;
+		sub: string;
+		info: ViewInfoEntry | null;
 		isCustom: boolean;
-		jsonText: string;
-		imageUrl: string | null;
 		onClose: () => void;
 	} = $props();
 </script>
@@ -26,20 +26,18 @@
 		<div class="drawer-head">
 			<div>
 				<div class="drawer-title">{title}</div>
-				<div class="drawer-sub">{pageId} · {isCustom ? 'custom (JSON-backed)' : 'built-in component'}</div>
+				<div class="drawer-sub">{sub}</div>
 			</div>
 			<button class="x" onclick={onClose} aria-label="Close">✕</button>
 		</div>
 
-		<h4>Media</h4>
-		{#if imageUrl}
-			<img class="media" src={imageUrl} alt="page media" />
+		{#if info}
+			<ViewInfo {info} />
+		{:else if isCustom}
+			<p class="muted">Custom page — edit its content directly in the page. No chart info for custom pages.</p>
 		{:else}
-			<p class="muted">{isCustom ? 'No image on this custom page yet — add one in edit mode.' : 'No media attached — built-in views render live charts, they have no image field.'}</p>
+			<p class="muted">No info available for this view yet.</p>
 		{/if}
-
-		<h4>JSON</h4>
-		<pre class="json">{jsonText}</pre>
 	</div>
 {/if}
 
@@ -63,7 +61,7 @@
 		align-items: flex-start;
 		justify-content: space-between;
 		gap: 0.5rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.75rem;
 	}
 	.drawer-title {
 		font-weight: 700;
@@ -84,37 +82,13 @@
 	.x:hover {
 		color: #fff;
 	}
-	h4 {
-		margin: 0.9rem 0 0.4rem;
-		font-size: 0.7rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: #777;
-	}
 	.muted {
 		color: #666;
 		font-size: 0.8rem;
 		line-height: 1.5;
 	}
-	.media {
-		width: 100%;
-		border-radius: 8px;
-		max-height: 220px;
-		object-fit: contain;
-		background: #000;
-	}
-	.json {
-		background: rgba(0, 0, 0, 0.4);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 8px;
-		padding: 0.6rem;
-		font-size: 0.7rem;
-		line-height: 1.5;
-		color: #a5b4fc;
-		white-space: pre-wrap;
-		word-break: break-word;
+	.drawer :global(.view-info) {
 		margin: 0;
-		max-height: 300px;
-		overflow-y: auto;
+		max-width: none;
 	}
 </style>

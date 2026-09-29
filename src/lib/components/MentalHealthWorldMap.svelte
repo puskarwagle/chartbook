@@ -89,6 +89,20 @@
 	}
 </script>
 
+<div class="map-layout">
+<div id="mh-controls">
+	<div class="controls-row">
+		{#each INDICATORS as ind}
+			<button
+				class="indicator-btn"
+				class:active={indicator === ind.key}
+				onclick={() => indicator = ind.key}
+			>
+				{ind.label}
+			</button>
+		{/each}
+	</div>
+</div>
 <div id="mh-map-container">
 	<svg viewBox="0 -10 960 520" id="mh-map">
 		{#each countryFeatures as c (c.iso2)}
@@ -140,28 +154,26 @@
 		{/if}
 	</div>
 {/if}
-
-<div id="mh-controls">
-	<div class="controls-row">
-		{#each INDICATORS as ind}
-			<button
-				class="indicator-btn"
-				class:active={indicator === ind.key}
-				onclick={() => indicator = ind.key}
-			>
-				{ind.label}
-			</button>
-		{/each}
-	</div>
 </div>
 
 <style>
-	#mh-map-container {
+	.map-layout {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
+		min-height: 0;
+		overflow: hidden;
+		position: relative;
+	}
+	#mh-map-container {
+		flex: 1 1 auto;
+		min-height: 0;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
 	}
 	#mh-map {
 		width: 100%;
@@ -175,8 +187,8 @@
 		filter: brightness(1.3);
 	}
 	#tooltip {
-		position: fixed;
-		bottom: 6rem;
+		position: absolute;
+		bottom: 1.5rem;
 		left: 50%;
 		transform: translateX(-50%);
 		background: rgba(15, 15, 30, 0.95);
@@ -185,7 +197,7 @@
 		border-radius: 10px;
 		font-size: 0.82rem;
 		pointer-events: none;
-		max-width: 360px;
+		max-width: min(360px, calc(100% - 2rem));
 		line-height: 1.5;
 		z-index: 100;
 		backdrop-filter: blur(8px);
@@ -209,22 +221,25 @@
 		font-size: 0.72rem;
 	}
 	#mh-controls {
-		position: fixed;
-		bottom: 1.5rem;
-		left: 50%;
-		transform: translateX(-50%);
+		flex: 0 0 auto;
+		align-self: center;
+		display: flex;
+		max-width: calc(100% - 2rem);
+		overflow-x: auto;
 		background: rgba(15, 15, 30, 0.85);
 		backdrop-filter: blur(10px);
 		padding: 0.6rem 1rem;
+		margin-top: 1rem;
 		border-radius: 16px;
 		border: 1px solid rgba(255, 255, 255, 0.08);
-		z-index: 50;
 	}
 	.controls-row {
 		display: flex;
+		flex-direction: row;
 		gap: 0.3rem;
-		flex-wrap: wrap;
-		justify-content: center;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		align-items: center;
 	}
 	.indicator-btn {
 		background: rgba(255, 255, 255, 0.06);
@@ -237,6 +252,7 @@
 		color: #bbb;
 		transition: all 0.15s;
 		white-space: nowrap;
+		flex-shrink: 0;
 	}
 	.indicator-btn:hover {
 		background: rgba(255, 255, 255, 0.1);
