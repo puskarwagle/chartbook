@@ -1,53 +1,60 @@
 <script lang="ts">
-	const comorbidities = [
-		{ name: 'Substance Use Disorder', percent: 100 },
-		{ name: 'Personality Disorders', percent: 96 },
-		{ name: 'Antisocial PD', percent: 96 },
-		{ name: 'Borderline PD', percent: 74 },
-		{ name: 'Mood & Anxiety', percent: 73 },
-		{ name: 'Autism Spectrum', percent: 23 },
-		{ name: 'Psychopathy (PCL-R ≥30)', percent: 10 }
-	];
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
+	import comorbiditiesRaw from '../../../data/comorbidities.json';
 
-	const maxVal = 100;
-	const chartW = 560;
-	const chartH = 300;
-	const pad = { top: 20, right: 60, bottom: 20, left: 200 };
-	const barH = 32;
-	const gap = 8;
+	// JSON-driven: values come from data/comorbidities.json (Ginsberg 2010).
+	const raw = comorbiditiesRaw as unknown as {
+		study: { n_confirmed_adhd: number; n_assessed: number; n_screened: number };
+		comorbidities: { name: string; percent: number }[];
+	};
+	const items = raw.comorbidities;
 
-	function xPos(val: number) {
-		return pad.left + (val / maxVal) * (chartW - pad.left - pad.right);
-	}
-
-	function barOpacity(percent: number) {
-		return 0.3 + (percent / 100) * 0.7;
-	}
+	const option: echarts.EChartsCoreOption = {
+		backgroundColor: 'transparent',
+		...BASE_ANIMATION,
+		tooltip: baseTooltip((v) => `${v}% of ADHD cases`),
+		grid: { left: 8, right: 64, top: 16, bottom: 32, containLabel: true },
+		xAxis: { ...valueXAxis(), max: 100 },
+		yAxis: {
+			type: 'category',
+			data: items.map((c) => c.name),
+			inverse: true,
+			axisLine: { lineStyle: { color: PALETTE.axisLine } },
+			axisTick: { show: false },
+			axisLabel: { color: PALETTE.text, fontSize: 11.5 }
+		},
+		series: [
+			{
+				type: 'bar',
+				data: items.map((c) => c.percent),
+				itemStyle: {
+					borderRadius: [0, 4, 4, 0],
+					color: (p: { value: number }) => {
+						const alpha = 0.3 + (Number(p.value) / 100) * 0.7;
+						return `rgba(139, 92, 246, ${alpha.toFixed(2)})`;
+					}
+				},
+				label: {
+					show: true,
+					position: 'right',
+					color: PALETTE.text,
+					fontWeight: 700,
+					formatter: (p: { value: number }) => `${p.value}%`
+				}
+			}
+		]
+	};
 </script>
 
 <div class="view">
 	<h1 class="title">Comorbidities in Prison ADHD</h1>
-	<p class="subtitle">Ginsberg 2010 — 30 confirmed ADHD cases, high-security Swedish prison</p>
+	<p class="subtitle">Ginsberg 2010 — 30 confirmed ADHD cases, high-security Swedish prison — ECharts · JSON-driven</p>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			<line x1={pad.left} y1={pad.top} x2={pad.left} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-			<line x1={pad.left} y1={chartH - pad.bottom} x2={chartW - pad.right} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-
-			{#each [0, 25, 50, 75, 100] as t}
-				<line x1={xPos(t)} y1={pad.top} x2={xPos(t)} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.04)" />
-				<text x={xPos(t)} y={chartH - pad.bottom + 16} text-anchor="middle" fill="#888" font-size="11">{t}%</text>
-			{/each}
-
-			{#each comorbidities as c, i}
-				{@const y = pad.top + i * (barH + gap)}
-				{@const barWidth = xPos(c.percent) - pad.left}
-				<text x={pad.left - 8} y={y + barH / 2 + 4} text-anchor="end" fill="#e0e0e0" font-size="11.5" font-weight="500">{c.name}</text>
-				<rect x={pad.left} y={y} width={Math.max(barWidth, 2)} height={barH} fill="#8b5cf6" rx={4} opacity={barOpacity(c.percent)} />
-				<text x={xPos(c.percent) + 8} y={y + barH / 2 + 4} fill="#e0e0e0" font-size="12" font-weight="700">{c.percent}%</text>
-			{/each}
-		</svg>
-		<p class="note">n = 30 confirmed ADHD cases (of 34 assessed from 315 screened)</p>
+		<EChart {option} height="300px" />
+		<p class="note">n = {raw.study.n_confirmed_adhd} confirmed ADHD cases (of {raw.study.n_assessed} assessed from {raw.study.n_screened} screened)</p>
 	</div>
 
 	<div class="card">

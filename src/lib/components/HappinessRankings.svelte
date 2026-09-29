@@ -1,38 +1,86 @@
 <script lang="ts">
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip } from '$lib/echartsTheme';
 	import { happinessYears, happinessForYear } from '$lib/data';
 
 	let selectedYear = $state(Math.max(...happinessYears));
 
-	const yearData = $derived(happinessForYear(selectedYear).slice(0, 20));
-
 	const factors = [
-		{ key: 'gdp', label: 'GDP', color: '#3b82f6' },
-		{ key: 'social', label: 'Social Support', color: '#8b5cf6' },
-		{ key: 'health', label: 'Health', color: '#10b981' },
-		{ key: 'freedom', label: 'Freedom', color: '#f59e0b' },
-		{ key: 'generosity', label: 'Generosity', color: '#ef4444' },
-		{ key: 'corruption', label: 'Corruption', color: '#06b6d4' },
-		{ key: 'dystopia', label: 'Dystopia', color: '#6b7280' }
+		{ key: 'gdp', label: 'GDP', color: PALETTE.blue },
+		{ key: 'social', label: 'Social Support', color: PALETTE.purple },
+		{ key: 'health', label: 'Health', color: PALETTE.green },
+		{ key: 'freedom', label: 'Freedom', color: PALETTE.amber },
+		{ key: 'generosity', label: 'Generosity', color: PALETTE.red },
+		{ key: 'corruption', label: 'Corruption', color: PALETTE.cyan },
+		{ key: 'dystopia', label: 'Dystopia', color: PALETTE.gray }
 	] as const;
 
-	const maxScore = Math.max(...yearData.map(r => r.score), 1);
+	type FactorKey = (typeof factors)[number]['key'];
 
-	const barW = 500;
-	const barH = 22;
-	const barGap = 6;
-	const labelW = 140;
-	const chartW = barW + labelW + 80;
-	const chartH = yearData.length * (barH + barGap) + 40;
-	const pad = { top: 20, right: 20, bottom: 20, left: 0 };
+	const yearData = $derived(happinessForYear(selectedYear).slice(0, 20));
+	const maxScore = $derived(Math.max(...yearData.map((r) => r.score), 1));
 
-	function segmentWidth(val: number, total: number) {
-		return (val / total) * barW * (total / maxScore);
-	}
+	const option = $derived.by((): echarts.EChartsCoreOption => {
+		const rows = yearData;
+		const names = rows.map((r) => (r.country.length > 16 ? r.country.slice(0, 14) + '…' : r.country));
+		return {
+			backgroundColor: 'transparent',
+			...BASE_ANIMATION,
+			tooltip: {
+				...baseTooltip(),
+				trigger: 'axis',
+				axisPointer: { type: 'shadow' },
+				formatter: (params: unknown) => {
+					const items = params as { seriesName: string; value: number; marker: string; dataIndex: number }[];
+					const row = rows[items[0]?.dataIndex];
+					if (!row) return '';
+					let html = `<b>#${row.rank} ${row.country}</b> — score ${row.score.toFixed(3)}`;
+					for (const it of items) {
+						html += `<br/>${it.marker} ${it.seriesName}: <b>${Number(it.value).toFixed(3)}</b>`;
+					}
+					return html;
+				}
+			},
+			legend: {
+				bottom: 0,
+				textStyle: { color: PALETTE.muted, fontSize: 10 },
+				data: factors.map((f) => f.label)
+			},
+			grid: { left: 8, right: 56, top: 16, bottom: 64, containLabel: true },
+			xAxis: {
+				type: 'value',
+				max: Math.ceil(maxScore * 10) / 10,
+				splitLine: { lineStyle: { color: PALETTE.grid } },
+				axisLabel: { color: PALETTE.muted }
+			},
+			yAxis: {
+				type: 'category',
+				data: names,
+				inverse: true,
+				axisLine: { lineStyle: { color: PALETTE.axisLine } },
+				axisTick: { show: false },
+				axisLabel: { color: PALETTE.text, fontSize: 10.5 }
+			},
+			series: factors.map((f, fi) => ({
+				name: f.label,
+				type: 'bar',
+				stack: 'score',
+				data: rows.map((r) => Number((r[f.key as FactorKey] ?? 0).toFixed(3))),
+				itemStyle: {
+					color: f.color,
+					opacity: 0.85,
+					...(fi === 0 ? { borderRadius: [4, 0, 0, 4] } : {}),
+					...(fi === factors.length - 1 ? { borderRadius: [0, 4, 4, 0] } : {})
+				}
+			}))
+		};
+	});
 </script>
 
 <div class="view">
 	<h1 class="title">World Happiness Report</h1>
-	<p class="subtitle">Top 20 countries — factor contributions to life evaluation ({selectedYear})</p>
+	<p class="subtitle">Top 20 countries — factor contributions to life evaluation ({selectedYear}) — ECharts</p>
 
 	<div class="year-controls">
 		{#each happinessYears as y}
@@ -40,31 +88,8 @@
 		{/each}
 	</div>
 
-	<div class="chart-container" style="height:{chartH}px">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			{#each yearData as r, i}
-				{@const y = pad.top + i * (barH + barGap)}
-				<text x={labelW - 8} y={y + barH / 2 + 4} text-anchor="end" fill="#e0e0e0" font-size="10.5" font-weight="500">
-					{r.country.length > 16 ? r.country.slice(0, 14) + '…' : r.country}
-				</text>
-				<text x={labelW - 28} y={y + barH / 2 + 4} text-anchor="end" fill="#555" font-size="9">
-					{r.rank}
-				</text>
-
-				{@const totalVal = r.gdp + r.social + r.health + r.freedom + r.generosity + r.corruption + r.dystopia}
-				{@const scaleX = barW / maxScore}
-
-				<rect x={labelW} y={y} width={Math.max(r.gdp * scaleX, 0)} height={barH} fill="#3b82f6" rx={i === 0 ? 4 : 0} opacity={0.85} />
-				<rect x={labelW + r.gdp * scaleX} y={y} width={Math.max(r.social * scaleX, 0)} height={barH} fill="#8b5cf6" opacity={0.85} />
-				<rect x={labelW + (r.gdp + r.social) * scaleX} y={y} width={Math.max(r.health * scaleX, 0)} height={barH} fill="#10b981" opacity={0.85} />
-				<rect x={labelW + (r.gdp + r.social + r.health) * scaleX} y={y} width={Math.max(r.freedom * scaleX, 0)} height={barH} fill="#f59e0b" opacity={0.85} />
-				<rect x={labelW + (r.gdp + r.social + r.health + r.freedom) * scaleX} y={y} width={Math.max(r.generosity * scaleX, 0)} height={barH} fill="#ef4444" opacity={0.85} />
-				<rect x={labelW + (r.gdp + r.social + r.health + r.freedom + r.generosity) * scaleX} y={y} width={Math.max(r.corruption * scaleX, 0)} height={barH} fill="#06b6d4" opacity={0.85} />
-				<rect x={labelW + (r.gdp + r.social + r.health + r.freedom + r.generosity + r.corruption) * scaleX} y={y} width={Math.max(r.dystopia * scaleX, 0)} height={barH} fill="#6b7280" rx={i === 0 ? 0 : 4} opacity={0.85} />
-
-				<text x={labelW + totalVal * scaleX + 6} y={y + barH / 2 + 4} fill="#aaa" font-size="10" font-weight="600">{r.score.toFixed(3)}</text>
-			{/each}
-		</svg>
+	<div class="chart-container">
+		<EChart {option} />
 	</div>
 
 	<div class="legend">
@@ -118,12 +143,12 @@
 	.chart-container {
 		width: 100%;
 		max-width: 660px;
+		height: 560px;
 		background: rgba(255,255,255,0.04);
 		border: 1px solid rgba(255,255,255,0.08);
 		border-radius: 12px;
 		padding: 1rem;
 		box-sizing: border-box;
-		overflow-y: auto;
 	}
 	.legend {
 		display: flex;

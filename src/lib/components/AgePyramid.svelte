@@ -1,55 +1,67 @@
 <script lang="ts">
-	import { BarChart } from 'layerchart';
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import {
+		PALETTE,
+		BASE_ANIMATION,
+		baseTooltip,
+		categoryXAxis,
+		valueYAxis,
+		legendBottom,
+		barSeries
+	} from '$lib/echartsTheme';
+	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
 
+	// JSON-driven: values come from data/adolescents_young_adults_10_24.json (by_age_group).
+	const byAge = (
+		adolescentsRaw as unknown as Record<string, Record<string, Record<string, number>>>
+	).by_age_group;
 	const ageData = [
-		{ group: '10–14', prevalence: 2713.36, incidence: 33.66 },
-		{ group: '15–19', prevalence: 2157.35, incidence: 0 },
-		{ group: '20–24', prevalence: 1587.64, incidence: 0 }
+		{
+			group: '10–14',
+			prevalence: byAge['10_to_14'].prevalence_rate_2021_per_100k,
+			incidence: byAge['10_to_14'].incidence_rate_2021_per_100k ?? 0
+		},
+		{ group: '15–19', prevalence: byAge['15_to_19'].prevalence_rate_2021_per_100k, incidence: 0 },
+		{ group: '20–24', prevalence: byAge['20_to_24'].prevalence_rate_2021_per_100k, incidence: 0 }
 	];
+
+	const option: echarts.EChartsCoreOption = {
+		backgroundColor: 'transparent',
+		...BASE_ANIMATION,
+		tooltip: baseTooltip((v) => `${v.toLocaleString()} / 100k`),
+		legend: legendBottom(['Prevalence (per 100k)', 'Incidence (per 100k)']),
+		grid: { left: 64, right: 56, top: 32, bottom: 56 },
+		xAxis: categoryXAxis(ageData.map((d) => d.group)),
+		yAxis: [
+			valueYAxis('prevalence / 100k'),
+			{
+				...valueYAxis('incidence / 100k'),
+				position: 'right',
+				axisLabel: { color: PALETTE.green }
+			}
+		],
+		series: [
+			barSeries('Prevalence (per 100k)', ageData.map((d) => d.prevalence), PALETTE.blue, (v) =>
+				v.toFixed(0)
+			),
+			barSeries(
+				'Incidence (per 100k)',
+				ageData.map((d) => d.incidence),
+				PALETTE.green,
+				(v) => v.toFixed(v > 0 ? 2 : 0),
+				1
+			)
+		]
+	};
 </script>
 
 <div class="view">
 	<h1 class="title">ADHD Prevalence by Age Group</h1>
-	<p class="subtitle">Ages 10–24, global rates per 100k (2021)</p>
+	<p class="subtitle">Ages 10–24, global rates per 100k (2021) — ECharts · JSON-driven</p>
 
 	<div class="chart-container">
-		<BarChart
-			data={ageData}
-			x="group"
-			y="prevalence"
-			orientation="vertical"
-			grid={true}
-			axis={true}
-			tooltipContext={{ mode: 'band' }}
-		>
-			{#snippet marks({ context })}
-				{#each context.data ?? [] as d, i}
-					{@const x = context.xScale?.(d.group) ?? 0}
-					{@const y = context.yScale?.(d.prevalence) ?? 0}
-					{@const barWidth = context.xScale?.bandwidth?.() ?? 60}
-					{@const barHeight = (context.height ?? 400) - y}
-					<rect
-						x={x}
-						y={y}
-						width={barWidth}
-						height={barHeight}
-						fill="#3b82f6"
-						rx={4}
-						opacity={0.9}
-					/>
-					<text
-						x={x + barWidth / 2}
-						y={y - 8}
-						text-anchor="middle"
-						fill="#e0e0e0"
-						font-size="13"
-						font-weight="600"
-					>
-						{d.prevalence.toFixed(0)}
-					</text>
-				{/each}
-			{/snippet}
-		</BarChart>
+		<EChart {option} />
 	</div>
 
 	<div class="card">

@@ -197,21 +197,29 @@ export const povertyRate = (() => {
 	return new Map(rows.map(r => [r.country_code, r.value]));
 })();
 
+export const govYear = (() => {
+	const years = (GOV.control_of_corruption ?? [])
+		.filter((r) => isCountryCode(r.country_code))
+		.map((r) => Number(r.year))
+		.filter((y) => Number.isFinite(y));
+	return years.length > 0 ? String(Math.max(...years)) : '2023';
+})();
+
 export const govIndicators = (() => {
 	return {
-		controlOfCorruption: new Map((GOV.control_of_corruption ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value])),
-		ruleOfLaw: new Map((GOV.rule_of_law ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value])),
-		govEffectiveness: new Map((GOV.government_effectiveness ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value])),
-		regulatoryQuality: new Map((GOV.regulatory_quality ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value])),
-		politicalStability: new Map((GOV.political_stability ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value])),
-		voiceAccountability: new Map((GOV.voice_accountability ?? []).filter(r => isCountryCode(r.country_code) && r.year === '2023').map(r => [r.country_code, r.value]))
+		controlOfCorruption: new Map((GOV.control_of_corruption ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value])),
+		ruleOfLaw: new Map((GOV.rule_of_law ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value])),
+		govEffectiveness: new Map((GOV.government_effectiveness ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value])),
+		regulatoryQuality: new Map((GOV.regulatory_quality ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value])),
+		politicalStability: new Map((GOV.political_stability ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value])),
+		voiceAccountability: new Map((GOV.voice_accountability ?? []).filter(r => isCountryCode(r.country_code) && r.year === govYear).map(r => [r.country_code, r.value]))
 	};
 })();
 
 export const govCountryNames = (() => {
 	const names = new Map<string, string>();
 	for (const r of (GOV.control_of_corruption ?? [])) {
-		if (isCountryCode(r.country_code) && r.year === '2023') {
+		if (isCountryCode(r.country_code) && r.year === govYear) {
 			names.set(r.country_code, r.country);
 		}
 	}
