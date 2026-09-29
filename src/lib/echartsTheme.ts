@@ -22,6 +22,9 @@ export const PALETTE = {
 
 export const BASE_ANIMATION = { animationDuration: 800 };
 
+/** Font stack shared by chart text — includes Devanagari fallback for ne/hi locales. */
+export const CHART_FONT = `'Inter', 'Noto Sans Devanagari', system-ui, sans-serif`;
+
 export function baseTooltip(formatter?: (v: number) => string): TooltipComponentOption {
 	return {
 		trigger: 'axis',
