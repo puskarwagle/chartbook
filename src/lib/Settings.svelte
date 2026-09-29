@@ -45,8 +45,25 @@
 </script>
 
 {#if open}
-	<div class="overlay" onclick={onClose} role="presentation">
-		<div class="modal" onclick={(e) => e.stopPropagation()} role="dialog" aria-label="Settings">
+	<div
+		class="overlay"
+		onclick={onClose}
+		onkeydown={(e) => {
+			if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') onClose();
+		}}
+		role="button"
+		tabindex="-1"
+		aria-label="Close settings"
+	>
+		<div
+			class="modal"
+			onclick={(e) => e.stopPropagation()}
+			onkeydown={(e) => e.stopPropagation()}
+			role="dialog"
+			aria-modal="true"
+			aria-label="Settings"
+			tabindex="-1"
+		>
 			<div class="modal-head">
 				<h2>Settings</h2>
 				<button class="x" onclick={onClose} aria-label="Close">✕</button>
