@@ -150,8 +150,8 @@
   },
 
   "transparency_cpi_2024.json": {
-    "source": "World Bank Governance Indicators (https://api.worldbank.org/v2/)",
-    "fetched_via": "Used as alternative to Transparency International CPI (direct CPI download was unavailable)",
+    "source": "World Bank Worldwide Governance Indicators (https://www.worldbank.org/en/publication/worldwide-governance-indicators — official wgidataset.xlsx, Estimate values)",
+    "fetched_via": "Downloaded wgidataset.xlsx and extracted per-country Estimate values per year (see /tmp/build_wgi.py pattern)",
     "format": "JSON object with named indicator arrays",
     "top_level_keys": [
       "control_of_corruption",
@@ -164,17 +164,17 @@
     "row_schema": {
       "country_code": "ISO-3166-1 alpha-3",
       "country": "Country name",
-      "year": "String year (filtered to '2023' in data.ts)",
-      "value": "Governance score (-2.5 to 2.5 scale)"
+      "year": "String year (1996-2022; data.ts uses latest available via govYear)",
+      "value": "Governance estimate (-2.5 to 2.5 scale)"
     },
     "note": "Replaces Transparency International CPI which was unavailable. Governance indicators serve as proxy for institutional quality/corruption.",
     "data_ts_exports": [
-      "govIndicators — object with Map<iso3, number> for each of the 6 indicators (filtered to 2023)",
+      "govYear — latest available year in the file",
+      "govIndicators — object with Map<iso3, number> for each of the 6 indicators (filtered to govYear)",
       "govCountryNames — Map<iso3, country_name>"
     ],
     "consumed_by": [
-      "GovernanceRadar.svelte — govIndicators, govCountryNames",
-      "TreatmentAccessIndex.svelte — govIndicators.controlOfCorruption (via computeTreatmentAccessIndex)"
+      "GovernanceRadar.svelte — govIndicators, govCountryNames, govYear (ECharts radar, min -2.5 / max 2.5)"
     ]
   },
 
@@ -438,5 +438,40 @@
     "description": "Search keywords and AI image generation prompts for visuals matched to script sections — intended for Unsplash, Pexels, Pixabay, or AI image tools",
     "format": "JSON object with image entries containing section, timestamp_hint, keywords, and description",
     "consumed_by": "Reference data for visual asset generation; not imported by components"
+  },
+
+  "sud_by_sex.json": {
+    "source": "Moldekleiv et al. 2025, Norwegian cohort (ages 18-31, n=49,815 ADHD)",
+    "description": "SUD prevalence in ADHD by sex with hazard ratios per substance type",
+    "format": "JSON object with cohort meta + categories array (name, male_pct, female_pct, hr_male, hr_female)",
+    "consumed_by": ["SexDiffSUD.svelte — grouped ECharts bar, HR shown in axis labels + tooltip"]
+  },
+
+  "comorbidities.json": {
+    "source": "Ginsberg et al. 2010, high-security Swedish prison (30 confirmed ADHD cases)",
+    "description": "Psychiatric comorbidity percentages in prison ADHD cases",
+    "format": "JSON object with study meta + comorbidities array (name, percent)",
+    "consumed_by": ["ComorbidityBreakdown.svelte — horizontal ECharts bar with value-mapped opacity"]
+  },
+
+  "sud_by_substance.json": {
+    "source": "Rohner et al. 2023 meta-analysis (n=12,524 across 31 studies)",
+    "description": "ADHD prevalence in SUD patients by substance type, with 95% CIs and overall pooled estimate",
+    "format": "JSON object with meta_analysis + overall + substances array (name, percent, ci_low, ci_high, n_studies)",
+    "consumed_by": ["SUDbySubstance.svelte — ECharts bar + custom CI whisker series + overall markLine"]
+  },
+
+  "prison_adhd_studies.json": {
+    "source": "Fazel 2024, Young 2014, Ginsberg 2010 meta-analyses",
+    "description": "ADHD prevalence in prison populations across studies vs general population baseline",
+    "format": "JSON object with general_population_pct + studies array (name, prevalence, ci_low/ci_high nullable, n, note)",
+    "consumed_by": ["PrisonPrevalence.svelte — ECharts bar + custom CI whisker series + general-pop markLine"]
+  },
+
+  "sdi_regions.json": {
+    "source": "GBD 2021 under-20 estimates (Cortese et al. 2026) + regional breakdowns",
+    "description": "SDI vs ADHD prevalence by region",
+    "format": "JSON object with regions array (region, sdi, prevalence_pct)",
+    "consumed_by": ["SDIScatter.svelte — ECharts scatter with region labels"]
   }
 }
