@@ -15,14 +15,14 @@
 		{ key: 'dystopia', label: 'Dystopia', color: '#6b7280' }
 	] as const;
 
-	const maxScore = Math.max(...yearData.map(r => r.score), 1);
+	const maxScore = $derived(Math.max(...yearData.map(r => r.score), 1));
 
 	const barW = 500;
 	const barH = 22;
 	const barGap = 6;
 	const labelW = 140;
 	const chartW = barW + labelW + 80;
-	const chartH = yearData.length * (barH + barGap) + 40;
+	const chartH = $derived(yearData.length * (barH + barGap) + 40);
 	const pad = { top: 20, right: 20, bottom: 20, left: 0 };
 
 	function segmentWidth(val: number, total: number) {
