@@ -99,8 +99,13 @@
 				stroke="#fff"
 				stroke-width={hovered === c.iso2 ? 1.5 : 0.5}
 				class="country"
+				role="button"
+				tabindex="0"
+				aria-label={c.name}
 				onmouseenter={() => handleHover(c.iso2)}
 				onmouseleave={() => { hovered = null; hoveredData = null; }}
+				onfocus={() => handleHover(c.iso2)}
+				onblur={() => { hovered = null; hoveredData = null; }}
 			/>
 		{/each}
 		<path d={bordersPath} fill="none" stroke="#999" stroke-width={0.3} />

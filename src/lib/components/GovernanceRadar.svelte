@@ -87,8 +87,8 @@
 
 	<div class="controls">
 		<div class="select-group">
-			<label class="select-label">Country 1</label>
-			<select class="select" bind:value={country1}>
+			<label class="select-label" for="gov-country-1">Country 1</label>
+			<select id="gov-country-1" class="select" bind:value={country1}>
 				{#each allCountryCodes as c}
 					<option value={c.code}>{c.name}</option>
 				{/each}
@@ -99,8 +99,8 @@
 		</button>
 		{#if compareMode}
 			<div class="select-group">
-				<label class="select-label">Country 2</label>
-				<select class="select" bind:value={country2}>
+				<label class="select-label" for="gov-country-2">Country 2</label>
+				<select id="gov-country-2" class="select" bind:value={country2}>
 					<option value="">Select...</option>
 					{#each allCountryCodes as c}
 						<option value={c.code}>{c.name}</option>
