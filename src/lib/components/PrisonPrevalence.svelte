@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import prisonRaw from '../../../data/prison_adhd_studies.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/prison_adhd_studies.json.
 	interface Study {
@@ -41,7 +43,7 @@
 		};
 	}
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
 		tooltip: {
@@ -52,8 +54,17 @@
 				const p = (params as { dataIndex: number; marker: string }[])[0];
 				const s = studies[p.dataIndex];
 				const ci =
-					s.ci_low !== null && s.ci_high !== null ? ` (95% CI ${s.ci_low}–${s.ci_high})` : ' (no CI reported)';
-				return `<b>${s.name}</b><br/>${p.marker} Prevalence: <b>${s.prevalence}%</b>${ci}<br/><span style="color:#888">n = ${s.n.toLocaleString()} — ${s.note}</span>`;
+					s.ci_low !== null && s.ci_high !== null
+						? interpolate(t('views.prison.tooltipCi'), { lo: s.ci_low, hi: s.ci_high })
+						: t('views.prison.tooltipNoCi');
+				return interpolate(t('views.prison.tooltip'), {
+					name: s.name,
+					marker: p.marker,
+					pct: s.prevalence,
+					ci,
+					n: s.n.toLocaleString(),
+					note: s.note
+				});
 			}
 		},
 		grid: { left: 8, right: 88, top: 32, bottom: 32, containLabel: true },
@@ -78,7 +89,7 @@
 					fontWeight: 700,
 					formatter: (p: any) => {
 						const s = studies[p.dataIndex as number];
-						return `{b|${s.prevalence}%}\n{s|n = ${s.n.toLocaleString()}}`;
+						return `{b|${s.prevalence}%}\n{s|${interpolate(t('views.prison.barSub'), { n: s.n.toLocaleString() })}}`;
 					},
 					rich: {
 						b: { color: PALETTE.text, fontSize: 13, fontWeight: 700, lineHeight: 18 },
@@ -88,7 +99,11 @@
 				markLine: {
 					symbol: 'none',
 					lineStyle: { color: PALETTE.red, type: 'dashed', width: 1.5 },
-					label: { color: PALETTE.red, fontSize: 10, formatter: `General pop ~${generalPop}%` },
+					label: {
+						color: PALETTE.red,
+						fontSize: 10,
+						formatter: () => interpolate(t('views.prison.generalPop'), { value: generalPop })
+					},
 					data: [{ xAxis: generalPop }]
 				}
 			},
@@ -101,12 +116,12 @@
 				z: 3
 			}
 		]
-	};
+	});
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD in Prison Populations</h1>
-	<p class="subtitle">Prevalence across meta-analyses vs general population — ECharts · JSON-driven</p>
+	<h1 class="title">{t('views.prison.title')}</h1>
+	<p class="subtitle">{t('views.prison.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} />
@@ -114,12 +129,12 @@
 
 	<div class="cards">
 		<div class="card">
-			<span class="card-label">1 in 12 prisoners (random sampling)</span>
-			<span class="card-note">Fazel 2024 — corrected for selection bias</span>
+			<span class="card-label">{t('views.prison.card1Label')}</span>
+			<span class="card-note">{t('views.prison.card1Note')}</span>
 		</div>
 		<div class="card">
-			<span class="card-label">Up to 8x overrepresentation</span>
-			<span class="card-note">Ginsberg 2010 — 40% in long-term male inmates</span>
+			<span class="card-label">{t('views.prison.card2Label')}</span>
+			<span class="card-note">{t('views.prison.card2Note')}</span>
 		</div>
 	</div>
 </div>

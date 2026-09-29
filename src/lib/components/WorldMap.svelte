@@ -2,8 +2,10 @@
 	import { tick } from 'svelte';
 	import html2canvas from 'html2canvas';
 	import { countryFeatures, bordersPath } from '$lib/mapData';
-	import { COLORS, TIERS } from '$lib/colors';
+	import { COLORS } from '$lib/colors';
 	import statusData from '$lib/countryStatus.json';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { tierShortLabel, countryNoteLocalized, interpolate } from '$lib/i18n/index';
 
 	type TierKey = '1' | '2' | '3' | '4' | 'unknown';
 
@@ -27,13 +29,15 @@
 	// Pinned selection wins over hover so a clicked country's info stays put.
 	let shown = $derived(selected ?? hovered);
 
-	const PALETTE: { key: TierKey; label: string; hex: string }[] = [
-		{ key: '1', label: 'Amphetamine', hex: COLORS['1'] },
-		{ key: '2', label: 'Methylphenidate Only', hex: COLORS['2'] },
-		{ key: '3', label: 'Non-Stimulants Only', hex: COLORS['3'] },
-		{ key: '4', label: 'No Treatment', hex: COLORS['4'] },
-		{ key: 'unknown', label: 'Unknown', hex: COLORS.unknown }
-	];
+	const TIER_KEYS: TierKey[] = ['1', '2', '3', '4', 'unknown'];
+
+	const tierButtons = $derived(
+		TIER_KEYS.map((key) => ({
+			key,
+			label: tierShortLabel(key, currentLocale()),
+			hex: key === 'unknown' ? COLORS.unknown : COLORS[key]
+		}))
+	);
 
 	function fillFor(iso2: string): string {
 		const tier = countryTiers[iso2] ?? 'unknown';
@@ -88,7 +92,7 @@
 <div class="map-layout">
 <div id="controls" class:hidden={takingScreenshot}>
 	<div class="controls-row">
-		{#each PALETTE as p}
+		{#each tierButtons as p}
 			<button
 				class="tier-btn"
 				class:active={filterTier === p.key}
@@ -107,23 +111,23 @@
 		>
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-				<circle cx="12" cy="12" r="3"/>
-			</svg>
-			Names
+			<circle cx="12" cy="12" r="3"/>
+		</svg>
+			{t('views.worldmap.names')}
 		</button>
 		<button class="action-btn reset-btn" onclick={() => { countryTiers = loadInitialTiers(); filterTier = null; selected = null; }}>
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M1 4v6h6M23 20v-6h-6"/>
-				<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
-			</svg>
-			Reset
+			<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+		</svg>
+			{t('views.worldmap.reset')}
 		</button>
 		<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-				<circle cx="12" cy="13" r="4"/>
-			</svg>
-			Screenshot
+			<circle cx="12" cy="13" r="4"/>
+		</svg>
+			{t('views.worldmap.screenshot')}
 		</button>
 	</div>
 </div>
@@ -175,16 +179,16 @@
 	<div id="tooltip">
 		<div class="tooltip-name">{feat?.name ?? shown}</div>
 		{#if selected}
-			<div class="tooltip-pinned">Pinned — click {feat?.name ?? shown} again to unpin</div>
+			<div class="tooltip-pinned">{interpolate(t('views.worldmap.pinned'), { name: feat?.name ?? shown })}</div>
 		{/if}
 		{#if entry}
-			<div class="tooltip-tier">Tier {entry.tier} — {(TIERS as any)[String(entry.tier)] ?? 'Unknown'}</div>
+			<div class="tooltip-tier">{interpolate(t('views.worldmap.tierLine'), { tier: entry.tier, label: tierShortLabel(String(entry.tier) as TierKey, currentLocale()) })}</div>
 			{#if entry.confidence}
 				<div class="tooltip-meta">
-					Confidence: {entry.confidence} | Evidence: {entry.evidence} | Verified: {entry.last_verified}
+					{interpolate(t('views.worldmap.metaLine'), { confidence: entry.confidence, evidence: entry.evidence, verified: entry.last_verified })}
 				</div>
 			{/if}
-			<div class="tooltip-notes">{entry.notes}</div>
+			<div class="tooltip-notes">{countryNoteLocalized(shown, currentLocale(), entry.notes)}</div>
 			{#if entry.approved && Object.keys(entry.approved).length > 0}
 				<div class="tooltip-approved">
 					{#each Object.entries(entry.approved) as [drug, ok]}
@@ -193,7 +197,7 @@
 				</div>
 			{/if}
 		{:else}
-			<div class="tooltip-meta">No data</div>
+			<div class="tooltip-meta">{t('views.worldmap.noData')}</div>
 		{/if}
 	</div>
 {/if}

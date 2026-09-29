@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import comorbiditiesRaw from '../../../data/comorbidities.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/comorbidities.json (Ginsberg 2010).
 	const raw = comorbiditiesRaw as unknown as {
@@ -11,10 +13,10 @@
 	};
 	const items = raw.comorbidities;
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
-		tooltip: baseTooltip((v) => `${v}% of ADHD cases`),
+		tooltip: baseTooltip((v) => interpolate(t('views.comorbid.tooltip'), { value: v })),
 		grid: { left: 8, right: 64, top: 16, bottom: 32, containLabel: true },
 		xAxis: { ...valueXAxis(), max: 100 },
 		yAxis: {
@@ -42,24 +44,32 @@
 					color: PALETTE.text,
 					fontWeight: 700,
 					formatter: (p: { value: number }) => `${p.value}%`
-				}
 			}
-		]
-	};
+		}
+	]
+	});
+
+	const note = $derived(
+		interpolate(t('views.comorbid.note'), {
+			confirmed: raw.study.n_confirmed_adhd,
+			assessed: raw.study.n_assessed,
+			screened: raw.study.n_screened
+		})
+	);
 </script>
 
 <div class="view">
-	<h1 class="title">Comorbidities in Prison ADHD</h1>
-	<p class="subtitle">Ginsberg 2010 — 30 confirmed ADHD cases, high-security Swedish prison — ECharts · JSON-driven</p>
+	<h1 class="title">{t('views.comorbid.title')}</h1>
+	<p class="subtitle">{t('views.comorbid.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} height="300px" />
-		<p class="note">n = {raw.study.n_confirmed_adhd} confirmed ADHD cases (of {raw.study.n_assessed} assessed from {raw.study.n_screened} screened)</p>
+		<p class="note">{note}</p>
 	</div>
 
 	<div class="card">
-		<span class="card-label">100% had lifetime substance use disorder</span>
-		<span class="card-note">Only 7% had a childhood ADHD diagnosis despite most needing services</span>
+		<span class="card-label">{t('views.comorbid.cardLabel')}</span>
+		<span class="card-note">{t('views.comorbid.cardNote')}</span>
 	</div>
 </div>
 

@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { COLORS, TIERS } from '$lib/colors';
+	import { COLORS } from '$lib/colors';
 	import statusData from '$lib/countryStatus.json';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { tierShortLabel, interpolate } from '$lib/i18n/index';
 
 	type TierKey = '1' | '2' | '3' | '4' | 'unknown';
 
@@ -15,18 +17,16 @@
 
 	const totalCountries = $derived(Object.keys(statusData.countries).length);
 
-	const tierMeta: { key: TierKey; label: string }[] = [
-		{ key: '1', label: 'Amphetamine' },
-		{ key: '2', label: 'Methylphenidate Only' },
-		{ key: '3', label: 'Non-Stimulants Only' },
-		{ key: '4', label: 'No Treatment' },
-		{ key: 'unknown', label: 'Unknown' }
-	];
+	const title = $derived(t('views.stats.title'));
+	const subtitle = $derived(interpolate(t('common.countriesTracked'), { count: totalCountries }));
+
+	const tierKeys: TierKey[] = ['1', '2', '3', '4', 'unknown'];
+	const tierMeta = $derived(tierKeys.map((key) => ({ key, label: tierShortLabel(key, currentLocale()) })));
 </script>
 
 <div class="stats-view">
-	<h1 class="stats-title">Global ADHD Treatment Overview</h1>
-	<p class="stats-subtitle">{totalCountries} countries tracked</p>
+	<h1 class="stats-title">{title}</h1>
+	<p class="stats-subtitle">{subtitle}</p>
 
 	<div class="stats-grid">
 		{#each tierMeta as t}

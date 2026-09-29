@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import sdiRaw from '../../../data/sdi_regions.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	// JSON-driven: values come from data/sdi_regions.json.
 	const raw = sdiRaw as unknown as {
@@ -10,18 +12,22 @@
 	};
 	const sdiData = raw.regions;
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
 		tooltip: {
 			trigger: 'item',
 			formatter: (p: any) =>
-				`<b>${sdiData[p.dataIndex as number].region}</b><br/>SDI: <b>${(p.value as number[])[0]}</b><br/>Prevalence: <b>${(p.value as number[])[1]}%</b>`
+				interpolate(t('views.sdi.tooltip'), {
+					region: sdiData[p.dataIndex as number].region,
+					sdi: (p.value as number[])[0],
+					pct: (p.value as number[])[1]
+				})
 		},
 		grid: { left: 56, right: 96, top: 32, bottom: 56 },
 		xAxis: {
 			type: 'value',
-			name: 'Sociodevelopmental Index (SDI)',
+			name: t('views.sdi.axisX'),
 			nameLocation: 'middle',
 			nameGap: 36,
 			nameTextStyle: { color: PALETTE.muted, fontSize: 12 },
@@ -32,7 +38,7 @@
 		},
 		yAxis: {
 			type: 'value',
-			name: 'Prevalence %',
+			name: t('views.sdi.axisY'),
 			nameTextStyle: { color: PALETTE.muted, fontSize: 12 },
 			min: 0,
 			max: 6,
@@ -55,20 +61,20 @@
 				emphasis: { scale: 1.4 }
 			}
 		]
-	};
+	});
 </script>
 
 <div class="view">
-	<h1 class="title">SDI vs ADHD Prevalence</h1>
-	<p class="subtitle">Sociodevelopmental Index vs prevalence rate % by region (under-20, 2021) — ECharts · JSON-driven</p>
+	<h1 class="title">{t('views.sdi.title')}</h1>
+	<p class="subtitle">{t('views.sdi.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} />
 	</div>
 
 	<div class="card">
-		<span class="card-label">Nonlinear positive correlation</span>
-		<span class="card-note">Higher SDI generally correlates with higher ADHD prevalence. High SDI regions showed the greatest increases over 1990–2021.</span>
+		<span class="card-label">{t('views.sdi.cardLabel')}</span>
+		<span class="card-note">{t('views.sdi.cardNote')}</span>
 	</div>
 </div>
 

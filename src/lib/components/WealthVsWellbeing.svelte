@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import { happinessYears, happinessForYear, gdpPerCapita, giniIndex, countryNameToCode3 } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	let selectedYear = $state(Math.max(...happinessYears));
 	let showTrend = $state(true);
@@ -62,14 +64,19 @@
 				trigger: 'item',
 				formatter: (p: any) => {
 					const d = data[p.dataIndex as number];
-					const gini = d.gini === null ? 'n/a' : d.gini.toFixed(1);
-					return `<b>${d.country}</b><br/>GDP per capita: <b>$${Math.round(d.gdp).toLocaleString()}</b><br/>Happiness: <b>${d.score.toFixed(3)}</b><br/><span style="color:#888">Gini: ${gini}</span>`;
+					const gini = d.gini === null ? t('views.wealth.na') : d.gini.toFixed(1);
+					return interpolate(t('views.wealth.tooltip'), {
+						country: d.country,
+						gdp: Math.round(d.gdp).toLocaleString(),
+						score: d.score.toFixed(3),
+						gini
+					});
 				}
 			},
 			grid: { left: 56, right: 24, top: 30, bottom: 64 },
 			xAxis: {
 				type: 'log',
-				name: 'GDP per capita (log scale)',
+				name: t('views.wealth.axisX'),
 				nameLocation: 'middle',
 				nameGap: 36,
 				nameTextStyle: { color: PALETTE.muted, fontSize: 11 },
@@ -83,7 +90,7 @@
 			},
 			yAxis: {
 				type: 'value',
-				name: 'Happiness score',
+				name: t('views.wealth.axisY'),
 				nameTextStyle: { color: PALETTE.muted, fontSize: 11 },
 				min: 2,
 				max: 9,
@@ -128,11 +135,12 @@
 			]
 		};
 	});
+	const subtitle = $derived(interpolate(t('views.wealth.subtitle'), { year: selectedYear }));
 </script>
 
 <div class="view">
-	<h1 class="title">Wealth & Wellbeing</h1>
-	<p class="subtitle">GDP per capita vs happiness score ({selectedYear}) — color = Gini inequality index — ECharts</p>
+	<h1 class="title">{t('views.wealth.title')}</h1>
+	<p class="subtitle">{subtitle}</p>
 
 	<div class="controls">
 		<div class="year-controls">
@@ -141,7 +149,7 @@
 			{/each}
 		</div>
 		<button class="trend-btn" class:active={showTrend} onclick={() => showTrend = !showTrend}>
-			{showTrend ? 'Trend on' : 'Trend off'}
+			{showTrend ? t('views.wealth.trendOn') : t('views.wealth.trendOff')}
 		</button>
 	</div>
 
@@ -150,14 +158,14 @@
 	</div>
 
 	<div class="legend">
-		<span class="legend-label">Low inequality (Gini 25)</span>
+		<span class="legend-label">{t('views.wealth.legendLow')}</span>
 		<div class="legend-bar"></div>
-		<span class="legend-label">High inequality (Gini 70)</span>
+		<span class="legend-label">{t('views.wealth.legendHigh')}</span>
 	</div>
 
 	<div class="card">
-		<span class="card-label">ADHD outcomes improve with economic resources</span>
-		<span class="card-note">But inequality matters as much as wealth — high-GDP + high-Gini countries show worse mental health outcomes. Treatment access correlates with both GDP and low inequality.</span>
+		<span class="card-label">{t('views.wealth.cardLabel')}</span>
+		<span class="card-note">{t('views.wealth.cardNote')}</span>
 	</div>
 </div>
 

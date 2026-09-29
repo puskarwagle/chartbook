@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { computeTreatmentAccessIndex, countryName, iso3ToIso2 } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
 
 	type ViewMode = 'top20' | 'bottom20' | 'all';
 
@@ -25,13 +26,13 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Treatment Access Index</h1>
-	<p class="subtitle">Composite of healthcare spending, government effectiveness, and HDI</p>
+	<h1 class="title">{t('views.treatment.title')}</h1>
+	<p class="subtitle">{t('views.treatment.subtitle')}</p>
 
 	<div class="controls">
-		<button class="mode-btn" class:active={mode === 'top20'} onclick={() => mode = 'top20'}>Top 20</button>
-		<button class="mode-btn" class:active={mode === 'bottom20'} onclick={() => mode = 'bottom20'}>Bottom 20</button>
-		<button class="mode-btn" class:active={mode === 'all'} onclick={() => mode = 'all'}>All</button>
+		<button class="mode-btn" class:active={mode === 'top20'} onclick={() => mode = 'top20'}>{t('views.treatment.modeTop')}</button>
+		<button class="mode-btn" class:active={mode === 'bottom20'} onclick={() => mode = 'bottom20'}>{t('views.treatment.modeBottom')}</button>
+		<button class="mode-btn" class:active={mode === 'all'} onclick={() => mode = 'all'}>{t('views.treatment.modeAll')}</button>
 	</div>
 
 	<div class="chart-container" class:scrollable={mode === 'all'}>
@@ -60,12 +61,12 @@
 
 	<div class="cards">
 		<div class="card">
-			<span class="card-label">Treatment access depends on infrastructure</span>
-			<span class="card-note">ADHD diagnosis and treatment require healthcare spending and good health outcomes — both captured in this composite of health expenditure % GDP and life expectancy.</span>
+			<span class="card-label">{t('views.treatment.card1Label')}</span>
+			<span class="card-note">{t('views.treatment.card1Note')}</span>
 		</div>
 		<div class="card">
-			<span class="card-label">Low-income countries face barriers</span>
-			<span class="card-note">Countries scoring lowest have underfunded health systems and weak governance, making ADHD treatment nearly unavailable.</span>
+			<span class="card-label">{t('views.treatment.card2Label')}</span>
+			<span class="card-note">{t('views.treatment.card2Note')}</span>
 		</div>
 	</div>
 </div>

@@ -10,6 +10,7 @@
 		mentalHealthByCountry,
 		countryName
 	} from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
 
 	type Indicator = 'depression' | 'anxiety' | 'schizophrenia' | 'eating' | 'alcohol' | 'drugs';
 
@@ -17,13 +18,13 @@
 	let hovered = $state<string | null>(null);
 	let hoveredData = $state<{ depression?: number; anxiety?: number; schizophrenia?: number; eating?: number; alcohol?: number; drugs?: number; lifeExp?: number } | null>(null);
 
-	const INDICATORS: { key: Indicator; label: string }[] = [
-		{ key: 'depression', label: 'Depression' },
-		{ key: 'anxiety', label: 'Anxiety' },
-		{ key: 'schizophrenia', label: 'Schizophrenia' },
-		{ key: 'eating', label: 'Eating Disorders' },
-		{ key: 'alcohol', label: 'Alcohol Use' },
-		{ key: 'drugs', label: 'Drug Use' }
+	const INDICATORS: { key: Indicator; labelKey: string; tipKey: string }[] = [
+		{ key: 'depression', labelKey: 'indicators.depression', tipKey: 'views.mhmap.tipDepression' },
+		{ key: 'anxiety', labelKey: 'indicators.anxiety', tipKey: 'views.mhmap.tipAnxiety' },
+		{ key: 'schizophrenia', labelKey: 'indicators.schizophrenia', tipKey: 'views.mhmap.tipSchizophrenia' },
+		{ key: 'eating', labelKey: 'indicators.eatingDisorders', tipKey: 'views.mhmap.tipEating' },
+		{ key: 'alcohol', labelKey: 'indicators.alcohol', tipKey: 'views.mhmap.tipAlcohol' },
+		{ key: 'drugs', labelKey: 'indicators.drugs', tipKey: 'views.mhmap.tipDrugs' }
 	];
 
 	const dataByIndicator: Record<Indicator, { country_code: string; value: number }[]> = {
@@ -98,7 +99,7 @@
 				class:active={indicator === ind.key}
 				onclick={() => indicator = ind.key}
 			>
-				{ind.label}
+				{t(ind.labelKey)}
 			</button>
 		{/each}
 	</div>
@@ -132,25 +133,25 @@
 		<div class="tooltip-name">{feat?.name ?? hovered}</div>
 		{#if hoveredData}
 			<div class="tooltip-row">
-				<span class="tooltip-label">Depression:</span> {formatVal(hoveredData.depression)}
+				<span class="tooltip-label">{t('views.mhmap.tipDepression')}</span> {formatVal(hoveredData.depression)}
 			</div>
 			<div class="tooltip-row">
-				<span class="tooltip-label">Anxiety:</span> {formatVal(hoveredData.anxiety)}
+				<span class="tooltip-label">{t('views.mhmap.tipAnxiety')}</span> {formatVal(hoveredData.anxiety)}
 			</div>
 			<div class="tooltip-row">
-				<span class="tooltip-label">Schizophrenia:</span> {formatVal(hoveredData.schizophrenia)}
+				<span class="tooltip-label">{t('views.mhmap.tipSchizophrenia')}</span> {formatVal(hoveredData.schizophrenia)}
 			</div>
 			<div class="tooltip-row">
-				<span class="tooltip-label">Eating Disorders:</span> {formatVal(hoveredData.eating)}
+				<span class="tooltip-label">{t('views.mhmap.tipEating')}</span> {formatVal(hoveredData.eating)}
 			</div>
 			<div class="tooltip-row">
-				<span class="tooltip-label">Alcohol:</span> {formatVal(hoveredData.alcohol)}
+				<span class="tooltip-label">{t('views.mhmap.tipAlcohol')}</span> {formatVal(hoveredData.alcohol)}
 			</div>
 			<div class="tooltip-row">
-				<span class="tooltip-label">Drugs:</span> {formatVal(hoveredData.drugs)}
+				<span class="tooltip-label">{t('views.mhmap.tipDrugs')}</span> {formatVal(hoveredData.drugs)}
 			</div>
 		{:else}
-			<div class="tooltip-meta">No WHO data</div>
+			<div class="tooltip-meta">{t('views.mhmap.tipNoData')}</div>
 		{/if}
 	</div>
 {/if}
