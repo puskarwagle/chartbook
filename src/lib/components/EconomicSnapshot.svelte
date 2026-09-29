@@ -32,7 +32,7 @@
 		return rows.slice(0, 15);
 	});
 
-	const maxValue = Math.max(...displayData.map(r => r.value), 1);
+	const maxValue = $derived(Math.max(...displayData.map(r => r.value), 1));
 
 	const globalStats = $derived.by(() => {
 		const map = metricMaps[metric];
