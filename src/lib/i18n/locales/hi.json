@@ -111,7 +111,11 @@
 		"toggleSidebar": "",
 		"untitled": "",
 		"countriesTracked": "",
-		"language": ""
+		"language": "",
+		"male": "",
+		"female": "",
+		"males": "",
+		"females": ""
 	},
 	"viewInfoHeadings": {
 		"what": "",
@@ -288,6 +292,252 @@
 			"source": "",
 			"insight": "",
 			"limitation": ""
+		}
+	},
+	"views": {
+		"stats": {
+			"title": ""
+		},
+		"comorbid": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"note": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"timeline": {
+			"title": "",
+			"subtitle": "",
+			"event1937": "",
+			"event1955": "",
+			"event1996": "",
+			"event2002": "",
+			"event2021": ""
+		},
+		"age": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"legendPrevalence": "",
+			"legendIncidence": "",
+			"axisPrevalence": "",
+			"axisIncidence": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"sdi": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"axisX": "",
+			"axisY": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"sex": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"legendPrevalence": "",
+			"legendIncidence": "",
+			"axisPrevalence": "",
+			"axisIncidence": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"prisonmh": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"barLabel": "",
+			"globalAvg": "",
+			"card1Label": "",
+			"card1Note": "",
+			"card2Label": "",
+			"card2Note": ""
+		},
+		"sudsex": {
+			"title": "",
+			"subtitle": "",
+			"tooltipHr": "",
+			"cohortLabel": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"region": {
+			"title": "",
+			"subtitle": "",
+			"incidence": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"healthtrends": {
+			"title": "",
+			"subtitle": "",
+			"unitYears": "",
+			"unitPer1k": "",
+			"unitPer100k": "",
+			"globalAvg": "",
+			"axisYear": ""
+		},
+		"sud": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"barSub": "",
+			"overall": "",
+			"card1Label": "",
+			"card1Note": "",
+			"card2Label": "",
+			"card2Note": ""
+		},
+		"prison": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"tooltipCi": "",
+			"tooltipNoCi": "",
+			"barSub": "",
+			"generalPop": "",
+			"card1Label": "",
+			"card1Note": "",
+			"card2Label": "",
+			"card2Note": ""
+		},
+		"trends": {
+			"title": "",
+			"subtitle": "",
+			"labelPrevalence": "",
+			"labelIncidence": "",
+			"labelDalys": "",
+			"unit": "",
+			"decline": ""
+		},
+		"happiness": {
+			"title": "",
+			"subtitle": "",
+			"tooltipHead": "",
+			"factorGdp": "",
+			"factorSocial": "",
+			"factorHealth": "",
+			"factorFreedom": "",
+			"factorGenerosity": "",
+			"factorCorruption": "",
+			"factorDystopia": ""
+		},
+		"suicide": {
+			"title": "",
+			"subtitle": "",
+			"riskIdeation": "",
+			"riskDeath": "",
+			"riskAttempt": "",
+			"riskOverall": "",
+			"higherRisk": "",
+			"cardMeta": "",
+			"sum1Label": "",
+			"sum1Note": "",
+			"sum2Label": "",
+			"sum2Note": "",
+			"sum3Label": "",
+			"sum3Note": ""
+		},
+		"economy": {
+			"title": "",
+			"subtitle": "",
+			"statCountries": "",
+			"statAverage": "",
+			"statMedian": ""
+		},
+		"treatment": {
+			"title": "",
+			"subtitle": "",
+			"modeTop": "",
+			"modeBottom": "",
+			"modeAll": "",
+			"card1Label": "",
+			"card1Note": "",
+			"card2Label": "",
+			"card2Note": ""
+		},
+		"education": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"groupAll": "",
+			"groupHigh": "",
+			"groupUpperMiddle": "",
+			"groupLowerMiddle": "",
+			"groupLow": "",
+			"primary": "",
+			"secondary": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"governance": {
+			"title": "",
+			"subtitle": "",
+			"dimCorruption": "",
+			"dimRuleOfLaw": "",
+			"dimEffectiveness": "",
+			"dimRegulatory": "",
+			"dimStability": "",
+			"dimVoice": "",
+			"country1": "",
+			"country2": "",
+			"compare": "",
+			"comparing": "",
+			"select": ""
+		},
+		"hdi": {
+			"title": "",
+			"subtitle": "",
+			"search": "",
+			"tierAll": "",
+			"tierVeryHigh": "",
+			"tierHigh": "",
+			"tierMedium": "",
+			"tierLow": "",
+			"legendEducation": "",
+			"legendIncome": ""
+		},
+		"wealth": {
+			"title": "",
+			"subtitle": "",
+			"tooltip": "",
+			"na": "",
+			"axisX": "",
+			"axisY": "",
+			"trendOn": "",
+			"trendOff": "",
+			"legendLow": "",
+			"legendHigh": "",
+			"cardLabel": "",
+			"cardNote": ""
+		},
+		"dataexplorer": {
+			"title": "",
+			"subtitle": "",
+			"back": "",
+			"loading": ""
+		},
+		"mhmap": {
+			"tipDepression": "",
+			"tipAnxiety": "",
+			"tipSchizophrenia": "",
+			"tipEating": "",
+			"tipAlcohol": "",
+			"tipDrugs": "",
+			"tipNoData": ""
+		},
+		"worldmap": {
+			"names": "",
+			"reset": "",
+			"screenshot": "",
+			"pinned": "",
+			"tierLine": "",
+			"metaLine": "",
+			"noData": ""
 		}
 	}
 }
