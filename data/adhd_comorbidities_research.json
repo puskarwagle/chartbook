@@ -1,0 +1,427 @@
+{
+  "metadata": {
+    "description": "Extracted statistics from peer-reviewed research on ADHD comorbidities: prison populations, substance use disorder, and suicide risk",
+    "created": "2026-07-18",
+    "note": "All data manually extracted from abstracts and full-text articles. No downloadable datasets available for these studies."
+  },
+  "adhd_in_prison_populations": [
+    {
+      "id": "fazel_2024",
+      "citation": "Fazel S, Favril L. Prevalence of attention-deficit hyperactivity disorder in adult prisoners: An updated meta-analysis. Crim Behav Ment Health. 2024;34(3):339-346.",
+      "doi": "10.1002/cbm.2337",
+      "pmid": "38568877",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38568877/",
+      "study_type": "updated meta-analysis",
+      "year": 2024,
+      "n_studies": 11,
+      "n_total": 3919,
+      "population": "unselected adults in prison",
+      "key_findings": {
+        "pooled_adhd_prevalence_random_sampling": {
+          "percent": 8.3,
+          "ci_95": [3.8, 12.8],
+          "interpretation": "1 in 12 adults in prison diagnosed with ADHD"
+        }
+      },
+      "notes": "Updated meta-analysis correcting for overestimation in prior reviews by using only unselected samples"
+    },
+    {
+      "id": "young_2014",
+      "citation": "Young S, Moss D, Sedgwick O, Fridman M, Hodgkins P. A meta-analysis of the prevalence of attention deficit hyperactivity disorder in incarcerated populations. Psychol Med. 2015;45(2):247-258.",
+      "doi": "10.1017/S0033291714000762",
+      "pmid": "25066071",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4301200/",
+      "study_type": "meta-analysis",
+      "year": 2014,
+      "n_studies": 42,
+      "n_total": 26641,
+      "population": "incarcerated populations (youth and adult, male and female)",
+      "key_findings": {
+        "youth_prison_adhd_prevalence": {
+          "percent": 30.1,
+          "comparison": "5x increase vs general population (3-7%)",
+          "diagnostic_method": "diagnostic clinical interview"
+        },
+        "adult_prison_adhd_prevalence": {
+          "percent": 26.2,
+          "comparison": "10x increase vs general population (1-5%)",
+          "diagnostic_method": "diagnostic clinical interview"
+        },
+        "overall_interview_prevalence": {
+          "percent": 25.5,
+          "ci_95": [20.0, 32.4]
+        },
+        "screening_vs_interview": {
+          "screening_prevalence": 43.3,
+          "interview_prevalence": 25.5,
+          "p_value": 0.001
+        },
+        "by_gender_interview": {
+          "male": 30.3,
+          "female": 26.1,
+          "p_value": "0.242 (not significant)"
+        },
+        "by_age_interview": {
+          "youth": 30.1,
+          "adult": 26.2
+        }
+      },
+      "notes": "Largest meta-analysis on this topic. Screening tools produce significantly higher (false-positive) rates than diagnostic interviews."
+    },
+    {
+      "id": "ginsberg_2010",
+      "citation": "Ginsberg Y, Hirvikoski T, Lindefors N. Attention Deficit Hyperactivity Disorder (ADHD) among longer-term prison inmates is a prevalent, persistent and disabling disorder. BMC Psychiatry. 2010;10:112.",
+      "doi": "10.1186/1471-244X-10-112",
+      "pmid": "21176203",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3016316/",
+      "study_type": "cross-sectional with diagnostic assessment",
+      "year": 2010,
+      "n_screened": 315,
+      "n_assessed": 34,
+      "n_confirmed_adhd": 30,
+      "population": "longer-term male inmates, high-security Swedish prison",
+      "key_findings": {
+        "adhd_prevalence": {
+          "percent": 40,
+          "interpretation": "Estimated prevalence among longer-term male inmates"
+        },
+        "comorbidities": {
+          "substance_use_disorder_lifetime": {
+            "percent": 100,
+            "note": "All 30 confirmed ADHD cases"
+          },
+          "preferred_drug_amphetamine": {
+            "percent": 63
+          },
+          "mood_and_anxiety_disorders_lifetime": {
+            "percent": 73
+          },
+          "autism_spectrum_disorder": {
+            "percent": 23
+          },
+          "personality_disorders": {
+            "percent": 96,
+            "note": "Of 23 assessed"
+          },
+          "antisocial_personality_disorder": {
+            "percent": 96
+          },
+          "borderline_personality_disorder": {
+            "percent": 74
+          },
+          "psychopathy": {
+            "percent": 10,
+            "note": "PCL-R score >= 30"
+          }
+        },
+        "childhood_diagnosis_rate": {
+          "percent": 7,
+          "note": "Only 2 of 30 had childhood ADHD diagnosis despite most needing services"
+        },
+        "educational_level": {
+          "nine_year_compulsory_or_less": {
+            "percent": 83
+          }
+        }
+      },
+      "notes": "Small sample but rich comorbidity data. All confirmed ADHD cases had lifetime SUD. Striking underdiagnosis in childhood."
+    }
+  ],
+  "adhd_and_substance_use_disorder": [
+    {
+      "id": "van_emmerik_2012",
+      "citation": "van Emmerik-van Oortmerssen K, van de Glind G, van den Brink W, Smit F, Crunelle CL, Swets M, Schoevers RA. Prevalence of attention-deficit hyperactivity disorder in substance use disorder patients: a meta-analysis and meta-regression analysis. Drug Alcohol Depend. 2012;122(1-2):11-19.",
+      "doi": "10.1016/j.drugalcdep.2011.12.007",
+      "pmid": "22209385",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22209385/",
+      "study_type": "meta-analysis and meta-regression",
+      "year": 2012,
+      "n_studies": 29,
+      "population": "substance use disorder patients",
+      "key_findings": {
+        "overall_adhd_prevalence_in_sud": {
+          "percent": 23.1,
+          "ci_95": [19.4, 27.2],
+          "interpretation": "Almost 1 in 4 SUD patients meet DSM criteria for comorbid ADHD"
+        },
+        "by_substance": {
+          "cocaine_dependence": "lower ADHD prevalence than other substances",
+          "alcohol_dependence": "higher ADHD prevalence",
+          "opioid_dependence": "higher ADHD prevalence"
+        },
+        "assessment_instrument_effect": {
+          "dica_or_sads_l": "significantly higher comorbidity rates",
+          "ksads_disc_dis_other": "lower comorbidity rates"
+        }
+      },
+      "notes": "Widely cited foundational meta-analysis. Prevalence depends on substance type and assessment instrument."
+    },
+    {
+      "id": "rohner_2023",
+      "citation": "Rohner H, Gaspar N, Philipsen A, Schulze M. Prevalence of Attention Deficit Hyperactivity Disorder (ADHD) among Substance Use Disorder (SUD) Populations: Meta-Analysis. Int J Environ Res Public Health. 2023;20(2):1275.",
+      "doi": "10.3390/ijerph20021275",
+      "pmid": "36674031",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9859173/",
+      "study_type": "meta-analysis",
+      "year": 2023,
+      "n_studies": 31,
+      "n_total": 12524,
+      "population": "adult and adolescent SUD patients",
+      "key_findings": {
+        "overall_adhd_prevalence_in_sud": {
+          "percent": 21,
+          "ci_95": [17.4, 25.5],
+          "interpretation": "Approximately 1 in 5 SUD patients have comorbid ADHD"
+        },
+        "by_substance": {
+          "cocaine": {
+            "percent": 19,
+            "ci_95": [10.6, 31.0],
+            "n_studies": 7
+          },
+          "opioid": {
+            "percent": 18,
+            "ci_95": [7.8, 35.1],
+            "n_studies": 3
+          },
+          "alcohol": {
+            "percent": 25,
+            "ci_95": [18.5, 33.6],
+            "n_studies": 7
+          }
+        },
+        "heterogeneity": {
+          "I2": 95.8,
+          "p_value": "< 0.0001"
+        }
+      },
+      "notes": "Updated meta-analysis including more recent studies. Consistent with 2012 findings. High heterogeneity across studies."
+    },
+    {
+      "id": "moldekleiv_2025",
+      "citation": "Moldekleiv CJ, Lundervold AJ, Solberg BS, Engeland A, Fadnes LT, Chalabianloo F, Klungsøyr K. Prevalence of substance use disorder in individuals with attention deficit/hyperactivity disorder: associations with sex and psychiatric comorbidity. BMC Psychiatry. 2025;25:936.",
+      "doi": "10.1186/s12888-025-07305-1",
+      "pmid": "41057812",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12505809/",
+      "study_type": "national registry-based cohort study",
+      "year": 2025,
+      "n_total": 800187,
+      "n_adhd": 49815,
+      "n_male_adhd": 31146,
+      "n_female_adhd": 18669,
+      "population": "Norwegian population born 1988-2001, followed to 2019 (ages 18-31)",
+      "key_findings": {
+        "any_sud_prevalence_difference": {
+          "females": {
+            "pd_percent": 10.9,
+            "ci_95": [10.4, 11.4],
+            "hr": 4.5
+          },
+          "males": {
+            "pd_percent": 11.4,
+            "ci_95": [11.0, 11.8],
+            "hr": 4.1
+          }
+        },
+        "sex_differences_larger_in_males_for": [
+          "cannabis-related disorders",
+          "sedative-related disorders",
+          "stimulant-related disorders",
+          "other substance-related disorders",
+          "multiple psychoactive substance-related disorders"
+        ],
+        "adhd_with_comorbidities_any_sud": {
+          "adhd_with_psychosis_schizophrenia": {
+            "pd_males_percent": 49.0,
+            "ci_95_males": [45.6, 52.4],
+            "pd_females_percent": 40.6,
+            "ci_95_females": [36.1, 45.1]
+          },
+          "adhd_with_personality_disorders": {
+            "pd_males_percent": 37.6,
+            "ci_95_males": [35.2, 40.0],
+            "pd_females_percent": 33.0,
+            "ci_95_females": [31.0, 35.0]
+          },
+          "adhd_with_eating_sleeping_disorders": {
+            "pd_males_percent": 30.0,
+            "ci_95_males": [26.6, 33.5],
+            "pd_females_percent": 23.1,
+            "ci_95_females": [21.0, 25.2]
+          },
+          "adhd_with_conduct_disorders": {
+            "pd_males_percent": 23.5,
+            "ci_95_males": [21.0, 26.0],
+            "pd_females_percent": 24.9,
+            "ci_95_females": [20.9, 28.9]
+          }
+        },
+        "specific_sud_by_sex": {
+          "cannabis_males": {
+            "pd_percent": 6.8,
+            "ci_95": [6.5, 7.1],
+            "hr": 5.5
+          },
+          "cannabis_females": {
+            "pd_percent": 4.3,
+            "ci_95": [4.0, 4.6],
+            "hr": 6.5
+          },
+          "stimulant_males": {
+            "pd_percent": 3.7,
+            "ci_95": [3.5, 3.9],
+            "hr": 7.3
+          },
+          "stimulant_females": {
+            "pd_percent": 3.4,
+            "ci_95": [3.1, 3.6],
+            "hr": 8.0
+          },
+          "opioid_males": {
+            "pd_percent": 1.5,
+            "hr": 7.6
+          },
+          "opioid_females": {
+            "pd_percent": 1.4,
+            "hr": 7.4
+          }
+        }
+      },
+      "notes": "Large-scale sex-stratified study. ADHD with comorbid psychiatric disorders dramatically increases SUD prevalence. Males show larger absolute differences; females show larger relative risks."
+    }
+  ],
+  "adhd_depression_and_suicide": [
+    {
+      "id": "garas_2025",
+      "citation": "Garas P, Takacs ZK, Balázs J. Longitudinal Suicide Risk in Children and Adolescents With Attention Deficit and Hyperactivity Disorder: A Systematic Review and Meta-Analysis. Brain Behav. 2025;15(6):e70618.",
+      "doi": "10.1002/brb3.70618",
+      "pmid": "40534226",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12177204/",
+      "study_type": "systematic review and meta-analysis (longitudinal studies)",
+      "year": 2025,
+      "n_studies": 9,
+      "n_adhd_total": 140654,
+      "n_comparison_total": 4293312,
+      "population": "children and adolescents with clinical ADHD diagnosis, followed longitudinally",
+      "key_findings": {
+        "overall_suicidality": {
+          "or": 3.336,
+          "ci_95": [2.201, 5.057],
+          "p_value": "< 0.001",
+          "interpretation": "More than tripled odds of suicidal behavior"
+        },
+        "suicidal_ideation": {
+          "or": 3.956,
+          "ci_95": [1.996, 7.841],
+          "p_value": "< 0.001",
+          "n_studies": 2
+        },
+        "suicide_attempt": {
+          "or": 3.344,
+          "ci_95": [1.682, 6.65],
+          "p_value": "0.001",
+          "n_studies": 6
+        },
+        "suicide_death": {
+          "or": 3.891,
+          "ci_95": [2.103, 7.198],
+          "p_value": "< 0.001",
+          "n_studies": 2
+        },
+        "heterogeneity": {
+          "I2": 92.39,
+          "Q": 105.17,
+          "p_value": "< 0.001"
+        }
+      },
+      "moderating_factors": {
+        "adhd_subtypes": "Combined and hyperactive/impulsive subtypes show higher risk than inattentive subtype",
+        "sex_differences": "Conflicting results across studies; some show higher risk in females, others in males",
+        "comorbidities": "Depression may partially mediate the ADHD-suicidality relationship",
+        "follow_up_duration": "Risk may only be significant with follow-up >= 10 years"
+      },
+      "notes": "First meta-analysis of longitudinal studies specifically examining ADHD and subsequent suicidal behavior in youth. Establishes temporal precedence."
+    },
+    {
+      "id": "zahid_2020",
+      "citation": "Zahid S, Bodicherla KP, Eskander N, Patel RS. Attention-Deficit/Hyperactivity Disorder and Suicidal Risk in Major Depression: Analysis of 141,530 Adolescent Hospitalizations. Cureus. 2020;12(5):e7949.",
+      "doi": "10.7759/cureus.7949",
+      "pmid": "32509475",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7270943/",
+      "study_type": "cross-sectional (nationwide inpatient sample)",
+      "year": 2020,
+      "n_total": 141530,
+      "n_adhd": 22665,
+      "n_non_adhd": 118865,
+      "population": "US adolescent inpatients (ages 12-18) with primary MDD diagnosis, 2012-2014",
+      "key_findings": {
+        "adhd_prevalence_in_mdd": {
+          "percent": 16,
+          "note": "16% of hospitalized MDD adolescents had comorbid ADHD"
+        },
+        "suicidal_behaviors": {
+          "adhd_cohort_percent": 54.3,
+          "non_adhd_cohort_percent": 52.7,
+          "adjusted_or": 1.04,
+          "ci_95": [1.01, 1.08],
+          "p_value": 0.011,
+          "interpretation": "Statistically significant but small positive association after controlling for confounders and comorbidities"
+        },
+        "trend_2012_to_2014": {
+          "suicidal_behaviors_2012": "51.1% (N=3,360)",
+          "suicidal_behaviors_2014": "58.2% (N=5,115)",
+          "increase_percent": 52.2,
+          "p_value": "< 0.001"
+        },
+        "demographics": {
+          "males_higher_odds_adhd": {
+            "or": 2.33,
+            "ci_95": [2.25, 2.41]
+          },
+          "mean_age": 15.1
+        },
+        "comorbidities_in_adhd_cohort": {
+          "anxiety_disorders": {
+            "percent": 46.3,
+            "or": 1.12
+          },
+          "substance_abuse": {
+            "percent": 20.1,
+            "or": 1.27
+          },
+          "impulse_control_disorders": {
+            "percent": 4.6,
+            "or": 1.52
+          }
+        }
+      },
+      "notes": "Large hospitalization study. Small but significant association between ADHD and suicidal behaviors in depressed adolescents. Suicide-related hospitalizations with ADHD increased 52% over 2 years."
+    },
+    {
+      "id": "abcd_2025",
+      "citation": "ABCD Study cohort. (Preprint, 2025). Passive suicidal ideation in children 8-11 with ADHD.",
+      "doi": "10.1101/2025.08.09.25333367",
+      "url": "https://www.medrxiv.org/content/10.1101/2025.08.09.25333367v1.full",
+      "study_type": "cohort study (ABCD Study)",
+      "year": 2025,
+      "population": "children ages 8-11 from ABCD Study cohort",
+      "key_findings": {
+        "passive_suicidal_ideation": {
+          "females_with_adhd": {
+            "percent": 15.6
+          },
+          "females_control": {
+            "percent": 7.0
+          },
+          "males_with_adhd": {
+            "percent": 7.6
+          },
+          "males_control": {
+            "percent": 4.7
+          }
+        }
+      },
+      "notes": "Preprint (medrxiv). Could not fetch full text (403 error). Key numbers provided by user. Females with ADHD show 2x higher passive suicidal ideation than controls."
+    }
+  ]
+}

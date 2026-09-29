@@ -1,200 +1,455 @@
 <script lang="ts">
-	/**
-	 * +page.svelte — Main application page
-	 *
-	 * Renders the interactive world map SVG, tier-selection palette,
-	 * hover tooltip, and control buttons. All state lives here via Svelte 5 runes.
-	 *
-	 * Data flow:
-	 *   countryStatus.json → loadInitialTiers() → countryTiers (reactive state)
-	 *   countryTiers + COLORS → fillFor(iso2) → SVG path fill attribute
-	 *   hovered → tooltip rendering (country name, tier info, drug approvals)
-	 */
-	import { tick } from 'svelte';
-	import html2canvas from 'html2canvas';
-	import { countryFeatures, bordersPath } from '$lib/mapData';
-	import { COLORS, TIERS } from '$lib/colors';
-	import statusData from '$lib/countryStatus.json';
+	import Sidebar from '$lib/Sidebar.svelte';
+	import WorldMap from '$lib/components/WorldMap.svelte';
+	import StatsView from '$lib/components/StatsView.svelte';
+	import TimelineView from '$lib/components/TimelineView.svelte';
+	import AgePyramid from '$lib/components/AgePyramid.svelte';
+	import SexComparison from '$lib/components/SexComparison.svelte';
+	import RegionalRanking from '$lib/components/RegionalRanking.svelte';
+	import TrendLine from '$lib/components/TrendLine.svelte';
+	import SDIScatter from '$lib/components/SDIScatter.svelte';
+	import PrisonPrevalence from '$lib/components/PrisonPrevalence.svelte';
+	import ComorbidityBreakdown from '$lib/components/ComorbidityBreakdown.svelte';
+	import SUDbySubstance from '$lib/components/SUDbySubstance.svelte';
+	import SuicideRisk from '$lib/components/SuicideRisk.svelte';
+	import SexDiffSUD from '$lib/components/SexDiffSUD.svelte';
+	import MentalHealthWorldMap from '$lib/components/MentalHealthWorldMap.svelte';
+	import WealthVsWellbeing from '$lib/components/WealthVsWellbeing.svelte';
+	import TreatmentAccessIndex from '$lib/components/TreatmentAccessIndex.svelte';
+	import EducationPressure from '$lib/components/EducationPressure.svelte';
+	import PrisonMentalHealthLink from '$lib/components/PrisonMentalHealthLink.svelte';
+	import HappinessRankings from '$lib/components/HappinessRankings.svelte';
+	import HDIExplorer from '$lib/components/HDIExplorer.svelte';
+	import GovernanceRadar from '$lib/components/GovernanceRadar.svelte';
+	import GlobalHealthTrends from '$lib/components/GlobalHealthTrends.svelte';
+	import EconomicSnapshot from '$lib/components/EconomicSnapshot.svelte';
+	import DataExplorer from '$lib/components/DataExplorer.svelte';
+	import CustomPage from '$lib/components/CustomPage.svelte';
+	import Settings from '$lib/Settings.svelte';
+	import PageInspector from '$lib/PageInspector.svelte';
+	import customDefaults from '$lib/customPages.json';
 
-	type TierKey = '1' | '2' | '3' | '4' | 'unknown';
-
-	let filterTier = $state<TierKey | null>(null);
-	let countryTiers = $state<Record<string, TierKey>>({});
-	let hovered = $state<string | null>(null);
-	let showNames = $state(false);
-	let takingScreenshot = $state(false);
-
-	function loadInitialTiers(): Record<string, TierKey> {
-		const result: Record<string, TierKey> = {};
-		for (const [iso2, entry] of Object.entries(statusData.countries)) {
-			result[iso2] = String(entry.tier) as TierKey;
-		}
-		return result;
+	interface ComponentEntry {
+		id: string;
+		label: string;
+		component: any;
 	}
 
-	countryTiers = loadInitialTiers();
+	interface Category {
+		name: string;
+		ids: string[];
+	}
 
-	/**
-	 * Tier palette for the bottom control bar.
-	 * Each entry maps a TierKey to its display label and hex color.
-	 */
-	const PALETTE: { key: TierKey; label: string; hex: string }[] = [
-		{ key: '1', label: 'Amphetamine', hex: COLORS['1'] },
-		{ key: '2', label: 'Methylphenidate Only', hex: COLORS['2'] },
-		{ key: '3', label: 'Non-Stimulants Only', hex: COLORS['3'] },
-		{ key: '4', label: 'No Treatment', hex: COLORS['4'] },
-		{ key: 'unknown', label: 'Unknown', hex: COLORS.unknown }
+	interface CustomEntry {
+		id: string;
+		title: string;
+	}
+
+	const COMPONENTS: ComponentEntry[] = [
+		{ id: 'worldmap', label: 'World Map', component: WorldMap },
+		{ id: 'mhmap', label: 'Mental Health Map', component: MentalHealthWorldMap },
+		{ id: 'stats', label: 'Stats', component: StatsView },
+		{ id: 'timeline', label: 'Timeline', component: TimelineView },
+		{ id: 'age', label: 'By Age', component: AgePyramid },
+		{ id: 'sex', label: 'By Sex', component: SexComparison },
+		{ id: 'region', label: 'By Region', component: RegionalRanking },
+		{ id: 'trends', label: 'Trends', component: TrendLine },
+		{ id: 'sdi', label: 'SDI Scatter', component: SDIScatter },
+		{ id: 'prison', label: 'Prison ADHD', component: PrisonPrevalence },
+		{ id: 'comorbid', label: 'Comorbidities', component: ComorbidityBreakdown },
+		{ id: 'sud', label: 'SUD & ADHD', component: SUDbySubstance },
+		{ id: 'sudsex', label: 'SUD by Sex', component: SexDiffSUD },
+		{ id: 'suicide', label: 'Suicide Risk', component: SuicideRisk },
+		{ id: 'prisonmh', label: 'Prison & MH', component: PrisonMentalHealthLink },
+		{ id: 'wealth', label: 'Wealth & Wellbeing', component: WealthVsWellbeing },
+		{ id: 'happiness', label: 'Happiness Report', component: HappinessRankings },
+		{ id: 'hdi', label: 'Human Development', component: HDIExplorer },
+		{ id: 'economy', label: 'Economic Overview', component: EconomicSnapshot },
+		{ id: 'education', label: 'Education Context', component: EducationPressure },
+		{ id: 'governance', label: 'Governance', component: GovernanceRadar },
+		{ id: 'healthtrends', label: 'Health Trends', component: GlobalHealthTrends },
+		{ id: 'treatment', label: 'Treatment Access', component: TreatmentAccessIndex },
+		{ id: 'dataexplorer', label: 'Data Files', component: DataExplorer }
 	];
 
-	function fillFor(iso2: string): string {
-		const tier = countryTiers[iso2] ?? 'unknown';
-		if (filterTier !== null && tier !== filterTier) return '#1a1a2e';
-		return COLORS[tier] ?? COLORS.unknown;
+	const CATEGORIES: Category[] = [
+		{ name: 'Overview', ids: ['worldmap', 'mhmap', 'stats', 'timeline'] },
+		{ name: 'Demographics', ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
+		{ name: 'ADHD & Comorbidities', ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
+		{ name: 'Socioeconomic', ids: ['wealth', 'happiness', 'hdi', 'economy', 'education', 'governance', 'healthtrends', 'treatment'] },
+		{ name: 'Reference', ids: ['dataexplorer'] }
+	];
+
+	const CUSTOM_LIST_KEY = 'custom-pages-list';
+	const STORAGE_KEY = 'sidebar-component-order';
+	const HIDDEN_KEY = 'sidebar-hidden-ids';
+
+	function loadCustomPages(): CustomEntry[] {
+		const fromDisk: CustomEntry[] = Array.isArray(customDefaults)
+			? (customDefaults as any[]).map((p) => ({ id: String(p.id), title: String(p.title ?? 'Untitled') }))
+			: [];
+		try {
+			const raw = localStorage.getItem(CUSTOM_LIST_KEY);
+			if (raw) {
+				const parsed = JSON.parse(raw);
+				if (Array.isArray(parsed)) {
+					const byId = new Map<string, string>();
+					for (const p of fromDisk) byId.set(p.id, p.title);
+					for (const p of parsed) {
+						if (p && typeof p.id === 'string') byId.set(p.id, String(p.title ?? 'Untitled'));
+					}
+					return [...byId.entries()].map(([id, title]) => ({ id, title }));
+				}
+			}
+		} catch {}
+		return fromDisk;
 	}
 
-	function tierOpacity(iso2: string): number {
-		const tier = countryTiers[iso2] ?? 'unknown';
-		if (filterTier !== null && tier !== filterTier) return 0.15;
-		return 1;
+	function saveCustomPages(pages: CustomEntry[]) {
+		try {
+			localStorage.setItem(CUSTOM_LIST_KEY, JSON.stringify(pages));
+		} catch {}
 	}
 
-	/** Look up a country's full status entry from countryStatus.json by ISO alpha-2 code. */
-	function getEntry(iso2: string) {
-		return (statusData.countries as any)[iso2] ?? null;
+	let customPages = $state<CustomEntry[]>(loadCustomPages());
+
+	function loadHidden(): string[] {
+		try {
+			const raw = localStorage.getItem(HIDDEN_KEY);
+			if (raw) {
+				const parsed = JSON.parse(raw);
+				if (Array.isArray(parsed)) return parsed.filter((x) => typeof x === 'string');
+			}
+		} catch {}
+		return [];
 	}
 
-	/**
-	 * Extract the first M command coordinates from an SVG path string.
-	 * Used to position country name labels at the start of each country's shape.
-	 * This is a rough centroid — good enough for label placement at small font sizes.
-	 */
-	function getCentroid(path: string): { x: number; y: number } {
-		const match = path.match(/M([\d.]+),([\d.]+)/);
-		if (match) return { x: parseFloat(match[1]), y: parseFloat(match[2]) };
-		return { x: 0, y: 0 };
+	let hiddenIds = $state<string[]>(loadHidden());
+
+	function saveHidden(ids: string[]) {
+		try {
+			localStorage.setItem(HIDDEN_KEY, JSON.stringify(ids));
+		} catch {}
 	}
 
-	/**
-	 * Capture the map container as a PNG screenshot.
-	 * Uses html2canvas to render the DOM element to a canvas, then triggers
-	 * a download via a temporary <a> element. Hides UI controls during capture.
-	 */
-	async function takeScreenshot() {
-		takingScreenshot = true;
-		await tick();
-		const el = document.getElementById('map-container');
-		if (!el) return;
-		const canvas = await html2canvas(el, {
-			backgroundColor: '#1a1a2e',
-			scale: 2,
-			useCORS: true
-		});
-		const link = document.createElement('a');
-		link.download = 'worldmap.png';
-		link.href = canvas.toDataURL('image/png');
-		link.click();
-		takingScreenshot = false;
+	const ALL_COMPONENTS = $derived<ComponentEntry[]>([
+		...COMPONENTS,
+		...customPages.map((p) => ({ id: p.id, label: p.title, component: CustomPage }))
+	]);
+
+	const VISIBLE_IDS = $derived(
+		new Set(ALL_COMPONENTS.map((c) => c.id).filter((id) => !hiddenIds.includes(id)))
+	);
+
+	const ALL_CATEGORIES = $derived<Category[]>(
+		customPages.length > 0
+			? [...CATEGORIES, { name: 'My Pages', ids: customPages.map((p) => p.id).filter((id) => VISIBLE_IDS.has(id)) }]
+			: CATEGORIES
+	);
+
+	function loadOrder(): string[] {
+		const validIds = [...COMPONENTS.map((c) => c.id), ...customPages.map((p) => p.id)];
+		try {
+			const stored = localStorage.getItem(STORAGE_KEY);
+			if (stored) {
+				const parsed = JSON.parse(stored);
+				if (Array.isArray(parsed)) {
+					const valid = parsed.filter((id: any) => validIds.includes(id));
+					const missing = validIds.filter((id) => !valid.includes(id));
+					return [...valid, ...missing];
+				}
+			}
+		} catch {}
+		return validIds;
+	}
+
+	function saveOrder(order: string[]) {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+	}
+
+	let componentOrder = $state<string[]>(loadOrder());
+
+	const orderedComponents = $derived(
+		componentOrder
+			.map((id) => ALL_COMPONENTS.find((c) => c.id === id))
+			.filter(Boolean)
+			.filter((c) => VISIBLE_IDS.has((c as ComponentEntry).id)) as ComponentEntry[]
+	);
+
+	const defaultId = COMPONENTS[0].id;
+	let activeId = $state(defaultId);
+	let sidebarCollapsed = $state(false);
+	let settingsOpen = $state(false);
+	let inspectorOpen = $state(false);
+
+	const activeCustom = $derived(customPages.find((p) => p.id === activeId) ?? null);
+
+	const activeIndex = $derived(orderedComponents.findIndex((c) => c.id === activeId));
+
+	function handleReorder(fromIndex: number, toIndex: number) {
+		const newOrder = [...componentOrder];
+		const [moved] = newOrder.splice(fromIndex, 1);
+		newOrder.splice(toIndex, 0, moved);
+		componentOrder = newOrder;
+		saveOrder(newOrder);
+	}
+
+	async function handleAddPage() {
+		const rawTitle = (window as any).__newPageTitle as string | undefined;
+		(window as any).__newPageTitle = undefined;
+		const title = (rawTitle?.trim() || `Untitled ${customPages.length + 1}`).slice(0, 80);
+		// Optimistic local id (stable; UI title is renameable separately)
+		const id = `custom-${Date.now().toString(36)}`;
+		customPages = [...customPages, { id, title }];
+		saveCustomPages(customPages);
+		componentOrder = [...componentOrder, id];
+		saveOrder(componentOrder);
+		// Auto-navigate to the new page, close settings
+		activeId = id;
+		inspectorOpen = false;
+		settingsOpen = false;
+		// Best-effort disk persistence via node API (so it shows "forever")
+		try {
+			const res = await fetch('/api/custom-pages', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ title })
+			});
+			if (res.ok) {
+				const saved = await res.json();
+				if (saved?.id && saved.id !== id) {
+					// Swap temp id for disk id, stay on the new page
+					customPages = customPages.map((p) => (p.id === id ? { id: saved.id, title: saved.title } : p));
+					saveCustomPages(customPages);
+					componentOrder = componentOrder.map((cid) => (cid === id ? saved.id : cid));
+					saveOrder(componentOrder);
+					activeId = saved.id;
+				}
+			}
+		} catch {}
+	}
+
+	async function handleRenamePage(id: string, newTitle: string) {
+		customPages = customPages.map((p) => (p.id === id ? { ...p, title: newTitle } : p));
+		saveCustomPages(customPages);
+		try {
+			await fetch('/api/custom-pages', {
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ id, title: newTitle })
+			});
+		} catch {}
+	}
+
+	function handleToggleHide(id: string) {
+		hiddenIds = hiddenIds.includes(id) ? hiddenIds.filter((x) => x !== id) : [...hiddenIds, id];
+		saveHidden(hiddenIds);
+		// If we hid the active page, move to first visible
+		if (hiddenIds.includes(activeId)) {
+			const first = orderedComponents.find((c) => c.id !== activeId);
+			if (first) activeId = first.id;
+		}
+	}
+
+	function handleShowAll() {
+		hiddenIds = [];
+		saveHidden(hiddenIds);
+	}
+
+	async function handleDeletePage(id: string) {
+		customPages = customPages.filter((p) => p.id !== id);
+		saveCustomPages(customPages);
+		componentOrder = componentOrder.filter((cid) => cid !== id);
+		saveOrder(componentOrder);
+		hiddenIds = hiddenIds.filter((x) => x !== id);
+		saveHidden(hiddenIds);
+		try {
+			localStorage.removeItem(`custom-page-${id}`);
+		} catch {}
+		try {
+			await fetch('/api/custom-pages', {
+				method: 'DELETE',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ id })
+			});
+		} catch {}
+		if (activeId === id) {
+			const first = orderedComponents.find((c) => c.id !== id);
+			activeId = first ? first.id : defaultId;
+			inspectorOpen = false;
+		}
+	}
+
+	// ---- Inspector (top gear): dynamic JSON + media for current page ----
+	function readLocalPageData(id: string): { imageUrl: string; notes: string } | null {
+		try {
+			const raw = localStorage.getItem(`custom-page-${id}`);
+			if (!raw) return null;
+			const p = JSON.parse(raw);
+			return { imageUrl: String(p.imageUrl ?? ''), notes: String(p.notes ?? '') };
+		} catch {
+			return null;
+		}
+	}
+
+	const activeEntry = $derived(ALL_COMPONENTS.find((c) => c.id === activeId) ?? null);
+	const inspectorIsCustom = $derived(activeCustom !== null);
+	const inspectorImage = $derived.by<string | null>(() => {
+		if (!activeCustom) return null;
+		const local = readLocalPageData(activeCustom.id);
+		// eslint-disable-next-line svelte/state_referenced_locally
+		if (inspectorOpen && local?.imageUrl) return local.imageUrl;
+		return local?.imageUrl || null;
+	});
+	const inspectorJson = $derived.by<string>(() => {
+		if (activeCustom) {
+			const local = readLocalPageData(activeCustom.id);
+			return JSON.stringify(
+				{
+					id: activeCustom.id,
+					title: activeCustom.title,
+					type: 'custom',
+					media: local?.imageUrl
+						? { hasImage: true, imageSrc: local.imageUrl.startsWith('data:') ? '(inline upload, local-only)' : local.imageUrl }
+						: { hasImage: false },
+					notesChars: local?.notes?.length ?? 0
+				},
+				null,
+				2
+			);
+		}
+		return JSON.stringify(
+			{ id: activeId, label: activeEntry?.label ?? activeId, type: 'builtin', media: null },
+			null,
+			2
+		);
+	});
+
+	const settingsItems = $derived(
+		ALL_COMPONENTS.map((c) => ({
+			id: c.id,
+			label: c.label,
+			isCustom: c.id.startsWith('custom-'),
+			hidden: hiddenIds.includes(c.id)
+		}))
+	);
+
+	function handleKeydown(e: KeyboardEvent) {
+		const tag = (e.target as HTMLElement)?.tagName;
+		if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+			e.preventDefault();
+			if (activeIndex === -1) return;
+			const next = (activeIndex + 1) % orderedComponents.length;
+			activeId = orderedComponents[next].id;
+		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+			e.preventDefault();
+			if (activeIndex === -1) return;
+			const prev = (activeIndex - 1 + orderedComponents.length) % orderedComponents.length;
+			activeId = orderedComponents[prev].id;
+		}
 	}
 </script>
 
-<div id="app">
-	<div id="map-container">
-		<svg viewBox="0 0 960 500" id="map">
-			{#each countryFeatures as c (c.iso2)}
-				<path
-					d={c.path}
-					fill={fillFor(c.iso2)}
-					opacity={tierOpacity(c.iso2)}
-					stroke="#fff"
-					stroke-width={hovered === c.iso2 ? 1.5 : 0.5}
-					class="country"
-					role="button"
-					tabindex="0"
-					aria-label={c.name}
-					onmouseenter={() => (hovered = c.iso2)}
-					onmouseleave={() => (hovered = null)}
-				/>
-				{#if showNames && c.iso2 !== 'AQ'}
-					{@const pos = getCentroid(c.path)}
-					<text
-						x={pos.x}
-						y={pos.y}
-						class="country-label"
-						class:hidden={takingScreenshot && false}
-					>{c.iso2}</text>
-				{/if}
-			{/each}
-			<path d={bordersPath} fill="none" stroke="#999" stroke-width={0.3} />
-		</svg>
-	</div>
+<svelte:window on:keydown={handleKeydown} />
 
-	{#if hovered && !takingScreenshot}
-		{@const feat = countryFeatures.find((c) => c.iso2 === hovered)}
-		{@const entry = getEntry(hovered)}
-		<div id="tooltip">
-			<div class="tooltip-name">{feat?.name ?? hovered}</div>
-			{#if entry}
-				<div class="tooltip-tier">Tier {entry.tier} — {(TIERS as any)[String(entry.tier)] ?? 'Unknown'}</div>
-				{#if entry.confidence}
-					<div class="tooltip-meta">
-						Confidence: {entry.confidence} | Evidence: {entry.evidence} | Verified: {entry.last_verified}
-					</div>
-				{/if}
-				<div class="tooltip-notes">{entry.notes}</div>
-				{#if entry.approved && Object.keys(entry.approved).length > 0}
-					<div class="tooltip-approved">
-						{#each Object.entries(entry.approved) as [drug, ok]}
-							{#if ok === true}<span class="approved-yes">{drug}</span>{:else if ok === false}<span class="approved-no">{drug}</span>{/if}
-						{/each}
-					</div>
-				{/if}
-			{:else}
-				<div class="tooltip-meta">No data</div>
+<div class="app-shell">
+	<Sidebar
+		items={orderedComponents.map((c) => ({ id: c.id, label: c.label }))}
+		categories={ALL_CATEGORIES}
+		{activeId}
+		onSelect={(id) => { activeId = id; inspectorOpen = false; }}
+		onReorder={handleReorder}
+		onOpenSettings={() => (settingsOpen = true)}
+		bind:collapsed={sidebarCollapsed}
+	/>
+
+	<main class="content">
+		<button
+			class="page-gear"
+			onclick={() => (inspectorOpen = !inspectorOpen)}
+			title="Page info / media / JSON"
+			aria-label="Page info"
+		>
+			⚙
+		</button>
+		<PageInspector
+			open={inspectorOpen}
+			pageId={activeId}
+			title={activeEntry?.label ?? activeId}
+			isCustom={inspectorIsCustom}
+			jsonText={inspectorJson}
+			imageUrl={inspectorImage}
+			onClose={() => (inspectorOpen = false)}
+		/>
+		{#key activeId}
+			<div class="component-wrapper">
+			{#if activeCustom}
+				<CustomPage pageId={activeCustom.id} title={activeCustom.title} onRename={handleRenamePage} />
+			{:else if activeId === 'worldmap'}
+				<WorldMap />
+			{:else if activeId === 'stats'}
+				<StatsView />
+			{:else if activeId === 'timeline'}
+				<TimelineView />
+			{:else if activeId === 'age'}
+				<AgePyramid />
+			{:else if activeId === 'sex'}
+				<SexComparison />
+			{:else if activeId === 'region'}
+				<RegionalRanking />
+			{:else if activeId === 'trends'}
+				<TrendLine />
+			{:else if activeId === 'sdi'}
+				<SDIScatter />
+			{:else if activeId === 'prison'}
+				<PrisonPrevalence />
+			{:else if activeId === 'comorbid'}
+				<ComorbidityBreakdown />
+			{:else if activeId === 'sud'}
+				<SUDbySubstance />
+			{:else if activeId === 'suicide'}
+				<SuicideRisk />
+			{:else if activeId === 'sudsex'}
+				<SexDiffSUD />
+			{:else if activeId === 'mhmap'}
+				<MentalHealthWorldMap />
+			{:else if activeId === 'wealth'}
+				<WealthVsWellbeing />
+			{:else if activeId === 'treatment'}
+				<TreatmentAccessIndex />
+			{:else if activeId === 'education'}
+				<EducationPressure />
+			{:else if activeId === 'prisonmh'}
+				<PrisonMentalHealthLink />
+			{:else if activeId === 'happiness'}
+				<HappinessRankings />
+			{:else if activeId === 'hdi'}
+				<HDIExplorer />
+			{:else if activeId === 'governance'}
+				<GovernanceRadar />
+			{:else if activeId === 'healthtrends'}
+				<GlobalHealthTrends />
+			{:else if activeId === 'economy'}
+				<EconomicSnapshot />
+			{:else if activeId === 'dataexplorer'}
+				<DataExplorer />
 			{/if}
-		</div>
-	{/if}
+			</div>
+		{/key}
+	</main>
 
-	<div id="controls" class:hidden={takingScreenshot}>
-		<div class="controls-row">
-			{#each PALETTE as p}
-				<button
-					class="tier-btn"
-					class:active={filterTier === p.key}
-					onclick={() => (filterTier = filterTier === p.key ? null : p.key)}
-				>
-					<span class="tier-dot" style="background:{p.hex}"></span>
-					{p.label}
-				</button>
-			{/each}
-		</div>
-		<div class="controls-row">
-			<button
-				class="toggle-btn"
-				class:active={showNames}
-				onclick={() => (showNames = !showNames)}
-			>
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-					<circle cx="12" cy="12" r="3"/>
-				</svg>
-				Names
-			</button>
-			<button class="action-btn reset-btn" onclick={() => { countryTiers = loadInitialTiers(); filterTier = null; }}>
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M1 4v6h6M23 20v-6h-6"/>
-					<path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
-				</svg>
-				Reset
-			</button>
-			<button class="action-btn screenshot-btn" onclick={takeScreenshot}>
-				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-					<circle cx="12" cy="13" r="4"/>
-				</svg>
-				Screenshot
-			</button>
-		</div>
-	</div>
+	<Settings
+		open={settingsOpen}
+		items={settingsItems}
+		onClose={() => (settingsOpen = false)}
+		onNewPage={handleAddPage}
+		onToggleHide={handleToggleHide}
+		onDelete={handleDeletePage}
+		onShowAll={handleShowAll}
+		onSelect={(id) => (activeId = id)}
+	/>
 </div>
 
 <style>
@@ -206,222 +461,43 @@
 		overflow: hidden;
 	}
 
-	#app {
-		position: relative;
+	.app-shell {
+		display: flex;
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
 	}
 
-	#map-container {
+	.content {
+		flex: 1;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.component-wrapper {
 		width: 100%;
 		height: 100%;
+	}
+
+	.page-gear {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.9rem;
+		z-index: 110;
+		width: 2rem;
+		height: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-
-	#map {
-		width: 100%;
-		height: 100%;
-	}
-
-	.country {
-		cursor: pointer;
-		transition: fill 0.15s, opacity 0.3s, stroke-width 0.1s;
-	}
-
-	.country:hover {
-		filter: brightness(1.3);
-	}
-
-	.country-label {
-		font-size: 5px;
-		text-anchor: middle;
-		dominant-baseline: central;
-		fill: rgba(255, 255, 255, 0.7);
-		pointer-events: none;
-		font-weight: 600;
-		paint-order: stroke;
-		stroke: rgba(0, 0, 0, 0.6);
-		stroke-width: 1.5px;
-	}
-
-	#controls {
-		position: fixed;
-		bottom: 1.5rem;
-		left: 50%;
-		transform: translateX(-50%);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
 		background: rgba(15, 15, 30, 0.85);
-		backdrop-filter: blur(10px);
-		padding: 0.75rem 1rem;
-		border-radius: 16px;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		z-index: 50;
-		transition: opacity 0.2s;
-	}
-
-	#controls.hidden {
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	.controls-row {
-		display: flex;
-		gap: 0.35rem;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.tier-btn {
-		display: flex;
-		align-items: center;
-		gap: 0.4rem;
-		background: rgba(255, 255, 255, 0.06);
-		border: 1.5px solid rgba(255, 255, 255, 0.08);
-		border-radius: 20px;
-		padding: 0.4rem 0.85rem;
-		font-size: 0.78rem;
-		font-weight: 500;
-		cursor: pointer;
-		color: #bbb;
-		transition: all 0.15s;
-		white-space: nowrap;
-	}
-
-	.tier-btn:hover {
-		background: rgba(255, 255, 255, 0.1);
-		color: #fff;
-	}
-
-	.tier-btn.active {
-		background: rgba(255, 255, 255, 0.12);
-		border-color: rgba(255, 255, 255, 0.3);
-		color: #fff;
-		box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
-	}
-
-	.tier-dot {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		flex-shrink: 0;
-	}
-
-	.toggle-btn, .action-btn {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 8px;
-		padding: 0.4rem 0.7rem;
-		font-size: 0.78rem;
-		font-weight: 500;
-		cursor: pointer;
-		color: #999;
-		transition: all 0.15s;
-	}
-
-	.toggle-btn:hover, .action-btn:hover {
-		background: rgba(255, 255, 255, 0.08);
-		color: #ddd;
-	}
-
-	.toggle-btn.active {
-		background: rgba(16, 185, 129, 0.15);
-		border-color: rgba(16, 185, 129, 0.3);
-		color: #10b981;
-	}
-
-	.screenshot-btn {
-		background: rgba(99, 102, 241, 0.12);
-		border-color: rgba(99, 102, 241, 0.25);
-		color: #818cf8;
-	}
-
-	.screenshot-btn:hover {
-		background: rgba(99, 102, 241, 0.2);
-		color: #a5b4fc;
-	}
-
-	.reset-btn {
-		background: rgba(243, 156, 18, 0.12);
-		border-color: rgba(243, 156, 18, 0.25);
-		color: #f39c12;
-	}
-
-	.reset-btn:hover {
-		background: rgba(243, 156, 18, 0.2);
-		color: #f1c40f;
-	}
-
-	#tooltip {
-		position: fixed;
-		bottom: 8rem;
-		left: 50%;
-		transform: translateX(-50%);
-		background: rgba(15, 15, 30, 0.95);
-		color: #fff;
-		padding: 0.75rem 1.2rem;
-		border-radius: 10px;
-		font-size: 0.82rem;
-		pointer-events: none;
-		max-width: 520px;
-		line-height: 1.45;
-		z-index: 100;
-		backdrop-filter: blur(8px);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-	}
-
-	.tooltip-name {
-		font-weight: 700;
+		color: #888;
 		font-size: 1rem;
-		margin-bottom: 0.25rem;
+		cursor: pointer;
 	}
-
-	.tooltip-tier {
-		color: #aaa;
-		margin-bottom: 0.3rem;
-		font-size: 0.78rem;
-	}
-
-	.tooltip-meta {
-		color: #666;
-		font-size: 0.72rem;
-		margin-bottom: 0.3rem;
-	}
-
-	.tooltip-notes {
-		color: #ccc;
-		margin-bottom: 0.3rem;
-	}
-
-	.tooltip-approved {
-		display: flex;
-		gap: 0.35rem;
-		flex-wrap: wrap;
-	}
-
-	.approved-yes {
-		background: rgba(16, 185, 129, 0.2);
-		color: #10b981;
-		padding: 0.1rem 0.4rem;
-		border-radius: 4px;
-		font-size: 0.7rem;
-	}
-
-	.approved-no {
-		background: rgba(220, 38, 38, 0.15);
-		color: #dc2626;
-		padding: 0.1rem 0.4rem;
-		border-radius: 4px;
-		font-size: 0.7rem;
-		text-decoration: line-through;
+	.page-gear:hover {
+		color: #fff;
+		border-color: rgba(99, 102, 241, 0.4);
 	}
 </style>

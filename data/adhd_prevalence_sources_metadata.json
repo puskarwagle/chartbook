@@ -1,0 +1,69 @@
+{
+  "description": "Metadata about ADHD prevalence data sources collected for graphicsForADHD project",
+  "last_updated": "2026-07-16",
+  "data_files": [
+    {
+      "filename": "wmh_10_country_adult_adhd_prevalence.json",
+      "description": "Country-by-country adult ADHD prevalence from the WHO WMH 10-country study (Fayyad et al. 2007)",
+      "completeness": "Complete - all 10 countries extracted from accessible paper",
+      "source_url": "https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/crossnational-prevalence-and-correlates-of-adult-attentiondeficit-hyperactivity-disorder/43819B490B72F072154DBDEAFE9807E8"
+    },
+    {
+      "filename": "wmh_20_country_adult_adhd_access_notes.json",
+      "description": "Notes about the 20-country WMH study and additional data from accessible sources including childhood persistence data",
+      "completeness": "Partial - the 20-country paper is paywalled, only abstract-level data available",
+      "includes": "Abstract data from 20-country study + full childhood persistence data from PMC article"
+    },
+    {
+      "filename": "gbd_2019_adhd_global.json",
+      "description": "GBD 2019 global ADHD estimates with authors' critical re-analysis (Cortese et al. 2023)",
+      "completeness": "Complete from accessible paper, but covers lifespan not adults-only",
+      "source_url": "https://www.nature.com/articles/s41380-023-02228-3"
+    }
+  ],
+  "existing_data_files": [
+    {
+      "filename": "adolescents_young_adults_10_24.json",
+      "note": "Previously collected, not examined in this session"
+    },
+    {
+      "filename": "china_vs_worldwide.json",
+      "note": "Previously collected, not examined in this session"
+    },
+    {
+      "filename": "gbd_2021_global_adhd_under20.json",
+      "note": "Previously collected, not examined in this session"
+    }
+  ],
+  "data_gaps": {
+    "20_country_wmh_data": {
+      "status": "NOT ACCESSIBLE",
+      "reason": "The Springer article (Fayyad et al. 2017) containing the 20-country data is behind a paywall",
+      "what_is_missing": "Country-specific prevalence rates for 10 additional countries beyond the original 10",
+      "potential_additional_countries": [
+        "Iraq",
+        "Japan",
+        "New Zealand",
+        "Northern Ireland",
+        "Peru",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "South Korea",
+        "Others"
+      ],
+      "how_to_obtain": "1) Institutional access to Springer, 2) Contact authors at Harvard WMH (www.hcp.med.harvard.edu/wmh), 3) Check if data is in WHO MH Atlas or public use files"
+    },
+    "workplace_impact_data": {
+      "status": "NOT ACCESSIBLE",
+      "reason": "ResearchGate returned 403 error",
+      "source": "de Graaf et al. 2008, Occupational and Environmental Medicine"
+    },
+    "adult_specific_gbd_data": {
+      "status": "NOT DIRECTLY AVAILABLE",
+      "reason": "The GBD 2019 paper reports lifespan estimates, not adults-only breakdowns",
+      "note": "Adult-specific GBD estimates may exist in the full GBD data tools (ghdx.healthdata.org)"
+    }
+  },
+  "key_insight": "The WMH survey data (actual survey-based prevalence) consistently shows higher adult ADHD rates (3.4% average) than GBD modeled estimates (1.13% lifespan). This suggests GBD may underestimate true prevalence, especially in adults."
+}
