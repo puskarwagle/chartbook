@@ -1,75 +1,115 @@
 <script lang="ts">
-	const studies = [
-		{
-			name: 'Fazel 2024',
-			prevalence: 8.3,
-			ciLow: 3.8,
-			ciHigh: 12.8,
-			n: 3919,
-			note: 'Unselected adults, random sampling'
-		},
-		{
-			name: 'Young 2014',
-			prevalence: 25.5,
-			ciLow: 20.0,
-			ciHigh: 32.4,
-			n: 26641,
-			note: 'All ages, diagnostic interview'
-		},
-		{
-			name: 'Ginsberg 2010',
-			prevalence: 40.0,
-			ciLow: null,
-			ciHigh: null,
-			n: 30,
-			note: 'Long-term male inmates, high-security'
-		}
-	];
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
+	import prisonRaw from '../../../data/prison_adhd_studies.json';
 
-	const generalPop = 3.5;
-	const maxVal = 50;
-	const chartW = 560;
-	const chartH = 280;
-	const pad = { top: 30, right: 40, bottom: 60, left: 140 };
-	const barH = 44;
-	const gap = 20;
-
-	function xPos(val: number) {
-		return pad.left + (val / maxVal) * (chartW - pad.left - pad.right);
+	// JSON-driven: values come from data/prison_adhd_studies.json.
+	interface Study {
+		name: string;
+		prevalence: number;
+		ci_low: number | null;
+		ci_high: number | null;
+		n: number;
+		note: string;
 	}
+	const raw = prisonRaw as unknown as { general_population_pct: number; studies: Study[] };
+	const studies = raw.studies;
+	const generalPop = raw.general_population_pct;
+
+	// CI whiskers only for studies that report a CI (Ginsberg has none).
+	const ciData = studies
+		.map((s, i) => ({ s, i }))
+		.filter(({ s }) => s.ci_low !== null && s.ci_high !== null)
+		.map(({ s, i }) => [s.ci_low as number, s.ci_high as number, i]);
+
+	function renderWhisker(params: any, api: any) {
+		const low = api.value(0) as number;
+		const high = api.value(1) as number;
+		const idx = api.value(2) as number;
+		const y = api.coord([low, idx])[1] as number;
+		const xLow = api.coord([low, idx])[0] as number;
+		const xHigh = api.coord([high, idx])[0] as number;
+		const cap = 6;
+		return {
+			type: 'group',
+			children: [
+				{ type: 'line', shape: { x1: xLow, y1: y, x2: xHigh, y2: y }, style: { stroke: '#e0e0e0', lineWidth: 2 } },
+				{ type: 'line', shape: { x1: xLow, y1: y - cap, x2: xLow, y2: y + cap }, style: { stroke: '#e0e0e0', lineWidth: 2 } },
+				{ type: 'line', shape: { x1: xHigh, y1: y - cap, x2: xHigh, y2: y + cap }, style: { stroke: '#e0e0e0', lineWidth: 2 } }
+			]
+		};
+	}
+
+	const option: echarts.EChartsCoreOption = {
+		backgroundColor: 'transparent',
+		...BASE_ANIMATION,
+		tooltip: {
+			...baseTooltip(),
+			trigger: 'axis',
+			axisPointer: { type: 'shadow' },
+			formatter: (params: unknown) => {
+				const p = (params as { dataIndex: number; marker: string }[])[0];
+				const s = studies[p.dataIndex];
+				const ci =
+					s.ci_low !== null && s.ci_high !== null ? ` (95% CI ${s.ci_low}–${s.ci_high})` : ' (no CI reported)';
+				return `<b>${s.name}</b><br/>${p.marker} Prevalence: <b>${s.prevalence}%</b>${ci}<br/><span style="color:#888">n = ${s.n.toLocaleString()} — ${s.note}</span>`;
+			}
+		},
+		grid: { left: 8, right: 88, top: 32, bottom: 32, containLabel: true },
+		xAxis: { ...valueXAxis(), max: 50 },
+		yAxis: {
+			type: 'category',
+			data: studies.map((s) => s.name),
+			inverse: true,
+			axisLine: { lineStyle: { color: PALETTE.axisLine } },
+			axisTick: { show: false },
+			axisLabel: { color: PALETTE.text, fontSize: 12, fontWeight: 600 }
+		},
+		series: [
+			{
+				type: 'bar',
+				data: studies.map((s) => s.prevalence),
+				itemStyle: { color: PALETTE.purple, borderRadius: [0, 5, 5, 0], opacity: 0.85 },
+				label: {
+					show: true,
+					position: 'right',
+					color: PALETTE.text,
+					fontWeight: 700,
+					formatter: (p: any) => {
+						const s = studies[p.dataIndex as number];
+						return `{b|${s.prevalence}%}\n{s|n = ${s.n.toLocaleString()}}`;
+					},
+					rich: {
+						b: { color: PALETTE.text, fontSize: 13, fontWeight: 700, lineHeight: 18 },
+						s: { color: 'rgba(255,255,255,0.5)', fontSize: 9, lineHeight: 13 }
+					}
+				},
+				markLine: {
+					symbol: 'none',
+					lineStyle: { color: PALETTE.red, type: 'dashed', width: 1.5 },
+					label: { color: PALETTE.red, fontSize: 10, formatter: `General pop ~${generalPop}%` },
+					data: [{ xAxis: generalPop }]
+				}
+			},
+			{
+				type: 'custom',
+				coordinateSystem: 'cartesian2d',
+				data: ciData,
+				renderItem: renderWhisker,
+				tooltip: { show: false },
+				z: 3
+			}
+		]
+	};
 </script>
 
 <div class="view">
 	<h1 class="title">ADHD in Prison Populations</h1>
-	<p class="subtitle">Prevalence across meta-analyses vs general population</p>
+	<p class="subtitle">Prevalence across meta-analyses vs general population — ECharts · JSON-driven</p>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			<line x1={pad.left} y1={pad.top} x2={pad.left} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-			<line x1={pad.left} y1={chartH - pad.bottom} x2={chartW - pad.right} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-
-			{#each [0, 10, 20, 30, 40, 50] as t}
-				<line x1={xPos(t)} y1={pad.top} x2={xPos(t)} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.04)" />
-				<text x={xPos(t)} y={chartH - pad.bottom + 18} text-anchor="middle" fill="#888" font-size="11">{t}%</text>
-			{/each}
-
-			<line x1={xPos(generalPop)} y1={pad.top} x2={xPos(generalPop)} y2={chartH - pad.bottom} stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3" />
-			<text x={xPos(generalPop)} y={pad.top - 8} text-anchor="middle" fill="#ef4444" font-size="10">General pop ~3.5%</text>
-
-			{#each studies as s, i}
-				{@const y = pad.top + i * (barH + gap)}
-				{@const barWidth = xPos(s.prevalence) - pad.left}
-				<text x={pad.left - 8} y={y + barH / 2 + 4} text-anchor="end" fill="#e0e0e0" font-size="12" font-weight="600">{s.name}</text>
-				<rect x={pad.left} y={y} width={barWidth} height={barH} fill="#8b5cf6" rx={5} opacity={0.85} />
-				{#if s.ciLow !== null && s.ciHigh !== null}
-					<line x1={xPos(s.ciLow)} y1={y + barH / 2} x2={xPos(s.ciHigh)} y2={y + barH / 2} stroke="#e0e0e0" stroke-width="2" />
-					<line x1={xPos(s.ciLow)} y1={y + barH / 2 - 6} x2={xPos(s.ciLow)} y2={y + barH / 2 + 6} stroke="#e0e0e0" stroke-width="2" />
-					<line x1={xPos(s.ciHigh)} y1={y + barH / 2 - 6} x2={xPos(s.ciHigh)} y2={y + barH / 2 + 6} stroke="#e0e0e0" stroke-width="2" />
-				{/if}
-				<text x={xPos(s.prevalence) + 8} y={y + barH / 2 + 5} fill="#e0e0e0" font-size="13" font-weight="700">{s.prevalence}%</text>
-				<text x={pad.left + 6} y={y + barH - 4} fill="rgba(255,255,255,0.5)" font-size="9">n = {s.n.toLocaleString()}</text>
-			{/each}
-		</svg>
+		<EChart {option} />
 	</div>
 
 	<div class="cards">

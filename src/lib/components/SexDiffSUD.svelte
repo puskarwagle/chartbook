@@ -1,94 +1,90 @@
 <script lang="ts">
-	const categories = [
-		{
-			name: 'Any SUD',
-			male: 11.4,
-			female: 10.9,
-			hrMale: 4.1,
-			hrFemale: 4.5
-		},
-		{
-			name: 'Cannabis',
-			male: 6.8,
-			female: 4.3,
-			hrMale: 5.5,
-			hrFemale: 6.5
-		},
-		{
-			name: 'Stimulant',
-			male: 3.7,
-			female: 3.4,
-			hrMale: 7.3,
-			hrFemale: 8.0
-		},
-		{
-			name: 'Opioid',
-			male: 1.5,
-			female: 1.4,
-			hrMale: 7.6,
-			hrFemale: 7.4
-		}
-	];
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import {
+		PALETTE,
+		BASE_ANIMATION,
+		baseTooltip,
+		categoryXAxis,
+		valueYAxis,
+		legendBottom,
+		barSeries
+	} from '$lib/echartsTheme';
+	import sudBySexRaw from '../../../data/sud_by_sex.json';
 
-	const chartW = 560;
-	const chartH = 300;
-	const pad = { top: 40, right: 40, bottom: 50, left: 80 };
-	const maxVal = 14;
-	const barW = 28;
-	const groupGap = 40;
-
-	function yPos(val: number) {
-		return pad.top + (1 - val / maxVal) * (chartH - pad.top - pad.bottom);
+	// JSON-driven: values come from data/sud_by_sex.json (Moldekleiv 2025).
+	interface Category {
+		name: string;
+		male_pct: number;
+		female_pct: number;
+		hr_male: number;
+		hr_female: number;
 	}
+	const raw = sudBySexRaw as unknown as {
+		cohort: { n_males: number; n_females: number };
+		categories: Category[];
+	};
+	const categories = raw.categories;
+	const hrByName = new Map(categories.map((c) => [c.name, c]));
 
-	function groupX(i: number) {
-		const totalW = chartW - pad.left - pad.right;
-		const groupW = totalW / categories.length;
-		return pad.left + i * groupW + groupW / 2;
-	}
+	const option: echarts.EChartsCoreOption = {
+		backgroundColor: 'transparent',
+		...BASE_ANIMATION,
+		tooltip: {
+			...baseTooltip((v) => `${v}%`),
+			formatter: (params: unknown) => {
+				const rows = params as { seriesName: string; value: number; marker: string }[];
+				const name = (params as { name?: string }[])[0]?.name ?? rows[0]?.seriesName ?? '';
+				const hr = hrByName.get(String(name));
+				let html = `<b>${name}</b>`;
+				for (const r of rows) {
+					html += `<br/>${r.marker} ${r.seriesName}: <b>${r.value}%</b>`;
+				}
+				if (hr) html += `<br/><span style="color:#888">HR ♂ ${hr.hr_male}× / ♀ ${hr.hr_female}×</span>`;
+				return html;
+			}
+		},
+		legend: legendBottom(['Males', 'Females']),
+		grid: { left: 48, right: 24, top: 32, bottom: 72 },
+		xAxis: {
+			...categoryXAxis(categories.map((c) => c.name)),
+			axisLabel: {
+				color: PALETTE.text,
+				fontSize: 11,
+				formatter: (name: string) => {
+					const hr = hrByName.get(name);
+					return `{name|${name}}\n{hr|HR ♂ ${hr?.hr_male}× / ♀ ${hr?.hr_female}×}`;
+				},
+				rich: {
+					name: { color: PALETTE.text, fontSize: 11, lineHeight: 18 },
+					hr: { color: PALETTE.muted, fontSize: 9, lineHeight: 14 }
+				}
+			}
+		},
+		yAxis: { ...valueYAxis('%'), max: 14 },
+		series: [
+			barSeries('Males', categories.map((c) => c.male_pct), PALETTE.blue, (v) => `${v}%`),
+			barSeries('Females', categories.map((c) => c.female_pct), '#ec4899', (v) => `${v}%`)
+		]
+	};
 </script>
 
 <div class="view">
 	<h1 class="title">SUD in ADHD by Sex</h1>
-	<p class="subtitle">Norwegian cohort, ages 18–31 (Moldekleiv 2025, n=49,815 ADHD)</p>
+	<p class="subtitle">Norwegian cohort, ages 18–31 (Moldekleiv 2025, n=49,815 ADHD) — ECharts · JSON-driven</p>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			<line x1={pad.left} y1={pad.top} x2={pad.left} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-			<line x1={pad.left} y1={chartH - pad.bottom} x2={chartW - pad.right} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-
-			{#each [0, 2, 4, 6, 8, 10, 12, 14] as t}
-				<line x1={pad.left} y1={yPos(t)} x2={chartW - pad.right} y2={yPos(t)} stroke="rgba(255,255,255,0.04)" />
-				<text x={pad.left - 10} y={yPos(t) + 4} text-anchor="end" fill="#888" font-size="10">{t}%</text>
-			{/each}
-
-			{#each categories as cat, i}
-				{@const gx = groupX(i)}
-				{@const maleY = yPos(cat.male)}
-				{@const femaleY = yPos(cat.female)}
-				{@const barBottom = yPos(0)}
-
-				<rect x={gx - barW - 4} y={maleY} width={barW} height={barBottom - maleY} fill="#3b82f6" rx={4} opacity={0.85} />
-				<rect x={gx + 4} y={femaleY} width={barW} height={barBottom - femaleY} fill="#ec4899" rx={4} opacity={0.85} />
-
-				<text x={gx - barW / 2 - 4} y={maleY - 6} text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="700">{cat.male}%</text>
-				<text x={gx + barW / 2 + 4} y={femaleY - 6} text-anchor="middle" fill="#ec4899" font-size="11" font-weight="700">{cat.female}%</text>
-
-				<text x={gx} y={chartH - pad.bottom + 18} text-anchor="middle" fill="#e0e0e0" font-size="11" font-weight="500">{cat.name}</text>
-
-				<text x={gx} y={chartH - pad.bottom + 32} text-anchor="middle" fill="#888" font-size="9">HR ♂ {cat.hrMale}× / ♀ {cat.hrFemale}×</text>
-			{/each}
-		</svg>
+		<EChart {option} />
 	</div>
 
 	<div class="legend">
 		<div class="legend-item">
 			<div class="legend-dot" style="background:#3b82f6"></div>
-			<span>Males (n=31,146)</span>
+			<span>Males (n={raw.cohort.n_males.toLocaleString()})</span>
 		</div>
 		<div class="legend-item">
 			<div class="legend-dot" style="background:#ec4899"></div>
-			<span>Females (n=18,669)</span>
+			<span>Females (n={raw.cohort.n_females.toLocaleString()})</span>
 		</div>
 	</div>
 

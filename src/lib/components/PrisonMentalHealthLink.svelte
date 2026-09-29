@@ -1,63 +1,80 @@
 <script lang="ts">
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { prisonData } from '$lib/data';
 
-	const sorted = [...prisonData].sort((a, b) => b.prison_population_rate_per_100k - a.prison_population_rate_per_100k);
-
+	const sorted = [...prisonData].sort(
+		(a, b) => b.prison_population_rate_per_100k - a.prison_population_rate_per_100k
+	);
 	const top20 = sorted.slice(0, 20);
-	const maxRate = Math.max(...top20.map(r => r.prison_population_rate_per_100k), 1);
-	const globalAvg = $derived.by(() => {
-		const vals = prisonData.map(r => r.prison_population_rate_per_100k);
+	const maxRate = Math.max(...top20.map((r) => r.prison_population_rate_per_100k), 1);
+	const globalAvg = (() => {
+		const vals = prisonData.map((r) => r.prison_population_rate_per_100k);
 		return vals.reduce((a, b) => a + b, 0) / vals.length;
-	});
+	})();
 
-	const chartW = 600;
-	const chartH = 480;
-	const pad = { top: 30, right: 60, bottom: 30, left: 200 };
-	const barH = 18;
-	const barGap = 6;
+	const names = top20.map((r) => `#${r.rank}`);
 
-	function xPos(rate: number) {
-		return pad.left + (rate / maxRate) * (chartW - pad.left - pad.right);
-	}
-
-	const avgX = $derived(xPos(globalAvg));
-
-	function barOpacity(rate: number): number {
-		return 0.4 + (rate / maxRate) * 0.6;
-	}
-
-	function formatNum(n: number): string {
-		return n.toLocaleString();
-	}
+	const option: echarts.EChartsCoreOption = {
+		backgroundColor: 'transparent',
+		...BASE_ANIMATION,
+		tooltip: {
+			...baseTooltip(),
+			trigger: 'axis',
+			axisPointer: { type: 'shadow' },
+			formatter: (params: unknown) => {
+				const p = (params as { dataIndex: number; value: number; marker: string }[])[0];
+				const row = top20[p.dataIndex];
+				return `<b>Rank #${row.rank}</b><br/>${p.marker} Rate: <b>${row.prison_population_rate_per_100k}/100k</b><br/><span style="color:#888">Prison population: ${row.prison_population_total.toLocaleString()} (country names unavailable in source)</span>`;
+			}
+		},
+		grid: { left: 8, right: 72, top: 32, bottom: 32, containLabel: true },
+		xAxis: valueXAxis(),
+		yAxis: {
+			type: 'category',
+			data: names,
+			inverse: true,
+			axisLine: { lineStyle: { color: PALETTE.axisLine } },
+			axisTick: { show: false },
+			axisLabel: { color: PALETTE.text, fontSize: 10 }
+		},
+		series: [
+			{
+				type: 'bar',
+				data: top20.map((r) => r.prison_population_rate_per_100k),
+				itemStyle: {
+					borderRadius: [0, 4, 4, 0],
+					color: (p: { value: number }) => {
+						const alpha = 0.4 + (Number(p.value) / maxRate) * 0.6;
+						return `rgba(239, 68, 68, ${alpha.toFixed(2)})`;
+					}
+				},
+				label: {
+					show: true,
+					position: 'right',
+					color: '#fca5a5',
+					fontSize: 10,
+					fontWeight: 600,
+					formatter: (p: { value: number }) => `${p.value}/100k`
+				},
+				markLine: {
+					symbol: 'none',
+					lineStyle: { color: PALETTE.amber, type: 'dashed', width: 1.5 },
+					label: { color: PALETTE.amber, fontSize: 9, formatter: `Global avg: ${globalAvg.toFixed(0)}/100k` },
+					data: [{ xAxis: globalAvg }]
+				}
+			}
+		]
+	};
 </script>
 
 <div class="view">
 	<h1 class="title">Prison Population & Mental Health</h1>
-	<p class="subtitle">Global incarceration rates — ADHD is 4–10× overrepresented in prisons worldwide</p>
+	<p class="subtitle">Global incarceration rates — ADHD is 4–10× overrepresented in prisons worldwide — ECharts</p>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			<line x1={pad.left} y1={pad.top} x2={pad.left} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-			<line x1={pad.left} y1={chartH - pad.bottom} x2={chartW - pad.right} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-
-			{#each top20 as r, i}
-				{@const y = pad.top + i * (barH + barGap)}
-				{@const barWidth = xPos(r.prison_population_rate_per_100k) - pad.left}
-				<text x={pad.left - 8} y={y + barH / 2 + 4} text-anchor="end" fill="#e0e0e0" font-size="10" font-weight="500">
-					#{r.rank}
-				</text>
-				<rect x={pad.left} y={y} width={Math.max(barWidth, 2)} height={barH} fill="#ef4444" rx={3} opacity={barOpacity(r.prison_population_rate_per_100k)} />
-				<text x={xPos(r.prison_population_rate_per_100k) + 6} y={y + barH / 2 + 4} fill="#fca5a5" font-size="10" font-weight="600">
-					{r.prison_population_rate_per_100k}/100k
-				</text>
-				<text x={pad.left + 4} y={y + barH - 3} fill="rgba(255,255,255,0.4)" font-size="8">
-					n={formatNum(r.prison_population_total)}
-				</text>
-			{/each}
-
-			<line x1={avgX} y1={pad.top} x2={avgX} y2={chartH - pad.bottom} stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" />
-			<text x={avgX} y={pad.top - 8} text-anchor="middle" fill="#f59e0b" font-size="9">Global avg: {globalAvg.toFixed(0)}/100k</text>
-		</svg>
+		<EChart {option} />
 	</div>
 
 	<div class="cards">

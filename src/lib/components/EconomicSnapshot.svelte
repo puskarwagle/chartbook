@@ -1,4 +1,7 @@
 <script lang="ts">
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { gdpPerCapita, povertyRate, giniIndex, populationData, gdpLatestRows, countryName } from '$lib/data';
 
 	type Metric = 'gdp' | 'poverty' | 'gini' | 'population';
@@ -6,10 +9,10 @@
 	let metric = $state<Metric>('gdp');
 
 	const METRICS: { key: Metric; label: string; unit: string; color: string }[] = [
-		{ key: 'gdp', label: 'GDP per Capita', unit: 'USD', color: '#3b82f6' },
-		{ key: 'poverty', label: 'Poverty Rate', unit: '% below $2.15/day', color: '#ef4444' },
-		{ key: 'gini', label: 'Inequality (Gini)', unit: '0–100', color: '#f59e0b' },
-		{ key: 'population', label: 'Population', unit: 'total', color: '#10b981' }
+		{ key: 'gdp', label: 'GDP per Capita', unit: 'USD', color: PALETTE.blue },
+		{ key: 'poverty', label: 'Poverty Rate', unit: '% below $2.15/day', color: PALETTE.red },
+		{ key: 'gini', label: 'Inequality (Gini)', unit: '0–100', color: PALETTE.amber },
+		{ key: 'population', label: 'Population', unit: 'total', color: PALETTE.green }
 	];
 
 	const metricMaps: Record<Metric, Map<string, number>> = {
@@ -18,6 +21,18 @@
 		gini: giniIndex,
 		population: populationData
 	};
+
+	function formatVal(m: Metric, v: number): string {
+		if (m === 'population') {
+			if (v >= 1e9) return (v / 1e9).toFixed(1) + 'B';
+			if (v >= 1e6) return (v / 1e6).toFixed(1) + 'M';
+			if (v >= 1e3) return (v / 1e3).toFixed(0) + 'K';
+			return v.toFixed(0);
+		}
+		if (m === 'gdp') return '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 });
+		if (m === 'gini') return v.toFixed(1);
+		return v.toFixed(1) + '%';
+	}
 
 	const displayData = $derived.by(() => {
 		const map = metricMaps[metric];
@@ -32,48 +47,56 @@
 		return rows.slice(0, 15);
 	});
 
-	const maxValue = $derived(Math.max(...displayData.map(r => r.value), 1));
-
 	const globalStats = $derived.by(() => {
 		const map = metricMaps[metric];
-		const vals = Array.from(map.values()).filter(v => v > 0);
+		const vals = Array.from(map.values()).filter((v) => v > 0);
 		const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
 		const sorted = [...vals].sort((a, b) => a - b);
 		const median = sorted[Math.floor(sorted.length / 2)];
 		return { avg, median, count: vals.length };
 	});
 
-	const chartW = 600;
-	const chartH = 380;
-	const pad = { top: 30, right: 80, bottom: 30, left: 150 };
-	const barH = 18;
-	const barGap = 6;
-
-	function xPos(val: number) {
-		return pad.left + (val / maxValue) * (chartW - pad.left - pad.right);
-	}
-
-	function formatVal(v: number): string {
-		if (metric === 'population') {
-			if (v >= 1e9) return (v / 1e9).toFixed(1) + 'B';
-			if (v >= 1e6) return (v / 1e6).toFixed(1) + 'M';
-			if (v >= 1e3) return (v / 1e3).toFixed(0) + 'K';
-			return v.toFixed(0);
-		}
-		if (metric === 'gdp') return '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 });
-		return v.toFixed(1) + '%';
-	}
-
-	function barColor(val: number): string {
-		const t = val / maxValue;
-		const meta = METRICS.find(m => m.key === metric)!;
-		return meta.color;
-	}
+	const option = $derived.by((): echarts.EChartsCoreOption => {
+		const m = metric;
+		const meta = METRICS.find((x) => x.key === m)!;
+		const rows = displayData;
+		const names = rows.map((d) => (d.name.length > 18 ? d.name.slice(0, 16) + '…' : d.name));
+		return {
+			backgroundColor: 'transparent',
+			...BASE_ANIMATION,
+			tooltip: baseTooltip((v) => formatVal(m, v)),
+			grid: { left: 8, right: 72, top: 16, bottom: 32, containLabel: true },
+			xAxis: valueXAxis(),
+			yAxis: {
+				type: 'category',
+				data: names,
+				inverse: true,
+				axisLine: { lineStyle: { color: PALETTE.axisLine } },
+				axisTick: { show: false },
+				axisLabel: { color: PALETTE.text, fontSize: 10 }
+			},
+			series: [
+				{
+					type: 'bar',
+					data: rows.map((d) => d.value),
+					itemStyle: { color: meta.color, borderRadius: [0, 4, 4, 0], opacity: 0.8 },
+					label: {
+						show: true,
+						position: 'right',
+						color: '#ccc',
+						fontSize: 10,
+						fontWeight: 600,
+						formatter: (p: { value: number }) => formatVal(m, Number(p.value))
+					}
+				}
+			]
+		};
+	});
 </script>
 
 <div class="view">
 	<h1 class="title">Economic Overview</h1>
-	<p class="subtitle">Global economic indicators — latest available data by country</p>
+	<p class="subtitle">Global economic indicators — latest available data by country — ECharts</p>
 
 	<div class="controls">
 		{#each METRICS as m}
@@ -90,31 +113,16 @@
 		</div>
 		<div class="stat">
 			<span class="stat-label">Global Average</span>
-			<span class="stat-value">{formatVal(globalStats.avg)}</span>
+			<span class="stat-value">{formatVal(metric, globalStats.avg)}</span>
 		</div>
 		<div class="stat">
 			<span class="stat-label">Median</span>
-			<span class="stat-value">{formatVal(globalStats.median)}</span>
+			<span class="stat-value">{formatVal(metric, globalStats.median)}</span>
 		</div>
 	</div>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			<line x1={pad.left} y1={pad.top} x2={pad.left} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-			<line x1={pad.left} y1={chartH - pad.bottom} x2={chartW - pad.right} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.12)" />
-
-			{#each displayData as d, i}
-				{@const y = pad.top + i * (barH + barGap)}
-				{@const barWidth = xPos(d.value) - pad.left}
-				<text x={pad.left - 8} y={y + barH / 2 + 4} text-anchor="end" fill="#e0e0e0" font-size="10" font-weight="500">
-					{d.name.length > 18 ? d.name.slice(0, 16) + '…' : d.name}
-				</text>
-				<rect x={pad.left} y={y} width={Math.max(barWidth, 2)} height={barH} fill={barColor(d.value)} rx={4} opacity={0.8} />
-				<text x={xPos(d.value) + 6} y={y + barH / 2 + 4} fill="#ccc" font-size="9.5" font-weight="600">
-					{formatVal(d.value)}
-				</text>
-			{/each}
-		</svg>
+		<EChart {option} />
 	</div>
 </div>
 

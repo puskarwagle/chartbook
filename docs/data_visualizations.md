@@ -17,9 +17,21 @@
 | `who_health_indicators.json` | WHO GHO API | 7 indicators (depression, anxiety, schizophrenia, eating disorders, alcohol, drugs, life exp) | ~15k | `latestPerCountrySex()` filters `SEX_BTSX` only, latest year |
 | `world_happiness_report_2026.json` | WHR 2026 (XLSX→JSON) | 7 factor contributions to life evaluation | ~2k | Parsed to simplified schema; `happinessForYear(year)` filter |
 | `undp_hdi.json` | UNDP HDR (XLSX→JSON) | HDI rank, value, life exp, schooling, GNI | ~200 | Parsed from "Table 1" with tier headers |
-| `transparency_cpi_2024.json` | WB Governance (proxy) | 6 WGI indicators (corruption, rule of law, gov effectiveness, regulatory quality, political stability, voice/accountability) | ~1k | Filtered to 2023; replaces unavailable TI CPI |
+| `transparency_cpi_2024.json` | WB Governance (proxy) | 6 WGI indicators (corruption, rule of law, gov effectiveness, regulatory quality, political stability, voice/accountability) | ~1k | Latest available year via `govYear` in data.ts (1996–2022); replaces unavailable TI CPI |
 | `world_prison_brief.json` | ICPR scraped HTML | Prison population total, rate per 100k | ~200 | Filtered to rate > 0 |
 | `education_indicators.json` | World Bank API | 5 indicators (pupil-teacher primary/secondary, edu expenditure % GDP, tertiary enrollment, primary net enrollment) | ~5k | `latestPerCountry()` per indicator |
+
+### Component-imported JSON datasets (ECharts views, imported directly by components)
+
+| File | Source | Content | Consumed by |
+|------|--------|---------|-------------|
+| `sud_by_sex.json` | Moldekleiv et al. 2025, Norwegian cohort (ages 18–31, n=49,815 ADHD) | SUD prevalence in ADHD by sex + hazard ratios (Any, Cannabis, Stimulant, Opioid) | SexDiffSUD.svelte — grouped ECharts bar, HR in axis labels + tooltip |
+| `comorbidities.json` | Ginsberg et al. 2010, high-security Swedish prison (30 confirmed ADHD) | Psychiatric comorbidity % (SUD 100%, Personality 96%, Antisocial PD 96%, Borderline 74%, Mood & Anxiety 73%, Autism 23%, Psychopathy 10%) | ComorbidityBreakdown.svelte — horizontal ECharts bar, value-mapped opacity |
+| `sud_by_substance.json` | Rohner et al. 2023 meta-analysis (n=12,524, 31 studies) | ADHD prevalence in SUD patients by substance + 95% CIs + overall pooled estimate (21%) | SUDbySubstance.svelte — ECharts bar + custom CI whisker series + overall markLine |
+| `prison_adhd_studies.json` | Fazel 2024, Young 2014, Ginsberg 2010 | ADHD prevalence in prison (8.3% / 25.5% / 40.0%) vs 3.5% general population | PrisonPrevalence.svelte — ECharts bar + custom CI whiskers + general-pop markLine |
+| `sdi_regions.json` | GBD 2021 under-20 (Cortese et al. 2026) + regional breakdowns | SDI vs ADHD prevalence for 7 regions | SDIScatter.svelte — ECharts scatter with region labels |
+
+Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapper) and `src/lib/echartsTheme.ts` (dark palette, tooltip/axis/series helpers) used by all migrated views.
 
 ### Reference & Narrative Datasets (not imported by components)
 
@@ -257,14 +269,14 @@
 
 **Title**: ADHD in Prison Populations  
 **Type**: Horizontal bar chart with 95% CI error bars + general population reference line  
-**Data**: Embedded static (3 studies):
+**Data**: JSON-driven (`data/prison_adhd_studies.json`, 3 studies, vs 3.5% general population):
 | Study | Prevalence | 95% CI | n | Note |
 |-------|------------|--------|---|------|
 | Fazel 2024 | 8.3% | [3.8, 12.8] | 3,919 | Unselected adults, random sampling |
 | Young 2014 | 25.5% | [20.0, 32.4] | 26,641 | All ages, diagnostic interview |
 | Ginsberg 2010 | 40.0% | — | 30 | Long-term male inmates, high-security |
 
-**Chart Specs**: SVG 560×280, padding {t:30, r:40, b:60, l:140}, maxVal=50, barH=44, gap=20  
+**Chart**: ECharts horizontal bars (shared `EChart` wrapper + `echartsTheme`), x-axis max 50, custom CI whisker series  
 **Reference Line**: Red dashed at 3.5% (general population) with label  
 **Error Bars**: Horizontal line CI low–high with caps at midpoint
 
@@ -280,7 +292,7 @@
 
 **Title**: Comorbidities in Prison ADHD  
 **Type**: Horizontal bar chart (% of ADHD prisoners with each comorbidity)  
-**Data**: Embedded static (Ginsberg 2010, n=30 confirmed ADHD of 34 assessed from 315 screened, Swedish high-security):
+**Data**: JSON-driven (`data/comorbidities.json`; Ginsberg 2010, n=30 confirmed ADHD of 34 assessed from 315 screened, Swedish high-security):
 | Comorbidity | % |
 |-------------|---|
 | Substance Use Disorder | 100 |
@@ -291,7 +303,7 @@
 | Autism Spectrum | 23 |
 | Psychopathy (PCL-R ≥30) | 10 |
 
-**Chart Specs**: SVG 560×300, padding {t:20, r:60, b:20, l:200}, maxVal=100, barH=32, gap=8  
+**Chart**: ECharts horizontal bars (shared `EChart` wrapper + `echartsTheme`), x-axis max 100  
 **Opacity**: 0.3 + 0.7×(percent/100)  
 **Note**: "n = 30 confirmed ADHD cases (of 34 assessed from 315 screened)"
 
@@ -307,7 +319,7 @@
 
 **Title**: ADHD in Substance Use Disorder  
 **Type**: Horizontal bars with 95% CI + overall reference line  
-**Data**: Embedded static (Rohner 2023 meta-analysis, n=12,524 across 31 studies):
+**Data**: JSON-driven (`data/sud_by_substance.json`; Rohner 2023 meta-analysis, n=12,524 across 31 studies):
 | Substance | % ADHD | 95% CI | n Studies |
 |-----------|--------|--------|-----------|
 | Alcohol | 25% | [18.5, 33.6] | 7 |
@@ -315,7 +327,7 @@
 | Opioid | 18% | [7.8, 35.1] | 3 |
 | **Overall** | **21%** | [17.4, 25.5] | — |
 
-**Chart Specs**: SVG 560×260, padding {t:40, r:40, b:50, l:60}, maxVal=40  
+**Chart**: ECharts horizontal bars (shared `EChart` wrapper + `echartsTheme`), x-axis max 40, custom CI whisker series  
 **Overall Line**: Blue #3b82f6 dashed at 21% with label "Overall: 21%"  
 **Bars**: Amber #f59e0b, height=36, CI lines at mid-height with caps
 
@@ -366,7 +378,7 @@
 
 **Title**: SDI vs ADHD Prevalence  
 **Type**: Scatter plot (7 regional points) — SDI (0–1) vs prevalence % (under-20, 2021)  
-**Data**: Embedded static regional aggregates:
+**Data**: JSON-driven (`data/sdi_regions.json`) regional aggregates:
 | Region | SDI | Prevalence % | Label |
 |--------|-----|--------------|-------|
 | High SDI | 0.90 | 2.88 | High SDI |
@@ -377,7 +389,7 @@
 | N. Africa / ME | 0.60 | 1.80 | N. Africa / ME |
 | South Asia | 0.50 | 1.20 | South Asia |
 
-**Chart Specs**: SVG 500×350, padding {t:30, r:30, b:50, l:60}, xTicks=[0,0.2..1.0], yTicks=[0..6]  
+**Chart**: ECharts scatter (shared `EChart` wrapper + `echartsTheme`), x 0–1.0, y 0–6, region labels  
 **Insight**: Nonlinear positive correlation — higher sociodevelopmental index → higher diagnosed prevalence; Australasia extreme outlier (Australia 5.62%); greatest increases 1990–2021 in high-SDI regions (detection improvement, not true incidence rise)
 
 ---
@@ -483,7 +495,7 @@ const tierCounts = $derived.by(() => {
 
 **Title**: SUD in ADHD by Sex  
 **Type**: Grouped vertical bar chart (4 substance categories × 2 sexes) + HR labels  
-**Data**: Embedded static (Moldekleiv 2025, Norwegian cohort n=49,815 ADHD ages 18–31):
+**Data**: JSON-driven (`data/sud_by_sex.json`; Moldekleiv 2025, Norwegian cohort n=49,815 ADHD ages 18–31):
 | SUD Type | Male % | Female % | Male HR | Female HR |
 |----------|--------|----------|---------|-----------|
 | Any SUD | 11.4 | 10.9 | 4.1× | 4.5× |
@@ -491,7 +503,7 @@ const tierCounts = $derived.by(() => {
 | Stimulant | 3.7 | 3.4 | 7.3× | 8.0× |
 | Opioid | 1.5 | 1.4 | 7.6× | 7.4× |
 
-**Chart Specs**: SVG 560×300, padding {t:40, r:40, b:50, l:80}, maxVal=14, barW=28, groupGap=40  
+**Chart**: ECharts grouped bars (shared `EChart` wrapper + `echartsTheme`), y-axis max 14  
 **Bars**: Blue #3b82f6 (male), Pink #ec4899 (female) side-by-side per group  
 **Labels**: Prevalence % above bars; HR below x-axis: "HR ♂ 4.1× / ♀ 4.5×"
 
