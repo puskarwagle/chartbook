@@ -1,21 +1,25 @@
 <script lang="ts">
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import { wbTimeSeries, wbGlobalAverage, countryName, gdpLatestRows } from '$lib/data';
 
-	type Indicator = 'life_expectancy_wb' | 'infant_mortality' | 'maternal_mortality';
+	type Indicator = 'life_expectancy' | 'infant_mortality' | 'maternal_mortality';
 
 	const INDICATORS: { key: Indicator; label: string; unit: string }[] = [
-		{ key: 'life_expectancy_wb', label: 'Life Expectancy', unit: 'years' },
+		{ key: 'life_expectancy', label: 'Life Expectancy', unit: 'years' },
 		{ key: 'infant_mortality', label: 'Infant Mortality', unit: 'per 1k' },
 		{ key: 'maternal_mortality', label: 'Maternal Mortality', unit: 'per 100k' }
 	];
 
-	let indicator = $state<Indicator>('life_expectancy_wb');
+	const LINE_COLORS = [
+		PALETTE.blue, PALETTE.purple, PALETTE.green, PALETTE.amber, PALETTE.red,
+		PALETTE.cyan, '#ec4899', '#f97316', '#14b8a6', '#a855f7'
+	];
 
-	const topCountries = $derived.by(() => {
-		const rows = gdpLatestRows.slice(0, 10).map(r => r.country_code);
-		return rows;
-	});
+	let indicator = $state<Indicator>('life_expectancy');
 
+	const topCountries = $derived(gdpLatestRows.slice(0, 10).map((r) => r.country_code));
 	const globalAvg = $derived(wbGlobalAverage(indicator));
 
 	const allSeries = $derived.by(() => {
@@ -29,61 +33,67 @@
 		return series;
 	});
 
-	const chartW = 600;
-	const chartH = 380;
-	const pad = { top: 20, right: 120, bottom: 40, left: 50 };
+	const unit = $derived(INDICATORS.find((i) => i.key === indicator)?.unit ?? '');
 
-	const xRange = $derived.by(() => {
-		const years = globalAvg.map(d => d.year);
-		if (years.length === 0) return { min: 2000, max: 2023 };
-		return { min: Math.min(...years), max: Math.max(...years) };
-	});
-
-	const yRange = $derived.by(() => {
-		const allVals = [
-			...globalAvg.map(d => d.value),
-			...allSeries.flatMap(s => s.data.map(d => d.value))
-		];
-		if (allVals.length === 0) return { min: 0, max: 100 };
-		return { min: Math.min(...allVals) * 0.9, max: Math.max(...allVals) * 1.1 };
-	});
-
-	function xPos(year: number) {
-		const r = xRange;
-		return pad.left + ((year - r.min) / (r.max - r.min || 1)) * (chartW - pad.left - pad.right);
-	}
-
-	function yPos(val: number) {
-		const r = yRange;
-		return pad.top + (1 - (val - r.min) / (r.max - r.min || 1)) * (chartH - pad.top - pad.bottom);
-	}
-
-	function pathD(data: { year: number; value: number }[]): string {
-		return data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xPos(d.year)} ${yPos(d.value)}`).join(' ');
-	}
-
-	const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#f97316', '#14b8a6', '#a855f7'];
-
-	const xTicks = $derived.by(() => {
-		const r = xRange;
-		const step = Math.ceil((r.max - r.min) / 6);
-		const ticks: number[] = [];
-		for (let y = r.min; y <= r.max; y += step) ticks.push(y);
-		return ticks;
-	});
-
-	const yTicks = $derived.by(() => {
-		const r = yRange;
-		const step = (r.max - r.min) / 5;
-		const ticks: number[] = [];
-		for (let v = r.min; v <= r.max; v += step) ticks.push(Math.round(v * 10) / 10);
-		return ticks;
+	const option = $derived.by((): echarts.EChartsCoreOption => {
+		const u = unit;
+		return {
+			backgroundColor: 'transparent',
+			...BASE_ANIMATION,
+			tooltip: {
+				trigger: 'axis',
+				valueFormatter: (v: unknown) => `${Number(v).toFixed(1)} ${u}`
+			},
+			legend: {
+				bottom: 0,
+				textStyle: { color: PALETTE.muted, fontSize: 9 },
+				data: ['Global Avg', ...allSeries.map((s) => s.name)]
+			},
+			grid: { left: 56, right: 24, top: 24, bottom: 64 },
+			xAxis: {
+				type: 'value',
+				name: 'Year',
+				nameLocation: 'middle',
+				nameGap: 30,
+				nameTextStyle: { color: PALETTE.muted },
+				splitLine: { lineStyle: { color: PALETTE.grid } },
+				axisLabel: { color: PALETTE.muted, formatter: (v: number) => v.toFixed(0) }
+			},
+			yAxis: {
+				type: 'value',
+				name: u,
+				nameTextStyle: { color: PALETTE.muted, fontSize: 11 },
+				scale: true,
+				splitLine: { lineStyle: { color: PALETTE.grid } },
+				axisLabel: { color: PALETTE.muted }
+			},
+			series: [
+				{
+					name: 'Global Avg',
+					type: 'line',
+					data: globalAvg.map((d) => [d.year, Number(d.value.toFixed(2))]),
+					lineStyle: { color: '#fff', width: 2.5, type: 'dashed', opacity: 0.6 },
+					itemStyle: { color: '#fff' },
+					symbol: 'none',
+					emphasis: { focus: 'series' }
+				},
+				...allSeries.map((s, i) => ({
+					name: s.name,
+					type: 'line' as const,
+					data: s.data.map((d) => [d.year, Number(d.value.toFixed(2))]),
+					lineStyle: { color: LINE_COLORS[i % LINE_COLORS.length], width: 1.5, opacity: 0.85 },
+					itemStyle: { color: LINE_COLORS[i % LINE_COLORS.length] },
+					symbol: 'none',
+					emphasis: { focus: 'series' as const }
+				}))
+			]
+		};
 	});
 </script>
 
 <div class="view">
 	<h1 class="title">Global Health Trends</h1>
-	<p class="subtitle">Top 10 economies by GDP — health indicators over time</p>
+	<p class="subtitle">Top 10 economies by GDP — health indicators over time — ECharts</p>
 
 	<div class="controls">
 		{#each INDICATORS as ind}
@@ -94,32 +104,7 @@
 	</div>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			{#each xTicks as t}
-				<line x1={xPos(t)} y1={pad.top} x2={xPos(t)} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.06)" />
-				<text x={xPos(t)} y={chartH - pad.bottom + 16} text-anchor="middle" fill="#888" font-size="10">{t}</text>
-			{/each}
-			{#each yTicks as t}
-				<line x1={pad.left} y1={yPos(t)} x2={chartW - pad.right} y2={yPos(t)} stroke="rgba(255,255,255,0.06)" />
-				<text x={pad.left - 8} y={yPos(t) + 4} text-anchor="end" fill="#888" font-size="10">{t}</text>
-			{/each}
-
-			<path d={pathD(globalAvg)} fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="6,4" opacity={0.6} />
-
-			{#each allSeries as s, i}
-				<path d={pathD(s.data)} fill="none" stroke={COLORS[i % COLORS.length]} stroke-width="1.5" opacity={0.85} />
-			{/each}
-		</svg>
-	</div>
-
-	<div class="legend">
-		<span class="legend-item"><span class="line white dashed"></span> Global Avg</span>
-		{#each allSeries as s, i}
-			<span class="legend-item">
-				<span class="line" style="background:{COLORS[i % COLORS.length]}"></span>
-				{s.name}
-			</span>
-		{/each}
+		<EChart {option} />
 	</div>
 </div>
 
@@ -168,26 +153,4 @@
 		padding: 1rem;
 		box-sizing: border-box;
 	}
-	.legend {
-		display: flex;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-		justify-content: center;
-		margin-top: 0.75rem;
-		max-width: 640px;
-	}
-	.legend-item {
-		display: flex;
-		align-items: center;
-		gap: 0.3rem;
-		font-size: 0.65rem;
-		color: #888;
-	}
-	.line {
-		width: 12px;
-		height: 3px;
-		border-radius: 1px;
-	}
-	.line.white { background: #fff; }
-	.line.dashed { background: none; border-top: 2px dashed rgba(255,255,255,0.6); height: 0; }
 </style>
