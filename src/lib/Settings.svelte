@@ -8,9 +8,18 @@
 		hidden: boolean;
 	}
 
+	interface CollectionOption {
+		id: string;
+		title: string;
+		blurb: string;
+	}
+
 	let {
 		open,
 		items,
+		collections,
+		activeCollectionId,
+		onSelectCollection,
 		onClose,
 		onNewPage,
 		onToggleHide,
@@ -20,6 +29,9 @@
 	}: {
 		open: boolean;
 		items: Item[];
+		collections: CollectionOption[];
+		activeCollectionId: string;
+		onSelectCollection: (id: string) => void;
 		onClose: () => void;
 		onNewPage: () => void;
 		onToggleHide: (id: string) => void;
@@ -68,6 +80,23 @@
 				<h2>Settings</h2>
 				<button class="x" onclick={onClose} aria-label="Close">✕</button>
 			</div>
+
+			<section class="block">
+				<h3>Collection</h3>
+				<div class="collection-list">
+					{#each collections as col (col.id)}
+						<button
+							class="btn collection-btn"
+							class:active={col.id === activeCollectionId}
+							onclick={() => onSelectCollection(col.id)}
+							title={col.blurb}
+						>
+							{col.title}
+						</button>
+					{/each}
+				</div>
+				<p class="muted">{collections.find((c) => c.id === activeCollectionId)?.blurb ?? ''} Your custom pages show in every collection.</p>
+			</section>
 
 			<section class="block">
 				<h3>New page</h3>
@@ -185,6 +214,17 @@
 	.row {
 		display: flex;
 		gap: 0.5rem;
+	}
+	.collection-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin: 0.5rem 0;
+	}
+	.collection-btn.active {
+		background: rgba(99, 102, 241, 0.35);
+		color: #fff;
+		border-color: rgba(99, 102, 241, 0.6);
 	}
 	.text-input {
 		flex: 1;

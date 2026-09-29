@@ -28,6 +28,7 @@
 	import Settings from '$lib/Settings.svelte';
 	import PageInspector from '$lib/PageInspector.svelte';
 	import { VIEW_INFO } from '$lib/viewInfo';
+	import { COLLECTIONS, DEFAULT_COLLECTION_ID } from '$lib/collections';
 	import customDefaults from '$lib/customPages.json';
 
 	interface ComponentEntry {
@@ -84,6 +85,7 @@
 	const CUSTOM_LIST_KEY = 'custom-pages-list';
 	const STORAGE_KEY = 'sidebar-component-order';
 	const HIDDEN_KEY = 'sidebar-hidden-ids';
+	const COLLECTION_KEY = 'chartbook-collection';
 
 	function loadCustomPages(): CustomEntry[] {
 		const fromDisk: CustomEntry[] = Array.isArray(customDefaults)
@@ -133,6 +135,22 @@
 		} catch {}
 	}
 
+	function loadCollection(): string {
+		try {
+			const raw = localStorage.getItem(COLLECTION_KEY);
+			if (raw && COLLECTIONS.some((c) => c.id === raw)) return raw;
+		} catch {}
+		return DEFAULT_COLLECTION_ID;
+	}
+
+	function saveCollection(id: string) {
+		try {
+			localStorage.setItem(COLLECTION_KEY, id);
+		} catch {}
+	}
+
+	let activeCollectionId = $state<string>(loadCollection());
+
 	const ALL_COMPONENTS = $derived<ComponentEntry[]>([
 		...COMPONENTS,
 		...customPages.map((p) => ({ id: p.id, label: p.title, component: CustomPage }))
@@ -141,6 +159,14 @@
 	const VISIBLE_IDS = $derived(
 		new Set(ALL_COMPONENTS.map((c) => c.id).filter((id) => !hiddenIds.includes(id)))
 	);
+
+	const activeCollection = $derived(
+		COLLECTIONS.find((c) => c.id === activeCollectionId) ?? COLLECTIONS[0]
+	);
+
+	// Custom pages are global — they show in every collection.
+	const inActiveCollection = (id: string) =>
+		id.startsWith('custom-') || activeCollection.viewIds.includes(id);
 
 	const ALL_CATEGORIES = $derived<Category[]>(
 		customPages.length > 0
@@ -174,7 +200,8 @@
 		componentOrder
 			.map((id) => ALL_COMPONENTS.find((c) => c.id === id))
 			.filter(Boolean)
-			.filter((c) => VISIBLE_IDS.has((c as ComponentEntry).id)) as ComponentEntry[]
+			.filter((c) => VISIBLE_IDS.has((c as ComponentEntry).id))
+			.filter((c) => inActiveCollection((c as ComponentEntry).id)) as ComponentEntry[]
 	);
 
 	const defaultId = COMPONENTS[0].id;
@@ -256,6 +283,21 @@
 		hiddenIds = [];
 		saveHidden(hiddenIds);
 	}
+
+	function handleSelectCollection(id: string) {
+		if (id === activeCollectionId) return;
+		activeCollectionId = id;
+		saveCollection(id);
+		inspectorOpen = false;
+	}
+
+	// Keep the active page visible across collection switches, hides, and reloads.
+	$effect(() => {
+		if (!orderedComponents.some((c) => c.id === activeId)) {
+			const first = orderedComponents[0];
+			activeId = first ? first.id : defaultId;
+		}
+	});
 
 	async function handleDeletePage(id: string) {
 		customPages = customPages.filter((p) => p.id !== id);
@@ -402,6 +444,9 @@
 	<Settings
 		open={settingsOpen}
 		items={settingsItems}
+		collections={COLLECTIONS}
+		activeCollectionId={activeCollectionId}
+		onSelectCollection={handleSelectCollection}
 		onClose={() => (settingsOpen = false)}
 		onNewPage={handleAddPage}
 		onToggleHide={handleToggleHide}
