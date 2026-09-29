@@ -1,0 +1,293 @@
+{
+	"_meta": {
+		"canonical": false,
+		"locale": "ne",
+		"description": "Untranslated overlay. Empty-string values fall back to en at runtime. Fill in progressively; do not rename keys.",
+		"status": "untranslated"
+	},
+	"nav": {
+		"worldmap": "",
+		"mhmap": "",
+		"stats": "",
+		"timeline": "",
+		"age": "",
+		"sex": "",
+		"region": "",
+		"trends": "",
+		"sdi": "",
+		"prison": "",
+		"comorbid": "",
+		"sud": "",
+		"sudsex": "",
+		"suicide": "",
+		"prisonmh": "",
+		"wealth": "",
+		"happiness": "",
+		"hdi": "",
+		"economy": "",
+		"education": "",
+		"governance": "",
+		"healthtrends": "",
+		"treatment": "",
+		"dataexplorer": ""
+	},
+	"categories": {
+		"overview": "",
+		"demographics": "",
+		"adhd": "",
+		"socioeconomic": "",
+		"reference": "",
+		"myPages": ""
+	},
+	"tiers": {
+		"short": {
+			"1": "",
+			"2": "",
+			"3": "",
+			"4": "",
+			"unknown": ""
+		},
+		"descriptions": {
+			"1": "",
+			"2": "",
+			"3": "",
+			"4": "",
+			"unknown": ""
+		}
+	},
+	"indicators": {
+		"gdp": "",
+		"poverty": "",
+		"gini": "",
+		"population": "",
+		"lifeExpectancy": "",
+		"healthExpenditure": "",
+		"educationExpenditure": "",
+		"literacyRate": "",
+		"infantMortality": "",
+		"maternalMortality": "",
+		"depression": "",
+		"anxiety": "",
+		"schizophrenia": "",
+		"eatingDisorders": "",
+		"alcohol": "",
+		"drugs": ""
+	},
+	"units": {
+		"usd": "",
+		"poverty": "",
+		"gini": "",
+		"total": "",
+		"percent": "",
+		"per100k": ""
+	},
+	"common": {
+		"settings": "",
+		"closeSettings": "",
+		"close": "",
+		"newPage": "",
+		"pageTitlePlaceholder": "",
+		"createAndOpen": "",
+		"createNote": "",
+		"pagesInSidebar": "",
+		"showAll": "",
+		"goToPage": "",
+		"tagCustom": "",
+		"tagHidden": "",
+		"show": "",
+		"hide": "",
+		"showInSidebar": "",
+		"hideFromSidebar": "",
+		"confirmDelete": "",
+		"keep": "",
+		"delete": "",
+		"hideNote": "",
+		"aboutThisView": "",
+		"pageInfo": "",
+		"builtInView": "",
+		"customPageSub": "",
+		"customPageNote": "",
+		"noInfo": "",
+		"toggleSidebar": "",
+		"untitled": "",
+		"countriesTracked": "",
+		"language": ""
+	},
+	"viewInfoHeadings": {
+		"what": "",
+		"howToRead": "",
+		"source": "",
+		"insight": "",
+		"limitation": ""
+	},
+	"viewInfo": {
+		"worldmap": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"mhmap": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"stats": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"timeline": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"age": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"sex": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"region": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"trends": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"sdi": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"prison": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"comorbid": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"sud": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"sudsex": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"suicide": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"prisonmh": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"wealth": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"happiness": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"hdi": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"economy": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"education": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"governance": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"healthtrends": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"treatment": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"dataexplorer": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		}
+	}
+}

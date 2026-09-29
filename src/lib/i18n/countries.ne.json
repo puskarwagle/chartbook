@@ -1,0 +1,11 @@
+{
+	"_meta": {
+		"locale": "ne",
+		"status": "untranslated",
+		"description": "Nepali country-name overlay, keyed by ISO 3166-1 alpha-2 code. Empty object = fall back to English names from world-atlas / World Bank. Generate once via Intl.DisplayNames and review Nepal-adjacent names by hand.",
+		"how_to_generate": "Intl.DisplayNames('ne', { type: 'region' }).of(iso2) for each code in src/lib/mapData.ts, then save non-identical results here. Only entries present in this file override English.",
+		"source": "CLDR via Intl.DisplayNames (runtime) — this file is the reviewed, pinned snapshot.",
+		"example": { "NP": "COUNTRY_NAME_NE", "US": "COUNTRY_NAME_NE" }
+	},
+	"countries": {}
+}

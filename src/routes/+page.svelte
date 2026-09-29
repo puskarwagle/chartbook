@@ -27,6 +27,9 @@
 	import CustomPage from '$lib/components/CustomPage.svelte';
 	import Settings from '$lib/Settings.svelte';
 	import PageInspector from '$lib/PageInspector.svelte';
+	import LanguageSwitcher from '$lib/i18n/LanguageSwitcher.svelte';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/format';
 	import { VIEW_INFO } from '$lib/viewInfo';
 	import { COLLECTIONS, DEFAULT_COLLECTION_ID } from '$lib/collections';
 	import customDefaults from '$lib/customPages.json';
@@ -47,40 +50,43 @@
 		title: string;
 	}
 
-	const COMPONENTS: ComponentEntry[] = [
-		{ id: 'worldmap', label: 'World Map', component: WorldMap },
-		{ id: 'mhmap', label: 'Mental Health Map', component: MentalHealthWorldMap },
-		{ id: 'stats', label: 'Stats', component: StatsView },
-		{ id: 'timeline', label: 'Timeline', component: TimelineView },
-		{ id: 'age', label: 'By Age', component: AgePyramid },
-		{ id: 'sex', label: 'By Sex', component: SexComparison },
-		{ id: 'region', label: 'By Region', component: RegionalRanking },
-		{ id: 'trends', label: 'Trends', component: TrendLine },
-		{ id: 'sdi', label: 'SDI Scatter', component: SDIScatter },
-		{ id: 'prison', label: 'Prison ADHD', component: PrisonPrevalence },
-		{ id: 'comorbid', label: 'Comorbidities', component: ComorbidityBreakdown },
-		{ id: 'sud', label: 'SUD & ADHD', component: SUDbySubstance },
-		{ id: 'sudsex', label: 'SUD by Sex', component: SexDiffSUD },
-		{ id: 'suicide', label: 'Suicide Risk', component: SuicideRisk },
-		{ id: 'prisonmh', label: 'Prison & MH', component: PrisonMentalHealthLink },
-		{ id: 'wealth', label: 'Wealth & Wellbeing', component: WealthVsWellbeing },
-		{ id: 'happiness', label: 'Happiness Report', component: HappinessRankings },
-		{ id: 'hdi', label: 'Human Development', component: HDIExplorer },
-		{ id: 'economy', label: 'Economic Overview', component: EconomicSnapshot },
-		{ id: 'education', label: 'Education Context', component: EducationPressure },
-		{ id: 'governance', label: 'Governance', component: GovernanceRadar },
-		{ id: 'healthtrends', label: 'Health Trends', component: GlobalHealthTrends },
-		{ id: 'treatment', label: 'Treatment Access', component: TreatmentAccessIndex },
-		{ id: 'dataexplorer', label: 'Data Files', component: DataExplorer }
-	];
+	// Labels resolve via the i18n dictionary (locales/en.json canonical,
+	// locales/ne.json + hi.json overlays). $derived so the sidebar
+	// re-renders on locale change; untranslated keys fall back to English.
+	const COMPONENTS = $derived<ComponentEntry[]>([
+		{ id: 'worldmap', label: t('nav.worldmap'), component: WorldMap },
+		{ id: 'mhmap', label: t('nav.mhmap'), component: MentalHealthWorldMap },
+		{ id: 'stats', label: t('nav.stats'), component: StatsView },
+		{ id: 'timeline', label: t('nav.timeline'), component: TimelineView },
+		{ id: 'age', label: t('nav.age'), component: AgePyramid },
+		{ id: 'sex', label: t('nav.sex'), component: SexComparison },
+		{ id: 'region', label: t('nav.region'), component: RegionalRanking },
+		{ id: 'trends', label: t('nav.trends'), component: TrendLine },
+		{ id: 'sdi', label: t('nav.sdi'), component: SDIScatter },
+		{ id: 'prison', label: t('nav.prison'), component: PrisonPrevalence },
+		{ id: 'comorbid', label: t('nav.comorbid'), component: ComorbidityBreakdown },
+		{ id: 'sud', label: t('nav.sud'), component: SUDbySubstance },
+		{ id: 'sudsex', label: t('nav.sudsex'), component: SexDiffSUD },
+		{ id: 'suicide', label: t('nav.suicide'), component: SuicideRisk },
+		{ id: 'prisonmh', label: t('nav.prisonmh'), component: PrisonMentalHealthLink },
+		{ id: 'wealth', label: t('nav.wealth'), component: WealthVsWellbeing },
+		{ id: 'happiness', label: t('nav.happiness'), component: HappinessRankings },
+		{ id: 'hdi', label: t('nav.hdi'), component: HDIExplorer },
+		{ id: 'economy', label: t('nav.economy'), component: EconomicSnapshot },
+		{ id: 'education', label: t('nav.education'), component: EducationPressure },
+		{ id: 'governance', label: t('nav.governance'), component: GovernanceRadar },
+		{ id: 'healthtrends', label: t('nav.healthtrends'), component: GlobalHealthTrends },
+		{ id: 'treatment', label: t('nav.treatment'), component: TreatmentAccessIndex },
+		{ id: 'dataexplorer', label: t('nav.dataexplorer'), component: DataExplorer }
+	]);
 
-	const CATEGORIES: Category[] = [
-		{ name: 'Overview', ids: ['worldmap', 'mhmap', 'stats', 'timeline'] },
-		{ name: 'Demographics', ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
-		{ name: 'ADHD & Comorbidities', ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
-		{ name: 'Socioeconomic', ids: ['wealth', 'happiness', 'hdi', 'economy', 'education', 'governance', 'healthtrends', 'treatment'] },
-		{ name: 'Reference', ids: ['dataexplorer'] }
-	];
+	const CATEGORIES = $derived<Category[]>([
+		{ name: t('categories.overview'), ids: ['worldmap', 'mhmap', 'stats', 'timeline'] },
+		{ name: t('categories.demographics'), ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
+		{ name: t('categories.adhd'), ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
+		{ name: t('categories.socioeconomic'), ids: ['wealth', 'happiness', 'hdi', 'economy', 'education', 'governance', 'healthtrends', 'treatment'] },
+		{ name: t('categories.reference'), ids: ['dataexplorer'] }
+	]);
 
 	const CUSTOM_LIST_KEY = 'custom-pages-list';
 	const STORAGE_KEY = 'sidebar-component-order';
@@ -170,7 +176,7 @@
 
 	const ALL_CATEGORIES = $derived<Category[]>(
 		customPages.length > 0
-			? [...CATEGORIES, { name: 'My Pages', ids: customPages.map((p) => p.id).filter((id) => VISIBLE_IDS.has(id)) }]
+			? [...CATEGORIES, { name: t('categories.myPages'), ids: customPages.map((p) => p.id).filter((id) => VISIBLE_IDS.has(id)) }]
 			: CATEGORIES
 	);
 
@@ -204,7 +210,8 @@
 			.filter((c) => inActiveCollection((c as ComponentEntry).id)) as ComponentEntry[]
 	);
 
-	const defaultId = COMPONENTS[0].id;
+	// Static default — ids never change across locales, so this stays a const.
+	const defaultId = 'worldmap';
 	let activeId = $state(defaultId);
 	let sidebarCollapsed = $state(false);
 	let settingsOpen = $state(false);
@@ -225,7 +232,7 @@
 	async function handleAddPage() {
 		const rawTitle = (window as any).__newPageTitle as string | undefined;
 		(window as any).__newPageTitle = undefined;
-		const title = (rawTitle?.trim() || `Untitled ${customPages.length + 1}`).slice(0, 80);
+		const title = (rawTitle?.trim() || interpolate(t('common.untitled'), { n: customPages.length + 1 })).slice(0, 80);
 		// Optimistic local id (stable; UI title is renameable separately)
 		const id = `custom-${Date.now().toString(36)}`;
 		customPages = [...customPages, { id, title }];
@@ -368,18 +375,21 @@
 	/>
 
 	<main class="content">
-		<button
-			class="page-gear"
-			onclick={() => (inspectorOpen = !inspectorOpen)}
-			title="About this view"
-			aria-label="About this view"
-		>
-			ⓘ
-		</button>
+		<div class="top-right">
+			<LanguageSwitcher />
+			<button
+				class="page-gear"
+				onclick={() => (inspectorOpen = !inspectorOpen)}
+				title={t('common.aboutThisView')}
+				aria-label={t('common.aboutThisView')}
+			>
+				ⓘ
+			</button>
+		</div>
 		<PageInspector
 			open={inspectorOpen}
 			title={activeEntry?.label ?? activeId}
-			sub={activeCustom ? 'custom page' : 'built-in view'}
+			sub={activeCustom ? t('common.customPageSub') : t('common.builtInView')}
 			info={inspectorInfo}
 			isCustom={activeCustom !== null}
 			onClose={() => (inspectorOpen = false)}
@@ -461,7 +471,7 @@
 		margin: 0;
 		background: #1a1a2e;
 		color: #e0e0e0;
-		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
 		overflow: hidden;
 	}
 
@@ -486,10 +496,6 @@
 	}
 
 	.page-gear {
-		position: absolute;
-		top: 0.75rem;
-		right: 0.9rem;
-		z-index: 110;
 		width: 2rem;
 		height: 2rem;
 		display: flex;
@@ -501,6 +507,15 @@
 		color: #888;
 		font-size: 1rem;
 		cursor: pointer;
+	}
+	.top-right {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.9rem;
+		z-index: 110;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 	.page-gear:hover {
 		color: #fff;
