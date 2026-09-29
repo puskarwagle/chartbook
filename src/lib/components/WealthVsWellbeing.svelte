@@ -119,8 +119,13 @@
 					opacity={hovered === i ? 1 : 0.8}
 					stroke={hovered === i ? '#fff' : 'none'}
 					stroke-width={1}
+					role="button"
+					tabindex="0"
+					aria-label="{d.country}: happiness {d.score}"
 					onmouseenter={() => hovered = i}
 					onmouseleave={() => hovered = null}
+					onfocus={() => hovered = i}
+					onblur={() => hovered = null}
 					class="dot"
 				/>
 				{#if outliers.includes(d.country)}
