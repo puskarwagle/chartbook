@@ -27,6 +27,7 @@
 	import CustomPage from '$lib/components/CustomPage.svelte';
 	import Settings from '$lib/Settings.svelte';
 	import PageInspector from '$lib/PageInspector.svelte';
+	import { VIEW_INFO } from '$lib/viewInfo';
 	import customDefaults from '$lib/customPages.json';
 
 	interface ComponentEntry {
@@ -280,50 +281,9 @@
 		}
 	}
 
-	// ---- Inspector (top gear): dynamic JSON + media for current page ----
-	function readLocalPageData(id: string): { imageUrl: string; notes: string } | null {
-		try {
-			const raw = localStorage.getItem(`custom-page-${id}`);
-			if (!raw) return null;
-			const p = JSON.parse(raw);
-			return { imageUrl: String(p.imageUrl ?? ''), notes: String(p.notes ?? '') };
-		} catch {
-			return null;
-		}
-	}
-
+	// ---- Inspector (top gear): about-this-view info for current page ----
 	const activeEntry = $derived(ALL_COMPONENTS.find((c) => c.id === activeId) ?? null);
-	const inspectorIsCustom = $derived(activeCustom !== null);
-	const inspectorImage = $derived.by<string | null>(() => {
-		if (!activeCustom) return null;
-		const local = readLocalPageData(activeCustom.id);
-		// eslint-disable-next-line svelte/state_referenced_locally
-		if (inspectorOpen && local?.imageUrl) return local.imageUrl;
-		return local?.imageUrl || null;
-	});
-	const inspectorJson = $derived.by<string>(() => {
-		if (activeCustom) {
-			const local = readLocalPageData(activeCustom.id);
-			return JSON.stringify(
-				{
-					id: activeCustom.id,
-					title: activeCustom.title,
-					type: 'custom',
-					media: local?.imageUrl
-						? { hasImage: true, imageSrc: local.imageUrl.startsWith('data:') ? '(inline upload, local-only)' : local.imageUrl }
-						: { hasImage: false },
-					notesChars: local?.notes?.length ?? 0
-				},
-				null,
-				2
-			);
-		}
-		return JSON.stringify(
-			{ id: activeId, label: activeEntry?.label ?? activeId, type: 'builtin', media: null },
-			null,
-			2
-		);
-	});
+	const inspectorInfo = $derived(activeCustom ? null : (VIEW_INFO[activeId] ?? null));
 
 	const settingsItems = $derived(
 		ALL_COMPONENTS.map((c) => ({
@@ -369,18 +329,17 @@
 		<button
 			class="page-gear"
 			onclick={() => (inspectorOpen = !inspectorOpen)}
-			title="Page info / media / JSON"
-			aria-label="Page info"
+			title="About this view"
+			aria-label="About this view"
 		>
-			⚙
+			ⓘ
 		</button>
 		<PageInspector
 			open={inspectorOpen}
-			pageId={activeId}
 			title={activeEntry?.label ?? activeId}
-			isCustom={inspectorIsCustom}
-			jsonText={inspectorJson}
-			imageUrl={inspectorImage}
+			sub={activeCustom ? 'custom page' : 'built-in view'}
+			info={inspectorInfo}
+			isCustom={activeCustom !== null}
 			onClose={() => (inspectorOpen = false)}
 		/>
 		{#key activeId}
@@ -477,6 +436,8 @@
 	.component-wrapper {
 		width: 100%;
 		height: 100%;
+		position: relative;
+		overflow: hidden;
 	}
 
 	.page-gear {
