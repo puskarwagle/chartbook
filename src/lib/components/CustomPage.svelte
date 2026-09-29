@@ -38,12 +38,17 @@
 
 	let data = $state<PageData>(loadData());
 	let editingTitle = $state(false);
-	let titleDraft = $state(title);
+	let titleDraft = $state('');
+	let titleInputEl: HTMLInputElement | null = $state(null);
 	let imageUrlDraft = $state(data.imageUrl);
 	let presenting = $state(false);
 
 	$effect(() => {
-		titleDraft = title;
+		if (!editingTitle) titleDraft = title;
+	});
+
+	$effect(() => {
+		if (editingTitle) titleInputEl?.focus();
 	});
 
 	function saveData() {
@@ -104,6 +109,7 @@
 		{#if editingTitle}
 			<input
 				class="title-input"
+				bind:this={titleInputEl}
 				bind:value={titleDraft}
 				onkeydown={(e) => {
 					if (e.key === 'Enter') commitTitle();
@@ -113,7 +119,6 @@
 					}
 				}}
 				onblur={commitTitle}
-				autofocus
 			/>
 		{:else}
 			<button
