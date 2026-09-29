@@ -1,4 +1,7 @@
 <script lang="ts">
+	import type * as echarts from 'echarts';
+	import EChart from './EChart.svelte';
+	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { educationData, getIncomeGroup, countryName } from '$lib/data';
 
 	type GroupKey = 'all' | 'Low Income' | 'Lower Middle' | 'Upper Middle' | 'High Income';
@@ -14,43 +17,89 @@
 		{ key: 'Low Income', label: 'Low Income' }
 	];
 
-	const chartW = 600;
-	const chartH = 400;
-	const pad = { top: 20, right: 40, bottom: 40, left: 140 };
-	const barH = 18;
-	const barGap = 22;
-
-	const filteredRows = $derived(() => {
+	const filteredRows = $derived.by(() => {
 		const allCodes = new Set([
 			...educationData.pupilTeacherPrimary.keys(),
 			...educationData.pupilTeacherSecondary.keys()
 		]);
-		const rows: { code: string; name: string; primary: number; secondary: number; group: string }[] = [];
+		const rows: { code: string; name: string; primary: number; secondary: number }[] = [];
 		for (const code of allCodes) {
 			const p = educationData.pupilTeacherPrimary.get(code);
 			const s = educationData.pupilTeacherSecondary.get(code);
 			if (p === undefined && s === undefined) continue;
 			const g = getIncomeGroup(code);
 			if (group !== 'all' && g !== group) continue;
-			rows.push({ code, name: countryName(code), primary: p ?? 0, secondary: s ?? 0, group: g });
+			rows.push({ code, name: countryName(code), primary: p ?? 0, secondary: s ?? 0 });
 		}
-		rows.sort((a, b) => sortKey === 'ptrPrimary' ? b.primary - a.primary : b.secondary - a.secondary);
+		rows.sort((a, b) => (sortKey === 'ptrPrimary' ? b.primary - a.primary : b.secondary - a.secondary));
 		return rows.slice(0, 20);
 	});
 
-	const maxVal = $derived(() => {
-		const allVals = filteredRows().flatMap(r => [r.primary, r.secondary]);
-		return Math.max(...allVals, 1);
+	const option = $derived.by((): echarts.EChartsCoreOption => {
+		const rows = filteredRows;
+		const names = rows.map((r) => (r.name.length > 18 ? r.name.slice(0, 16) + '…' : r.name));
+		return {
+			backgroundColor: 'transparent',
+			...BASE_ANIMATION,
+			tooltip: {
+				...baseTooltip((v) => `${Number(v).toFixed(1)} pupils/teacher`),
+				trigger: 'axis',
+				axisPointer: { type: 'shadow' }
+			},
+			legend: {
+				bottom: 0,
+				textStyle: { color: PALETTE.muted },
+				data: ['Primary', 'Secondary']
+			},
+			grid: { left: 8, right: 48, top: 16, bottom: 56, containLabel: true },
+			xAxis: valueXAxis(),
+			yAxis: {
+				type: 'category',
+				data: names,
+				inverse: true,
+				axisLine: { lineStyle: { color: PALETTE.axisLine } },
+				axisTick: { show: false },
+				axisLabel: { color: PALETTE.text, fontSize: 10 }
+			},
+			series: [
+				{
+					name: 'Primary',
+					type: 'bar',
+					data: rows.map((r) => r.primary),
+					itemStyle: { color: PALETTE.blue, borderRadius: [0, 4, 4, 0], opacity: 0.85 },
+					label: {
+						show: true,
+						position: 'right',
+						color: '#93c5fd',
+						fontSize: 9,
+						fontWeight: 600,
+						formatter: (p: { value: number }) =>
+							Number(p.value) > 0 ? Number(p.value).toFixed(1) : ''
+					}
+				},
+				{
+					name: 'Secondary',
+					type: 'bar',
+					data: rows.map((r) => r.secondary),
+					itemStyle: { color: PALETTE.purple, borderRadius: [0, 4, 4, 0], opacity: 0.85 },
+					label: {
+						show: true,
+						position: 'right',
+						color: '#c4b5fd',
+						fontSize: 9,
+						fontWeight: 600,
+						formatter: (p: { value: number }) =>
+							Number(p.value) > 0 ? Number(p.value).toFixed(1) : ''
+					}
+				}
+			]
+		};
 	});
-
-	function xBar(val: number) {
-		return pad.left + (val / maxVal()) * (chartW - pad.left - pad.right);
-	}
 </script>
 
 <div class="view">
 	<h1 class="title">Education Context</h1>
-	<p class="subtitle">Pupil-teacher ratios — more students per teacher means less individual attention</p>
+	<p class="subtitle">Pupil-teacher ratios — more students per teacher means less individual attention — ECharts</p>
 
 	<div class="controls">
 		<div class="control-group">
@@ -65,34 +114,7 @@
 	</div>
 
 	<div class="chart-container">
-		<svg viewBox="0 0 {chartW} {chartH}" width="100%" height="100%">
-			{#each [0, 10, 20, 30, 40, 50] as t}
-				{#if t <= maxVal()}
-					<line x1={xBar(t)} y1={pad.top} x2={xBar(t)} y2={chartH - pad.bottom} stroke="rgba(255,255,255,0.06)" />
-					<text x={xBar(t)} y={chartH - pad.bottom + 16} text-anchor="middle" fill="#888" font-size="10">{t}</text>
-				{/if}
-			{/each}
-
-			{#each filteredRows() as r, i}
-				{@const y = pad.top + i * (barH * 2 + barGap)}
-				<text x={pad.left - 8} y={y + barH - 2} text-anchor="end" fill="#e0e0e0" font-size="10" font-weight="500">
-					{r.name.length > 18 ? r.name.slice(0, 16) + '…' : r.name}
-				</text>
-				{#if r.primary > 0}
-					<rect x={pad.left} y={y - barH + 4} width={Math.max(xBar(r.primary) - pad.left, 2)} height={barH} fill="#3b82f6" rx={3} opacity={0.8} />
-					<text x={xBar(r.primary) + 4} y={y - barH + 4 + barH / 2 + 3} fill="#93c5fd" font-size="9" font-weight="600">{r.primary.toFixed(1)}</text>
-				{/if}
-				{#if r.secondary > 0}
-					<rect x={pad.left} y={y + 4} width={Math.max(xBar(r.secondary) - pad.left, 2)} height={barH} fill="#8b5cf6" rx={3} opacity={0.8} />
-					<text x={xBar(r.secondary) + 4} y={y + 4 + barH / 2 + 3} fill="#c4b5fd" font-size="9" font-weight="600">{r.secondary.toFixed(1)}</text>
-				{/if}
-			{/each}
-		</svg>
-	</div>
-
-	<div class="legend">
-		<span class="legend-item"><span class="dot blue"></span> Primary</span>
-		<span class="legend-item"><span class="dot purple"></span> Secondary</span>
+		<EChart {option} />
 	</div>
 
 	<div class="card">
@@ -159,25 +181,6 @@
 		padding: 1rem;
 		box-sizing: border-box;
 	}
-	.legend {
-		display: flex;
-		gap: 1.5rem;
-		margin-top: 0.75rem;
-	}
-	.legend-item {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
-		font-size: 0.75rem;
-		color: #888;
-	}
-	.dot {
-		width: 10px;
-		height: 10px;
-		border-radius: 3px;
-	}
-	.dot.blue { background: #3b82f6; }
-	.dot.purple { background: #8b5cf6; }
 	.card {
 		margin-top: 1.25rem;
 		background: rgba(255,255,255,0.04);
