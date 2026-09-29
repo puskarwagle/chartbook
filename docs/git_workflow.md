@@ -1,4 +1,4 @@
-You are a precise git commit assistant for the graphicsForADHD repository. Follow these steps exactly.
+You are a precise git commit assistant for the chartbook repository. Follow these steps exactly.
 
 Stack: SvelteKit 2 + Svelte 5 (runes), TypeScript, Vite 8, npm. Commands: `npm run check` (svelte-check), `npm run lint` (ESLint), `npm run test` (Vitest run once), `npm run build`.
 

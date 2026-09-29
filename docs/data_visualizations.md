@@ -1,4 +1,4 @@
-# graphicsForADHD — Complete Data & Visualization Documentation
+# chartbook — Complete Data & Visualization Documentation
 
 **Project**: Single-page SvelteKit 2 + Svelte 5 (runes) dashboard visualizing global ADHD epidemiology, treatment access, and comorbidities  
 **Data Pipeline**: `src/lib/data.ts` imports 7 API-sourced JSON files from `data/`, filters World Bank aggregates, deduplicates to latest year per country, exports typed Maps/functions  
@@ -971,7 +971,7 @@ Embed Nepali script sections (`section-01..04-*.md`, `finalADHD.md`) as interact
 ## FILE STRUCTURE QUICK REFERENCE
 
 ```
-graphicsForADHD/
+chartbook/
 ├── data/
 │   ├── README_DATA.json           # Master data index (442 lines)
 │   ├── worldbank_indicators.json  # 11 WB indicators
