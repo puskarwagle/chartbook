@@ -1,0 +1,152 @@
+{
+  "source": "WHO World Mental Health (WMH) Survey Initiative - 10 Country Study",
+  "citation": "Fayyad J, De Graaf R, Kessler R, et al. Cross-national prevalence and correlates of adult attention-deficit hyperactivity disorder. Br J Psychiatry. 2007;190(5):402-409. doi:10.1192/bjp.bp.106.034389",
+  "url": "https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/crossnational-prevalence-and-correlates-of-adult-attentiondeficit-hyperactivity-disorder/43819B490B72F072154DBDEAFE9807E8",
+  "methodology": "CIDI 3.0 (Composite International Diagnostic Interview) administered face-to-face. Clinical reappraisal using Adult ADHD Clinical Diagnostic Scale (ACDS) v1.2 with masked clinician interviews on US subsample (n=154). Multiple imputation used to calibrate across countries.",
+  "age_range": "18-44 years",
+  "diagnostic_criteria": "DSM-IV/CIDI",
+  "survey_years": "2001-2003",
+  "total_sample_size": 11422,
+  "global_prevalence": {
+    "percentage": 3.4,
+    "standard_error": 0.4
+  },
+  "by_income_level": {
+    "higher_income_countries": {
+      "percentage": 4.2,
+      "countries": [
+        "Belgium",
+        "France",
+        "Germany",
+        "Italy",
+        "Netherlands",
+        "Spain",
+        "USA"
+      ]
+    },
+    "lower_income_countries": {
+      "percentage": 1.9,
+      "countries": ["Colombia", "Lebanon", "Mexico"]
+    }
+  },
+  "countries": [
+    {
+      "country": "Belgium",
+      "prevalence_percentage": 4.1,
+      "standard_error": 1.5,
+      "sample_size": 486,
+      "survey_name": "ESEMeD",
+      "field_dates": "2001-2002",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 50.6
+    },
+    {
+      "country": "Colombia",
+      "prevalence_percentage": 1.9,
+      "standard_error": 0.5,
+      "sample_size": 1731,
+      "survey_name": "NSMH",
+      "field_dates": "2003",
+      "world_bank_classification": "Less Developed",
+      "who_region": "Americas",
+      "response_rate_percentage": 87.7
+    },
+    {
+      "country": "France",
+      "prevalence_percentage": 7.3,
+      "standard_error": 1.8,
+      "sample_size": 727,
+      "survey_name": "ESEMeD",
+      "field_dates": "2001-2002",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 45.9,
+      "note": "Significantly higher than average"
+    },
+    {
+      "country": "Germany",
+      "prevalence_percentage": 3.1,
+      "standard_error": 0.8,
+      "sample_size": 621,
+      "survey_name": "ESEMeD",
+      "field_dates": "2002-2003",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 57.8
+    },
+    {
+      "country": "Italy",
+      "prevalence_percentage": 2.8,
+      "standard_error": 0.6,
+      "sample_size": 853,
+      "survey_name": "ESEMeD",
+      "field_dates": "2001-2002",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 71.3
+    },
+    {
+      "country": "Lebanon",
+      "prevalence_percentage": 1.8,
+      "standard_error": 0.7,
+      "sample_size": 595,
+      "survey_name": "LEBANON",
+      "field_dates": "2002-2003",
+      "world_bank_classification": "Less Developed",
+      "who_region": "Eastern Mediterranean",
+      "response_rate_percentage": 70.0
+    },
+    {
+      "country": "Mexico",
+      "prevalence_percentage": 1.9,
+      "standard_error": 0.4,
+      "sample_size": 1736,
+      "survey_name": "M-NCS",
+      "field_dates": "2001-2002",
+      "world_bank_classification": "Less Developed",
+      "who_region": "Americas",
+      "response_rate_percentage": 76.6
+    },
+    {
+      "country": "Netherlands",
+      "prevalence_percentage": 5.0,
+      "standard_error": 1.6,
+      "sample_size": 516,
+      "survey_name": "ESEMeD",
+      "field_dates": "2002-2003",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 56.4
+    },
+    {
+      "country": "Spain",
+      "prevalence_percentage": 1.2,
+      "standard_error": 0.6,
+      "sample_size": 960,
+      "survey_name": "ESEMeD",
+      "field_dates": "2001-2002",
+      "world_bank_classification": "Developed",
+      "who_region": "Europe",
+      "response_rate_percentage": 78.6,
+      "note": "Significantly lower than average"
+    },
+    {
+      "country": "USA",
+      "prevalence_percentage": 5.2,
+      "standard_error": 0.6,
+      "sample_size": 3197,
+      "survey_name": "NCS-R",
+      "field_dates": "2002-2003",
+      "world_bank_classification": "Developed",
+      "who_region": "Americas",
+      "response_rate_percentage": 70.9
+    }
+  ],
+  "key_findings": {
+    "male_vs_female": "Male OR=1.5 (95% CI 1.1-1.9)",
+    "education_effect": "Lower education associated with higher prevalence",
+    "comorbidity": "ADHD highly comorbid with anxiety (OR=4.0), mood (OR=3.9), and substance use disorders (OR=4.0)",
+    "treatment_gap": "Very few cases receive ADHD treatment; treatment mostly targets comorbid conditions"
+  }
+}

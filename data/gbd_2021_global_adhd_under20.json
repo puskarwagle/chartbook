@@ -1,0 +1,193 @@
+{
+  "source": "GBD 2021 ADHD study (Cortese et al. 2026)",
+  "url": "https://www.nature.com/articles/s41380-026-03683-4",
+  "journal": "Molecular Psychiatry",
+  "published": "2026-06-16",
+  "population": "individuals under 20 years of age",
+  "countries_covered": 204,
+  "years": "1990-2021",
+  "model": "DisMod-MR 2.1 (Bayesian meta-regression)",
+  "notes": "Mortality set to zero; YLLs assumed zero; DALYs = YLDs. Estimates are model-based, not direct survey counts. Wide uncertainty intervals reflect data paucity.",
+  "global_2021": {
+    "prevalent_cases": {
+      "value": 46890733,
+      "ui_lower": 32136904,
+      "ui_upper": 67271064
+    },
+    "incident_cases": {
+      "value": 4111621,
+      "ui_lower": 2775203,
+      "ui_upper": 5954941
+    },
+    "dalys": { "value": 574979, "ui_lower": 294277, "ui_upper": 977557 },
+    "prevalence_rate_percent": {
+      "value": 1.78,
+      "ui_lower": 1.22,
+      "ui_upper": 2.55
+    },
+    "incidence_rate_percent": {
+      "value": 0.16,
+      "ui_lower": 0.11,
+      "ui_upper": 0.23
+    },
+    "daly_rate_per_100k": { "value": 21.8, "ui_lower": 11.2, "ui_upper": 37.1 }
+  },
+  "trends_1990_to_2021": {
+    "prevalent_cases_change_pct": {
+      "value": 9.7,
+      "ui_lower": 6.81,
+      "ui_upper": 12.68
+    },
+    "prevalence_rate_change_pct": {
+      "value": -6.0,
+      "ui_lower": -8.48,
+      "ui_upper": -3.45
+    },
+    "incident_cases_change_pct": {
+      "value": 9.92,
+      "ui_lower": 7.13,
+      "ui_upper": 13.16
+    },
+    "incidence_rate_change_pct": {
+      "value": -5.81,
+      "ui_lower": -8.21,
+      "ui_upper": -3.04
+    },
+    "dalys_change_pct": { "value": 9.85, "ui_lower": 6.84, "ui_upper": 12.86 },
+    "daly_rate_change_pct": {
+      "value": -5.88,
+      "ui_lower": -8.45,
+      "ui_upper": -3.29
+    }
+  },
+  "highest_country": {
+    "name": "Australia",
+    "prevalence_rate_percent": {
+      "value": 5.62,
+      "ui_lower": 4.16,
+      "ui_upper": 7.46
+    },
+    "incidence_rate_percent": {
+      "value": 0.49,
+      "ui_lower": 0.34,
+      "ui_upper": 0.66
+    }
+  },
+  "country_trend_extremes": {
+    "largest_prevalence_increase": {
+      "country": "China",
+      "change_pct": { "value": 21.44, "ui_lower": 11.42, "ui_upper": 31.85 }
+    },
+    "largest_prevalence_decrease": {
+      "country": "Finland",
+      "change_pct": { "value": -12.0, "ui_lower": -38.49, "ui_upper": 9.34 }
+    },
+    "largest_incidence_increase": {
+      "country": "China",
+      "change_pct": { "value": 41.46, "ui_lower": 30.08, "ui_upper": 54.22 }
+    },
+    "largest_incidence_decrease": {
+      "country": "Syrian Arab Republic",
+      "change_pct": { "value": -27.29, "ui_lower": -27.32, "ui_upper": -27.25 }
+    }
+  },
+  "regional_2021": {
+    "australasia": {
+      "prevalence_rate_pct": {
+        "value": 5.37,
+        "ui_lower": 3.94,
+        "ui_upper": 7.15
+      },
+      "incidence_rate_pct": {
+        "value": 0.46,
+        "ui_lower": 0.32,
+        "ui_upper": 0.64
+      },
+      "daly_rate_per_100k": {
+        "value": 65.8,
+        "ui_lower": 35.1,
+        "ui_upper": 104.4
+      }
+    },
+    "caribbean": {
+      "note": "Second highest prevalence, incidence, and DALY rate after Australasia"
+    },
+    "east_asia": {
+      "note": "Third highest prevalence, incidence, and DALY rate",
+      "largest_regional_increase_prevalence": {
+        "value": 21.3,
+        "ui_lower": 11.54,
+        "ui_upper": 31.51
+      },
+      "largest_regional_increase_incidence": {
+        "value": 40.62,
+        "ui_lower": 29.55,
+        "ui_upper": 53.05
+      },
+      "largest_regional_increase_daly_rate": {
+        "value": 21.61,
+        "ui_lower": 12.09,
+        "ui_upper": 32.76
+      }
+    },
+    "north_africa_and_middle_east": {
+      "note": "Significant decrease in prevalence"
+    },
+    "southeast_asia": {
+      "note": "Significant decrease in prevalence"
+    },
+    "south_asia": {
+      "largest_decrease_incidence": {
+        "value": -11.56,
+        "ui_lower": -18.42,
+        "ui_upper": -5.05
+      }
+    }
+  },
+  "by_sdi": {
+    "high_sdi": {
+      "prevalence_rate_pct": {
+        "value": 2.88,
+        "ui_lower": 1.94,
+        "ui_upper": 4.09
+      }
+    },
+    "high_middle_sdi": {
+      "note": "Highest incidence; 20.53% increase in incidence vs 1990"
+    }
+  },
+  "by_sex_2021": {
+    "male_prevalence_pct": {
+      "value": 2.52,
+      "ui_lower": 1.72,
+      "ui_upper": 3.62
+    },
+    "female_prevalence_pct": {
+      "value": 0.99,
+      "ui_lower": 0.68,
+      "ui_upper": 1.44
+    }
+  },
+  "by_age_peak": {
+    "incidence_peak_age": "5-9 years",
+    "prevalence_peak_age": "10-14 years",
+    "daly_peak_age": "10-14 years"
+  },
+  "by_age_trends_1990_to_2021": {
+    "under_5_prevalence_change_pct": {
+      "value": -2.26,
+      "ui_lower": -4.88,
+      "ui_upper": 0.69
+    },
+    "15_to_19_prevalence_change_pct": {
+      "value": -14.97,
+      "ui_lower": -17.39,
+      "ui_upper": -12.55
+    },
+    "15_to_19_incidence_change_pct": {
+      "value": -7.57,
+      "ui_lower": -9.75,
+      "ui_upper": -4.92
+    }
+  }
+}

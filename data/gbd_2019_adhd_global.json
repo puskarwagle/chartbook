@@ -1,0 +1,66 @@
+{
+  "source": "Global Burden of Disease Study 2019 (GBD 2019) - ADHD Analysis",
+  "citation": "Cortese S, Song M, Farhat LC, et al. Incidence, prevalence, and global burden of ADHD from 1990 to 2019 across 204 countries: data, with critical re-analysis, from the Global Burden of Disease study. Mol Psychiatry. 2023;28(12):4823-4830. doi:10.1038/s41380-023-02228-3",
+  "url": "https://www.nature.com/articles/s41380-023-02228-3",
+  "methodology_note": "GBD uses statistical modeling and imputation for countries without direct data. This analysis includes authors' critical re-analysis of the GBD data.",
+  "scope": "Lifespan (all ages, not adults-only)",
+  "diagnostic_criteria": "ICD-based definitions used by GBD",
+  "data_year": 2019,
+  "global_estimates_2019": {
+    "age_standardized_prevalence_percentage": 1.13,
+    "prevalence_95UI": {
+      "lower": 0.831,
+      "upper": 1.494
+    },
+    "age_standardized_incidence_percentage": 0.061,
+    "incidence_95UI": {
+      "lower": 0.04,
+      "upper": 0.087
+    },
+    "percentage_of_global_mental_disorder_dalys": 0.8,
+    "gbd_mortality_assumption": "Zero (GBD assumed no mortality from ADHD)"
+  },
+  "temporal_trends_1990_to_2019": {
+    "prevalence_change_percentage": -8.75,
+    "incidence_change_percentage": -4.77,
+    "largest_increase": "USA",
+    "largest_decrease": "Finland"
+  },
+  "sex_distribution": {
+    "male_to_female_ratio": 2.5,
+    "note": "Males have approximately 2.5x higher rates than females, stable from 1990-2019"
+  },
+  "age_patterns": {
+    "incidence_peak_age": "5-9 years",
+    "prevalence_peak_age": "10-14 years",
+    "dalys_peak_age": "10-14 years"
+  },
+  "authors_reanalysis_findings": {
+    "pre_data_2013_prevalence_in_children_adolescents": {
+      "actual_data_prevalence_percentage": 5.41,
+      "actual_data_95CI": {
+        "lower": 4.67,
+        "upper": 6.15
+      },
+      "gbd_imputed_prevalence_percentage": 2.68,
+      "gbd_imputed_95CI": {
+        "lower": 1.83,
+        "upper": 3.72
+      },
+      "conclusion": "GBD may have substantially underestimated ADHD prevalence by roughly 2x in children/adolescents"
+    },
+    "income_level_difference": "No significant differences in prevalence between low/middle-income and high-income countries in actual data (unlike GBD estimates)",
+    "adhd_related_mortality": "Meta-analytic evidence of significantly increased ADHD-related mortality due to unnatural causes, contradicting GBD's zero-mortality assumption"
+  },
+  "limitations_acknowledged": {
+    "gbd_limitations": [
+      "Reliance on data imputation for countries without direct data may underestimate prevalence",
+      "Zero mortality assumption for ADHD is questionable",
+      "Modeling approach may not capture true population-level variation"
+    ],
+    "age_restriction": "This is lifespan data, not adults-only. Adult-specific GBD estimates are not directly reported in this paper."
+  },
+  "comparison_to_wmh": {
+    "note": "GBD prevalence (1.13% lifespan) is lower than WMH adult prevalence (3.4% for ages 18-44). This difference likely reflects: (1) different diagnostic approaches, (2) GBD modeling vs. actual survey data, (3) different age ranges, (4) GBD's more conservative estimation methodology."
+  }
+}

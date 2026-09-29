@@ -1,0 +1,442 @@
+{
+  "_meta": {
+    "description": "Master index of all data files in the graphicsForADHD project. Each entry documents the file's source, schema, and which components consume it.",
+    "last_updated": "2026-07-18",
+    "pipeline_entrypoint": "src/lib/data.ts",
+    "notes": "data.ts imports the 7 API-sourced JSON files and exports derived maps/functions. Components import from data.ts, not directly from JSON."
+  },
+
+  "worldbank_indicators.json": {
+    "source": "World Bank Open Data API (https://api.worldbank.org/v2/)",
+    "fetched_via": "World Bank API v2, no auth required",
+    "format": "JSON object with named indicator arrays",
+    "top_level_keys": [
+      "gdp_per_capita",
+      "gdp_total",
+      "poverty_rate",
+      "gini_index",
+      "literacy_rate",
+      "life_expectancy_wb",
+      "population",
+      "health_expenditure_pct_gdp",
+      "education_expenditure_pct_gdp",
+      "maternal_mortality",
+      "infant_mortality"
+    ],
+    "row_schema": {
+      "country_code": "ISO-3166-1 alpha-3 (includes World Bank aggregates like AFE, WLD)",
+      "country": "Country or region name",
+      "year": "String year (e.g. '2023')",
+      "value": "Numeric indicator value"
+    },
+    "aggregates": "Contains World Bank region/income aggregates (AFE, WLD, etc.) — data.ts filters these out via isCountryCode()",
+    "data_ts_exports": [
+      "gdpPerCapita — Map<iso3, number>",
+      "gdpLatestRows — latest year row per country",
+      "lifeExpectancyWb — Map<iso3, number>",
+      "populationData — Map<iso3, number>",
+      "healthExpenditure — Map<iso3, number>",
+      "educationExpenditure — Map<iso3, number>",
+      "giniIndex — Map<iso3, number>",
+      "infantMortality — Map<iso3, number>",
+      "maternalMortality — Map<iso3, number>",
+      "literacyRate — Map<iso3, number>",
+      "povertyRate — Map<iso3, number>",
+      "wbTimeSeries(indicatorKey, countryCode) — function",
+      "wbGlobalAverage(indicatorKey) — function",
+      "countryName(code3) — function",
+      "countryNameToCode3(name) — function"
+    ],
+    "consumed_by": [
+      "EconomicSnapshot.svelte — gdpPerCapita, povertyRate, giniIndex, populationData, gdpLatestRows, countryName",
+      "GlobalHealthTrends.svelte — wbTimeSeries, wbGlobalAverage, countryName, gdpLatestRows",
+      "WealthVsWellbeing.svelte — gdpPerCapita, giniIndex, countryNameToCode3",
+      "TreatmentAccessIndex.svelte — (indirectly via healthExpenditure)",
+      "MentalHealthWorldMap.svelte — countryName (for ISO3 lookup)"
+    ]
+  },
+
+  "who_health_indicators.json": {
+    "source": "WHO Global Health Observatory API (https://ghoapi.azureedge.net/api/)",
+    "fetched_via": "WHO GHO API, no auth required",
+    "format": "JSON object with named indicator arrays",
+    "top_level_keys": [
+      "mental_health_depression",
+      "mental_health_anxiety",
+      "mental_health_schizophrenia",
+      "mental_health_eating_disorders",
+      "substance_use_alcohol",
+      "substance_use_drugs",
+      "life_expectancy_who"
+    ],
+    "indicators": [
+      "MH_12 — Mental health, depression",
+      "MH_16 — Mental health, anxiety",
+      "MH_17 — Mental health, bipolar",
+      "MH_19 — Mental health, schizophrenia",
+      "MH_20 — Mental health, eating disorders",
+      "MH_14 — Substance use, alcohol",
+      "MH_15 — Substance use, drugs",
+      "WHOSIS_000001 — Life expectancy"
+    ],
+    "row_schema": {
+      "country_code": "ISO-3166-1 alpha-3",
+      "year": "Numeric year",
+      "sex": "SEX_BTSX (both sexes combined), SEX_MLE, SEX_FLE — data.ts filters for SEX_BTSX",
+      "value": "Numeric prevalence/estimate",
+      "low": "Lower confidence interval (nullable)",
+      "high": "Upper confidence interval (nullable)"
+    },
+    "data_ts_exports": [
+      "depressionData — latest SEX_BTSX row per country",
+      "anxietyData — latest SEX_BTSX row per country",
+      "schizophreniaData — latest SEX_BTSX row per country",
+      "eatingDisordersData — latest SEX_BTSX row per country",
+      "alcoholData — latest SEX_BTSX row per country",
+      "drugsData — latest SEX_BTSX row per country",
+      "mentalHealthByCountry — Map<iso3, {depression, anxiety, schizophrenia, eating, alcohol, drugs}>"
+    ],
+    "consumed_by": [
+      "MentalHealthWorldMap.svelte — depressionData, anxietyData, schizophreniaData, eatingDisordersData, alcoholData, drugsData, mentalHealthByCountry, countryName"
+    ]
+  },
+
+  "world_happiness_report_2026.json": {
+    "source": "World Happiness Report 2026 (https://worldhappiness.report/ed/2026/)",
+    "fetched_via": "Converted from XLSX to JSON",
+    "format": "JSON object with a single key containing an array of yearly rows",
+    "row_schema": {
+      "Year": "Numeric year",
+      "Rank": "Country rank (1 = happiest)",
+      "Country name": "Country name string",
+      "Life evaluation (3-year average)": "Happiness score (0-10 scale)",
+      "Explained by: Log GDP per capita": "GDP contribution to happiness",
+      "Explained by: Social support": "Social support contribution",
+      "Explained by: Healthy life expectancy": "Health contribution",
+      "Explained by: Freedom to make life choices": "Freedom contribution",
+      "Explained by: Generosity": "Generosity contribution",
+      "Explained by: Perceptions of corruption": "Corruption perception contribution",
+      "Dystopia + residual": "Unexplained residual"
+    },
+    "data_ts_exports": [
+      "happinessData — all rows with simplified field names",
+      "happinessLatest — latest year only, sorted by rank",
+      "happinessYears — distinct sorted years array",
+      "happinessForYear(year) — filter by year"
+    ],
+    "consumed_by": [
+      "HappinessRankings.svelte — happinessYears, happinessForYear",
+      "WealthVsWellbeing.svelte — happinessData, happinessYears, happinessForYear"
+    ]
+  },
+
+  "undp_hdi.json": {
+    "source": "UNDP Human Development Report (https://hdr.undp.org/)",
+    "fetched_via": "Converted from XLSX to JSON",
+    "format": "JSON object with key 'Table 1' containing HDI rankings",
+    "row_schema": {
+      "Table 1. Human Development Index and its components": "Country name or tier header (e.g. 'VERY HIGH HUMAN DEVELOPMENT')",
+      "Back": "HDI rank (numeric)",
+      "col2": "HDI value",
+      "col4": "Life expectancy at birth",
+      "col6": "Expected years of schooling",
+      "col8": "Mean years of schooling",
+      "col10": "GNI per capita (PPP $)"
+    },
+    "data_ts_exports": [
+      "hdiData — array of {rank, country, hdi, lifeExp, expectedSchooling, meanSchooling, gni}"
+    ],
+    "consumed_by": ["HDIExplorer.svelte — hdiData"]
+  },
+
+  "transparency_cpi_2024.json": {
+    "source": "World Bank Governance Indicators (https://api.worldbank.org/v2/)",
+    "fetched_via": "Used as alternative to Transparency International CPI (direct CPI download was unavailable)",
+    "format": "JSON object with named indicator arrays",
+    "top_level_keys": [
+      "control_of_corruption",
+      "rule_of_law",
+      "government_effectiveness",
+      "regulatory_quality",
+      "political_stability",
+      "voice_accountability"
+    ],
+    "row_schema": {
+      "country_code": "ISO-3166-1 alpha-3",
+      "country": "Country name",
+      "year": "String year (filtered to '2023' in data.ts)",
+      "value": "Governance score (-2.5 to 2.5 scale)"
+    },
+    "note": "Replaces Transparency International CPI which was unavailable. Governance indicators serve as proxy for institutional quality/corruption.",
+    "data_ts_exports": [
+      "govIndicators — object with Map<iso3, number> for each of the 6 indicators (filtered to 2023)",
+      "govCountryNames — Map<iso3, country_name>"
+    ],
+    "consumed_by": [
+      "GovernanceRadar.svelte — govIndicators, govCountryNames",
+      "TreatmentAccessIndex.svelte — govIndicators.controlOfCorruption (via computeTreatmentAccessIndex)"
+    ]
+  },
+
+  "world_prison_brief.json": {
+    "source": "World Prison Brief, ICPR (https://www.prisonstudies.org/)",
+    "fetched_via": "Scraped from HTML",
+    "format": "JSON array of objects",
+    "row_schema": {
+      "rank": "Rank by incarceration rate",
+      "country": "Country name (nullable)",
+      "prison_population_total": "Total prison population",
+      "prison_population_rate_per_100k": "Incarceration rate per 100,000 population"
+    },
+    "data_ts_exports": ["prisonData — filtered to rows with rate > 0"],
+    "consumed_by": ["PrisonMentalHealthLink.svelte — prisonData"]
+  },
+
+  "education_indicators.json": {
+    "source": "World Bank Open Data API (https://api.worldbank.org/v2/)",
+    "fetched_via": "World Bank API v2, no auth required",
+    "format": "JSON object with named indicator arrays",
+    "top_level_keys": [
+      "pupil_teacher_ratio_primary",
+      "pupil_teacher_ratio_secondary",
+      "education_expenditure_pct_gdp",
+      "tertiary_enrollment_rate",
+      "primary_net_enrollment"
+    ],
+    "indicators": [
+      "SE.PRM.ENRL.TC.ZS — Pupil-teacher ratio, primary",
+      "SE.SEC.ENRL.TC.ZS — Pupil-teacher ratio, secondary",
+      "SE.XPD.TOTL.GD.ZS — Education expenditure % GDP",
+      "SE.TER.ENRR — Tertiary enrollment rate",
+      "SE.PRM.NENR — Primary net enrollment"
+    ],
+    "row_schema": {
+      "country_code": "ISO-3166-1 alpha-3",
+      "country": "Country name",
+      "year": "String year",
+      "value": "Numeric indicator value"
+    },
+    "data_ts_exports": [
+      "educationData — object with Map<iso3, number> for pupilTeacherPrimary, pupilTeacherSecondary, tertiaryEnrollment, primaryEnrollment"
+    ],
+    "consumed_by": [
+      "EducationPressure.svelte — educationData, getIncomeGroup, countryName"
+    ]
+  },
+
+  "wmh_10_country_adult_adhd_prevalence.json": {
+    "source": "WHO World Mental Health Survey Initiative — Fayyad et al. 2007, British Journal of Psychiatry",
+    "description": "Adult ADHD prevalence (ages 18-44) across 10 countries using DSM-IV/CIDI diagnostic criteria",
+    "format": "JSON object with prevalence statistics",
+    "key_stats": {
+      "global_prevalence": "3.4% (SE 0.4)",
+      "higher_income_countries": "4.2% (Belgium, France, Germany, Italy, Netherlands, Spain, USA)",
+      "lower_income_countries": "1.9% (Colombia, Lebanon, Mexico)",
+      "male_female_OR": 1.5,
+      "comorbidity_ORs": "Anxiety 4.0, Mood 3.9, Substance use 4.0"
+    },
+    "note": "This is the 10-country subset. The full 20-country study is paywalled — see wmh_20_country_adult_adhd_access_notes.json",
+    "consumed_by": "Not directly imported by components; used as reference data for narrative/research context"
+  },
+
+  "wmh_20_country_adult_adhd_access_notes.json": {
+    "source": "Documentation of paywalled 20-country WMH study (Fayyad et al. 2017, Springer) + Lara et al. 2009 (PMC open access)",
+    "description": "Access barriers documentation and extracted data from abstracts for the full 20-country WMH adult ADHD study",
+    "format": "JSON object with access notes and extracted statistics",
+    "extracted_data": {
+      "global_average_prevalence": "2.8%",
+      "high_income": "3.6%",
+      "upper_middle": "3.0%",
+      "low_lower_middle": "1.4%",
+      "childhood_persistence": "50% average (range 32.8% Mexico to 84.1% Italy)"
+    },
+    "data_gaps": [
+      "Full 20-country paper paywalled (Springer)",
+      "Workplace impact data blocked by ResearchGate 403"
+    ],
+    "consumed_by": "Reference data only; not imported by components"
+  },
+
+  "adhd_comorbidities_research.json": {
+    "source": "Multiple peer-reviewed meta-analyses (Fazel 2024, Young 2014, Ginsberg 2010, van Emmerik 2012, Rohner 2023, Moldekleiv 2025, Garas 2025, Zahid 2020, ABCD 2025)",
+    "description": "Structured statistics on ADHD comorbidities: prison populations, substance use disorders, depression, and suicide risk",
+    "format": "JSON object with three sections",
+    "sections": {
+      "prison_populations": "ADHD prevalence in prisons (8.3%-40% depending on methodology)",
+      "substance_use_disorder": "ADHD-SUD comorbidity (21-23% of SUD patients have ADHD; 4-5x hazard ratios)",
+      "depression_and_suicide": "ADHD-depression link (OR=3.34 suicidal behavior; 16% ADHD in hospitalized depressed adolescents)"
+    },
+    "consumed_by": "Reference data for research context; not directly imported by components"
+  },
+
+  "china_vs_worldwide.json": {
+    "source": "Gao et al. 2025, Frontiers in Psychiatry (GBD 1990-2021 comparative analysis)",
+    "description": "China vs. global ADHD burden comparison — China's burden increasing while global burden decreasing",
+    "format": "JSON object with incidence, prevalence, DALYs, and AAPC data",
+    "key_finding": "China age-standardized incidence rose from 103.58 to 126.23/100k (1990-2021); global fell from 61.67 to 58.67/100k",
+    "consumed_by": "Reference data for narrative context; not directly imported by components"
+  },
+
+  "adolescents_young_adults_10_24.json": {
+    "source": "Yuan et al. 2026, PLoS ONE (GBD 1990-2021, ages 10-24)",
+    "description": "ADHD epidemiology for adolescents and young adults globally — all rates declining but absolute cases rising due to population growth",
+    "format": "JSON object with global, regional, and country-level data",
+    "key_stats": {
+      "global_2021_prevalent_cases": "41 million",
+      "global_2021_incident_cases": "224K",
+      "highest_prevalence_country": "Australia (5.62%)",
+      "sex_ratio": "Male 2.52% vs Female 0.99%"
+    },
+    "consumed_by": "Reference data for research context; not directly imported by components"
+  },
+
+  "gbd_2019_adhd_global.json": {
+    "source": "Cortese et al. 2023, Molecular Psychiatry (GBD 2019 re-analysis)",
+    "description": "Global ADHD estimates across 204 countries, all ages — documents GBD's potential underestimation of prevalence",
+    "format": "JSON object with global and country-level estimates",
+    "key_stats": {
+      "age_standardized_prevalence": "1.13%",
+      "incidence": "0.061%",
+      "male_female_ratio": "2.5:1",
+      "peak_incidence_ages": "5-9",
+      "peak_prevalence_ages": "10-14",
+      "gbd_underestimation_note": "Actual data: 5.41% vs GBD imputed: 2.68% in children"
+    },
+    "consumed_by": "Reference data; not directly imported by components"
+  },
+
+  "gbd_2021_global_adhd_under20.json": {
+    "source": "Cortese et al. 2026, Molecular Psychiatry (GBD 2021, under-20s)",
+    "description": "Most up-to-date GBD ADHD estimates for under-20s across 204 countries (1990-2021)",
+    "format": "JSON object with global, regional, and country-level data",
+    "key_stats": {
+      "global_2021_prevalent_cases": "46.9 million (1.78%)",
+      "global_2021_incident_cases": "4.1 million",
+      "global_2021_dalys": "575K",
+      "prevalence_rate_trend": "Declining (-6.0%)",
+      "absolute_cases_trend": "Rising (+9.7% due to population growth)",
+      "highest_prevalence": "Australia (5.62%)"
+    },
+    "consumed_by": "Reference data; not directly imported by components"
+  },
+
+  "adhd_prevalence_sources_metadata.json": {
+    "source": "Project-level metadata (last updated 2026-07-16)",
+    "description": "Catalog/index of all data files with completeness status, source URLs, and documented data gaps",
+    "format": "JSON object serving as a project data inventory",
+    "data_gaps_documented": [
+      "20-country WMH paper paywalled",
+      "Workplace impact data blocked (ResearchGate 403)",
+      "Adult-specific GBD data not directly available"
+    ],
+    "key_insight": "WMH survey data (3.4%) consistently shows higher adult ADHD rates than GBD modeled estimates (1.13%)",
+    "consumed_by": "Developer reference only; not imported by any component"
+  },
+
+  "adhd_cognitive_neuroscience_research.json": {
+    "source": "Research synthesis created for the project",
+    "description": "Structured overview of ADHD cognitive neuroscience: deficits (well-established) and strengths (emerging evidence)",
+    "format": "JSON object with two main sections",
+    "sections": {
+      "deficits": "Sustained attention, working memory, response inhibition, time perception, emotional regulation, task-switching, intra-individual variability",
+      "strengths": "Divergent thinking/creativity, hyperfocus, novelty/reward-seeking, improvisation under pressure"
+    },
+    "honest_caveat": "Deficit literature is far more rigorous (decades of controlled lab tasks) than strengths literature (newer, often self-report based)",
+    "consumed_by": "Reference data for narrative/research context; not directly imported by components"
+  },
+
+  "adhd_cognitive_neuroscience_research.md": {
+    "source": "Plain-text/narrative version of adhd_cognitive_neuroscience_research.json",
+    "description": "Essay-format synthesis of ADHD cognitive neuroscience — suitable for direct inclusion in documents or presentations",
+    "format": "Markdown",
+    "consumed_by": "Content source for narrative text; not imported by components"
+  },
+
+  "problem-for-others.md": {
+    "source": "Original essay/narrative",
+    "description": "Honest examination of how unmanaged adult ADHD affects household members, parents, romantic partners, and friends",
+    "format": "Markdown (English)",
+    "sections": [
+      "Household members",
+      "Parents",
+      "Romantic partners",
+      "Friends"
+    ],
+    "core_thesis": "People around the ADHDer absorb the consequences of their executive dysfunction; treatment dramatically changes this",
+    "consumed_by": "Content source for narrative text; not imported by components"
+  },
+
+  "section-01-k-mero-khuskidai-xa.md": {
+    "source": "Original Nepali spoken-word script",
+    "description": "Section 1: First-person monologue about ADHD medication availability in Nepal — why it is mass-produced globally yet restricted locally",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "section_number": 1,
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "section-02-chasma.md": {
+    "source": "Original Nepali spoken-word script",
+    "description": "Section 2: Extended metaphor/parable comparing ADHD diagnosis to the introduction of eyeglasses — 'For eyes, it's not like that anymore. But for mental health — it's still the same.'",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "section_number": 2,
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "section-03-metagnosis.md": {
+    "source": "Original Nepali spoken-word script",
+    "description": "Section 3: Defines 'metagnosis' — the moment you realize you've lived your entire life with an undiagnosed condition. Multiple vignettes (dyslexia, ADHD, learning disability).",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "section_number": 3,
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "section-04-problem-in-adhd.md": {
+    "source": "Original Nepali spoken-word script",
+    "description": "Section 4: Explains ADHD neurochemistry in accessible Nepali — dopamine (motivation, focus, impulse control) and norepinephrine (alertness, filtering). Concludes: 'This is not a character issue. This is a chemistry issue.'",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "section_number": 4,
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "TODO_FETCH_MANUALLY.json": {
+    "source": "Developer task list",
+    "description": "External data sources that could not be fetched automatically and require manual intervention",
+    "format": "Markdown",
+    "unfetchable_sources": [
+      "IMF — 403 Forbidden",
+      "PISA (OECD) — 404 from SDMX API",
+      "UNESCO UIS — DNS resolution failures",
+      "Global Peace Index — 403 Forbidden",
+      "Legatum Prosperity Index — no accessible API",
+      "Transparency International CPI — Excel file was empty (substituted with World Bank governance indicators)"
+    ],
+    "consumed_by": "Developer reference only; not imported by components"
+  },
+
+  "finalADHD.md": {
+    "source": "Original Nepali spoken-word script (final version)",
+    "description": "Finalized script for spoken-word presentation on ADHD medication access in Nepal — references DDCA amphetamine ban and calls for legal reform",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "rough_draft.md": {
+    "source": "Original Nepali spoken-word script (rough draft)",
+    "description": "Early draft of spoken-word monologue — personal narrative about ADHD, executive dysfunction, and stigma",
+    "format": "Markdown (Nepali)",
+    "language": "Nepali",
+    "consumed_by": "Script content for spoken-word presentation; not imported by components"
+  },
+
+  "image_keywords.json": {
+    "source": "Project asset reference",
+    "description": "Search keywords and AI image generation prompts for visuals matched to script sections — intended for Unsplash, Pexels, Pixabay, or AI image tools",
+    "format": "JSON object with image entries containing section, timestamp_hint, keywords, and description",
+    "consumed_by": "Reference data for visual asset generation; not imported by components"
+  }
+}

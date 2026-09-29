@@ -1,0 +1,229 @@
+{
+  "note": "Search these keywords on Unsplash, Pexels, Pixabay, or use as AI image generation prompts. Each entry has a 'section', 'timestamp_hint' (rough script location), 'keywords' for searching, and 'description' of what the image should convey.",
+  "images": [
+    {
+      "id": "01-nepal-mountains",
+      "section": "intro / section 1",
+      "timestamp_hint": "Opening - Nepal landscape",
+      "keywords": ["nepal mountains landscape", "himalayas wide shot", "nepal village aerial"],
+      "description": "Wide shot of Nepal - mountains or village. Sets the location. You're speaking to camera about Nepalis living with ADHD."
+    },
+    {
+      "id": "02-pilling-machines",
+      "section": "section 1",
+      "timestamp_hint": "Dawai mass produce hunxa",
+      "keywords": ["pharmaceutical manufacturing pills", "medicine production line", "pill bottles factory", "medication mass production"],
+      "description": "Medicine being mass produced - pill manufacturing. Visual for 'ADHD ko dawai mass produce hunxa'."
+    },
+    {
+      "id": "03-banned-stamp",
+      "section": "section 1",
+      "timestamp_hint": "Pratibandha lagaena",
+      "keywords": ["banned stamp red", "government ban document", "prohibition stamp", "restricted medicine"],
+      "description": "A 'BANNED' or 'RESTRICTED' stamp on a document. Visual for the government banning ADHD medication."
+    },
+    {
+      "id": "04-personalone",
+      "section": "section 1",
+      "timestamp_hint": "Dukha paera bachiraxan",
+      "keywords": ["person alone suffering", "depressed person sitting alone", "lonely person dark room", "mental health struggle silhouette"],
+      "description": "A person alone, struggling. Visual for people suffering in silence without treatment."
+    },
+    {
+      "id": "05-blurred-vision",
+      "section": "section 2 (chasma)",
+      "timestamp_hint": "Dhamilo drishti - blurred world",
+      "keywords": ["blurred vision first person", "blurry world view", "out of focus landscape", "can't see clearly"],
+      "description": "Blurred/poor vision POV - world seen through bad eyes. The glasses metaphor begins here."
+    },
+    {
+      "id": "06-old-nepal-village",
+      "section": "section 2",
+      "timestamp_hint": "100-200 barsha agadi Nepal",
+      "keywords": ["old nepal village historical", "traditional nepal life", "rural nepal old photo", "village life nepal past"],
+      "description": "Old/traditional Nepal village. Setting the historical context - no eye tests existed."
+    },
+    {
+      "id": "07-eye-test-glasses",
+      "section": "section 2",
+      "timestamp_hint": "Khaire with glasses",
+      "keywords": ["first time wearing glasses", "person trying glasses surprised", "eye exam glasses", "putting on glasses reaction"],
+      "description": "Person trying glasses for the first time - the moment of clarity. The foreigner bringing glasses to the village."
+    },
+    {
+      "id": "08-clear-vision-reveal",
+      "section": "section 2",
+      "timestamp_hint": "Leaves, birds, flowers suddenly clear",
+      "keywords": ["sharp nature close up", "flowers leaves details clear", "bird detail photography", "nature suddenly in focus"],
+      "description": "Beautiful sharp nature - leaves, flowers, birds. What the person sees for the first time through glasses."
+    },
+    {
+      "id": "09-crying-happy",
+      "section": "section 2",
+      "timestamp_hint": "Khusi bhayo ani feri royo",
+      "keywords": ["person crying tears of joy", "emotional tears happy", "mixed emotions crying smiling"],
+      "description": "Person crying - both happy and sad. Joy of discovery mixed with grief of what was missed."
+    },
+    {
+      "id": "10-not-available-nepal",
+      "section": "section 2",
+      "timestamp_hint": "Bidesh ma matra painxa, Nepal ma paidaina",
+      "keywords": ["not available sign", "unavailable medicine pharmacy", "empty shelves pharmacy", "medicine not found"],
+      "description": "Empty pharmacy shelves or 'not available' sign. Medication doesn't exist in Nepal."
+    },
+    {
+      "id": "11-brain-diagram",
+      "section": "section 3 (problem in adhd)",
+      "timestamp_hint": "Brain chemistry explanation",
+      "keywords": ["human brain diagram", "brain anatomy labeled", "brain neuroscience illustration", "brain regions colored"],
+      "description": "Brain diagram/illustration. You're explaining that parts of your brain don't work like others."
+    },
+    {
+      "id": "12-thermometer-fever",
+      "section": "section 3",
+      "timestamp_hint": "Tauko xamera jaro aako - checking fever",
+      "keywords": ["thermometer measuring fever", "checking temperature forehead", "fever detection"],
+      "description": "Thermometer or checking fever. You can tell if you have a fever - brain should be the same."
+    },
+    {
+      "id": "13-serotonin-dopamine",
+      "section": "section 3",
+      "timestamp_hint": "Dopamine, serotonin, melatonin explanation",
+      "keywords": ["dopamine molecule illustration", "neurotransmitter molecules", "brain chemicals diagram", "serotonin dopamine art"],
+      "description": "Dopamine/serotonin molecule or brain chemical illustration. Chemistry, not character."
+    },
+    {
+      "id": "14-engine-car",
+      "section": "section 3",
+      "timestamp_hint": "Engine idle ma rahanchha vs engine banda",
+      "keywords": ["car engine running idle", "engine start ignition", "car engine off", "engine dashboard"],
+      "description": "Car engine - running vs off. ADHD brain engine is off, needs interest/urgency to start."
+    },
+    {
+      "id": "15-radio-noise",
+      "section": "section 3",
+      "timestamp_hint": "Radio bajiraxako - background noise",
+      "keywords": ["old radio playing", "radio static noise", "radio in background", "multiple thoughts chaos"],
+      "description": "Old radio playing in background. Your brain has constant background noise while trying to focus."
+    },
+    {
+      "id": "16-clock-time-blindness",
+      "section": "section 3",
+      "timestamp_hint": "Samay bistarai bitxxa vs abhi xa ya gayo",
+      "keywords": ["clock time passing", "time blindness concept", "watch hands moving", "hourglass time"],
+      "description": "Clock or hourglass. Time blindness - hours feel like minutes, or moments vanish."
+    },
+    {
+      "id": "17-emotional-punch",
+      "section": "section 3",
+      "timestamp_hint": "Filter kahinkahin aaudaina - full force punch",
+      "keywords": ["emotional overwhelm", "person overwhelmed feelings", "emotional explosion", "feelings intensity"],
+      "description": "Visual representation of overwhelming emotions. Small things hit with full force."
+    },
+    {
+      "id": "18-medication-calm",
+      "section": "section 3",
+      "timestamp_hint": "First time medication - thoughts go quiet",
+      "keywords": ["peaceful calm moment", "person at peace serene", "quiet mind meditation", "stillness silence"],
+      "description": "Peaceful/calm moment. First time on medication - the constant noise stops."
+    },
+    {
+      "id": "19-fish-water",
+      "section": "section 4 (metagnosis)",
+      "timestamp_hint": "Machha lai thaha hudaina ki u bhijeko xa",
+      "keywords": ["fish in water", "fish doesn't know it's wet", "underwater fish swimming"],
+      "description": "Fish in water. The fish doesn't know it's wet - you can't miss what you've never known."
+    },
+    {
+      "id": "20-child-reading-struggle",
+      "section": "section 4",
+      "timestamp_hint": "Dyslexia child - letters jumbling",
+      "keywords": ["child reading difficulty", "dyslexia letters jumbled", "struggling to read", "child confused book"],
+      "description": "Child struggling to read. Dyslexia example - letters shuffle, words jump."
+    },
+    {
+      "id": "21-color-blindness-test",
+      "section": "section 4",
+      "timestamp_hint": "Color blind - traffic light",
+      "keywords": ["ishihara color test", "color blind test plate", "traffic light different colors", "color blindness"],
+      "description": "Color blind test or traffic light. 40 years not knowing red looks different to everyone."
+    },
+    {
+      "id": "22-empty-mind-no-image",
+      "section": "section 4",
+      "timestamp_hint": "Dimag ma chitra sochnu - student can't visualize",
+      "keywords": ["blank mind concept", "empty mind no thoughts", "mind blank visualization", "aphantasia no mental image"],
+      "description": "Blank/empty visual. Student can't picture an apple - aphantasia, thought it was a metaphor."
+    },
+    {
+      "id": "23-ringing-ears",
+      "section": "section 4",
+      "timestamp_hint": "Continuous ringing in head",
+      "keywords": ["tinnitus ringing ears", "sound waves illustration", "ear ringing concept", "continuous sound"],
+      "description": "Visual for tinnitus/ringing. Constant ringing - thought it was normal."
+    },
+    {
+      "id": "24-dark-cloud-lifting",
+      "section": "section 4",
+      "timestamp_hint": "Depression cloud lifting after medication",
+      "keywords": ["dark clouds parting sun", "depression lifting", "clouds clearing sky", "hope after darkness"],
+      "description": "Dark clouds parting, light coming through. Depression lifting after first antidepressant."
+    },
+    {
+      "id": "25-comparison-split",
+      "section": "rough draft",
+      "timestamp_hint": "Neurotypical vs ADHD brain comparison",
+      "keywords": ["brain comparison normal vs adhd", "two brains side by side", "neurotypical adhd brain", "brain scan comparison"],
+      "description": "Side-by-side brain comparison. Normal brain baseline fuel vs ADHD brain engine off."
+    },
+    {
+      "id": "26-seesaw-tpn-dmn",
+      "section": "rough draft",
+      "timestamp_hint": "TPN vs DMN seesaw",
+      "keywords": ["seesaw balance", "two networks brain", "focus vs daydreaming", "tug of war brain networks"],
+      "description": "Seesaw or balance concept. TPN (focus) and DMN (daydream) - in ADHD both fire at once."
+    },
+    {
+      "id": "27-mask-hiding",
+      "section": "rough draft",
+      "timestamp_hint": "Masking - hiding real self",
+      "keywords": ["person wearing mask hiding", "mask facade pretending", "hiding true self", "emotional masking"],
+      "description": "Person wearing a mask. ADHDers mask to look normal - exhausting and unsustainable."
+    },
+    {
+      "id": "28-consequences-stats",
+      "section": "rough draft",
+      "timestamp_hint": "Depression, anxiety, addiction stats",
+      "keywords": ["mental health statistics infographic", "depression anxiety addiction", "ADHD consequences data", "mental health crisis"],
+      "description": "Stats visualization or infographic. Depression 70%, anxiety 50%, addiction 2-3x, suicide 2-4x."
+    },
+    {
+      "id": "29-nepal-pharmacy-empty",
+      "section": "rough draft",
+      "timestamp_hint": "Nepal ma medicine napai marchan",
+      "keywords": ["nepal pharmacy empty", "medicine unavailable developing country", "pharmacy bare shelves", "healthcare access gap"],
+      "description": "Empty pharmacy in Nepal context. People dying because treatment isn't available."
+    },
+    {
+      "id": "30-human-brain-universal",
+      "section": "rough draft",
+      "timestamp_hint": "American ko sharir ra Nepali ko sharir autai ho",
+      "keywords": ["human brain universal", "brain no nationality", "anatomy same all humans", "neuroscience universal"],
+      "description": "Universal human brain. An American brain and Nepali brain are biologically the same."
+    },
+    {
+      "id": "31-unban-medicine",
+      "section": "rough draft / closing",
+      "timestamp_hint": "Aushadhi Unban garnuhos",
+      "keywords": ["medicine unban", "remove ban sign", "open pharmacy gate", "access to treatment", "medication available"],
+      "description": "Ban being removed / medicine becoming available. The call to action - unban ADHD medication."
+    },
+    {
+      "id": "32-face-camera-nepali",
+      "section": "all sections",
+      "timestamp_hint": "Speaking to camera - personal moments",
+      "keywords": ["nepali person speaking camera", "face to camera documentary", "personal story testimony", "talking head interview"],
+      "description": "Your face to camera moments. Personal, raw, direct. The backbone of the video."
+    }
+  ]
+}

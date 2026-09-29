@@ -1,7 +1,7 @@
 {
   "_meta": {
     "schema_version": "2.0",
-    "last_updated": "2026-07-06T19:00:00Z",
+    "last_updated": "2026-09-29T00:00:00Z",
     "description": "Prescription-access tiers for amphetamine-class ADHD stimulants (amphetamine, dexamphetamine, lisdexamfetamine/Vyvanse) vs. methylphenidate-class vs. non-stimulant-only. NOT legal or medical advice. Confidence/evidence fields indicate how well-sourced each entry is — treat 'low' confidence entries as needing further verification before relying on them.",
     "tiers": {
       "1": "At least one amphetamine-class ADHD stimulant (dexamphetamine and/or lisdexamfetamine) is approved and routinely prescribable under controlled-substance regulations. Brand availability (e.g. Adderall specifically) does not matter for this tier.",
@@ -93,17 +93,20 @@
     },
     "NZ": {
       "tier": 1,
-      "confidence": "low",
-      "evidence": "community",
-      "last_verified": "2026-07",
+      "confidence": "medium",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
-        "dexamphetamine": null,
-        "lisdexamfetamine": null,
-        "mixed_amphetamine_salts": null
+        "dexamphetamine": true,
+        "lisdexamfetamine": true,
+        "mixed_amphetamine_salts": false
       },
-      "sources": [],
-      "notes": "Assumed similar to Australia's framework; not independently checked.",
+      "sources": [
+        "https://gazette.govt.nz/notice/id/2025-go3319",
+        "https://www.pharmac.govt.nz/news-and-resources/consultations-and-decisions/2025-06-decision-to-change-the-regulatory-and-funding-restrictions-for-stimulant-medicines-for-adhd"
+      ],
+      "notes": "Methylphenidate, dexamphetamine and lisdexamfetamine (Vyvanse) are regulated by Medsafe and funded by Pharmac for ADHD; mixed amphetamine salts (Adderall) are not used. Prescriber base widened from Feb 2026 (GPs/nurse practitioners for adults).",
       "countryname": "New Zealand"
     },
     "DE": {
@@ -383,10 +386,10 @@
       "countryname": "Japan"
     },
     "KR": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Ministry of Food and Drug Safety (MFDS). Methylphenidate and atomoxetine are approved under a heavy digital tracking network. All amphetamine variants are illegal under the Narcotics Control Act.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -397,7 +400,7 @@
       "sources": [
         "https://mfds.go.kr"
       ],
-      "notes": "MFDS utilizes an AI-driven Narcotics Information Management System to crack down on over-prescribing. Amphetamines are strictly banned for import.",
+      "notes": "Regulated by the Ministry of Food and Drug Safety (MFDS). Methylphenidate and atomoxetine are approved under a heavy digital tracking network. All amphetamine variants are illegal under the Narcotics Control Act. MFDS utilizes an AI-driven Narcotics Information Management System to crack down on over-prescribing. Amphetamines are strictly banned for import.",
       "countryname": "South Korea"
     },
     "CN": {
@@ -697,10 +700,10 @@
       "countryname": "Singapore"
     },
     "TW": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Taiwan Food and Drug Administration (TFDA). Methylphenidate and atomoxetine are approved and covered under National Health Insurance. Amphetamine derivatives are completely banned.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -711,7 +714,7 @@
       "sources": [
         "https://fda.gov.tw"
       ],
-      "notes": "Methylphenidate is managed as a Class 3 Controlled Drug. Bringing unapproved amphetamines into the country is treated as a narcotics offense.",
+      "notes": "Regulated by the Taiwan Food and Drug Administration (TFDA). Methylphenidate and atomoxetine are approved and covered under National Health Insurance. Amphetamine derivatives are completely banned. Methylphenidate is managed as a Class 3 Controlled Drug. Bringing unapproved amphetamines into the country is treated as a narcotics offense.",
       "countryname": "Taiwan"
     },
     "TH": {
@@ -788,10 +791,10 @@
       "countryname": "Indonesia"
     },
     "KH": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Ministry of Health. Amphetamines are strictly prohibited for therapeutic use. Methylphenidate is heavily restricted under psychotropic control laws and rarely available outside specialized international clinics.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -802,7 +805,7 @@
       "sources": [
         "http://moh.gov.kh"
       ],
-      "notes": "Extremely limited domestic supply chain. Generally inaccessible in commercial public retail pharmacies.",
+      "notes": "Regulated by the Ministry of Health. Amphetamines are strictly prohibited for therapeutic use. Methylphenidate is heavily restricted under psychotropic control laws and rarely available outside specialized international clinics. Extremely limited domestic supply chain. Generally inaccessible in commercial public retail pharmacies.",
       "countryname": "Cambodia"
     },
     "LA": {
@@ -963,10 +966,10 @@
       "countryname": "Nigeria"
     },
     "ET": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Ethiopian Food and Drug Authority (EFDA). Methylphenidate is heavily bottlenecked and designated for institutional use only. Amphetamines are legally categorized as dangerous substances of abuse.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -977,7 +980,7 @@
       "sources": [
         "http://efda.gov.et"
       ],
-      "notes": "No routine commercial therapeutic pipelines exist for central nervous system stimulants. High import barriers apply.",
+      "notes": "Regulated by the Ethiopian Food and Drug Authority (EFDA). Methylphenidate is heavily bottlenecked and designated for institutional use only. Amphetamines are legally categorized as dangerous substances of abuse. No routine commercial therapeutic pipelines exist for central nervous system stimulants. High import barriers apply.",
       "countryname": "Ethiopia"
     },
     "CD": {
@@ -1121,10 +1124,10 @@
       "countryname": "Russia"
     },
     "TR": {
-      "tier": 2,
+      "tier": 1,
       "confidence": "high",
       "evidence": "government",
-      "last_verified": "2026-07",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1694,10 +1697,10 @@
       "countryname": "Algeria"
     },
     "BJ": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Agence Béninoise de Régulation Pharmaceutique (ABRP). Follows rigid regional West African UEMOA narcotic guidelines. Methylphenidate is authorized under strict import quotas; amphetamines are completely unregistered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1708,14 +1711,14 @@
       "sources": [
         "https://abrp.bj"
       ],
-      "notes": "Sourcing is highly irregular and confined to select institutional pharmacies in Cotonou. Requires validated doctor authorization.",
+      "notes": "Regulated by the Agence Béninoise de Régulation Pharmaceutique (ABRP). Follows rigid regional West African UEMOA narcotic guidelines. Methylphenidate is authorized under strict import quotas; amphetamines are completely unregistered. Sourcing is highly irregular and confined to select institutional pharmacies in Cotonou. Requires validated doctor authorization.",
       "countryname": "Benin"
     },
     "BF": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Agence Nationale de Régulation Pharmaceutique (ANRP). Amphetamines are illegal for clinical medical use. Methylphenidate is legally classified under scheduled psychotropics but is rarely stocked in national distribution cycles.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1726,7 +1729,7 @@
       "sources": [
         "https://anrp.bf"
       ],
-      "notes": "Severe localized availability bottlenecks. Medical supplies face structural logistical disruptions outside major metropolitan centers.",
+      "notes": "Regulated by the Agence Nationale de Régulation Pharmaceutique (ANRP). Amphetamines are illegal for clinical medical use. Methylphenidate is legally classified under scheduled psychotropics but is rarely stocked in national distribution cycles. Severe localized availability bottlenecks. Medical supplies face structural logistical disruptions outside major metropolitan centers.",
       "countryname": "Burkina Faso"
     },
     "BI": {
@@ -1784,10 +1787,10 @@
       "countryname": "Chad"
     },
     "CG": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Médicament (DPM) of the Republic of the Congo. Methylphenidate is approved strictly under custom import authorizations. Amphetamines are not registered for therapeutic distribution.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1798,14 +1801,14 @@
       "sources": [
         "https://gouv.cg"
       ],
-      "notes": "Highly scarce. Medications can generally only be sourced through highly specialized channels in Brazzaville or Pointe-Noire.",
+      "notes": "Regulated by the Direction de la Pharmacie et du Médicament (DPM) of the Republic of the Congo. Methylphenidate is approved strictly under custom import authorizations. Amphetamines are not registered for therapeutic distribution. Highly scarce. Medications can generally only be sourced through highly specialized channels in Brazzaville or Pointe-Noire.",
       "countryname": "Republic of Congo"
     },
     "DJ": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Ministère de la Santé. Methylphenidate is managed under tight narcotic scheduling rules matching historical French health frameworks. Amphetamines are not approved or imported.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1816,14 +1819,14 @@
       "sources": [
         "https://gouv.dj"
       ],
-      "notes": "Stocks are rare and limited to specialized military or international private clinics in the capital city.",
+      "notes": "Regulated by the Ministère de la Santé. Methylphenidate is managed under tight narcotic scheduling rules matching historical French health frameworks. Amphetamines are not approved or imported. Stocks are rare and limited to specialized military or international private clinics in the capital city.",
       "countryname": "Djibouti"
     },
     "GQ": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "low",
-      "evidence": "Regulated by the Ministerio de Sanidad y Bienestar Social. There is no public record of standard registrations for amphetamine products or atomoxetine. Methylphenidate is restricted under specific psychotropic monitoring laws.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1834,7 +1837,7 @@
       "sources": [
         "https://minsanidad-ge.org"
       ],
-      "notes": "Relying on imported items with volatile stock rates. All personal quantities must be accompanied by certified Spanish translations of prescriptions.",
+      "notes": "Regulated by the Ministerio de Sanidad y Bienestar Social. There is no public record of standard registrations for amphetamine products or atomoxetine. Methylphenidate is restricted under specific psychotropic monitoring laws. Relying on imported items with volatile stock rates. All personal quantities must be accompanied by certified Spanish translations of prescriptions.",
       "countryname": "Equatorial Guinea"
     },
     "ER": {
@@ -1874,10 +1877,10 @@
       "countryname": "Eswatini"
     },
     "GA": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Agence du Médicament du Gabon (AMED). Methylphenidate is integrated into high-level psychotropic classifications. Amphetamine-based formulations are completely unregistered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1888,14 +1891,14 @@
       "sources": [
         "https://gouv.ga"
       ],
-      "notes": "Requires mandatory validated documentation from a licensed psychiatric specialist to clear national custom entry ports.",
+      "notes": "Regulated by the Agence du Médicament du Gabon (AMED). Methylphenidate is integrated into high-level psychotropic classifications. Amphetamine-based formulations are completely unregistered. Requires mandatory validated documentation from a licensed psychiatric specialist to clear national custom entry ports.",
       "countryname": "Gabon"
     },
     "GM": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Medicines Control Agency (MCA) Gambia. Amphetamines are strictly unapproved. Methylphenidate is subject to high-level narcotic restrictions and is not routinely stocked in general public healthcare routes.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1904,16 +1907,16 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://mcagambia.gm"
+        "mcagambia.gm"
       ],
-      "notes": "Requires direct individual clinical exception permits from the MCA for any legitimate personal transit imports.",
+      "notes": "Regulated by the Medicines Control Agency (MCA) Gambia. Amphetamines are strictly unapproved. Methylphenidate is subject to high-level narcotic restrictions and is not routinely stocked in general public healthcare routes. Requires direct individual clinical exception permits from the MCA for any legitimate personal transit imports.",
       "countryname": "Gambia"
     },
     "GN": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "low",
-      "evidence": "Regulated by the Direction Nationale de la Pharmacie et du Médicament (DNPM). Amphetamine formulations remain unregistered. Methylphenidate availability is unstable and strictly ring-fenced to specialized psychiatric programs.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -1922,9 +1925,9 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://sante.gov.gn"
+        "sante.gov.gn"
       ],
-      "notes": "High volumes of counterfeit products in parallel informal networks mean strict state checks are applied to genuine controlled prescriptions.",
+      "notes": "Regulated by the Direction Nationale de la Pharmacie et du Médicament (DNPM). Amphetamine formulations remain unregistered. Methylphenidate availability is unstable and strictly ring-fenced to specialized psychiatric programs. High volumes of counterfeit products in parallel informal networks mean strict state checks are applied to genuine controlled prescriptions.",
       "countryname": "Guinea"
     },
     "GW": {
@@ -1940,7 +1943,7 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://insp.gw"
+        "insp.gw"
       ],
       "notes": "Severe systemic instability has limited access to psychiatric pharmaceuticals. Sourcing via public commercial channels is functionally non-existent.",
       "countryname": "Guinea-Bissau"
@@ -1994,16 +1997,16 @@
         "atomoxetine": true
       },
       "sources": [
-        "https://pmra.mw"
+        "pmra.mw"
       ],
       "notes": "Requires custom certified pink prescription templates from psychiatric hospitals. Unauthorized imports are severely penalized under anti-diversion acts.",
       "countryname": "Malawi"
     },
     "ML": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Médicament (DPM). Amphetamines are completely prohibited for therapeutic distribution. Methylphenidate is theoretically registered under restricted psychotropic guidelines.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2012,9 +2015,9 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://sante.gov.ml"
+        "sante.gov.ml"
       ],
-      "notes": "Sourcing challenges are extreme. Supplies are rarely tracked outside specific institutional channels in Bamako.",
+      "notes": "Regulated by the Direction de la Pharmacie et du Médicament (DPM). Amphetamines are completely prohibited for therapeutic distribution. Methylphenidate is theoretically registered under restricted psychotropic guidelines. Sourcing challenges are extreme. Supplies are rarely tracked outside specific institutional channels in Bamako.",
       "countryname": "Mali"
     },
     "MR": {
@@ -2030,7 +2033,7 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://sante.gov.mr"
+        "sante.gov.mr"
       ],
       "notes": "Unverified stimulant medications found at security points carry a high risk of strict legal or border interdiction without exhaustive ministerial paperwork.",
       "countryname": "Mauritania"
@@ -2048,7 +2051,7 @@
         "atomoxetine": true
       },
       "sources": [
-        "https://sante.gov.ma"
+        "sante.gov.ma"
       ],
       "notes": "Prescription renewals are strictly capped at limited-day cycles (typically 28 days) and require rigorous oversight from licensed neurologists or psychiatrists.",
       "countryname": "Morocco"
@@ -2066,16 +2069,16 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://gouv.ne"
+        "gouv.ne"
       ],
       "notes": "Severe systemic shortages disrupt mental health therapeutics. Carrying stimulants across internal security checkpoints is heavily restricted.",
       "countryname": "Niger"
     },
     "RW": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Rwanda Food and Drugs Authority (Rwanda FDA). Achieved WHO Maturity Level 3. Methylphenidate and atomoxetine are officially registered on the national list of approved human medicines. Amphetamines are not registered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2084,9 +2087,9 @@
         "atomoxetine": true
       },
       "sources": [
-        "https://rwandafda.gov.rw"
+        "rwandafda.gov.rw"
       ],
-      "notes": "Strictly monitored as a controlled psychotropic substance. Dispensing requires validated tracking records from regional referral medical complexes.",
+      "notes": "Regulated by the Rwanda Food and Drugs Authority (Rwanda FDA). Achieved WHO Maturity Level 3. Methylphenidate and atomoxetine are officially registered on the national list of approved human medicines. Amphetamines are not registered. Strictly monitored as a controlled psychotropic substance. Dispensing requires validated tracking records from regional referral medical complexes.",
       "countryname": "Rwanda"
     },
     "SL": {
@@ -2120,7 +2123,7 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://moh.gov.so"
+        "moh.gov.so"
       ],
       "notes": "Pharmaceutical pipelines lack standardized central tracking systems for psychotropics. Possession of highly active stimulants carries severe risk without exhaustive official diplomatic verification.",
       "countryname": "Somalia"
@@ -2144,10 +2147,10 @@
       "countryname": "South Sudan"
     },
     "TG": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie, du Médicament et des Laboratoires (DPML). Methylphenidate is cataloged under tight psychotropic controls in alignment with Francophone regulatory matrices. Amphetamines are strictly unapproved.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2156,9 +2159,9 @@
         "atomoxetine": false
       },
       "sources": [
-        "https://togo.gouv.tg"
+        "https://togo.gouv.tg/"
       ],
-      "notes": "Stocks are limited and restricted to premier clinical networks in Lomé. Customs require official tracking certificates.",
+      "notes": "Regulated by the Direction de la Pharmacie, du Médicament et des Laboratoires (DPML). Methylphenidate is cataloged under tight psychotropic controls in alignment with Francophone regulatory matrices. Amphetamines are strictly unapproved. Stocks are limited and restricted to premier clinical networks in Lomé. Customs require official tracking certificates.",
       "countryname": "Togo"
     },
     "GH": {
@@ -2180,10 +2183,10 @@
       "countryname": "Ghana"
     },
     "CM": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie, du Médicament et des Laboratoires (DPML). Methylphenidate is theoretically permitted for institutional psychiatric hospital use but is exceedingly difficult to source commercially. Amphetamines are not approved.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2194,14 +2197,14 @@
       "sources": [
         "https://amrh.nepad.org/amrh-countries"
       ],
-      "notes": "Severe localized availability bottlenecks. ADHD clinical support heavily relies on non-pharmacological or alternative sedative treatments due to lack of supply.",
+      "notes": "Regulated by the Direction de la Pharmacie, du Médicament et des Laboratoires (DPML). Methylphenidate is theoretically permitted for institutional psychiatric hospital use but is exceedingly difficult to source commercially. Amphetamines are not approved. Severe localized availability bottlenecks. ADHD clinical support heavily relies on non-pharmacological or alternative sedative treatments due to lack of supply.",
       "countryname": "Cameroon"
     },
     "CI": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Autorité Ivoirienne de Régulation Pharmaceutique (AIRP). Governed under strict French-inherited narcotic laws. Methylphenidate is accessible under rigorous psychotropic prescription, while amphetamines remain unregistered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2212,14 +2215,14 @@
       "sources": [
         "https://amrh.nepad.org/amrh-countries"
       ],
-      "notes": "Requires a triplicate custom psychotropic prescription counter-signed by certified psychiatric experts in Abidjan.",
+      "notes": "Regulated by the Autorité Ivoirienne de Régulation Pharmaceutique (AIRP). Governed under strict French-inherited narcotic laws. Methylphenidate is accessible under rigorous psychotropic prescription, while amphetamines remain unregistered. Requires a triplicate custom psychotropic prescription counter-signed by certified psychiatric experts in Abidjan.",
       "countryname": "Ivory Coast"
     },
     "SN": {
       "tier": 2,
-      "confidence": "high",
-      "evidence": "Regulated by the Agence Nationale de Régulation Pharmaceutique (ARP). Recently attained WHO Maturity Level 3. Methylphenidate is registered on the national psychotropic scheduled formulary under close monitoring. Amphetamines are completely unregistered.",
-      "last_verified": "2026-07",
+      "confidence": "medium",
+      "evidence": "mixed",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2228,16 +2231,18 @@
         "atomoxetine": true
       },
       "sources": [
-        "https://www.marketaccess.africa/blogs/regulatory-spotlight---11"
+        "https://www.marketaccess.africa/blogs/regulatory-spotlight---11",
+        "https://www.scirp.org/journal/paperinformation?paperid=152541",
+        "https://www.reddit.com/r/Senegal/comments/1wdmi00/is_adhd_meds_available_in_senegal/"
       ],
-      "notes": "Supply chain is strictly audited under the national pharmacy structure (PNA) to prevent illicit parallel trading.",
+      "notes": "Supply chain is strictly audited under the national pharmacy structure (PNA) to prevent illicit parallel trading. Patient-network and clinical-review reports indicate methylphenidate is not routinely stocked in Dakar pharmacies and may be absent from the standard formulary; securing it typically requires a per-batch Special Import Authorization through specialized import pharmacies. Doctors reportedly rely largely on non-stimulant or psychosocial options given the constraints. Travelers should bring adequate supply with prescription and medical certificate.",
       "countryname": "Senegal"
     },
     "MZ": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the National Directorate of Pharmacy (DNF). Central nervous system stimulants face heavily restricted clinical deployment. Methylphenidate is limited to dedicated provincial neuropsychiatric centers.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2248,14 +2253,14 @@
       "sources": [
         "https://amrh.nepad.org/amrh-countries"
       ],
-      "notes": "Stocks are highly unreliable in public networks; private imports are subject to long regulatory delays and mandatory clinical justification.",
+      "notes": "Regulated by the National Directorate of Pharmacy (DNF). Central nervous system stimulants face heavily restricted clinical deployment. Methylphenidate is limited to dedicated provincial neuropsychiatric centers. Stocks are highly unreliable in public networks; private imports are subject to long regulatory delays and mandatory clinical justification.",
       "countryname": "Mozambique"
     },
     "AO": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Agência Reguladora de Medicamentos e Tecnologias de Saúde (ARMED). Methylphenidate is registered under specialized narcotic controls. Amphetamines are strictly banned for therapeutic ADHD applications.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2266,7 +2271,7 @@
       "sources": [
         "https://amrh.nepad.org/amrh-countries"
       ],
-      "notes": "Travelers must hold legalized cross-border medical certificates in Portuguese to prevent seizure by customs authorities.",
+      "notes": "Regulated by the Agência Reguladora de Medicamentos e Tecnologias de Saúde (ARMED). Methylphenidate is registered under specialized narcotic controls. Amphetamines are strictly banned for therapeutic ADHD applications. Travelers must hold legalized cross-border medical certificates in Portuguese to prevent seizure by customs authorities.",
       "countryname": "Angola"
     },
     "ZM": {
@@ -2306,10 +2311,10 @@
       "countryname": "Zimbabwe"
     },
     "BW": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Botswana Medicines Regulatory Authority (BoMRA). Methylphenidate (5mg and 10mg) is integrated into the Botswana Essential Medicines List (BEML). Amphetamines are not standardly registered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2321,14 +2326,14 @@
         "https://www.bomra.co.bw/",
         "https://cdn.who.int/media/docs/default-source/essential-medicines/national-essential-medicines-lists-(neml)/afro_neml/botswana-2016.pdf?sfvrsn=af553a41_3&download=true"
       ],
-      "notes": "Requires specific psychiatric authorization (designated with 'E' class restrictions in national listings).",
+      "notes": "Regulated by the Botswana Medicines Regulatory Authority (BoMRA). Methylphenidate (5mg and 10mg) is integrated into the Botswana Essential Medicines List (BEML). Amphetamines are not standardly registered. Requires specific psychiatric authorization (designated with 'E' class restrictions in national listings).",
       "countryname": "Botswana"
     },
     "NA": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Namibia Medicines Regulatory Council (NMRC). Methylphenidate is widely approved (e.g., Concerta, Ritalin formulations) under tight Schedule 5/6 classifications. Amphetamines are completely unregistered.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2339,14 +2344,14 @@
       "sources": [
         "https://nmrc.gov.na/"
       ],
-      "notes": "Strict cross-border control links with South African supply lines. Requires structured medical validation forms at point of entry.",
+      "notes": "Regulated by the Namibia Medicines Regulatory Council (NMRC). Methylphenidate is widely approved (e.g., Concerta, Ritalin formulations) under tight Schedule 5/6 classifications. Amphetamines are completely unregistered. Strict cross-border control links with South African supply lines. Requires structured medical validation forms at point of entry.",
       "countryname": "Namibia"
     },
     "MG": {
-      "tier": 3,
+      "tier": 2,
       "confidence": "medium",
-      "evidence": "Regulated by the Agence de Médicament de Madagascar (DAMM). Severe structural shortage of psychiatric drugs. Methylphenidate is occasionally imported under exceptional authorizations; amphetamines are completely unauthorized.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2357,14 +2362,14 @@
       "sources": [
         "https://amrh.nepad.org/amrh-countries"
       ],
-      "notes": "Therapeutic access is largely non-existent for the general population outside localized humanitarian or elite private medical pipelines.",
+      "notes": "Regulated by the Agence de Médicament de Madagascar (DAMM). Severe structural shortage of psychiatric drugs. Methylphenidate is occasionally imported under exceptional authorizations; amphetamines are completely unauthorized. Therapeutic access is largely non-existent for the general population outside localized humanitarian or elite private medical pipelines.",
       "countryname": "Madagascar"
     },
     "MU": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Ministry of Health and Wellness. Methylphenidate HCl 10mg tablets are integrated into the Approved Drug List for Public Hospitals. Governed under the Dangerous Drugs Act. Amphetamines are severely restricted.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2375,7 +2380,7 @@
       "sources": [
         "https://cdn.who.int/media/docs/default-source/essential-medicines/national-essential-medicines-lists-(neml)/afro_neml/mauritius-20227e9629f5-66f0-46e6-9b16-3205cffc2813.pdf?sfvrsn=360a4280_3&download=true"
       ],
-      "notes": "Requires a specialized narcotic prescription form and official government-issued psychotropic authorization for travel import.",
+      "notes": "Regulated by the Ministry of Health and Wellness. Methylphenidate HCl 10mg tablets are integrated into the Approved Drug List for Public Hospitals. Governed under the Dangerous Drugs Act. Amphetamines are severely restricted. Requires a specialized narcotic prescription form and official government-issued psychotropic authorization for travel import.",
       "countryname": "Mauritius"
     },
     "TN": {
@@ -2681,10 +2686,10 @@
       "countryname": "Azerbaijan"
     },
     "BG": {
-      "tier": 1,
+      "tier": 2,
       "confidence": "high",
-      "evidence": "Regulated by the Bulgarian Drug Agency (BDA) under the Ministry of Health and harmonized with the European Medicines Agency (EMA). Methylphenidate (primarily Concerta extended-release) and atomoxetine are registered on the official national pharmaceutical index. All amphetamine variants, including dexamphetamine and lisdexamfetamine, are completely unregistered and unavailable for therapeutic use.",
-      "last_verified": "2026-07",
+      "evidence": "government",
+      "last_verified": "2026-09",
       "approved": {
         "methylphenidate": true,
         "dexamphetamine": false,
@@ -2695,7 +2700,7 @@
       "sources": [
         "https://www.bda.bg"
       ],
-      "notes": "Methylphenidate is available but requires strict narcotic prescription oversight. Amphetamine-based ADHD treatments are completely prohibited for domestic prescribing.",
+      "notes": "Regulated by the Bulgarian Drug Agency (BDA) under the Ministry of Health and harmonized with the European Medicines Agency (EMA). Methylphenidate (primarily Concerta extended-release) and atomoxetine are registered on the official national pharmaceutical index. All amphetamine variants, including dexamphetamine and lisdexamfetamine, are completely unregistered and unavailable for therapeutic use. Methylphenidate is available but requires strict narcotic prescription oversight. Amphetamine-based ADHD treatments are completely prohibited for domestic prescribing.",
       "countryname": "Bulgaria"
     },
     "BY": {
@@ -3017,492 +3022,6 @@
       ],
       "notes": "Methylphenidate (e.g., Ritalin) is clinically approved and available, though supply is frequently subject to local market volatility and economic conditions. Lisdexamfetamine, amphetamine-based salts, and atomoxetine are generally not registered or are unavailable through official public clinical channels.",
       "countryname": "Venezuela"
-    },
-    "DZ": {
-      "tier": 2,
-      "confidence": "high",
-      "evidence": "Regulated by the Ministère de la Santé and the National National Agency for Pharmaceutical Products (ANPP). Methylphenidate is approved but strictly classified as a Table A psychotropic substance. Amphetamines are not registered for therapeutic use.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "http://sante.gov.dz"
-      ],
-      "notes": "Prescriptions require specialized triplicate control forms issued exclusively by hospital psychiatrists. Strict quantity limits apply at customs.",
-      "countryname": "Algeria"
-    },
-    "BJ": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Agence Béninoise de Régulation Pharmaceutique (ABRP). Follows rigid regional West African UEMOA narcotic guidelines. Methylphenidate is authorized under strict import quotas; amphetamines are completely unregistered.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://abrp.bj"
-      ],
-      "notes": "Sourcing is highly irregular and confined to select institutional pharmacies in Cotonou. Requires validated doctor authorization.",
-      "countryname": "Benin"
-    },
-    "BF": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Agence Nationale de Régulation Pharmaceutique (ANRP). Amphetamines are illegal for clinical medical use. Methylphenidate is legally classified under scheduled psychotropics but is rarely stocked in national distribution cycles.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://anrp.bf"
-      ],
-      "notes": "Severe localized availability bottlenecks. Medical supplies face structural logistical disruptions outside major metropolitan centers.",
-      "countryname": "Burkina Faso"
-    },
-    "BI": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Autorité de Régulation des Médicaments et des Aliments (ABREMA). No registered commercial licenses exist for amphetamine salts, dexamphetamine, or lisdexamfetamine. Methylphenidate is theoretically classified as a controlled narcotic but lacks consistent formal import lines.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://minisante.gov.bi"
-      ],
-      "notes": "ADHD treatments are severely limited within the public system. Travelers face extreme scrutiny without legalized psychiatric documentation.",
-      "countryname": "Burundi"
-    },
-    "CF": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Ministère de la Santé et de la Population. Central nervous system stimulants lack structured regulatory registry logs or standard tracking systems. Unauthorized amphetamines or methylphenidate are subject to immediate seizure.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://minsante-rca.org"
-      ],
-      "notes": "Public healthcare infrastructure prioritizing endemic diseases; specialized neuropsychiatric medications are completely absent from normal commercial trade.",
-      "countryname": "Central African Republic"
-    },
-    "TD": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Médicament. Commercial or therapeutic registration of amphetamine formulations is absent. Methylphenidate is heavily controlled and isolated strictly to military or direct ministry exceptions.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://sante-tchad.org"
-      ],
-      "notes": "Strict border drug interdiction protocols are in effect. Possession without heavy official authorization is legally risky.",
-      "countryname": "Chad"
-    },
-    "CG": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Médicament (DPM) of the Republic of the Congo. Methylphenidate is approved strictly under custom import authorizations. Amphetamines are not registered for therapeutic distribution.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://gouv.cg"
-      ],
-      "notes": "Highly scarce. Medications can generally only be sourced through highly specialized channels in Brazzaville or Pointe-Noire.",
-      "countryname": "Republic of Congo"
-    },
-    "DJ": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Ministère de la Santé. Methylphenidate is managed under tight narcotic scheduling rules matching historical French health frameworks. Amphetamines are not approved or imported.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://gouv.dj"
-      ],
-      "notes": "Stocks are rare and limited to specialized military or international private clinics in the capital city.",
-      "countryname": "Djibouti"
-    },
-    "GQ": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Ministerio de Sanidad y Bienestar Social. There is no public record of standard registrations for amphetamine products or atomoxetine. Methylphenidate is restricted under specific psychotropic monitoring laws.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://minsanidad-ge.org"
-      ],
-      "notes": "Relying on imported items with volatile stock rates. All personal quantities must be accompanied by certified Spanish translations of prescriptions.",
-      "countryname": "Equatorial Guinea"
-    },
-    "ER": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Ministry of Health. Central nervous system stimulants (methylphenidate and amphetamines) are not listed on the national core formulary of essential medicines. Strictly restricted to avoid diversion.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://eritrean-health.org"
-      ],
-      "notes": "Therapeutic infrastructure for neurodevelopmental care is severely underdeveloped. Bringing stimulants across checkpoints requires specialized state clearance.",
-      "countryname": "Eritrea"
-    },
-    "SZ": {
-      "tier": 2,
-      "confidence": "medium",
-      "evidence": "Regulated by the Ministry of Health. Closely follows South African Health Products Regulatory Authority (SAHPRA) trends. Methylphenidate is registered as a Schedule 5/6 controlled substance. Amphetamines are not registered.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "https://www.gov.sz"
-      ],
-      "notes": "Requires verified cross-border diagnostic forms. Sourced almost entirely from regional tertiary private medical networks.",
-      "countryname": "Eswatini"
-    },
-    "GA": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Agence du Médicament du Gabon (AMED). Methylphenidate is integrated into high-level psychotropic classifications. Amphetamine-based formulations are completely unregistered.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://gouv.ga"
-      ],
-      "notes": "Requires mandatory validated documentation from a licensed psychiatric specialist to clear national custom entry ports.",
-      "countryname": "Gabon"
-    },
-    "GM": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Medicines Control Agency (MCA) Gambia. Amphetamines are strictly unapproved. Methylphenidate is subject to high-level narcotic restrictions and is not routinely stocked in general public healthcare routes.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "mcagambia.gm"
-      ],
-      "notes": "Requires direct individual clinical exception permits from the MCA for any legitimate personal transit imports.",
-      "countryname": "Gambia"
-    },
-    "GN": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Direction Nationale de la Pharmacie et du Médicament (DNPM). Amphetamine formulations remain unregistered. Methylphenidate availability is unstable and strictly ring-fenced to specialized psychiatric programs.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "sante.gov.gn"
-      ],
-      "notes": "High volumes of counterfeit products in parallel informal networks mean strict state checks are applied to genuine controlled prescriptions.",
-      "countryname": "Guinea"
-    },
-    "GW": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Direcção-Geral da Farmácia. Formal public tracking or registration entries do not exist for modern ADHD stimulants. Amphetamines are strictly unapproved.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "insp.gw"
-      ],
-      "notes": "Severe systemic instability has limited access to psychiatric pharmaceuticals. Sourcing via public commercial channels is functionally non-existent.",
-      "countryname": "Guinea-Bissau"
-    },
-    "LS": {
-      "tier": 2,
-      "confidence": "medium",
-      "evidence": "Regulated by the Ministry of Health. Interlinked tightly with South African pharmaceutical regulatory listings. Methylphenidate and atomoxetine are approved under controlled psychotropic classifications. Amphetamines are unregistered.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "https://www.gov.ls"
-      ],
-      "notes": "Dispensed almost exclusively at select specialized clinical points in Maseru. Border entry checks demand highly formalized medical tracking notes.",
-      "countryname": "Lesotho"
-    },
-    "LR": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Liberia Medicines and Health Products Regulatory Authority (LMHRA). Amphetamines are unlisted and prohibited. Methylphenidate is managed under dangerous psychotropic schedules with no stable retail tracking supply chain.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://lmhra.gov.lr"
-      ],
-      "notes": "Access to pediatric or adult ADHD psychopharmacology is extremely constrained outside specialized international medical deployments.",
-      "countryname": "Liberia"
-    },
-    "MW": {
-      "tier": 2,
-      "confidence": "high",
-      "evidence": "Regulated by the Pharmacy and Medicines Regulatory Authority (PMRA). Methylphenidate and atomoxetine are listed under strict narcotic and psychotropic schedules. Amphetamine configurations are not registered on the national database.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "pmra.mw"
-      ],
-      "notes": "Requires custom certified pink prescription templates from psychiatric hospitals. Unauthorized imports are severely penalized under anti-diversion acts.",
-      "countryname": "Malawi"
-    },
-    "ML": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Médicament (DPM). Amphetamines are completely prohibited for therapeutic distribution. Methylphenidate is theoretically registered under restricted psychotropic guidelines.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "sante.gov.ml"
-      ],
-      "notes": "Sourcing challenges are extreme. Supplies are rarely tracked outside specific institutional channels in Bamako.",
-      "countryname": "Mali"
-    },
-    "MR": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Direction de la Pharmacie et du Laboratoire. Psychotropic controls are exceptionally high to block illicit transit pipelines. Amphetamines are banned. Methylphenidate is heavily restricted and unavailable commercially.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "sante.gov.mr"
-      ],
-      "notes": "Unverified stimulant medications found at security points carry a high risk of strict legal or border interdiction without exhaustive ministerial paperwork.",
-      "countryname": "Mauritania"
-    },
-    "MA": {
-      "tier": 2,
-      "confidence": "high",
-      "evidence": "Regulated by the Direction du Médicament et de la Pharmacie (DMP). Methylphenidate is fully approved and strictly cataloged under the 'Tableau A' narcotic designation. Atomoxetine is approved. Amphetamines are strictly unapproved.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "sante.gov.ma"
-      ],
-      "notes": "Prescription renewals are strictly capped at limited-day cycles (typically 28 days) and require rigorous oversight from licensed neurologists or psychiatrists.",
-      "countryname": "Morocco"
-    },
-    "NE": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Direction de la Pharmacie et de la Médecine Traditionnelle. Therapeutic amphetamines are completely illegal. Methylphenidate is structurally controlled under psychotropic schedules with no routine domestic commercial distribution pipeline.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "gouv.ne"
-      ],
-      "notes": "Severe systemic shortages disrupt mental health therapeutics. Carrying stimulants across internal security checkpoints is heavily restricted.",
-      "countryname": "Niger"
-    },
-    "RW": {
-      "tier": 1,
-      "confidence": "high",
-      "evidence": "Regulated by the Rwanda Food and Drugs Authority (Rwanda FDA). Achieved WHO Maturity Level 3. Methylphenidate and atomoxetine are officially registered on the national list of approved human medicines. Amphetamines are not registered.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": true
-      },
-      "sources": [
-        "rwandafda.gov.rw"
-      ],
-      "notes": "Strictly monitored as a controlled psychotropic substance. Dispensing requires validated tracking records from regional referral medical complexes.",
-      "countryname": "Rwanda"
-    },
-    "SL": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Pharmacy Board of Sierra Leone. Commercial licensing registries contain no valid active listings for therapeutic amphetamines or atomoxetine. Methylphenidate is tightly managed under hazardous drug laws to prevent abuse.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://pharmacyboard.gov.sl"
-      ],
-      "notes": "Clinical diagnostic frames for ADHD are extremely sparse. Travelers must declare medications clearly with verified stamps to avoid seizure.",
-      "countryname": "Sierra Leone"
-    },
-    "SO": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Somali National Medicines Regulatory Authority (NMRA). Modern central nervous system stimulants (amphetamines and methylphenidate) are not standardly registered, tracked, or distributed in the standard public healthcare sector.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "moh.gov.so"
-      ],
-      "notes": "Pharmaceutical pipelines lack standardized central tracking systems for psychotropics. Possession of highly active stimulants carries severe risk without exhaustive official diplomatic verification.",
-      "countryname": "Somalia"
-    },
-    "SS": {
-      "tier": 3,
-      "confidence": "low",
-      "evidence": "Regulated by the Ministry of Health. Due to extreme institutional challenges, national procurement does not accommodate modern ADHD psychopharmacology. Amphetamines are completely prohibited.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": false,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "http://moh.gov.ss"
-      ],
-      "notes": "Supply chain is virtually non-existent for therapeutic stimulants. Bringing these compounds into transit zones without strict pre-clearance is highly discouraged.",
-      "countryname": "South Sudan"
-    },
-    "TG": {
-      "tier": 3,
-      "confidence": "medium",
-      "evidence": "Regulated by the Direction de la Pharmacie, du Médicament et des Laboratoires (DPML). Methylphenidate is cataloged under tight psychotropic controls in alignment with Francophone regulatory matrices. Amphetamines are strictly unapproved.",
-      "last_verified": "2026-07",
-      "approved": {
-        "methylphenidate": true,
-        "dexamphetamine": false,
-        "lisdexamfetamine": false,
-        "mixed_amphetamine_salts": false,
-        "atomoxetine": false
-      },
-      "sources": [
-        "https://togo.gouv.tg/"
-      ],
-      "notes": "Stocks are limited and restricted to premier clinical networks in Lomé. Customs require official tracking certificates.",
-      "countryname": "Togo"
     }
   }
 }

@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "purpose": "Per-condition strengths (blue, left) and weaknesses (red, right) as circles for abstract gradient visualization.",
+    "size_scale": "0.0 to 1.0, relative magnitude within this dataset only — not a clinical or statistical scale.",
+    "size_basis": {
+      "measured": "Derived from a reported effect size or percentage in the source text.",
+      "described": "No effect size given — sized from qualitative language (e.g. 'significant', 'reliable', 'broad', 'small').",
+      "none_found": "Source explicitly states no reliable strength exists for this domain."
+    },
+    "source": "user-provided literature summary, see references in original doc"
+  },
+  "conditions": [
+    {
+      "id": "asd",
+      "label": "Autism Spectrum Disorder",
+      "strengths": [
+        {
+          "label": "Visuospatial perception",
+          "size": 0.55,
+          "size_basis": "described",
+          "note": "Relative strength vs. neurotypical controls (Kuo & Eack, 2020)."
+        },
+        {
+          "label": "Pattern-based reasoning",
+          "size": 0.55,
+          "size_basis": "described",
+          "note": "Relative strength (Kuo & Eack, 2020)."
+        },
+        {
+          "label": "Problem-solving",
+          "size": 0.5,
+          "size_basis": "described",
+          "note": "Relative strength (Kuo & Eack, 2020)."
+        }
+      ],
+      "weaknesses": [
+        {
+          "label": "Working memory",
+          "size": 0.4,
+          "size_basis": "described",
+          "note": "'Significantly smaller impairments' than other neurodevelopmental conditions, but present."
+        },
+        {
+          "label": "Language processing",
+          "size": 0.4,
+          "size_basis": "described",
+          "note": "Reliable deficit vs. controls."
+        },
+        {
+          "label": "Theory of Mind",
+          "size": 0.4,
+          "size_basis": "described",
+          "note": "Reliable deficit vs. controls."
+        }
+      ]
+    },
+    {
+      "id": "ocd",
+      "label": "Obsessive-Compulsive Disorder",
+      "strengths": [],
+      "weaknesses": [
+        {
+          "label": "Response inhibition",
+          "size": 0.7,
+          "size_basis": "described",
+          "note": "Significant executive function impairment (Bhattacharya et al., 2023)."
+        },
+        {
+          "label": "Cognitive flexibility",
+          "size": 0.7,
+          "size_basis": "described",
+          "note": "Significant executive function impairment."
+        },
+        {
+          "label": "Planning",
+          "size": 0.65,
+          "size_basis": "described",
+          "note": "Significant executive function impairment."
+        },
+        {
+          "label": "Decision-making",
+          "size": 0.65,
+          "size_basis": "described",
+          "note": "Significant executive function impairment."
+        },
+        {
+          "label": "Theory of Mind",
+          "size": 0.5,
+          "size_basis": "described",
+          "note": "Bora, 2022."
+        },
+        {
+          "label": "Facial emotion recognition (disgust)",
+          "size": 0.5,
+          "size_basis": "described",
+          "note": "Bora, 2022."
+        }
+      ],
+      "notes": "Source explicitly states meta-analytic literature does not establish a cognitive strength for OCD; 'hyper-focus' claims are anecdotal."
+    },
+    {
+      "id": "bipolar",
+      "label": "Bipolar Disorder",
+      "strengths": [
+        {
+          "label": "Divergent thinking / creative potential",
+          "size": 0.15,
+          "size_basis": "measured",
+          "note": "Meta-analytic effect size d=0.11 — statistically significant but very small (Forthmann et al., 2023)."
+        }
+      ],
+      "weaknesses": [
+        {
+          "label": "Sustained attention",
+          "size": 0.65,
+          "size_basis": "described",
+          "note": "Broad deficit, often persists even in stable (euthymic) phases."
+        },
+        {
+          "label": "Verbal memory",
+          "size": 0.65,
+          "size_basis": "described",
+          "note": "Broad deficit, persists in stable phases."
+        },
+        {
+          "label": "Executive functioning",
+          "size": 0.65,
+          "size_basis": "described",
+          "note": "Broad deficit, persists in stable phases."
+        }
+      ],
+      "notes": "Creativity link follows an inverted-U: mild traits may help, severe episodes impair. Unaffected relatives outperform patients on creativity/success but that's a separate population, not included here."
+    },
+    {
+      "id": "anxiety",
+      "label": "Anxiety Disorders",
+      "strengths": [
+        {
+          "label": "Task accuracy (performance effectiveness)",
+          "size": 0.45,
+          "size_basis": "described",
+          "note": "Outperform healthy peers in accuracy on executive function tasks — but caveat: this is compensatory, not enhancement (Attentional Control Theory)."
+        }
+      ],
+      "weaknesses": [
+        {
+          "label": "Reaction time / processing speed",
+          "size": 0.55,
+          "size_basis": "described",
+          "note": "Slower reaction times (Majeed et al., 2023)."
+        },
+        {
+          "label": "Selective attention",
+          "size": 0.45,
+          "size_basis": "described",
+          "note": "Impaired selective attention."
+        },
+        {
+          "label": "Working memory",
+          "size": 0.45,
+          "size_basis": "described",
+          "note": "Impaired working memory."
+        }
+      ]
+    }
+  ]
+}

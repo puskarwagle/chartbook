@@ -1,0 +1,106 @@
+{
+  "note": "The 20-country WMH study is the primary source for expanded adult ADHD prevalence data. This file documents what we know and limitations.",
+  "source_20_country": {
+    "citation": "Fayyad J, Sampson NA, Hwang I, et al. The descriptive epidemiology of DSM-IV Adult ADHD in the World Health Organization World Mental Health Surveys. ADHD Atten Defic Hyperact Disord. 2017;9(1):47-65. doi:10.1007/s12402-016-0208-3",
+    "url": "https://link.springer.com/article/10.1007/s12402-016-0208-3",
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s12402-016-0208-3.pdf",
+    "status": "PAYWALLED - Could not access full text or PDF",
+    "known_from_abstract": {
+      "total_respondents": 26744,
+      "mean_response_rate_percentage": 68.5,
+      "global_average_prevalence_percentage": 2.8,
+      "prevalence_by_income": {
+        "high_income_percentage": 3.6,
+        "upper_middle_income_percentage": 3.0,
+        "low_lower_middle_income_percentage": 1.4
+      },
+      "countries_surveyed": 20,
+      "note": "The 10 countries from the 2007 study plus 10 additional countries. Country-specific prevalence tables are in the PDF which is behind paywall."
+    }
+  },
+  "source_10_country_original": {
+    "citation": "Fayyad J, De Graaf R, Kessler R, et al. Cross-national prevalence and correlates of adult attention-deficit hyperactivity disorder. Br J Psychiatry. 2007;190(5):402-409.",
+    "status": "ACCESSIBLE - Full data extracted to wmh_10_country_adult_adhd_prevalence.json"
+  },
+  "childhood_persistence_data": {
+    "citation": "Lara C, Fayyad J, de Graaf R, et al. Childhood predictors of adult attention-deficit/hyperactivity disorder: results from the World Health Organization World Mental Health Survey Initiative. Biol Psychiatry. 2009;65(1):46-54. doi:10.1016/j.biopsych.2008.10.005",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2629074/",
+    "status": "ACCESSIBLE - Open access via PMC",
+    "key_data": {
+      "average_persistence_from_childhood_to_adulthood_percentage": 50.0,
+      "persistence_range": "32.8% (Mexico) to 84.1% (Italy)",
+      "persistence_by_country": [
+        {
+          "country": "Colombia",
+          "persistence_percentage": 75.8,
+          "se": 10.1,
+          "n": 33
+        },
+        {
+          "country": "Mexico",
+          "persistence_percentage": 32.8,
+          "se": 7.3,
+          "n": 88
+        },
+        {
+          "country": "USA",
+          "persistence_percentage": 46.0,
+          "se": 4.9,
+          "n": 346
+        },
+        {
+          "country": "Lebanon",
+          "persistence_percentage": 52.4,
+          "se": 15.0,
+          "n": 20
+        },
+        {
+          "country": "Belgium",
+          "persistence_percentage": 71.9,
+          "se": 16.5,
+          "n": 15
+        },
+        {
+          "country": "France",
+          "persistence_percentage": 58.8,
+          "se": 14.0,
+          "n": 38
+        },
+        {
+          "country": "Germany",
+          "persistence_percentage": 67.9,
+          "se": 16.0,
+          "n": 20
+        },
+        {
+          "country": "Italy",
+          "persistence_percentage": 84.1,
+          "se": 11.1,
+          "n": 17
+        },
+        {
+          "country": "Netherlands",
+          "persistence_percentage": 82.3,
+          "se": 14.4,
+          "n": 22
+        },
+        {
+          "country": "Spain",
+          "persistence_percentage": 33.6,
+          "se": 20.6,
+          "n": 30
+        }
+      ]
+    }
+  },
+  "workplace_impact_source": {
+    "citation": "de Graaf R et al. The prevalence and effects of adult attention-deficit/hyperactivity disorder (ADHD) on the performance of workers: results from the WHO World Mental Health Survey Initiative. Occup Environ Med. 2008;65(12):835-842.",
+    "url": "https://www.researchgate.net/publication/5344712_The_prevalence_and_effects_of_Adult_Attention-Deficithyperactivity_Disorder_ADHD_on_the_performance_of_workers_Results_from_the_WHO_World_Mental_Health_Survey_Initiative",
+    "status": "BLOCKED - ResearchGate returned 403"
+  },
+  "recommended_next_steps": [
+    "To get the 20-country data, someone with institutional access needs to download the Springer PDF and manually transcribe Table 1 (prevalence by country)",
+    "The 20-country study includes 10 additional countries beyond the original 10: likely includes Iraq, Japan, New Zealand, Northern Ireland, Peru, Poland, Portugal, Romania, and others",
+    "Alternative: contact the authors or check Harvard WMH data repository (www.hcp.med.harvard.edu/wmh) for public use data files"
+  ]
+}
