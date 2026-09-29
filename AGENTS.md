@@ -18,8 +18,10 @@ ESLint 10 (flat config), Vitest 4 + jsdom. No Prettier configured.
 Single-page app. `src/routes/+page.svelte` is the dashboard shell — it renders a sidebar and switches views via an if/else chain keyed on `activeId`. Adding a new view requires:
 
 1. Create `src/lib/components/YourView.svelte`
-2. Import it in `src/routes/+page.svelte` and add entries to `COMPONENTS`, `CATEGORIES`, and the if/else block
+2. Import it in `src/routes/+page.svelte` and add entries to `COMPONENTS`, `CATEGORIES`, and the if/else block. Labels are i18n keys — add `nav.<id>` (+ `viewInfo.<id>` prose) to `src/lib/i18n/locales/en.json` (canonical; `ne.json`/`hi.json` overlays fall back to English when empty)
 3. Data helpers live in `src/lib/data.ts` — import JSON datasets from `data/` (root-level) or `src/lib/data/` (lib-level)
+
+Locale state lives in `src/lib/i18n/store.svelte.ts` (persisted under `app-locale`, synced to `<html lang>`); locale-aware number helpers in `src/lib/i18n/format.ts`.
 
 ## Data
 
