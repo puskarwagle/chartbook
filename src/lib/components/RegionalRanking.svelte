@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
+
 	const regions = [
 		{ region: 'Australasia', prevalence: 6366.3, incidence: 33.74 },
 		{ region: 'Caribbean', prevalence: 6001.95, incidence: null },
@@ -10,8 +13,8 @@
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD Prevalence by Region</h1>
-	<p class="subtitle">Ages 10–24, rates per 100k (2021)</p>
+	<h1 class="title">{t('views.region.title')}</h1>
+	<p class="subtitle">{t('views.region.subtitle')}</p>
 
 	<div class="chart">
 		{#each regions as r}
@@ -20,7 +23,7 @@
 				<div class="label-col">
 					<span class="region-name">{r.region}</span>
 					{#if r.incidence !== null}
-						<span class="region-sub">Incidence: {r.incidence}/100k</span>
+						<span class="region-sub">{interpolate(t('views.region.incidence'), { value: r.incidence })}</span>
 					{/if}
 				</div>
 				<div class="bar-col">
@@ -34,8 +37,8 @@
 	</div>
 
 	<div class="card">
-		<span class="card-label">Australasia leads all regions</span>
-		<span class="card-note">Australia alone: 6,366 per 100k — highest national rate globally</span>
+		<span class="card-label">{t('views.region.cardLabel')}</span>
+		<span class="card-note">{t('views.region.cardNote')}</span>
 	</div>
 </div>
 

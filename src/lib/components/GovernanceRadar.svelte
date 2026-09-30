@@ -3,18 +3,20 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import { govIndicators, govCountryNames, govYear } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	let country1 = $state('USA');
 	let country2 = $state('');
 	let compareMode = $state(false);
 
 	const dimensions = [
-		{ key: 'controlOfCorruption', label: 'Control of Corruption' },
-		{ key: 'ruleOfLaw', label: 'Rule of Law' },
-		{ key: 'govEffectiveness', label: 'Gov. Effectiveness' },
-		{ key: 'regulatoryQuality', label: 'Regulatory Quality' },
-		{ key: 'politicalStability', label: 'Political Stability' },
-		{ key: 'voiceAccountability', label: 'Voice & Accountability' }
+		{ key: 'controlOfCorruption', labelKey: 'views.governance.dimCorruption' },
+		{ key: 'ruleOfLaw', labelKey: 'views.governance.dimRuleOfLaw' },
+		{ key: 'govEffectiveness', labelKey: 'views.governance.dimEffectiveness' },
+		{ key: 'regulatoryQuality', labelKey: 'views.governance.dimRegulatory' },
+		{ key: 'politicalStability', labelKey: 'views.governance.dimStability' },
+		{ key: 'voiceAccountability', labelKey: 'views.governance.dimVoice' }
 	] as const;
 
 	type DimKey = (typeof dimensions)[number]['key'];
@@ -36,6 +38,8 @@
 	const values2 = $derived(compareMode && country2 ? getValues(country2) : null);
 	const name1 = $derived(govCountryNames.get(country1) ?? country1);
 	const name2 = $derived(compareMode && country2 ? (govCountryNames.get(country2) ?? country2) : '');
+
+	const subtitle = $derived(interpolate(t('views.governance.subtitle'), { year: govYear }));
 
 	const option = $derived.by((): echarts.EChartsCoreOption => {
 		const series: Record<string, unknown>[] = [
@@ -70,7 +74,7 @@
 				data: values2 && name2 ? [name1, name2] : [name1]
 			},
 			radar: {
-				indicator: dimensions.map((d) => ({ name: d.label, min: -2.5, max: 2.5 })),
+				indicator: dimensions.map((d) => ({ name: t(d.labelKey), min: -2.5, max: 2.5 })),
 				axisName: { color: '#aaa', fontSize: 9 },
 				splitLine: { lineStyle: { color: 'rgba(255,255,255,0.08)' } },
 				splitArea: { show: false },
@@ -82,12 +86,12 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Governance Scores</h1>
-	<p class="subtitle">World Bank Worldwide Governance Indicators ({govYear}) — ECharts</p>
+	<h1 class="title">{t('views.governance.title')}</h1>
+	<p class="subtitle">{subtitle}</p>
 
 	<div class="controls">
 		<div class="select-group">
-			<label class="select-label" for="gov-country-1">Country 1</label>
+			<label class="select-label" for="gov-country-1">{t('views.governance.country1')}</label>
 			<select id="gov-country-1" class="select" bind:value={country1}>
 				{#each allCountryCodes as c}
 					<option value={c.code}>{c.name}</option>
@@ -95,13 +99,13 @@
 			</select>
 		</div>
 		<button class="compare-btn" class:active={compareMode} onclick={() => compareMode = !compareMode}>
-			{compareMode ? 'Comparing' : 'Compare'}
+			{compareMode ? t('views.governance.comparing') : t('views.governance.compare')}
 		</button>
 		{#if compareMode}
 			<div class="select-group">
-				<label class="select-label" for="gov-country-2">Country 2</label>
+				<label class="select-label" for="gov-country-2">{t('views.governance.country2')}</label>
 				<select id="gov-country-2" class="select" bind:value={country2}>
-					<option value="">Select...</option>
+					<option value="">{t('views.governance.select')}</option>
 					{#each allCountryCodes as c}
 						<option value={c.code}>{c.name}</option>
 					{/each}

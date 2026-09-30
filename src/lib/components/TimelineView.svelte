@@ -1,20 +1,21 @@
 <script lang="ts">
 	import { COLORS } from '$lib/colors';
+	import { t } from '$lib/i18n/store.svelte';
 
-	const events = [
-		{ year: 1937, label: 'Amphetamine first prescribed for ADHD', tier: '1' as const },
-		{ year: 1955, label: 'Methylphenidate (Ritalin) introduced', tier: '2' as const },
-		{ year: 1996, label: 'Atomoxetine (Strattera) approved', tier: '3' as const },
-		{ year: 2002, label: 'Extended-release formulations become standard', tier: '1' as const },
-		{ year: 2021, label: 'Vynse (lisdexamfetamine) approved in EU', tier: '1' as const },
-	];
+	const events = $derived([
+		{ year: 1937, label: t('views.timeline.event1937'), tier: '1' as const },
+		{ year: 1955, label: t('views.timeline.event1955'), tier: '2' as const },
+		{ year: 1996, label: t('views.timeline.event1996'), tier: '3' as const },
+		{ year: 2002, label: t('views.timeline.event2002'), tier: '1' as const },
+		{ year: 2021, label: t('views.timeline.event2021'), tier: '1' as const }
+	]);
 
 	let selected = $state<number | null>(null);
 </script>
 
 <div class="timeline-view">
-	<h1 class="timeline-title">ADHD Treatment Timeline</h1>
-	<p class="timeline-subtitle">Key milestones in stimulant medication history</p>
+	<h1 class="timeline-title">{t('views.timeline.title')}</h1>
+	<p class="timeline-subtitle">{t('views.timeline.subtitle')}</p>
 
 	<div class="timeline">
 		<div class="timeline-line"></div>

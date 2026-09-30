@@ -1,5 +1,7 @@
 <script lang="ts">
 	import readme from '../../../data/README_DATA.json';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	const dataModules = import.meta.glob<{
 		default: unknown;
@@ -76,13 +78,15 @@
 	function closeViewer() {
 		selected = null;
 	}
+
+	const subtitle = $derived(interpolate(t('views.dataexplorer.subtitle'), { count: files.length }));
 </script>
 
 <div class="explorer">
 	{#if selected}
 		<div class="viewer">
 			<div class="viewer-header">
-				<button class="back-btn" onclick={closeViewer}>&larr; Back to files</button>
+				<button class="back-btn" onclick={closeViewer}>&larr; {t('views.dataexplorer.back')}</button>
 				<h2 class="viewer-title">{selected.label}</h2>
 				{#if selected.source}
 					<p class="viewer-source">{selected.source}</p>
@@ -91,15 +95,15 @@
 			{#if loading}
 				<div class="spinner-container">
 					<div class="spinner"></div>
-					<span>Loading...</span>
+					<span>{t('views.dataexplorer.loading')}</span>
 				</div>
 			{:else}
 				<pre class="json-block"><code>{formattedJson}</code></pre>
 			{/if}
 		</div>
 	{:else}
-		<h1 class="explorer-title">Data Files</h1>
-		<p class="explorer-subtitle">{files.length} files &middot; Click to view contents</p>
+		<h1 class="explorer-title">{t('views.dataexplorer.title')}</h1>
+		<p class="explorer-subtitle">{subtitle}</p>
 		<div class="card-grid">
 			{#each files as file}
 				<button class="card" onclick={() => selectFile(file)}>

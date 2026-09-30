@@ -3,6 +3,8 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { prisonData } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	const sorted = [...prisonData].sort(
 		(a, b) => b.prison_population_rate_per_100k - a.prison_population_rate_per_100k
@@ -16,7 +18,7 @@
 
 	const names = top20.map((r) => `#${r.rank}`);
 
-	const option: echarts.EChartsCoreOption = {
+	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
 		tooltip: {
@@ -26,7 +28,12 @@
 			formatter: (params: unknown) => {
 				const p = (params as { dataIndex: number; value: number; marker: string }[])[0];
 				const row = top20[p.dataIndex];
-				return `<b>Rank #${row.rank}</b><br/>${p.marker} Rate: <b>${row.prison_population_rate_per_100k}/100k</b><br/><span style="color:#888">Prison population: ${row.prison_population_total.toLocaleString()} (country names unavailable in source)</span>`;
+				return interpolate(t('views.prisonmh.tooltip'), {
+					rank: row.rank,
+					marker: p.marker,
+					rate: row.prison_population_rate_per_100k,
+					total: row.prison_population_total.toLocaleString()
+				});
 			}
 		},
 		grid: { left: 8, right: 72, top: 32, bottom: 32, containLabel: true },
@@ -56,22 +63,26 @@
 					color: '#fca5a5',
 					fontSize: 10,
 					fontWeight: 600,
-					formatter: (p: { value: number }) => `${p.value}/100k`
+					formatter: (p: { value: number }) => interpolate(t('views.prisonmh.barLabel'), { value: p.value })
 				},
 				markLine: {
 					symbol: 'none',
 					lineStyle: { color: PALETTE.amber, type: 'dashed', width: 1.5 },
-					label: { color: PALETTE.amber, fontSize: 9, formatter: `Global avg: ${globalAvg.toFixed(0)}/100k` },
+					label: {
+						color: PALETTE.amber,
+						fontSize: 9,
+						formatter: () => interpolate(t('views.prisonmh.globalAvg'), { value: globalAvg.toFixed(0) })
+					},
 					data: [{ xAxis: globalAvg }]
 				}
 			}
 		]
-	};
+	});
 </script>
 
 <div class="view">
-	<h1 class="title">Prison Population & Mental Health</h1>
-	<p class="subtitle">Global incarceration rates — ADHD is 4–10× overrepresented in prisons worldwide — ECharts</p>
+	<h1 class="title">{t('views.prisonmh.title')}</h1>
+	<p class="subtitle">{t('views.prisonmh.subtitle')}</p>
 
 	<div class="chart-container">
 		<EChart {option} />
@@ -79,12 +90,12 @@
 
 	<div class="cards">
 		<div class="card">
-			<span class="card-label">ADHD prevalence in prisons: 25–40%</span>
-			<span class="card-note">vs ~3.5% in general population. Up to 8× overrepresentation across studies.</span>
+			<span class="card-label">{t('views.prisonmh.card1Label')}</span>
+			<span class="card-note">{t('views.prisonmh.card1Note')}</span>
 		</div>
 		<div class="card">
-			<span class="card-label">Only 7% had childhood diagnosis</span>
-			<span class="card-note">Most ADHD prisoners were never identified or treated — a systemic failure of screening and support.</span>
+			<span class="card-label">{t('views.prisonmh.card2Label')}</span>
+			<span class="card-note">{t('views.prisonmh.card2Note')}</span>
 		</div>
 	</div>
 </div>

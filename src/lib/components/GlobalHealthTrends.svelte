@@ -3,13 +3,14 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import { wbTimeSeries, wbGlobalAverage, countryName, gdpLatestRows } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
 
 	type Indicator = 'life_expectancy' | 'infant_mortality' | 'maternal_mortality';
 
-	const INDICATORS: { key: Indicator; label: string; unit: string }[] = [
-		{ key: 'life_expectancy', label: 'Life Expectancy', unit: 'years' },
-		{ key: 'infant_mortality', label: 'Infant Mortality', unit: 'per 1k' },
-		{ key: 'maternal_mortality', label: 'Maternal Mortality', unit: 'per 100k' }
+	const INDICATORS: { key: Indicator; labelKey: string; unitKey: string }[] = [
+		{ key: 'life_expectancy', labelKey: 'indicators.lifeExpectancy', unitKey: 'views.healthtrends.unitYears' },
+		{ key: 'infant_mortality', labelKey: 'indicators.infantMortality', unitKey: 'views.healthtrends.unitPer1k' },
+		{ key: 'maternal_mortality', labelKey: 'indicators.maternalMortality', unitKey: 'views.healthtrends.unitPer100k' }
 	];
 
 	const LINE_COLORS = [
@@ -33,10 +34,11 @@
 		return series;
 	});
 
-	const unit = $derived(INDICATORS.find((i) => i.key === indicator)?.unit ?? '');
+	const unit = $derived(t(INDICATORS.find((i) => i.key === indicator)?.unitKey ?? 'views.healthtrends.unitYears'));
 
 	const option = $derived.by((): echarts.EChartsCoreOption => {
 		const u = unit;
+		const avgLabel = t('views.healthtrends.globalAvg');
 		return {
 			backgroundColor: 'transparent',
 			...BASE_ANIMATION,
@@ -47,12 +49,12 @@
 			legend: {
 				bottom: 0,
 				textStyle: { color: PALETTE.muted, fontSize: 9 },
-				data: ['Global Avg', ...allSeries.map((s) => s.name)]
+				data: [avgLabel, ...allSeries.map((s) => s.name)]
 			},
 			grid: { left: 56, right: 24, top: 24, bottom: 64 },
 			xAxis: {
 				type: 'value',
-				name: 'Year',
+				name: t('views.healthtrends.axisYear'),
 				nameLocation: 'middle',
 				nameGap: 30,
 				nameTextStyle: { color: PALETTE.muted },
@@ -69,7 +71,7 @@
 			},
 			series: [
 				{
-					name: 'Global Avg',
+					name: avgLabel,
 					type: 'line',
 					data: globalAvg.map((d) => [d.year, Number(d.value.toFixed(2))]),
 					lineStyle: { color: '#fff', width: 2.5, type: 'dashed', opacity: 0.6 },
@@ -92,13 +94,13 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Global Health Trends</h1>
-	<p class="subtitle">Top 10 economies by GDP — health indicators over time — ECharts</p>
+	<h1 class="title">{t('views.healthtrends.title')}</h1>
+	<p class="subtitle">{t('views.healthtrends.subtitle')}</p>
 
 	<div class="controls">
 		{#each INDICATORS as ind}
 			<button class="ind-btn" class:active={indicator === ind.key} onclick={() => indicator = ind.key}>
-				{ind.label}
+				{t(ind.labelKey)}
 			</button>
 		{/each}
 	</div>

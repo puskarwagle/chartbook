@@ -3,17 +3,19 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip } from '$lib/echartsTheme';
 	import { happinessYears, happinessForYear } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
 
 	let selectedYear = $state(Math.max(...happinessYears));
 
 	const factors = [
-		{ key: 'gdp', label: 'GDP', color: PALETTE.blue },
-		{ key: 'social', label: 'Social Support', color: PALETTE.purple },
-		{ key: 'health', label: 'Health', color: PALETTE.green },
-		{ key: 'freedom', label: 'Freedom', color: PALETTE.amber },
-		{ key: 'generosity', label: 'Generosity', color: PALETTE.red },
-		{ key: 'corruption', label: 'Corruption', color: PALETTE.cyan },
-		{ key: 'dystopia', label: 'Dystopia', color: PALETTE.gray }
+		{ key: 'gdp', labelKey: 'views.happiness.factorGdp', color: PALETTE.blue },
+		{ key: 'social', labelKey: 'views.happiness.factorSocial', color: PALETTE.purple },
+		{ key: 'health', labelKey: 'views.happiness.factorHealth', color: PALETTE.green },
+		{ key: 'freedom', labelKey: 'views.happiness.factorFreedom', color: PALETTE.amber },
+		{ key: 'generosity', labelKey: 'views.happiness.factorGenerosity', color: PALETTE.red },
+		{ key: 'corruption', labelKey: 'views.happiness.factorCorruption', color: PALETTE.cyan },
+		{ key: 'dystopia', labelKey: 'views.happiness.factorDystopia', color: PALETTE.gray }
 	] as const;
 
 	type FactorKey = (typeof factors)[number]['key'];
@@ -35,7 +37,7 @@
 					const items = params as { seriesName: string; value: number; marker: string; dataIndex: number }[];
 					const row = rows[items[0]?.dataIndex];
 					if (!row) return '';
-					let html = `<b>#${row.rank} ${row.country}</b> — score ${row.score.toFixed(3)}`;
+					let html = `<b>${interpolate(t('views.happiness.tooltipHead'), { rank: row.rank, country: row.country, score: row.score.toFixed(3) })}</b>`;
 					for (const it of items) {
 						html += `<br/>${it.marker} ${it.seriesName}: <b>${Number(it.value).toFixed(3)}</b>`;
 					}
@@ -45,7 +47,7 @@
 			legend: {
 				bottom: 0,
 				textStyle: { color: PALETTE.muted, fontSize: 10 },
-				data: factors.map((f) => f.label)
+				data: factors.map((f) => t(f.labelKey))
 			},
 			grid: { left: 8, right: 56, top: 16, bottom: 64, containLabel: true },
 			xAxis: {
@@ -63,7 +65,7 @@
 				axisLabel: { color: PALETTE.text, fontSize: 10.5 }
 			},
 			series: factors.map((f, fi) => ({
-				name: f.label,
+				name: t(f.labelKey),
 				type: 'bar',
 				stack: 'score',
 				data: rows.map((r) => Number((r[f.key as FactorKey] ?? 0).toFixed(3))),
@@ -76,11 +78,13 @@
 			}))
 		};
 	});
+
+	const subtitle = $derived(interpolate(t('views.happiness.subtitle'), { year: selectedYear }));
 </script>
 
 <div class="view">
-	<h1 class="title">World Happiness Report</h1>
-	<p class="subtitle">Top 20 countries — factor contributions to life evaluation ({selectedYear}) — ECharts</p>
+	<h1 class="title">{t('views.happiness.title')}</h1>
+	<p class="subtitle">{subtitle}</p>
 
 	<div class="year-controls">
 		{#each happinessYears as y}
@@ -96,7 +100,7 @@
 		{#each factors as f}
 			<span class="legend-item">
 				<span class="dot" style="background:{f.color}"></span>
-				{f.label}
+				{t(f.labelKey)}
 			</span>
 		{/each}
 	</div>

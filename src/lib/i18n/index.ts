@@ -36,25 +36,44 @@ type TierKey = '1' | '2' | '3' | '4' | 'unknown';
 const neCountries = (countriesNe as { countries?: Record<string, string> }).countries ?? {};
 const neStatus = statusNe as { tiers?: Record<string, string>; countries?: Record<string, { notes?: string }> };
 
+interface TierDict {
+	tiers?: { short?: Record<string, string>; descriptions?: Record<string, string> };
+}
+
+const TIER_DICTS = {
+	en: enDict as unknown as TierDict,
+	ne: neViewDict as unknown as TierDict,
+	hi: hiViewDict as unknown as TierDict
+};
+
+function dictTier(locale: string, section: 'short' | 'descriptions', key: string): string | undefined {
+	const dict = TIER_DICTS[locale as keyof typeof TIER_DICTS] ?? TIER_DICTS.en;
+	const hit = dict.tiers?.[section]?.[key];
+	return typeof hit === 'string' && hit.length > 0 ? hit : undefined;
+}
+
+function nonEmpty(value: unknown): string | undefined {
+	return typeof value === 'string' && value.length > 0 ? value : undefined;
+}
+
 /** Short tier label for the active locale (StatsView cards, legends). Falls back to English. */
 export function tierShortLabel(key: TierKey, locale: string): string {
-	if (locale === 'ne') {
-		const hit = neStatus.tiers?.[key];
-		if (typeof hit === 'string' && hit.length > 0) return hit;
-	}
-	const en = (enDict as unknown as Record<string, Record<string, Record<string, string>>>).tiers?.short?.[key];
-	if (typeof en === 'string' && en.length > 0) return en;
-	return key;
+	return (
+		dictTier(locale, 'short', key) ??
+		(locale === 'ne' ? nonEmpty(neStatus.tiers?.[key]) : undefined) ??
+		dictTier('en', 'short', key) ??
+		key
+	);
 }
 
 /** Long tier definition for the active locale. Falls back to countryStatus.json English. */
 export function tierDescription(key: TierKey, locale: string): string {
-	if (locale === 'ne') {
-		const hit = neStatus.tiers?.[key];
-		if (typeof hit === 'string' && hit.length > 0) return hit;
-	}
-	const meta = (statusData as unknown as { _meta?: { tiers?: Record<string, string> } })._meta?.tiers?.[key];
-	return meta ?? key;
+	return (
+		dictTier(locale, 'descriptions', key) ??
+		(locale === 'ne' ? nonEmpty(neStatus.tiers?.[key]) : undefined) ??
+		nonEmpty((statusData as unknown as { _meta?: { tiers?: Record<string, string> } })._meta?.tiers?.[key]) ??
+		key
+	);
 }
 
 /**

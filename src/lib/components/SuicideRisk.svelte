@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { t } from '$lib/i18n/store.svelte';
+	import { interpolate } from '$lib/i18n/index';
+
 	const risks = [
 		{
-			name: 'Suicidal Ideation',
+			nameKey: 'views.suicide.riskIdeation',
 			or: 3.956,
 			ciLow: 1.996,
 			ciHigh: 7.841,
@@ -9,7 +12,7 @@
 			p: '< 0.001'
 		},
 		{
-			name: 'Suicide Death',
+			nameKey: 'views.suicide.riskDeath',
 			or: 3.891,
 			ciLow: 2.103,
 			ciHigh: 7.198,
@@ -17,7 +20,7 @@
 			p: '< 0.001'
 		},
 		{
-			name: 'Suicide Attempt',
+			nameKey: 'views.suicide.riskAttempt',
 			or: 3.344,
 			ciLow: 1.682,
 			ciHigh: 6.650,
@@ -25,7 +28,7 @@
 			p: '0.001'
 		},
 		{
-			name: 'Overall Suicidality',
+			nameKey: 'views.suicide.riskOverall',
 			or: 3.336,
 			ciLow: 2.201,
 			ciHigh: 5.057,
@@ -50,8 +53,8 @@
 </script>
 
 <div class="view">
-	<h1 class="title">ADHD & Suicide Risk</h1>
-	<p class="subtitle">Odds ratios from longitudinal meta-analysis (Garas 2025)</p>
+	<h1 class="title">{t('views.suicide.title')}</h1>
+	<p class="subtitle">{t('views.suicide.subtitle')}</p>
 
 	<div class="cards">
 		{#each risks as r}
@@ -61,8 +64,8 @@
 					<div class="card-bar-or" style="width:{orWidth(r.or)}%"></div>
 				</div>
 				<div class="card-or">{r.or.toFixed(1)}×</div>
-				<div class="card-label">higher risk of {r.name.toLowerCase()}</div>
-				<div class="card-meta">95% CI [{r.ciLow.toFixed(1)}–{r.ciHigh.toFixed(1)}] · {r.nStudies} studies</div>
+				<div class="card-label">{interpolate(t('views.suicide.higherRisk'), { name: t(r.nameKey).toLowerCase() })}</div>
+				<div class="card-meta">{interpolate(t('views.suicide.cardMeta'), { lo: r.ciLow.toFixed(1), hi: r.ciHigh.toFixed(1), n: r.nStudies })}</div>
 			</div>
 		{/each}
 	</div>
@@ -70,18 +73,18 @@
 	<div class="summary">
 		<div class="summary-card">
 			<span class="summary-value">3.3×</span>
-			<span class="summary-label">overall suicidality risk</span>
-			<span class="summary-note">OR 3.34, 95% CI [2.20–5.06]</span>
+			<span class="summary-label">{t('views.suicide.sum1Label')}</span>
+			<span class="summary-note">{t('views.suicide.sum1Note')}</span>
 		</div>
 		<div class="summary-card">
 			<span class="summary-value">140k</span>
-			<span class="summary-label">ADHD youth studied</span>
-			<span class="summary-note">vs 4.3M controls across 9 studies</span>
+			<span class="summary-label">{t('views.suicide.sum2Label')}</span>
+			<span class="summary-note">{t('views.suicide.sum2Note')}</span>
 		</div>
 		<div class="summary-card">
 			<span class="summary-value">≥10yr</span>
-			<span class="summary-label">follow-up needed</span>
-			<span class="summary-note">Risk significant only with long follow-up</span>
+			<span class="summary-label">{t('views.suicide.sum3Label')}</span>
+			<span class="summary-note">{t('views.suicide.sum3Note')}</span>
 		</div>
 	</div>
 </div>

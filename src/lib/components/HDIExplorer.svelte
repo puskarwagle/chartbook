@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { hdiData } from '$lib/data';
+	import { t } from '$lib/i18n/store.svelte';
 
 	type Tier = 'all' | 'very-high' | 'high' | 'medium' | 'low';
 
 	let tier = $state<Tier>('all');
 	let search = $state('');
 
-	const tiers: { key: Tier; label: string; color: string }[] = [
-		{ key: 'all', label: 'All', color: '#e0e0e0' },
-		{ key: 'very-high', label: 'Very High', color: '#10b981' },
-		{ key: 'high', label: 'High', color: '#3b82f6' },
-		{ key: 'medium', label: 'Medium', color: '#f59e0b' },
-		{ key: 'low', label: 'Low', color: '#ef4444' }
+	const tiers: { key: Tier; labelKey: string; color: string }[] = [
+		{ key: 'all', labelKey: 'views.hdi.tierAll', color: '#e0e0e0' },
+		{ key: 'very-high', labelKey: 'views.hdi.tierVeryHigh', color: '#10b981' },
+		{ key: 'high', labelKey: 'views.hdi.tierHigh', color: '#3b82f6' },
+		{ key: 'medium', labelKey: 'views.hdi.tierMedium', color: '#f59e0b' },
+		{ key: 'low', labelKey: 'views.hdi.tierLow', color: '#ef4444' }
 	];
 
 	function getTier(hdi: number): string {
@@ -40,20 +41,20 @@
 </script>
 
 <div class="view">
-	<h1 class="title">Human Development Index</h1>
-	<p class="subtitle">UNDP rankings with component breakdown — life expectancy, education, income</p>
+	<h1 class="title">{t('views.hdi.title')}</h1>
+	<p class="subtitle">{t('views.hdi.subtitle')}</p>
 
 	<div class="controls">
 		<input
 			type="text"
 			class="search"
-			placeholder="Search country..."
+			placeholder={t('views.hdi.search')}
 			bind:value={search}
 		/>
 		<div class="tier-btns">
-			{#each tiers as t}
-				<button class="tier-btn" class:active={tier === t.key} onclick={() => tier = t.key} style="--c:{t.color}">
-					{t.label}
+			{#each tiers as tr}
+				<button class="tier-btn" class:active={tier === tr.key} onclick={() => tier = tr.key} style="--c:{tr.color}">
+					{t(tr.labelKey)}
 				</button>
 			{/each}
 		</div>
@@ -88,9 +89,9 @@
 	</div>
 
 	<div class="legend">
-		<span class="legend-item"><span class="dot" style="background:#10b981"></span> Life Expectancy</span>
-		<span class="legend-item"><span class="dot" style="background:#3b82f6"></span> Education</span>
-		<span class="legend-item"><span class="dot" style="background:#8b5cf6"></span> Income (GNI)</span>
+		<span class="legend-item"><span class="dot" style="background:#10b981"></span> {t('indicators.lifeExpectancy')}</span>
+		<span class="legend-item"><span class="dot" style="background:#3b82f6"></span> {t('views.hdi.legendEducation')}</span>
+		<span class="legend-item"><span class="dot" style="background:#8b5cf6"></span> {t('views.hdi.legendIncome')}</span>
 	</div>
 </div>
 

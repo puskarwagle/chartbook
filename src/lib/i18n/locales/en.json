@@ -112,6 +112,10 @@
 		"toggleSidebar": "Toggle sidebar",
 		"untitled": "Untitled {n}",
 		"countriesTracked": "{count} countries tracked",
+		"male": "Male",
+		"female": "Female",
+		"males": "Males",
+		"females": "Females",
 		"language": "Language"
 	},
 	"viewInfoHeadings": {
@@ -289,6 +293,252 @@
 			"source": "All files under data/ plus their documentation in data/README_DATA.json.",
 			"insight": "Every chart in this dashboard traces back to a file you can open here — the fastest way to answer “where did that number come from?”.",
 			"limitation": "Raw files include mixed vintages, missing values, and aggregate codes; the views apply cleaning (e.g. dropping World Bank aggregates) that you must replicate for exact matches."
+		}
+	},
+	"views": {
+		"stats": {
+			"title": "Global ADHD Treatment Overview"
+		},
+		"comorbid": {
+			"title": "Comorbidities in Prison ADHD",
+			"subtitle": "Ginsberg 2010 — 30 confirmed ADHD cases, high-security Swedish prison — ECharts · JSON-driven",
+			"tooltip": "{value}% of ADHD cases",
+			"note": "n = {confirmed} confirmed ADHD cases (of {assessed} assessed from {screened} screened)",
+			"cardLabel": "100% had lifetime substance use disorder",
+			"cardNote": "Only 7% had a childhood ADHD diagnosis despite most needing services"
+		},
+		"timeline": {
+			"title": "ADHD Treatment Timeline",
+			"subtitle": "Key milestones in stimulant medication history",
+			"event1937": "Amphetamine first prescribed for ADHD",
+			"event1955": "Methylphenidate (Ritalin) introduced",
+			"event1996": "Atomoxetine (Strattera) approved",
+			"event2002": "Extended-release formulations become standard",
+			"event2021": "Vynse (lisdexamfetamine) approved in EU"
+		},
+		"age": {
+			"title": "ADHD Prevalence by Age Group",
+			"subtitle": "Ages 10–24, global rates per 100k (2021) — ECharts · JSON-driven",
+			"tooltip": "{value} / 100k",
+			"legendPrevalence": "Prevalence (per 100k)",
+			"legendIncidence": "Incidence (per 100k)",
+			"axisPrevalence": "prevalence / 100k",
+			"axisIncidence": "incidence / 100k",
+			"cardLabel": "All ADHD incidence occurs ages 10–14",
+			"cardNote": "Onset is before age 12 per GBD definition"
+		},
+		"sdi": {
+			"title": "SDI vs ADHD Prevalence",
+			"subtitle": "Sociodevelopmental Index vs prevalence rate % by region (under-20, 2021) — ECharts · JSON-driven",
+			"tooltip": "<b>{region}</b><br/>SDI: <b>{sdi}</b><br/>Prevalence: <b>{pct}%</b>",
+			"axisX": "Sociodevelopmental Index (SDI)",
+			"axisY": "Prevalence %",
+			"cardLabel": "Nonlinear positive correlation",
+			"cardNote": "Higher SDI generally correlates with higher ADHD prevalence. High SDI regions showed the greatest increases over 1990–2021."
+		},
+		"sex": {
+			"title": "ADHD by Sex",
+			"subtitle": "Global prevalence & incidence rates per 100k (ages 10–24, 2021) — ECharts · JSON-driven",
+			"tooltip": "{value} / 100k",
+			"legendPrevalence": "Prevalence (per 100k)",
+			"legendIncidence": "Incidence (per 100k)",
+			"axisPrevalence": "prevalence / 100k",
+			"axisIncidence": "incidence / 100k",
+			"cardLabel": "Males diagnosed 2.5x more often",
+			"cardNote": "Prevalence: {male} vs {female} per 100k · source: {source}"
+		},
+		"prisonmh": {
+			"title": "Prison Population & Mental Health",
+			"subtitle": "Global incarceration rates — ADHD is 4–10× overrepresented in prisons worldwide — ECharts",
+			"tooltip": "<b>Rank #{rank}</b><br/>{marker} Rate: <b>{rate}/100k</b><br/><span style=\"color:#888\">Prison population: {total} (country names unavailable in source)</span>",
+			"barLabel": "{value}/100k",
+			"globalAvg": "Global avg: {value}/100k",
+			"card1Label": "ADHD prevalence in prisons: 25–40%",
+			"card1Note": "vs ~3.5% in general population. Up to 8× overrepresentation across studies.",
+			"card2Label": "Only 7% had childhood diagnosis",
+			"card2Note": "Most ADHD prisoners were never identified or treated — a systemic failure of screening and support."
+		},
+		"sudsex": {
+			"title": "SUD in ADHD by Sex",
+			"subtitle": "Norwegian cohort, ages 18–31 (Moldekleiv 2025, n=49,815 ADHD) — ECharts · JSON-driven",
+			"tooltipHr": "HR ♂ {male}× / ♀ {female}×",
+			"cohortLabel": "{sex} (n={n})",
+			"cardLabel": "Females show higher relative risk despite lower prevalence",
+			"cardNote": "Stimulant SUD: HR 8.0× in females vs 7.3× in males — larger relative effect"
+		},
+		"region": {
+			"title": "ADHD Prevalence by Region",
+			"subtitle": "Ages 10–24, rates per 100k (2021)",
+			"incidence": "Incidence: {value}/100k",
+			"cardLabel": "Australasia leads all regions",
+			"cardNote": "Australia alone: 6,366 per 100k — highest national rate globally"
+		},
+		"healthtrends": {
+			"title": "Global Health Trends",
+			"subtitle": "Top 10 economies by GDP — health indicators over time — ECharts",
+			"unitYears": "years",
+			"unitPer1k": "per 1k",
+			"unitPer100k": "per 100k",
+			"globalAvg": "Global Avg",
+			"axisYear": "Year"
+		},
+		"sud": {
+			"title": "ADHD in Substance Use Disorder",
+			"subtitle": "Prevalence of comorbid ADHD by substance type (Rohner 2023) — ECharts · JSON-driven",
+			"tooltip": "<b>{name}</b><br/>{marker} ADHD prevalence: <b>{pct}%</b> (95% CI {lo}–{hi})<br/><span style=\"color:#888\">n = {n} studies</span>",
+			"barSub": "n={n} studies",
+			"overall": "Overall: {value}%",
+			"card1Label": "~1 in 5 SUD patients have ADHD",
+			"card1Note": "Rohner 2023 — n={patients} across {studies} studies",
+			"card2Label": "Alcohol highest at 25%",
+			"card2Note": "Cocaine 19%, Opioid 18% — wide CIs due to small n"
+		},
+		"prison": {
+			"title": "ADHD in Prison Populations",
+			"subtitle": "Prevalence across meta-analyses vs general population — ECharts · JSON-driven",
+			"tooltip": "<b>{name}</b><br/>{marker} Prevalence: <b>{pct}%</b>{ci}<br/><span style=\"color:#888\">n = {n} — {note}</span>",
+			"tooltipCi": " (95% CI {lo}–{hi})",
+			"tooltipNoCi": " (no CI reported)",
+			"barSub": "n = {n}",
+			"generalPop": "General pop ~{value}%",
+			"card1Label": "1 in 12 prisoners (random sampling)",
+			"card1Note": "Fazel 2024 — corrected for selection bias",
+			"card2Label": "Up to 8x overrepresentation",
+			"card2Note": "Ginsberg 2010 — 40% in long-term male inmates"
+		},
+		"trends": {
+			"title": "ADHD Global Trends",
+			"subtitle": "Ages 10–24, rates per 100k (1990 → 2021)",
+			"labelPrevalence": "Prevalence",
+			"labelIncidence": "Incidence",
+			"labelDalys": "DALYs",
+			"unit": "per 100k",
+			"decline": "decline"
+		},
+		"happiness": {
+			"title": "World Happiness Report",
+			"subtitle": "Top 20 countries — factor contributions to life evaluation ({year}) — ECharts",
+			"tooltipHead": "#{rank} {country} — score {score}",
+			"factorGdp": "GDP",
+			"factorSocial": "Social Support",
+			"factorHealth": "Health",
+			"factorFreedom": "Freedom",
+			"factorGenerosity": "Generosity",
+			"factorCorruption": "Corruption",
+			"factorDystopia": "Dystopia"
+		},
+		"suicide": {
+			"title": "ADHD & Suicide Risk",
+			"subtitle": "Odds ratios from longitudinal meta-analysis (Garas 2025)",
+			"riskIdeation": "Suicidal Ideation",
+			"riskDeath": "Suicide Death",
+			"riskAttempt": "Suicide Attempt",
+			"riskOverall": "Overall Suicidality",
+			"higherRisk": "higher risk of {name}",
+			"cardMeta": "95% CI [{lo}–{hi}] · {n} studies",
+			"sum1Label": "overall suicidality risk",
+			"sum1Note": "OR 3.34, 95% CI [2.20–5.06]",
+			"sum2Label": "ADHD youth studied",
+			"sum2Note": "vs 4.3M controls across 9 studies",
+			"sum3Label": "follow-up needed",
+			"sum3Note": "Risk significant only with long follow-up"
+		},
+		"economy": {
+			"title": "Economic Overview",
+			"subtitle": "Global economic indicators — latest available data by country — ECharts",
+			"statCountries": "Countries",
+			"statAverage": "Global Average",
+			"statMedian": "Median"
+		},
+		"treatment": {
+			"title": "Treatment Access Index",
+			"subtitle": "Composite of healthcare spending, government effectiveness, and HDI",
+			"modeTop": "Top 20",
+			"modeBottom": "Bottom 20",
+			"modeAll": "All",
+			"card1Label": "Treatment access depends on infrastructure",
+			"card1Note": "ADHD diagnosis and treatment require healthcare spending and good health outcomes — both captured in this composite of health expenditure % GDP and life expectancy.",
+			"card2Label": "Low-income countries face barriers",
+			"card2Note": "Countries scoring lowest have underfunded health systems and weak governance, making ADHD treatment nearly unavailable."
+		},
+		"education": {
+			"title": "Education Context",
+			"subtitle": "Pupil-teacher ratios — more students per teacher means less individual attention — ECharts",
+			"tooltip": "{value} pupils/teacher",
+			"groupAll": "All Countries",
+			"groupHigh": "High Income",
+			"groupUpperMiddle": "Upper Middle",
+			"groupLowerMiddle": "Lower Middle",
+			"groupLow": "Low Income",
+			"primary": "Primary",
+			"secondary": "Secondary",
+			"cardLabel": "High ratios = missed ADHD",
+			"cardNote": "In countries with 50+ pupils per teacher, individual learning differences go unnoticed. ADHD children in under-resourced schools are less likely to be identified or supported."
+		},
+		"governance": {
+			"title": "Governance Scores",
+			"subtitle": "World Bank Worldwide Governance Indicators ({year}) — ECharts",
+			"dimCorruption": "Control of Corruption",
+			"dimRuleOfLaw": "Rule of Law",
+			"dimEffectiveness": "Gov. Effectiveness",
+			"dimRegulatory": "Regulatory Quality",
+			"dimStability": "Political Stability",
+			"dimVoice": "Voice & Accountability",
+			"country1": "Country 1",
+			"country2": "Country 2",
+			"compare": "Compare",
+			"comparing": "Comparing",
+			"select": "Select..."
+		},
+		"hdi": {
+			"title": "Human Development Index",
+			"subtitle": "UNDP rankings with component breakdown — life expectancy, education, income",
+			"search": "Search country...",
+			"tierAll": "All",
+			"tierVeryHigh": "Very High",
+			"tierHigh": "High",
+			"tierMedium": "Medium",
+			"tierLow": "Low",
+			"legendEducation": "Education",
+			"legendIncome": "Income (GNI)"
+		},
+		"wealth": {
+			"title": "Wealth & Wellbeing",
+			"subtitle": "GDP per capita vs happiness score ({year}) — color = Gini inequality index — ECharts",
+			"tooltip": "<b>{country}</b><br/>GDP per capita: <b>${gdp}</b><br/>Happiness: <b>{score}</b><br/><span style=\"color:#888\">Gini: {gini}</span>",
+			"na": "n/a",
+			"axisX": "GDP per capita (log scale)",
+			"axisY": "Happiness score",
+			"trendOn": "Trend on",
+			"trendOff": "Trend off",
+			"legendLow": "Low inequality (Gini 25)",
+			"legendHigh": "High inequality (Gini 70)",
+			"cardLabel": "ADHD outcomes improve with economic resources",
+			"cardNote": "But inequality matters as much as wealth — high-GDP + high-Gini countries show worse mental health outcomes. Treatment access correlates with both GDP and low inequality."
+		},
+		"dataexplorer": {
+			"title": "Data Files",
+			"subtitle": "{count} files · Click to view contents",
+			"back": "Back to files",
+			"loading": "Loading..."
+		},
+		"mhmap": {
+			"tipDepression": "Depression:",
+			"tipAnxiety": "Anxiety:",
+			"tipSchizophrenia": "Schizophrenia:",
+			"tipEating": "Eating Disorders:",
+			"tipAlcohol": "Alcohol:",
+			"tipDrugs": "Drugs:",
+			"tipNoData": "No WHO data"
+		},
+		"worldmap": {
+			"names": "Names",
+			"reset": "Reset",
+			"screenshot": "Screenshot",
+			"pinned": "Pinned — click {name} again to unpin",
+			"tierLine": "Tier {tier} — {label}",
+			"metaLine": "Confidence: {confidence} | Evidence: {evidence} | Verified: {verified}",
+			"noData": "No data"
 		}
 	}
 }

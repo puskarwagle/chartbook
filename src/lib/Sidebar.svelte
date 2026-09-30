@@ -277,6 +277,7 @@
 		align-items: center;
 		gap: 0.6rem;
 		flex: 1;
+		min-width: 0;
 		padding: 0.6rem 0.75rem;
 		background: transparent;
 		border: 1px solid transparent;
@@ -288,6 +289,8 @@
 		text-align: left;
 		transition: all 0.15s;
 		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.nav-item:hover {
