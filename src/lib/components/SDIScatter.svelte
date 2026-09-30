@@ -17,7 +17,7 @@
 		...BASE_ANIMATION,
 		tooltip: {
 			trigger: 'item',
-			formatter: (p: any) =>
+			formatter: (p: { dataIndex: number; value: unknown }) =>
 				interpolate(t('views.sdi.tooltip'), {
 					region: sdiData[p.dataIndex as number].region,
 					sdi: (p.value as number[])[0],
@@ -56,7 +56,7 @@
 					position: 'right',
 					color: '#ccc',
 					fontSize: 11,
-					formatter: (p: any) => sdiData[p.dataIndex as number].region
+					formatter: (p: { dataIndex: number }) => sdiData[p.dataIndex as number].region
 				},
 				emphasis: { scale: 1.4 }
 			}

@@ -25,7 +25,10 @@
 		.filter(({ s }) => s.ci_low !== null && s.ci_high !== null)
 		.map(({ s, i }) => [s.ci_low as number, s.ci_high as number, i]);
 
-	function renderWhisker(params: any, api: any) {
+	function renderWhisker(
+		_params: unknown,
+		api: { value: (idx: number) => number; coord: (pt: [number, number]) => [number, number] }
+	) {
 		const low = api.value(0) as number;
 		const high = api.value(1) as number;
 		const idx = api.value(2) as number;
@@ -87,7 +90,7 @@
 					position: 'right',
 					color: PALETTE.text,
 					fontWeight: 700,
-					formatter: (p: any) => {
+					formatter: (p: { dataIndex: number }) => {
 						const s = studies[p.dataIndex as number];
 						return `{b|${s.prevalence}%}\n{s|${interpolate(t('views.prison.barSub'), { n: s.n.toLocaleString() })}}`;
 					},
