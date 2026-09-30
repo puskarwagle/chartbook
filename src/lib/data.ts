@@ -61,15 +61,6 @@ function percentileRanks(values: Map<string, number>): Map<string, number> {
 	return result;
 }
 
-function iso3To2(code3: string): string | undefined {
-	const row = WB.gdp_per_capita?.find(r => r.country_code === code3);
-	if (row) {
-		const iso2 = nameToIso2(row.country);
-		if (iso2) return iso2;
-	}
-	return undefined;
-}
-
 export const happinessData = (() => {
 	const key = Object.keys(WHR)[0];
 	const rows = WHR[key] ?? [];
@@ -227,13 +218,20 @@ export const govCountryNames = (() => {
 })();
 
 export const hdiData = (() => {
-	const table = (undpRaw as any)['Table 1'] ?? [];
+	interface HdiRow {
+		'Table 1. Human Development Index and its components'?: unknown;
+		Back?: unknown;
+		col2?: number;
+		col4?: number;
+		col6?: number;
+		col8?: number;
+		col10?: number;
+	}
+	const table = (undpRaw as Record<string, HdiRow[]>)['Table 1'] ?? [];
 	const results: { rank: number; country: string; hdi: number; lifeExp: number; expectedSchooling: number; meanSchooling: number; gni: number }[] = [];
-	let currentTier = '';
 	for (const row of table) {
 		const tierLabel = row['Table 1. Human Development Index and its components'];
 		if (tierLabel && typeof tierLabel === 'string' && tierLabel.includes('HUMAN DEVELOPMENT')) {
-			currentTier = tierLabel;
 			continue;
 		}
 		if (row.Back !== null && typeof row.Back === 'number' && tierLabel && typeof tierLabel === 'string') {
