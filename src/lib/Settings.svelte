@@ -50,7 +50,7 @@
 	function onNewPageWithTitle() {
 		// Pass title via custom event detail hack: parent reads input through callback.
 		// Simplest: dispatch with title by temporarily storing on window.
-		(window as any).__newPageTitle = newTitle.trim();
+		(window as Window & { __newPageTitle?: string }).__newPageTitle = newTitle.trim();
 		onNewPage();
 		newTitle = '';
 	}

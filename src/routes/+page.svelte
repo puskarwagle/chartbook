@@ -37,7 +37,9 @@
 	interface ComponentEntry {
 		id: string;
 		label: string;
-		component: any;
+		// Svelte components with differing prop types — dynamic render uses
+		// if/else, so unknown avoids generic variance errors.
+		component: unknown;
 	}
 
 	interface Category {
@@ -95,7 +97,7 @@
 
 	function loadCustomPages(): CustomEntry[] {
 		const fromDisk: CustomEntry[] = Array.isArray(customDefaults)
-			? (customDefaults as any[]).map((p) => ({ id: String(p.id), title: String(p.title ?? 'Untitled') }))
+			? (customDefaults as { id: unknown; title?: unknown }[]).map((p) => ({ id: String(p.id), title: String(p.title ?? 'Untitled') }))
 			: [];
 		try {
 			const raw = localStorage.getItem(CUSTOM_LIST_KEY);
@@ -110,14 +112,14 @@
 					return [...byId.entries()].map(([id, title]) => ({ id, title }));
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return fromDisk;
 	}
 
 	function saveCustomPages(pages: CustomEntry[]) {
 		try {
 			localStorage.setItem(CUSTOM_LIST_KEY, JSON.stringify(pages));
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	let customPages = $state<CustomEntry[]>(loadCustomPages());
@@ -129,7 +131,7 @@
 				const parsed = JSON.parse(raw);
 				if (Array.isArray(parsed)) return parsed.filter((x) => typeof x === 'string');
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return [];
 	}
 
@@ -138,21 +140,21 @@
 	function saveHidden(ids: string[]) {
 		try {
 			localStorage.setItem(HIDDEN_KEY, JSON.stringify(ids));
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	function loadCollection(): string {
 		try {
 			const raw = localStorage.getItem(COLLECTION_KEY);
 			if (raw && COLLECTIONS.some((c) => c.id === raw)) return raw;
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return DEFAULT_COLLECTION_ID;
 	}
 
 	function saveCollection(id: string) {
 		try {
 			localStorage.setItem(COLLECTION_KEY, id);
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	let activeCollectionId = $state<string>(loadCollection());
@@ -187,12 +189,12 @@
 			if (stored) {
 				const parsed = JSON.parse(stored);
 				if (Array.isArray(parsed)) {
-					const valid = parsed.filter((id: any) => validIds.includes(id));
+					const valid = parsed.filter((id: unknown) => validIds.includes(id as string));
 					const missing = validIds.filter((id) => !valid.includes(id));
 					return [...valid, ...missing];
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return validIds;
 	}
 
@@ -230,8 +232,8 @@
 	}
 
 	async function handleAddPage() {
-		const rawTitle = (window as any).__newPageTitle as string | undefined;
-		(window as any).__newPageTitle = undefined;
+		const rawTitle = (window as Window & { __newPageTitle?: string }).__newPageTitle as string | undefined;
+		(window as Window & { __newPageTitle?: string }).__newPageTitle = undefined;
 		const title = (rawTitle?.trim() || interpolate(t('common.untitled'), { n: customPages.length + 1 })).slice(0, 80);
 		// Optimistic local id (stable; UI title is renameable separately)
 		const id = `custom-${Date.now().toString(36)}`;
@@ -261,7 +263,7 @@
 					activeId = saved.id;
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	async function handleRenamePage(id: string, newTitle: string) {
@@ -273,7 +275,7 @@
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ id, title: newTitle })
 			});
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	function handleToggleHide(id: string) {
@@ -315,14 +317,14 @@
 		saveHidden(hiddenIds);
 		try {
 			localStorage.removeItem(`custom-page-${id}`);
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		try {
 			await fetch('/api/custom-pages', {
 				method: 'DELETE',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ id })
 			});
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		if (activeId === id) {
 			const first = orderedComponents.find((c) => c.id !== id);
 			activeId = first ? first.id : defaultId;
