@@ -17,7 +17,7 @@
 		try {
 			if (document.fullscreenElement) void document.exitFullscreen();
 			else void container?.requestFullscreen();
-		} catch {}
+		} catch { /* fullscreen not available — ignore */ }
 	}
 
 	function onKey(e: KeyboardEvent) {

@@ -26,7 +26,7 @@
 	}
 
 	function buildFiles(): DataFile[] {
-		const readmeMeta = readme as Record<string, any>;
+		const readmeMeta = readme as Record<string, { source?: string; description?: string }>;
 		const entries: DataFile[] = [];
 
 		for (const [path, mod] of Object.entries(dataModules)) {

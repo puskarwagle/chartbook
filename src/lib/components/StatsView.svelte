@@ -9,7 +9,7 @@
 	const tierCounts = $derived.by(() => {
 		const counts: Record<TierKey, number> = { '1': 0, '2': 0, '3': 0, '4': 0, unknown: 0 };
 		for (const entry of Object.values(statusData.countries)) {
-			const tier = String((entry as any).tier) as TierKey;
+			const tier = String((entry as { tier: unknown }).tier) as TierKey;
 			counts[tier] = (counts[tier] ?? 0) + 1;
 		}
 		return counts;

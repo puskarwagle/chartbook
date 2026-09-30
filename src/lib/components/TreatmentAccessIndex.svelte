@@ -14,8 +14,6 @@
 		return allData;
 	});
 
-	const maxScore = 100;
-
 	function barColor(score: number): string {
 		const t = score / 100;
 		const r = Math.round(220 - t * 200);
