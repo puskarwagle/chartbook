@@ -102,7 +102,7 @@ export function countryNoteLocalized(iso2: string, locale: string, fallbackEngli
 	return fallbackEnglish;
 }
 
-const VIEW_FIELDS = ['what', 'howToRead', 'source', 'insight', 'limitation'] as const;
+const VIEW_FIELDS = ['what', 'howToRead', 'source', 'coverage', 'sample', 'insight', 'limitation'] as const;
 
 /**
  * ViewInfo prose for the active locale. Reads locales/<locale>.json viewInfo
