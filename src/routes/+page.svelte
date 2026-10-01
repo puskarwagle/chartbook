@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Sidebar from '$lib/Sidebar.svelte';
+	import { NAV_GROUPS } from '$lib/navGroups';
 	import WorldMap from '$lib/components/WorldMap.svelte';
+	import BrainRegions from '$lib/components/BrainRegions.svelte';
 	import StatsView from '$lib/components/StatsView.svelte';
 	import TimelineView from '$lib/components/TimelineView.svelte';
 	import AgePyramid from '$lib/components/AgePyramid.svelte';
@@ -57,6 +59,7 @@
 	// re-renders on locale change; untranslated keys fall back to English.
 	const COMPONENTS = $derived<ComponentEntry[]>([
 		{ id: 'worldmap', label: t('nav.worldmap'), component: WorldMap },
+		{ id: 'brain', label: t('nav.brain'), component: BrainRegions },
 		{ id: 'mhmap', label: t('nav.mhmap'), component: MentalHealthWorldMap },
 		{ id: 'stats', label: t('nav.stats'), component: StatsView },
 		{ id: 'timeline', label: t('nav.timeline'), component: TimelineView },
@@ -82,13 +85,9 @@
 		{ id: 'dataexplorer', label: t('nav.dataexplorer'), component: DataExplorer }
 	]);
 
-	const CATEGORIES = $derived<Category[]>([
-		{ name: t('categories.overview'), ids: ['worldmap', 'mhmap', 'stats', 'timeline'] },
-		{ name: t('categories.demographics'), ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
-		{ name: t('categories.adhd'), ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
-		{ name: t('categories.socioeconomic'), ids: ['wealth', 'happiness', 'hdi', 'economy', 'education', 'governance', 'healthtrends', 'treatment'] },
-		{ name: t('categories.reference'), ids: ['dataexplorer'] }
-	]);
+	const CATEGORIES = $derived<Category[]>(
+		NAV_GROUPS.map((g) => ({ name: t(g.key), ids: g.ids }))
+	);
 
 	const CUSTOM_LIST_KEY = 'custom-pages-list';
 	const STORAGE_KEY = 'sidebar-component-order';
@@ -402,6 +401,8 @@
 				<CustomPage pageId={activeCustom.id} title={activeCustom.title} onRename={handleRenamePage} />
 			{:else if activeId === 'worldmap'}
 				<WorldMap />
+			{:else if activeId === 'brain'}
+				<BrainRegions />
 			{:else if activeId === 'stats'}
 				<StatsView />
 			{:else if activeId === 'timeline'}
