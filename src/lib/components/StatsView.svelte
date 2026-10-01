@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { COLORS } from '$lib/colors';
-	import statusData from '$lib/countryStatus.json';
+	import statusData from '../../../data/countryStatus.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { tierShortLabel, interpolate } from '$lib/i18n/index';
 

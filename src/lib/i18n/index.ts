@@ -8,7 +8,7 @@
  */
 import { countryName as baseCountryName } from '$lib/data';
 import { VIEW_INFO, type ViewInfoEntry } from '$lib/viewInfo';
-import statusData from '$lib/countryStatus.json';
+import statusData from '../../../data/countryStatus.json';
 import countriesNe from './countries.ne.json';
 import statusNe from './countryStatus.ne.json';
 import enDict from './locales/en.json';

@@ -3,7 +3,7 @@
 	import html2canvas from 'html2canvas';
 	import { countryFeatures, bordersPath } from '$lib/mapData';
 	import { COLORS } from '$lib/colors';
-	import statusData from '$lib/countryStatus.json';
+	import statusData from '../../../data/countryStatus.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { tierShortLabel, countryNoteLocalized, interpolate } from '$lib/i18n/index';
 
