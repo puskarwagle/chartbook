@@ -1,41 +1,42 @@
 <script lang="ts">
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
+	import { formatSummaryValue, type SummaryValue } from '$lib/summaryFormat';
+	import suicideRaw from '../../../data/suicide_risk_studies.json';
 
-	const risks = [
-		{
-			nameKey: 'views.suicide.riskIdeation',
-			or: 3.956,
-			ciLow: 1.996,
-			ciHigh: 7.841,
-			nStudies: 2,
-			p: '< 0.001'
-		},
-		{
-			nameKey: 'views.suicide.riskDeath',
-			or: 3.891,
-			ciLow: 2.103,
-			ciHigh: 7.198,
-			nStudies: 2,
-			p: '< 0.001'
-		},
-		{
-			nameKey: 'views.suicide.riskAttempt',
-			or: 3.344,
-			ciLow: 1.682,
-			ciHigh: 6.650,
-			nStudies: 6,
-			p: '0.001'
-		},
-		{
-			nameKey: 'views.suicide.riskOverall',
-			or: 3.336,
-			ciLow: 2.201,
-			ciHigh: 5.057,
-			nStudies: 9,
-			p: '< 0.001'
-		}
-	];
+	interface StudyFinding {
+		id: string;
+		nameKey: string;
+		odds_ratio: number;
+		ci_low: number;
+		ci_high: number;
+		n_studies: number;
+		p_value: string;
+		source: string;
+	}
+
+	interface SummaryRow extends SummaryValue {
+		id: string;
+		labelKey: string;
+		noteKey: string;
+		source: string;
+		derivation: string;
+	}
+
+	// Numbers + provenance live in data/suicide_risk_studies.json (Garas et
+	// al. 2025). Display order, label keys, and bar scaling stay here.
+	const { findings, summary } = suicideRaw as unknown as {
+		findings: StudyFinding[];
+		summary: SummaryRow[];
+	};
+
+	const risks = findings.map((f) => ({
+		nameKey: f.nameKey,
+		or: f.odds_ratio,
+		ciLow: f.ci_low,
+		ciHigh: f.ci_high,
+		nStudies: f.n_studies
+	}));
 
 	const maxOr = 8;
 
@@ -71,21 +72,13 @@
 	</div>
 
 	<div class="summary">
-		<div class="summary-card">
-			<span class="summary-value">3.3×</span>
-			<span class="summary-label">{t('views.suicide.sum1Label')}</span>
-			<span class="summary-note">{t('views.suicide.sum1Note')}</span>
-		</div>
-		<div class="summary-card">
-			<span class="summary-value">140k</span>
-			<span class="summary-label">{t('views.suicide.sum2Label')}</span>
-			<span class="summary-note">{t('views.suicide.sum2Note')}</span>
-		</div>
-		<div class="summary-card">
-			<span class="summary-value">≥10yr</span>
-			<span class="summary-label">{t('views.suicide.sum3Label')}</span>
-			<span class="summary-note">{t('views.suicide.sum3Note')}</span>
-		</div>
+		{#each summary as s}
+			<div class="summary-card">
+				<span class="summary-value">{formatSummaryValue(s)}</span>
+				<span class="summary-label">{t(s.labelKey)}</span>
+				<span class="summary-note">{t(s.noteKey)}</span>
+			</div>
+		{/each}
 	</div>
 </div>
 
