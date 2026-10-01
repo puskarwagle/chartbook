@@ -6,7 +6,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 
 ## What It Does
 
-- **24 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
+- **25 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
 - World map with Natural Earth projection (D3-geo + TopoJSON) — color-coded by ADHD medication access tier
 - Statistics, timelines, age pyramids, sex comparisons, regional rankings
 - Trend lines, SDI scatter plots, comorbidity breakdowns, substance use data
@@ -19,6 +19,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 | ID | Label | Description |
 |----|-------|-------------|
 | `worldmap` | World Map | ADHD medication access tiers by country |
+| `brain` | Brain Regions | Interactive ADHD brain-region/function explorer |
 | `stats` | Stats | Global ADHD statistics overview |
 | `timeline` | Timeline | Historical data over time |
 | `age` | By Age | Age pyramid of ADHD prevalence |
@@ -67,7 +68,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 │   │   ├── Sidebar.svelte       # Collapsible sidebar with drag-and-drop reordering
 │   │   ├── countryStatus.json   # Tier data per country (schema v2.0)
 │   │   ├── countryStatus.bak.json # Backup
-│   │   ├── components/          # 24 views + shared helpers (EChart, CustomPage, CustomPagePreview, ViewInfo)
+│   │   ├── components/          # 25 views + shared helpers (EChart, CustomPage, CustomPagePreview, ViewInfo)
 │   │   │   ├── WorldMap.svelte
 │   │   │   ├── StatsView.svelte
 │   │   │   ├── TimelineView.svelte
