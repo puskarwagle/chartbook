@@ -2568,9 +2568,9 @@
       "countryname": "Greenland"
     },
     "AQ": {
-      "tier": 3,
-      "confidence": "high",
-      "evidence": "Antarctica has no central government, local population, or sovereign FDA. All medical rules are governed strictly by the national polar program of the country operating the specific research station (e.g., USAP for McMurdo Station, BAS for Rothera).",
+      "tier": "unknown",
+      "confidence": "low",
+      "evidence": "Antarctica has no central government, local population, or sovereign regulator, so there is no domestic prescribing framework to tier. All medical rules are inherited from the national polar program of the country operating the specific research station (e.g., USAP for McMurdo Station, BAS for Rothera), which means the applicable tier varies by station and by season.",
       "last_verified": "2026-07",
       "approved": {
         "methylphenidate": null,
