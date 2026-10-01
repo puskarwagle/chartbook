@@ -211,6 +211,17 @@
 			.filter((c) => inActiveCollection((c as ComponentEntry).id)) as ComponentEntry[]
 	);
 
+	// The order the sidebar actually renders: category grouping first, but
+	// within each category preserve componentOrder (drag order) — mirrors
+	// Sidebar.svelte groupedItems. Keyboard navigation walks this list so
+	// arrows follow what the user sees.
+	const displayComponents = $derived<ComponentEntry[]>([
+		...ALL_CATEGORIES.flatMap((cat) =>
+			orderedComponents.filter((c) => cat.ids.includes((c as ComponentEntry).id))
+		),
+		...orderedComponents.filter((c) => !ALL_CATEGORIES.some((cat) => cat.ids.includes(c.id)))
+	]);
+
 	// Static default — ids never change across locales, so this stays a const.
 	const defaultId = 'worldmap';
 	let activeId = $state(defaultId);
@@ -220,12 +231,25 @@
 
 	const activeCustom = $derived(customPages.find((p) => p.id === activeId) ?? null);
 
-	const activeIndex = $derived(orderedComponents.findIndex((c) => c.id === activeId));
+	const activeIndex = $derived(displayComponents.findIndex((c) => c.id === activeId));
 
 	function handleReorder(fromIndex: number, toIndex: number) {
+		// fromIndex/toIndex are positions in orderedComponents (visible,
+		// collection-filtered). Map through ids so hidden or out-of-collection
+		// entries in componentOrder don't skew the splice. Dropping onto a
+		// target lands after it when moving forward, before it when moving
+		// backward — either way the item ends up at the target position.
+		const fromId = orderedComponents[fromIndex]?.id;
+		const toId = orderedComponents[toIndex]?.id;
+		if (!fromId || !toId || fromId === toId) return;
 		const newOrder = [...componentOrder];
-		const [moved] = newOrder.splice(fromIndex, 1);
-		newOrder.splice(toIndex, 0, moved);
+		const oldPos = newOrder.indexOf(fromId);
+		const toPos = newOrder.indexOf(toId);
+		if (oldPos === -1 || toPos === -1) return;
+		newOrder.splice(oldPos, 1);
+		let insertAt = newOrder.indexOf(toId);
+		if (oldPos < toPos) insertAt += 1;
+		newOrder.splice(insertAt, 0, fromId);
 		componentOrder = newOrder;
 		saveOrder(newOrder);
 	}
@@ -282,7 +306,7 @@
 		saveHidden(hiddenIds);
 		// If we hid the active page, move to first visible
 		if (hiddenIds.includes(activeId)) {
-			const first = orderedComponents.find((c) => c.id !== activeId);
+			const first = displayComponents.find((c) => c.id !== activeId);
 			if (first) activeId = first.id;
 		}
 	}
@@ -301,8 +325,8 @@
 
 	// Keep the active page visible across collection switches, hides, and reloads.
 	$effect(() => {
-		if (!orderedComponents.some((c) => c.id === activeId)) {
-			const first = orderedComponents[0];
+		if (!displayComponents.some((c) => c.id === activeId)) {
+			const first = displayComponents[0];
 			activeId = first ? first.id : defaultId;
 		}
 	});
@@ -325,7 +349,7 @@
 			});
 		} catch { /* storage/network unavailable — use defaults */ }
 		if (activeId === id) {
-			const first = orderedComponents.find((c) => c.id !== id);
+			const first = displayComponents.find((c) => c.id !== id);
 			activeId = first ? first.id : defaultId;
 			inspectorOpen = false;
 		}
@@ -351,13 +375,13 @@
 		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 			e.preventDefault();
 			if (activeIndex === -1) return;
-			const next = (activeIndex + 1) % orderedComponents.length;
-			activeId = orderedComponents[next].id;
+			const next = (activeIndex + 1) % displayComponents.length;
+			activeId = displayComponents[next].id;
 		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
 			e.preventDefault();
 			if (activeIndex === -1) return;
-			const prev = (activeIndex - 1 + orderedComponents.length) % orderedComponents.length;
-			activeId = orderedComponents[prev].id;
+			const prev = (activeIndex - 1 + displayComponents.length) % displayComponents.length;
+			activeId = displayComponents[prev].id;
 		}
 	}
 </script>
