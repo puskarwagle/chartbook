@@ -18,6 +18,18 @@
 			<span class="info-heading">Data source</span>
 			<span class="info-text">{info.source}</span>
 		</div>
+		{#if info.coverage}
+			<div class="info-row">
+				<span class="info-heading">Coverage</span>
+				<span class="info-text">{info.coverage}</span>
+			</div>
+		{/if}
+		{#if info.sample}
+			<div class="info-row">
+				<span class="info-heading">Sample</span>
+				<span class="info-text">{info.sample}</span>
+			</div>
+		{/if}
 		<div class="info-row">
 			<span class="info-heading">Key insight</span>
 			<span class="info-text">{info.insight}</span>
