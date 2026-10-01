@@ -6,7 +6,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 
 ## What It Does
 
-- **24 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
+- **25 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
 - World map with Natural Earth projection (D3-geo + TopoJSON) — color-coded by ADHD medication access tier
 - Statistics, timelines, age pyramids, sex comparisons, regional rankings
 - Trend lines, SDI scatter plots, comorbidity breakdowns, substance use data
@@ -19,6 +19,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 | ID | Label | Description |
 |----|-------|-------------|
 | `worldmap` | World Map | ADHD medication access tiers by country |
+| `brain` | Brain Regions | Interactive ADHD brain-region/function explorer |
 | `stats` | Stats | Global ADHD statistics overview |
 | `timeline` | Timeline | Historical data over time |
 | `age` | By Age | Age pyramid of ADHD prevalence |
@@ -67,7 +68,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 │   │   ├── Sidebar.svelte       # Collapsible sidebar with drag-and-drop reordering
 │   │   ├── countryStatus.json   # Tier data per country (schema v2.0)
 │   │   ├── countryStatus.bak.json # Backup
-│   │   ├── components/
+│   │   ├── components/          # 25 views + shared helpers (EChart, CustomPage, CustomPagePreview, ViewInfo)
 │   │   │   ├── WorldMap.svelte
 │   │   │   ├── StatsView.svelte
 │   │   │   ├── TimelineView.svelte
@@ -91,7 +92,11 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 │   │   │   ├── GovernanceRadar.svelte
 │   │   │   ├── GlobalHealthTrends.svelte
 │   │   │   ├── EconomicSnapshot.svelte
-│   │   │   └── DataExplorer.svelte
+│   │   │   ├── DataExplorer.svelte
+│   │   │   ├── EChart.svelte           # Shared echarts wrapper
+│   │   │   ├── CustomPage.svelte        # Generic renderer for user-created pages
+│   │   │   ├── CustomPagePreview.svelte # Fullscreen present mode
+│   │   │   └── ViewInfo.svelte
 │   │   └── assets/
 │   │       └── favicon.svg
 │   └── routes/
@@ -147,10 +152,10 @@ Dashboard shell. Renders the sidebar and active component. Handles keyboard navi
 
 - **Framework**: SvelteKit 2 + Svelte 5 (runes mode — forced for all project files via `vite.config.ts`, excluded for `node_modules`)
 - **Geo**: d3-geo (projection), topojson-client (TopoJSON → GeoJSON), world-atlas (110m country data)
-- **Charts**: layerchart
+- **Charts**: echarts (via `src/lib/components/EChart.svelte` wrapper + `src/lib/echartsTheme.ts`)
 - **Export**: html2canvas (DOM → PNG)
 - **Build**: Vite 8, TypeScript 6
-- **Lint/Format**: None configured — type-check only (`npm run check`)
+- **Lint/Test**: ESLint 10 (Svelte + TypeScript, `globals` for browser/node) + Vitest 4 (`npm run lint`, `npm run test`)
 
 ## Getting Started
 

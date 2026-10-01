@@ -25,7 +25,10 @@
 	// CI whiskers rendered as a custom series (horizontal line + caps).
 	const ciData = substances.map((s, i) => [s.ci_low, s.ci_high, i]);
 
-	function renderWhisker(params: any, api: any) {
+	function renderWhisker(
+		_params: unknown,
+		api: { value: (idx: number) => number; coord: (pt: [number, number]) => [number, number] }
+	) {
 		const low = api.value(0) as number;
 		const high = api.value(1) as number;
 		const idx = api.value(2) as number;
@@ -83,7 +86,7 @@
 					position: 'right',
 					color: PALETTE.text,
 					fontWeight: 700,
-					formatter: (p: any) => {
+					formatter: (p: { dataIndex: number }) => {
 						const s = substances[p.dataIndex as number];
 						return `{b|${s.percent}%}\n{s|${interpolate(t('views.sud.barSub'), { n: s.n_studies })}}`;
 					},

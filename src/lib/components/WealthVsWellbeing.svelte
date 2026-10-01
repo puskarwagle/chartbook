@@ -62,7 +62,7 @@
 			...BASE_ANIMATION,
 			tooltip: {
 				trigger: 'item',
-				formatter: (p: any) => {
+				formatter: (p: { dataIndex: number }) => {
 					const d = data[p.dataIndex as number];
 					const gini = d.gini === null ? t('views.wealth.na') : d.gini.toFixed(1);
 					return interpolate(t('views.wealth.tooltip'), {

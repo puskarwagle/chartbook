@@ -27,8 +27,13 @@ export interface CountryFeature {
 	cy: number;
 }
 
-const world = countriesTopo as any;
+// world-atlas TopoJSON has no bundled types — interop via unknown with a
+// narrow local shape. eslint-disable is intentional here (not a blanket any).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const world = countriesTopo as unknown as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const countries = topojson.feature(world, world.objects.countries) as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const borders = topojson.mesh(world, world.objects.countries, (a: any, b: any) => a !== b) as any;
 
 const projection = geoNaturalEarth1().fitExtent([[30, 30], [930, 470]], countries);
@@ -85,7 +90,9 @@ const NUMERIC_TO_ISO2: Record<string, string> = {
  * Countries without a numeric→alpha-2 mapping are excluded.
  */
 export const countryFeatures: CountryFeature[] = countries.features
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	.filter((f: any) => f.id && NUMERIC_TO_ISO2[f.id])
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	.map((f: any) => {
 		const centroid = pathGen.centroid(f);
 		return {

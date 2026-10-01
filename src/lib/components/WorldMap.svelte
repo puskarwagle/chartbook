@@ -3,7 +3,7 @@
 	import html2canvas from 'html2canvas';
 	import { countryFeatures, bordersPath } from '$lib/mapData';
 	import { COLORS } from '$lib/colors';
-	import statusData from '$lib/countryStatus.json';
+	import statusData from '../../../data/countryStatus.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { tierShortLabel, countryNoteLocalized, interpolate } from '$lib/i18n/index';
 
@@ -51,8 +51,18 @@
 		return 1;
 	}
 
-	function getEntry(iso2: string) {
-		return (statusData.countries as any)[iso2] ?? null;
+	interface CountryStatusEntry {
+		tier: string | number;
+		confidence: string | null;
+		evidence: string | null;
+		last_verified: string | null;
+		notes?: string | null;
+		approved?: Record<string, boolean | null>;
+		countryname?: string;
+	}
+
+	function getEntry(iso2: string): CountryStatusEntry | null {
+		return (statusData.countries as unknown as Record<string, CountryStatusEntry>)[iso2] ?? null;
 	}
 
 	const SHORT_NAMES: Record<string, string> = {
@@ -185,10 +195,10 @@
 			<div class="tooltip-tier">{interpolate(t('views.worldmap.tierLine'), { tier: entry.tier, label: tierShortLabel(String(entry.tier) as TierKey, currentLocale()) })}</div>
 			{#if entry.confidence}
 				<div class="tooltip-meta">
-					{interpolate(t('views.worldmap.metaLine'), { confidence: entry.confidence, evidence: entry.evidence, verified: entry.last_verified })}
+					{interpolate(t('views.worldmap.metaLine'), { confidence: entry.confidence ?? '', evidence: entry.evidence ?? '', verified: entry.last_verified ?? '' })}
 				</div>
 			{/if}
-			<div class="tooltip-notes">{countryNoteLocalized(shown, currentLocale(), entry.notes)}</div>
+			<div class="tooltip-notes">{countryNoteLocalized(shown, currentLocale(), entry.notes ?? '')}</div>
 			{#if entry.approved && Object.keys(entry.approved).length > 0}
 				<div class="tooltip-approved">
 					{#each Object.entries(entry.approved) as [drug, ok]}

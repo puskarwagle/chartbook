@@ -32,7 +32,7 @@
 					notes: parsed.notes ?? ''
 				};
 			}
-		} catch {}
+		} catch { /* storage unavailable — use defaults */ }
 		return { imageUrl: '', notes: '' };
 	}
 
@@ -61,8 +61,8 @@
 				method: 'PATCH',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ id: pageId, data: { imageUrl: diskImage, notes: data.notes } })
-			}).catch(() => {});
-		} catch {}
+			}).catch(() => { /* best-effort disk sync — ignore */ });
+		} catch { /* storage unavailable — use defaults */ }
 	}
 
 	function commitTitle() {

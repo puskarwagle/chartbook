@@ -27,7 +27,7 @@ Locale state lives in `src/lib/i18n/store.svelte.ts` (persisted under `app-local
 
 All data is static JSON imported at build time (not fetched). Raw datasets live in `data/` (root-level). `src/lib/data.ts` is the pipeline — it imports directly from root `data/`, filters out World Bank aggregates, deduplicates per country, and exports typed helpers for views.
 
-`src/lib/countryStatus.json` is the tier dataset (schema v2.0). `src/lib/colors.ts` re-exports tier colors/labels from its `_meta` block.
+`data/countryStatus.json` is the tier dataset (schema v2.0). `src/lib/colors.ts` re-exports tier colors/labels from its `_meta` block.
 
 ## Gotchas
 

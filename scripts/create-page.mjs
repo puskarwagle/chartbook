@@ -16,7 +16,7 @@ async function main() {
   try {
     pages = JSON.parse(await readFile(JSON_PATH, 'utf-8'));
     if (!Array.isArray(pages)) pages = [];
-  } catch {}
+  } catch { /* missing/corrupt JSON — start fresh */ }
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
   const id = `custom-${slug || 'page'}-${Date.now().toString(36)}`;
   pages.push({ id, title, createdAt: new Date().toISOString() });

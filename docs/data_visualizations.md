@@ -398,7 +398,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 **Title**: ADHD Prevalence by Region  
 **Type**: Horizontal progress bars (4 regions)  
-**Data**: Embedded static (GBD 2021, ages 10–24):
+**Data**: `data/adolescents_young_adults_10_24.json` → `regional_2021_highest_rates` (GBD 2021, ages 10–24):
 | Region | Prevalence/100k | Incidence/100k |
 |--------|-----------------|----------------|
 | Australasia | 6,366.3 | 33.74 |
@@ -532,7 +532,7 @@ const tierCounts = $derived.by(() => {
 
 **Title**: ADHD & Suicide Risk  
 **Type**: Horizontal bar cards with OR + 95% CI visualization + summary cards  
-**Data**: Embedded static (Garas 2025 meta-analysis):
+**Data**: `data/suicide_risk_studies.json` (Garas 2025 meta-analysis, per-item sources included):
 | Outcome | OR | 95% CI | n Studies | p |
 |---------|-----|--------|-----------|---|
 | Suicidal Ideation | 3.956 | [1.996, 7.841] | 2 | <0.001 |

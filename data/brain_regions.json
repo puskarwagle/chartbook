@@ -1,0 +1,460 @@
+{
+  "regions": [
+    {
+      "id": "pfc",
+      "name": "Prefrontal Cortex (PFC)",
+      "nickname": "The command center",
+      "color": "#a78bfa",
+      "summary": "The brain’s command center for sustaining attention, inhibiting distractions, and regulating behavior and emotions. In ADHD it is often underactive or inefficiently connected, and it needs optimal levels of dopamine and norepinephrine to work properly.",
+      "groups": [
+        {
+          "name": "Cognitive / Executive Functions",
+          "explanation": "Often underactive or inefficiently connected in ADHD; relies on optimal dopamine and norepinephrine levels. Disruption leads to distractibility, forgetfulness, impulsivity, and poor planning.",
+          "adhd": "Disruption here produces the classic ADHD profile: distractibility, forgetfulness, impulsivity, and poor planning."
+        },
+        {
+          "name": "Emotional / Social Functions",
+          "explanation": "The PFC’s role in emotional regulation is critical; when impaired in ADHD, it contributes to emotional dysregulation and impulsivity often seen alongside core symptoms.",
+          "adhd": "Impairment fuels emotional dysregulation, hot-headed impulsivity, and trouble with social judgment and delayed gratification."
+        },
+        {
+          "name": "Motor Functions",
+          "explanation": "The PFC contributes to the planning phase of movement, working in concert with motor cortices and subcortical structures.",
+          "adhd": "Weak movement planning adds to clumsiness and poorly sequenced actions, compounding restless, hyperactive behavior."
+        },
+        {
+          "name": "Integrative / Language Functions",
+          "explanation": "The PFC acts as a hub, coordinating inputs from multiple brain areas to support complex cognition and behavior.",
+          "adhd": "A noisy hub fails to integrate instructions and context — verbal directions get lost and multi-step tasks fall apart."
+        }
+      ],
+      "functions": [
+        {
+          "title": "Sustaining attention",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Inhibiting distractions",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Inhibiting impulses",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Working memory",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Cognitive flexibility (set-shifting)",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Planning",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Organizing",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Prioritizing tasks",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Decision-making",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Problem-solving",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Goal-directed behavior",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Initiating actions",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Sequencing and ordering information",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Abstract reasoning",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Error detection and correction",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Adapting behavior to changing rules",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Managing multitasking",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Maintaining focus over time (vigilance)",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Suppressing irrelevant thoughts and memories",
+          "group": "Cognitive / Executive Functions"
+        },
+        {
+          "title": "Regulating emotions",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Empathy and perspective-taking",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Social judgment",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Moral reasoning",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Regulating aggression and socially inappropriate behavior",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Reward evaluation and delayed gratification",
+          "group": "Emotional / Social Functions"
+        },
+        {
+          "title": "Motor planning and control of voluntary movement",
+          "group": "Motor Functions"
+        },
+        {
+          "title": "Language processing (verbal fluency, semantic processing)",
+          "group": "Integrative / Language Functions"
+        },
+        {
+          "title": "Integrating information from other brain regions",
+          "group": "Integrative / Language Functions"
+        }
+      ]
+    },
+    {
+      "id": "striatum",
+      "name": "Striatum (Basal Ganglia)",
+      "nickname": "The action filter",
+      "color": "#38bdf8",
+      "summary": "Part of the frontostriatal network linking the PFC to deeper structures. It selects and executes appropriate actions while suppressing inappropriate ones, and lays down habits through reward-modulated learning. Structural and functional differences — particularly in the caudate nucleus — are consistently found in ADHD.",
+      "groups": [
+        {
+          "name": "Action Selection and Inhibition",
+          "explanation": "Part of the frontostriatal network; structural and functional differences (especially in the caudate nucleus) contribute to problems with inhibition in ADHD.",
+          "adhd": "A weakened brake lets inappropriate actions slip through as hyperactivity, restlessness, and impulsivity."
+        },
+        {
+          "name": "Learning and Memory",
+          "explanation": "The striatum generates patterns for movement and cognitive processes, learning and laying down memories important for guiding actions. Repeated firing leads to habit development, modulated by reward-related dopamine signals.",
+          "adhd": "Altered reward-dopamine modulation skews habits toward immediately rewarding behavior and makes steady routines harder to establish."
+        },
+        {
+          "name": "Cognitive Functions",
+          "explanation": "The basal ganglia participate in circuits involving cortex and thalamus that support motor control, reward processing, and procedural learning.",
+          "adhd": "Disrupted cortex–basal-ganglia–thalamus loops degrade working memory and set-shifting, so switching approach mid-task is difficult."
+        }
+      ],
+      "functions": [
+        {
+          "title": "Selecting and executing appropriate actions",
+          "group": "Action Selection and Inhibition"
+        },
+        {
+          "title": "Suppressing inappropriate actions",
+          "group": "Action Selection and Inhibition"
+        },
+        {
+          "title": "Behavioral inhibition",
+          "group": "Action Selection and Inhibition"
+        },
+        {
+          "title": "Procedural learning",
+          "group": "Learning and Memory"
+        },
+        {
+          "title": "Habit formation",
+          "group": "Learning and Memory"
+        },
+        {
+          "title": "Reward-based learning",
+          "group": "Learning and Memory"
+        },
+        {
+          "title": "Building higher-order representations of sequential actions",
+          "group": "Learning and Memory"
+        },
+        {
+          "title": "Working memory",
+          "group": "Cognitive Functions"
+        },
+        {
+          "title": "Cognitive flexibility (set-shifting)",
+          "group": "Cognitive Functions"
+        }
+      ]
+    },
+    {
+      "id": "cerebellum",
+      "name": "Cerebellum",
+      "nickname": "The coordinator",
+      "color": "#34d399",
+      "summary": "Beyond its classic role in motor coordination, it contributes to attention, executive function, and cognitive and emotional processes via connections with the cerebrum. Many people with ADHD show differences in cerebellar volume and connectivity — and motor coordination difficulties are common.",
+      "groups": [
+        {
+          "name": "Motor Control and Coordination",
+          "explanation": "The cerebellum constantly compares intended movement with actual movement and makes appropriate adjustments. It coordinates motor acts so they happen in harmony, without shocks.",
+          "adhd": "Poor comparison of intended versus actual movement shows up as clumsiness, restlessness, and ill-timed actions."
+        },
+        {
+          "name": "Motor Learning",
+          "explanation": "The cerebellum participates actively in learning processes of motor tasks and memory storage.",
+          "adhd": "Slower motor learning keeps everyday actions effortful — skills and routines take longer to become automatic."
+        },
+        {
+          "name": "Non-Motor (Cognitive / Emotional) Functions",
+          "explanation": "The neocerebellum is linked to non-sensorimotor functions including perceptual, cognitive, and emotional processes. Its role in nonmotor cognitive and affective functions is increasingly recognized.",
+          "adhd": "Disrupted cerebello-cerebral loops weaken attention, working memory, verbal fluency, and emotional processing — the cognitive side of ADHD."
+        }
+      ],
+      "functions": [
+        {
+          "title": "Coordinating balance",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Eye movements",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Muscle tone",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Limb movement",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Planning coordinated, properly timed movement sequences",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Comparing intended movement with actual movement and making adjustments",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Coordinating rapid coordinated movements",
+          "group": "Motor Control and Coordination"
+        },
+        {
+          "title": "Motor learning",
+          "group": "Motor Learning"
+        },
+        {
+          "title": "Memory storage for motor tasks",
+          "group": "Motor Learning"
+        },
+        {
+          "title": "Perceptual processes",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Cognitive processes",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Emotional processes",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Verbal fluency",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Working memory",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Spatial tasks",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Executive tasks (random number generation, complex decision-making)",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Affective / emotional processing",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        },
+        {
+          "title": "Language",
+          "group": "Non-Motor (Cognitive / Emotional) Functions"
+        }
+      ]
+    },
+    {
+      "id": "callosum",
+      "name": "Corpus Callosum",
+      "nickname": "The bridge",
+      "color": "#fbbf24",
+      "summary": "A thick band of white matter joining the two hemispheres. Research shows white-matter integrity differences in ADHD, which may slow the communication between regions that attention and motor regulation depend on.",
+      "groups": [
+        {
+          "name": "Interhemispheric Integration",
+          "explanation": "The corpus callosum is crucial for bilateral integration of sensory, motor, or higher cognitive functions. Research on split-brain patients demonstrated its role in interhemispheric transfer of visual information.",
+          "adhd": "Slower transfer between hemispheres makes attention less stable and coordination between brain systems less reliable."
+        },
+        {
+          "name": "Functional Lateralization",
+          "explanation": "The corpus callosum can have both inhibitory and excitatory effects on the contralateral hemisphere. Its microstructure predicts interhemispheric inhibition function.",
+          "adhd": "Faulty interhemispheric inhibition lets the wrong hemisphere intrude — responses slip out poorly filtered."
+        },
+        {
+          "name": "Metacontrol",
+          "explanation": "This phenomenon is linked to how different types of processing in the two hemispheres are combined to yield a single behavioral response.",
+          "adhd": "When the hemispheres cannot fuse their processing into one response, behavior turns inconsistent and poorly unified."
+        }
+      ],
+      "functions": [
+        {
+          "title": "Connecting the brain’s two hemispheres",
+          "group": "Interhemispheric Integration"
+        },
+        {
+          "title": "Bilateral integration of sensory, motor, or higher cognitive functions",
+          "group": "Interhemispheric Integration"
+        },
+        {
+          "title": "Interhemispheric transfer of information",
+          "group": "Interhemispheric Integration"
+        },
+        {
+          "title": "Supporting hemispheric specialization",
+          "group": "Functional Lateralization"
+        },
+        {
+          "title": "Inhibiting and exciting contralateral hemispheres",
+          "group": "Functional Lateralization"
+        },
+        {
+          "title": "Interhemispheric inhibition",
+          "group": "Functional Lateralization"
+        },
+        {
+          "title": "Combining different types of processing in the two hemispheres to yield a single behavioral response",
+          "group": "Metacontrol"
+        }
+      ]
+    },
+    {
+      "id": "limbic",
+      "name": "Limbic System (Amygdala and related structures)",
+      "nickname": "The emotional alarm",
+      "color": "#f472b6",
+      "summary": "Emotion, reward, memory, and survival circuitry — including the amygdala — shows altered connectivity in ADHD. This impairment in the affective network is linked to the emotional dysregulation, impulsivity, and conduct problems often seen alongside core symptoms.",
+      "groups": [
+        {
+          "name": "Emotion Processing",
+          "explanation": "The amygdala is an essential component of the circuitry underlying fear-related responses. It plays a key role in emotional behavior, linked to both fear responses and feelings of pleasure.",
+          "adhd": "An over-reactive amygdala tags ordinary setbacks with outsized emotional value — small frustrations feel like emergencies."
+        },
+        {
+          "name": "Memory and Learning",
+          "explanation": "The amygdala is involved in forming and storing memories for emotive events. Long-term synaptic plasticity of inputs to the amygdala underlies acquisition of fear memory.",
+          "adhd": "Strongly encoded emotional memories mean fear and frustration condition quickly, fueling outsized reactions to reminders of past failures."
+        },
+        {
+          "name": "Survival Behaviors",
+          "explanation": "The limbic system is implicated in higher integration of visceral, olfactory, and somatic information as well as homeostatic responses including fundamental survival behaviors.",
+          "adhd": "Survival circuitry running hot amplifies urgency and restlessness — everything feels pressing and nothing can wait."
+        },
+        {
+          "name": "Social and Autonomic Functions",
+          "explanation": "Cells responding to complex aspects of social communications are found in the amygdala. The limbic system coordinates visceral reactions with emotion and motivation.",
+          "adhd": "Misread social signals plus amplified bodily arousal drive conflict, emotional outbursts, and trouble calming down."
+        }
+      ],
+      "functions": [
+        {
+          "title": "Assigning emotional significance or value to sensory information",
+          "group": "Emotion Processing"
+        },
+        {
+          "title": "Fear-related responses",
+          "group": "Emotion Processing"
+        },
+        {
+          "title": "Emotional behavior",
+          "group": "Emotion Processing"
+        },
+        {
+          "title": "Feelings of pleasure",
+          "group": "Emotion Processing"
+        },
+        {
+          "title": "Forming and storing memories for emotive events",
+          "group": "Memory and Learning"
+        },
+        {
+          "title": "Emotional learning",
+          "group": "Memory and Learning"
+        },
+        {
+          "title": "Fear conditioning",
+          "group": "Memory and Learning"
+        },
+        {
+          "title": "Feeding",
+          "group": "Survival Behaviors"
+        },
+        {
+          "title": "Mating",
+          "group": "Survival Behaviors"
+        },
+        {
+          "title": "Emotion",
+          "group": "Survival Behaviors"
+        },
+        {
+          "title": "Homeostatic responses",
+          "group": "Survival Behaviors"
+        },
+        {
+          "title": "Fundamental survival behaviors",
+          "group": "Survival Behaviors"
+        },
+        {
+          "title": "Emotional and behavioral responses",
+          "group": "Social and Autonomic Functions"
+        },
+        {
+          "title": "Social communication processing",
+          "group": "Social and Autonomic Functions"
+        },
+        {
+          "title": "Autonomic responses",
+          "group": "Social and Autonomic Functions"
+        }
+      ]
+    }
+  ],
+  "networkNote": {
+    "functions": [
+      "Integrated attention",
+      "Self-regulation",
+      "Motor control"
+    ],
+    "explanation": "ADHD is a network disorder — symptoms arise from disrupted circuits connecting these regions, not from a single area failing."
+  }
+}

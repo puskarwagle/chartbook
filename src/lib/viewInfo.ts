@@ -15,9 +15,16 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 	worldmap: {
 		what: 'World map color-coded by each country\u2019s ADHD medication access tier — from full amphetamine availability (Tier 1) to no approved pharmacological treatment (Tier 4).',
 		howToRead: 'Hover a country for a quick summary, click to pin its detail card. Use the tier buttons below the map to isolate one tier, and toggle Names to label countries. The tooltip shows confidence, evidence level, verification date, and per-drug approvals.',
-		source: 'Research-sourced tier dataset: src/lib/countryStatus.json (schema v2.0), with per-country confidence, evidence, sources, notes, and last_verified fields. Geography: world-atlas 110m + Natural Earth projection.',
+		source: 'Research-sourced tier dataset: data/countryStatus.json (schema v2.0), with per-country confidence, evidence, sources, notes, and last_verified fields. Geography: world-atlas 110m + Natural Earth projection.',
 		insight: 'Access is highly uneven — a small set of high-income countries has full stimulant access while large parts of the world rely on non-stimulants only or have no treatment infrastructure.',
 		limitation: 'Tiers reflect documented approvals and evidence quality, not actual prescription rates or affordability. "Unknown" means insufficient evidence, not necessarily no treatment. Data is a snapshot — verify dates per country.'
+	},
+	brain: {
+		what: 'Interactive explorer of the five brain regions most implicated in ADHD: prefrontal cortex, striatum, cerebellum, corpus callosum, and limbic system.',
+		howToRead: 'Pick a region on the left (or click it in the brain diagram) to list its functions in the center; click a function to read what it does and how its disruption maps to ADHD symptoms on the right.',
+		source: 'Curated from data/brain_regions.json (5 regions, 17 function groups, 77 functions) synthesising ADHD neuroscience literature.',
+		insight: 'ADHD is a network disorder — symptoms arise from disrupted circuits connecting these regions, not from one area failing alone.',
+		limitation: 'A simplified, illustrative overview — not a clinical reference. Regional boundaries in the diagram are schematic, not anatomical.'
 	},
 	mhmap: {
 		what: 'Choropleth world map of six WHO mental-health and substance-use indicators: depression, anxiety, schizophrenia, eating disorders, alcohol use, and drug use.',
@@ -29,14 +36,14 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 	stats: {
 		what: 'Summary cards counting how many tracked countries fall into each ADHD treatment tier, with share-of-total percentages.',
 		howToRead: 'Each card is one tier: count, label, and percentage bar. Together they sum to all tracked countries.',
-		source: 'Same tier dataset as the World Map: src/lib/countryStatus.json.',
+		source: 'Same tier dataset as the World Map: data/countryStatus.json.',
 		insight: 'The distribution makes the access gap concrete — compare the Tier 1 share against Tiers 3, 4, and Unknown.',
 		limitation: 'Counts are country counts, not population-weighted. A small country and a large one count equally here.'
 	},
 	timeline: {
 		what: 'Interactive timeline of key milestones in ADHD stimulant medication history, from first amphetamine use to modern extended-release formulations.',
 		howToRead: 'Click any event dot to expand it. Dots are color-coded by the treatment tier that milestone enabled.',
-		source: 'Curated historical milestones (hardcoded in TimelineView.svelte), cross-referenced with the tier definitions in countryStatus.json.',
+		source: 'Curated historical milestones (hardcoded in TimelineView.svelte), cross-referenced with the tier definitions in data/countryStatus.json.',
 		insight: 'Treatment options expanded in waves — each new drug class unlocked access for a new group of countries, but diffusion took decades.',
 		limitation: 'A simplified, illustrative timeline — not an exhaustive regulatory history. Approval years vary by country.'
 	},
@@ -106,7 +113,7 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 	suicide: {
 		what: 'Odds ratios linking ADHD to suicidal ideation, suicide attempt, suicide death, and overall suicidality from a longitudinal meta-analysis.',
 		howToRead: 'Bars show the odds ratio (risk multiple vs people without ADHD); whiskers show the 95% confidence interval. Anything above 1.0 means elevated risk. Wider whiskers mean less precise estimates.',
-		source: 'Garas et al. 2025 longitudinal meta-analysis (hardcoded estimates with CIs, study counts, and p-values).',
+		source: 'Garas et al. 2025 longitudinal meta-analysis via data/suicide_risk_studies.json (estimates with CIs, study counts, and p-values).',
 		insight: 'ADHD roughly triples the odds of suicidality across all outcomes — ideation, attempt, and death alike — making risk screening a core part of ADHD care.',
 		limitation: 'Odds ratios pool heterogeneous studies; confounding (e.g. comorbid depression, impulsivity) is only partly adjusted. Some outcomes rest on few studies (n=2).'
 	},

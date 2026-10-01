@@ -2,7 +2,7 @@
 	"_meta": {
 		"locale": "ne",
 		"status": "untranslated",
-		"description": "Nepali overlay for src/lib/countryStatus.json. Only translated fields live here; everything missing falls back to the English source file. Never fork the full dataset.",
+		"description": "Nepali overlay for data/countryStatus.json. Only translated fields live here; everything missing falls back to the English source file. Never fork the full dataset.",
 		"tiers": "Translated tier definitions, keyed '1' | '2' | '3' | '4' | 'unknown'. Fill from locales/ne.json tiers.descriptions when reviewed.",
 		"countries": "Per-country overrides keyed by ISO alpha-2 code, e.g. { \"NP\": { \"notes\": \"...\" } }. Sources and evidence codes stay English."
 	},

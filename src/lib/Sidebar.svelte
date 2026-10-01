@@ -31,9 +31,9 @@
 		const seen = new Set<string>();
 
 		for (const cat of categories) {
-			const catItems = cat.ids
-				.map((id) => items.find((it) => it.id === id))
-				.filter(Boolean) as NavItem[];
+			// Preserve drag order: items arrives in componentOrder, so filter
+			// (don't follow cat.ids order) or reordering has no visible effect.
+			const catItems = items.filter((it) => cat.ids.includes(it.id));
 			if (catItems.length === 0) continue;
 
 			result.push({ type: 'category', name: cat.name });
@@ -138,15 +138,19 @@
 
 		{#if collapsed}
 			<div class="collapsed-icons">
-				{#each items as item}
-					<button
-						class="nav-icon-btn"
-						class:active={activeId === item.id}
-						onclick={() => onSelect(item.id)}
-						title={item.label}
-					>
-						{item.label.charAt(0)}
-					</button>
+				{#each groupedItems as entry}
+					{#if entry.type === 'category'}
+						<div class="collapsed-divider" title={entry.name}></div>
+					{:else}
+						<button
+							class="nav-icon-btn"
+							class:active={activeId === entry.id}
+							onclick={() => onSelect(entry.id)}
+							title={entry.label}
+						>
+							{entry.label.charAt(0)}
+						</button>
+					{/if}
 				{/each}
 			</div>
 		{/if}
@@ -314,6 +318,18 @@
 		align-items: center;
 		gap: 2px;
 		padding: 0.5rem 0;
+	}
+
+	.collapsed-divider {
+		width: 20px;
+		height: 1px;
+		background: rgba(255, 255, 255, 0.12);
+		margin: 0.35rem 0;
+		flex-shrink: 0;
+	}
+
+	.collapsed-divider:first-child {
+		display: none;
 	}
 
 	.nav-icon-btn {

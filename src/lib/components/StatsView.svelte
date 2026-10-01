@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { COLORS } from '$lib/colors';
-	import statusData from '$lib/countryStatus.json';
+	import statusData from '../../../data/countryStatus.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { tierShortLabel, interpolate } from '$lib/i18n/index';
 
@@ -9,7 +9,7 @@
 	const tierCounts = $derived.by(() => {
 		const counts: Record<TierKey, number> = { '1': 0, '2': 0, '3': 0, '4': 0, unknown: 0 };
 		for (const entry of Object.values(statusData.countries)) {
-			const tier = String((entry as any).tier) as TierKey;
+			const tier = String((entry as { tier: unknown }).tier) as TierKey;
 			counts[tier] = (counts[tier] ?? 0) + 1;
 		}
 		return counts;

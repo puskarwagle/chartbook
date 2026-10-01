@@ -7,6 +7,7 @@
 	},
 	"nav": {
 		"worldmap": "",
+		"brain": "",
 		"mhmap": "",
 		"stats": "",
 		"timeline": "",
@@ -126,6 +127,13 @@
 	},
 	"viewInfo": {
 		"worldmap": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"insight": "",
+			"limitation": ""
+		},
+		"brain": {
 			"what": "",
 			"howToRead": "",
 			"source": "",
@@ -519,7 +527,13 @@
 			"title": "",
 			"subtitle": "",
 			"back": "",
-			"loading": ""
+			"loading": "",
+			"byView": "",
+			"allFiles": "",
+			"inlineData": "",
+			"exemptTimeline": "",
+			"pendingTrends": "",
+			"exemptMeta": ""
 		},
 		"mhmap": {
 			"tipDepression": "",
@@ -538,6 +552,10 @@
 			"tierLine": "",
 			"metaLine": "",
 			"noData": ""
+		},
+		"brain": {
+			"title": "",
+			"subtitle": ""
 		}
 	}
 }

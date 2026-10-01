@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Sidebar from '$lib/Sidebar.svelte';
+	import { NAV_GROUPS } from '$lib/navGroups';
 	import WorldMap from '$lib/components/WorldMap.svelte';
+	import BrainRegions from '$lib/components/BrainRegions.svelte';
 	import StatsView from '$lib/components/StatsView.svelte';
 	import TimelineView from '$lib/components/TimelineView.svelte';
 	import AgePyramid from '$lib/components/AgePyramid.svelte';
@@ -37,7 +39,9 @@
 	interface ComponentEntry {
 		id: string;
 		label: string;
-		component: any;
+		// Svelte components with differing prop types — dynamic render uses
+		// if/else, so unknown avoids generic variance errors.
+		component: unknown;
 	}
 
 	interface Category {
@@ -55,6 +59,7 @@
 	// re-renders on locale change; untranslated keys fall back to English.
 	const COMPONENTS = $derived<ComponentEntry[]>([
 		{ id: 'worldmap', label: t('nav.worldmap'), component: WorldMap },
+		{ id: 'brain', label: t('nav.brain'), component: BrainRegions },
 		{ id: 'mhmap', label: t('nav.mhmap'), component: MentalHealthWorldMap },
 		{ id: 'stats', label: t('nav.stats'), component: StatsView },
 		{ id: 'timeline', label: t('nav.timeline'), component: TimelineView },
@@ -80,13 +85,9 @@
 		{ id: 'dataexplorer', label: t('nav.dataexplorer'), component: DataExplorer }
 	]);
 
-	const CATEGORIES = $derived<Category[]>([
-		{ name: t('categories.overview'), ids: ['worldmap', 'mhmap', 'stats', 'timeline'] },
-		{ name: t('categories.demographics'), ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
-		{ name: t('categories.adhd'), ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
-		{ name: t('categories.socioeconomic'), ids: ['wealth', 'happiness', 'hdi', 'economy', 'education', 'governance', 'healthtrends', 'treatment'] },
-		{ name: t('categories.reference'), ids: ['dataexplorer'] }
-	]);
+	const CATEGORIES = $derived<Category[]>(
+		NAV_GROUPS.map((g) => ({ name: t(g.key), ids: g.ids }))
+	);
 
 	const CUSTOM_LIST_KEY = 'custom-pages-list';
 	const STORAGE_KEY = 'sidebar-component-order';
@@ -95,7 +96,7 @@
 
 	function loadCustomPages(): CustomEntry[] {
 		const fromDisk: CustomEntry[] = Array.isArray(customDefaults)
-			? (customDefaults as any[]).map((p) => ({ id: String(p.id), title: String(p.title ?? 'Untitled') }))
+			? (customDefaults as { id: unknown; title?: unknown }[]).map((p) => ({ id: String(p.id), title: String(p.title ?? 'Untitled') }))
 			: [];
 		try {
 			const raw = localStorage.getItem(CUSTOM_LIST_KEY);
@@ -110,14 +111,14 @@
 					return [...byId.entries()].map(([id, title]) => ({ id, title }));
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return fromDisk;
 	}
 
 	function saveCustomPages(pages: CustomEntry[]) {
 		try {
 			localStorage.setItem(CUSTOM_LIST_KEY, JSON.stringify(pages));
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	let customPages = $state<CustomEntry[]>(loadCustomPages());
@@ -129,7 +130,7 @@
 				const parsed = JSON.parse(raw);
 				if (Array.isArray(parsed)) return parsed.filter((x) => typeof x === 'string');
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return [];
 	}
 
@@ -138,21 +139,21 @@
 	function saveHidden(ids: string[]) {
 		try {
 			localStorage.setItem(HIDDEN_KEY, JSON.stringify(ids));
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	function loadCollection(): string {
 		try {
 			const raw = localStorage.getItem(COLLECTION_KEY);
 			if (raw && COLLECTIONS.some((c) => c.id === raw)) return raw;
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return DEFAULT_COLLECTION_ID;
 	}
 
 	function saveCollection(id: string) {
 		try {
 			localStorage.setItem(COLLECTION_KEY, id);
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	let activeCollectionId = $state<string>(loadCollection());
@@ -187,12 +188,12 @@
 			if (stored) {
 				const parsed = JSON.parse(stored);
 				if (Array.isArray(parsed)) {
-					const valid = parsed.filter((id: any) => validIds.includes(id));
+					const valid = parsed.filter((id: unknown) => validIds.includes(id as string));
 					const missing = validIds.filter((id) => !valid.includes(id));
 					return [...valid, ...missing];
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		return validIds;
 	}
 
@@ -210,6 +211,17 @@
 			.filter((c) => inActiveCollection((c as ComponentEntry).id)) as ComponentEntry[]
 	);
 
+	// The order the sidebar actually renders: category grouping first, but
+	// within each category preserve componentOrder (drag order) — mirrors
+	// Sidebar.svelte groupedItems. Keyboard navigation walks this list so
+	// arrows follow what the user sees.
+	const displayComponents = $derived<ComponentEntry[]>([
+		...ALL_CATEGORIES.flatMap((cat) =>
+			orderedComponents.filter((c) => cat.ids.includes((c as ComponentEntry).id))
+		),
+		...orderedComponents.filter((c) => !ALL_CATEGORIES.some((cat) => cat.ids.includes(c.id)))
+	]);
+
 	// Static default — ids never change across locales, so this stays a const.
 	const defaultId = 'worldmap';
 	let activeId = $state(defaultId);
@@ -219,19 +231,32 @@
 
 	const activeCustom = $derived(customPages.find((p) => p.id === activeId) ?? null);
 
-	const activeIndex = $derived(orderedComponents.findIndex((c) => c.id === activeId));
+	const activeIndex = $derived(displayComponents.findIndex((c) => c.id === activeId));
 
 	function handleReorder(fromIndex: number, toIndex: number) {
+		// fromIndex/toIndex are positions in orderedComponents (visible,
+		// collection-filtered). Map through ids so hidden or out-of-collection
+		// entries in componentOrder don't skew the splice. Dropping onto a
+		// target lands after it when moving forward, before it when moving
+		// backward — either way the item ends up at the target position.
+		const fromId = orderedComponents[fromIndex]?.id;
+		const toId = orderedComponents[toIndex]?.id;
+		if (!fromId || !toId || fromId === toId) return;
 		const newOrder = [...componentOrder];
-		const [moved] = newOrder.splice(fromIndex, 1);
-		newOrder.splice(toIndex, 0, moved);
+		const oldPos = newOrder.indexOf(fromId);
+		const toPos = newOrder.indexOf(toId);
+		if (oldPos === -1 || toPos === -1) return;
+		newOrder.splice(oldPos, 1);
+		let insertAt = newOrder.indexOf(toId);
+		if (oldPos < toPos) insertAt += 1;
+		newOrder.splice(insertAt, 0, fromId);
 		componentOrder = newOrder;
 		saveOrder(newOrder);
 	}
 
 	async function handleAddPage() {
-		const rawTitle = (window as any).__newPageTitle as string | undefined;
-		(window as any).__newPageTitle = undefined;
+		const rawTitle = (window as Window & { __newPageTitle?: string }).__newPageTitle as string | undefined;
+		(window as Window & { __newPageTitle?: string }).__newPageTitle = undefined;
 		const title = (rawTitle?.trim() || interpolate(t('common.untitled'), { n: customPages.length + 1 })).slice(0, 80);
 		// Optimistic local id (stable; UI title is renameable separately)
 		const id = `custom-${Date.now().toString(36)}`;
@@ -261,7 +286,7 @@
 					activeId = saved.id;
 				}
 			}
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	async function handleRenamePage(id: string, newTitle: string) {
@@ -273,7 +298,7 @@
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ id, title: newTitle })
 			});
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 	}
 
 	function handleToggleHide(id: string) {
@@ -281,7 +306,7 @@
 		saveHidden(hiddenIds);
 		// If we hid the active page, move to first visible
 		if (hiddenIds.includes(activeId)) {
-			const first = orderedComponents.find((c) => c.id !== activeId);
+			const first = displayComponents.find((c) => c.id !== activeId);
 			if (first) activeId = first.id;
 		}
 	}
@@ -300,8 +325,8 @@
 
 	// Keep the active page visible across collection switches, hides, and reloads.
 	$effect(() => {
-		if (!orderedComponents.some((c) => c.id === activeId)) {
-			const first = orderedComponents[0];
+		if (!displayComponents.some((c) => c.id === activeId)) {
+			const first = displayComponents[0];
 			activeId = first ? first.id : defaultId;
 		}
 	});
@@ -315,16 +340,16 @@
 		saveHidden(hiddenIds);
 		try {
 			localStorage.removeItem(`custom-page-${id}`);
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		try {
 			await fetch('/api/custom-pages', {
 				method: 'DELETE',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ id })
 			});
-		} catch {}
+		} catch { /* storage/network unavailable — use defaults */ }
 		if (activeId === id) {
-			const first = orderedComponents.find((c) => c.id !== id);
+			const first = displayComponents.find((c) => c.id !== id);
 			activeId = first ? first.id : defaultId;
 			inspectorOpen = false;
 		}
@@ -350,13 +375,13 @@
 		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 			e.preventDefault();
 			if (activeIndex === -1) return;
-			const next = (activeIndex + 1) % orderedComponents.length;
-			activeId = orderedComponents[next].id;
+			const next = (activeIndex + 1) % displayComponents.length;
+			activeId = displayComponents[next].id;
 		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
 			e.preventDefault();
 			if (activeIndex === -1) return;
-			const prev = (activeIndex - 1 + orderedComponents.length) % orderedComponents.length;
-			activeId = orderedComponents[prev].id;
+			const prev = (activeIndex - 1 + displayComponents.length) % displayComponents.length;
+			activeId = displayComponents[prev].id;
 		}
 	}
 </script>
@@ -400,6 +425,8 @@
 				<CustomPage pageId={activeCustom.id} title={activeCustom.title} onRename={handleRenamePage} />
 			{:else if activeId === 'worldmap'}
 				<WorldMap />
+			{:else if activeId === 'brain'}
+				<BrainRegions />
 			{:else if activeId === 'stats'}
 				<StatsView />
 			{:else if activeId === 'timeline'}

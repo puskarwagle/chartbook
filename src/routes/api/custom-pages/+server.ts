@@ -9,7 +9,16 @@ import type { RequestHandler } from './$types';
 
 const JSON_PATH = path.resolve('src/lib/customPages.json');
 
-async function readPages(): Promise<any[]> {
+interface CustomPageEntry {
+	id: string;
+	title: string;
+	createdAt?: string;
+	updatedAt?: string;
+	data?: { imageUrl: string; notes: string };
+	[key: string]: unknown;
+}
+
+async function readPages(): Promise<CustomPageEntry[]> {
 	try {
 		const raw = await readFile(JSON_PATH, 'utf-8');
 		const parsed = JSON.parse(raw);
@@ -19,7 +28,7 @@ async function readPages(): Promise<any[]> {
 	}
 }
 
-async function writePages(pages: any[]) {
+async function writePages(pages: CustomPageEntry[]) {
 	await mkdir(path.dirname(JSON_PATH), { recursive: true });
 	await writeFile(JSON_PATH, JSON.stringify(pages, null, 2) + '\n', 'utf-8');
 }

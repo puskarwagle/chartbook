@@ -61,7 +61,7 @@
 	</div>
 
 	<div class="chart-container">
-		{#each filtered() as r, i}
+		{#each filtered() as r}
 			{@const hdiBarW = (r.hdi / maxHdi) * barW}
 			{@const lifeW = (r.lifeExp / 90) * hdiBarW * 0.4}
 			{@const eduW = (r.meanSchooling / 16) * hdiBarW * 0.3}

@@ -1,13 +1,34 @@
 <script lang="ts">
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
+	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
 
-	const regions = [
-		{ region: 'Australasia', prevalence: 6366.3, incidence: 33.74 },
-		{ region: 'Caribbean', prevalence: 6001.95, incidence: null },
-		{ region: 'East Asia', prevalence: 4411.22, incidence: 25.93 },
-		{ region: 'N. America', prevalence: 4184.7, incidence: 21.77 }
-	];
+	interface RegionalRates {
+		prevalence_rate_per_100k: number;
+		incidence_rate_per_100k?: number;
+	}
+	const regionalRates = (
+		adolescentsRaw as unknown as { regional_2021_highest_rates: Record<string, RegionalRates> }
+	).regional_2021_highest_rates;
+
+	// Display order + labels stay in the component (presentation). The numbers
+	// come from data/adolescents_young_adults_10_24.json (GBD-based) — edit
+	// the JSON and this chart updates.
+	const ORDER = [
+		{ key: 'australasia', label: 'Australasia' },
+		{ key: 'caribbean', label: 'Caribbean' },
+		{ key: 'east_asia', label: 'East Asia' },
+		{ key: 'high_income_north_america', label: 'N. America' }
+	] as const;
+
+	const regions = ORDER.map((o) => {
+		const r = regionalRates[o.key] as RegionalRates;
+		return {
+			region: o.label,
+			prevalence: r.prevalence_rate_per_100k,
+			incidence: r.incidence_rate_per_100k ?? null
+		};
+	});
 
 	const maxPrevalence = Math.max(...regions.map((r) => r.prevalence));
 </script>

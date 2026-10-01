@@ -18,6 +18,7 @@ export const COLLECTIONS: Collection[] = [
 		blurb: 'Everything in the chartbook, grouped by topic.',
 		viewIds: [
 			'worldmap',
+			'brain',
 			'mhmap',
 			'stats',
 			'timeline',
@@ -49,6 +50,7 @@ export const COLLECTIONS: Collection[] = [
 		blurb: 'Prevalence, treatment access, comorbidities, and justice-system overlap.',
 		viewIds: [
 			'worldmap',
+			'brain',
 			'stats',
 			'timeline',
 			'age',

@@ -10,7 +10,7 @@
  *   COLORS['1']   → "#2ecc71" (green — amphetamine available)
  *   TIERS['2']    → "Methylphenidate only"
  */
-import statusData from '$lib/countryStatus.json';
+import statusData from '../../data/countryStatus.json';
 
 /** Hex color for each tier key ('1'–'4' and 'unknown'). Sourced from countryStatus.json _meta.color_suggestion. */
 export const COLORS = statusData._meta.color_suggestion;

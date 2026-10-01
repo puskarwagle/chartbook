@@ -6,6 +6,25 @@
     "notes": "data.ts imports the 7 API-sourced JSON files and exports derived maps/functions. Components import from data.ts, not directly from JSON."
   },
 
+  "inline_data_rule": {
+    "rule": "Data with numbers or provenance goes to JSON; editorial copy and chart-specific presentation constants stay inline.",
+    "applies_to": "Every number a viewer can cite (chart values, study findings, summary statistics) must trace to a file under data/.",
+    "stays_inline": [
+      "Editorial prose and labels (i18n copy, viewInfo text)",
+      "Chart-specific presentation constants: series/color/dimension definitions, axis limits, bar scaling factors"
+    ],
+    "verified_exclusions": [
+      "TimelineView.svelte — 5 editorial milestones (years + narrative labels in i18n); no citable statistics. Registry state: exempt.",
+      "HappinessRankings.svelte `factors` — stacked-bar series definitions (key + labelKey + palette color). Presentation, not data.",
+      "GovernanceRadar.svelte `dimensions` — radar dimension definitions (key + labelKey). Presentation, not data.",
+      "GlobalHealthTrends.svelte `LINE_COLORS` — palette constant. Presentation, not data.",
+      "SexComparison.svelte `sexData` + AgePyramid.svelte `ageData` — reshapes that read every number from data/adolescents_young_adults_10_24.json. Already JSON-backed."
+    ],
+    "pending": [
+      "TrendLine.svelte (AdhdTrends) — extraction deferred until the /api/adhd-trends route decision is made. Registry state: pending."
+    ]
+  },
+
   "worldbank_indicators.json": {
     "source": "World Bank Open Data API (https://api.worldbank.org/v2/)",
     "fetched_via": "World Bank API v2, no auth required",
@@ -287,7 +306,7 @@
       "highest_prevalence_country": "Australia (5.62%)",
       "sex_ratio": "Male 2.52% vs Female 0.99%"
     },
-    "consumed_by": "Reference data for research context; not directly imported by components"
+    "consumed_by": ["SexComparison.svelte — by_sex rates", "AgePyramid.svelte — by_age_group rates", "RegionalRanking.svelte — regional_2021_highest_rates (GBD-based regional aggregates)"]
   },
 
   "gbd_2019_adhd_global.json": {
@@ -468,10 +487,32 @@
     "consumed_by": ["PrisonPrevalence.svelte — ECharts bar + custom CI whisker series + general-pop markLine"]
   },
 
+  "suicide_risk_studies.json": {
+    "source": "Garas et al. 2025, Brain Behav (longitudinal meta-analysis, n=9 studies; full record in data/adhd_comorbidities_research.json garas_2025)",
+    "description": "ADHD–suicidality odds ratios per outcome plus three headline summary values with per-item source fields",
+    "format": "JSON object with study meta + findings array (id, nameKey, odds_ratio, ci_low, ci_high, n_studies, p_value, source) + summary array (id, value, unit, qualifier, labelKey, noteKey, source, derivation)",
+    "note": "Summary values are raw numbers (3.3, 140654 floored to 140k by the formatter, 10 with qualifier ≥); the ×/k/yr formatting lives in src/lib/summaryFormat.ts",
+    "consumed_by": ["SuicideRisk.svelte — finding cards + summary row"]
+  },
+
   "sdi_regions.json": {
     "source": "GBD 2021 under-20 estimates (Cortese et al. 2026) + regional breakdowns",
     "description": "SDI vs ADHD prevalence by region",
     "format": "JSON object with regions array (region, sdi, prevalence_pct)",
     "consumed_by": ["SDIScatter.svelte — ECharts scatter with region labels"]
+  },
+
+  "brain_regions.json": {
+    "source": "Curated from brain-region-info.md (repo-root reference doc synthesising ADHD neuroscience literature)",
+    "description": "ADHD brain-region functions: 5 regions, 17 function groups with explanations + ADHD notes, 77 individual functions",
+    "format": "JSON object with regions array (id, name, nickname, color, summary, groups, functions) + networkNote",
+    "consumed_by": ["BrainRegions.svelte — via src/lib/brainRegions.ts typed wrapper"]
+  },
+
+  "countryStatus.json": {
+    "source": "Research-sourced dataset (schema v2.0), per-country confidence, evidence, sources, notes, last_verified",
+    "description": "ADHD medication-access tier per country (tiers 1-4 + unknown) with tier colors/labels in _meta",
+    "format": "JSON object with _meta (tiers, color_suggestion) + countries array",
+    "consumed_by": ["WorldMap.svelte + StatsView.svelte (direct import)", "colors.ts (tier colors/labels)", "i18n/index.ts (tier descriptions, country-note overlays)"]
   }
 }
