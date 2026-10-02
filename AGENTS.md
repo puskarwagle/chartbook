@@ -23,6 +23,8 @@ Single-page app. `src/routes/+page.svelte` is the dashboard shell — it renders
 
 Locale state lives in `src/lib/i18n/store.svelte.ts` (persisted under `app-locale`, synced to `<html lang>`); locale-aware number helpers in `src/lib/i18n/format.ts`.
 
+Shared view text: `src/lib/glossary.ts` is the glossary source of truth (`GLOSSARY` map of `[TOKEN]` → label/definition). `src/lib/components/RichText.svelte` renders `[TOKEN]` markers in i18n strings as hover definitions (`GlossaryTerm.svelte` renders one term); unknown tokens render literally. Translators must preserve `[TOKEN]` markers verbatim.
+
 ## Data
 
 All data is static JSON imported at build time (not fetched). Raw datasets live in `data/` (root-level). `src/lib/data.ts` is the pipeline — it imports directly from root `data/`, filters out World Bank aggregates, deduplicates per country, and exports typed helpers for views.
