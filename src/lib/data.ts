@@ -283,6 +283,24 @@ export function computeTreatmentAccessIndex(): { country_code: string; score: nu
 	return results.sort((a, b) => b.score - a.score);
 }
 
+/**
+ * How many countries the Treatment Access Index covers. A country is scored
+ * only when it has BOTH inputs (health expenditure + life expectancy);
+ * the rest are excluded. Membership matches computeTreatmentAccessIndex
+ * exactly (percentileRanks preserves keys), so `scored` always equals the
+ * index length — the subtitle interpolates these instead of hardcoding.
+ */
+export function treatmentAccessCoverage(): { scored: number; excluded: number; total: number } {
+	const healthCodes = new Set(healthExpenditure.keys());
+	const lifeCodes = new Set(lifeExpectancyWb.keys());
+	const total = new Set([...healthCodes, ...lifeCodes]);
+	let scored = 0;
+	for (const code of total) {
+		if (healthCodes.has(code) && lifeCodes.has(code)) scored++;
+	}
+	return { scored, excluded: total.size - scored, total: total.size };
+}
+
 export function wbTimeSeries(indicatorKey: string, countryCode: string): { year: number; value: number }[] {
 	const rows = (WB[indicatorKey] ?? []).filter(r => r.country_code === countryCode && isCountryCode(r.country_code));
 	return rows.map(r => ({ year: Number(r.year), value: r.value })).sort((a, b) => a.year - b.year);

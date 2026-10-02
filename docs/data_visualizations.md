@@ -249,7 +249,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 9. PrisonMentalHealthLink.svelte
 
-**Title**: Prison Population & Mental Health  
+**Title**: Some places imprison 100× more people than others  
 **Type**: Horizontal bar chart (top 20 incarceration rates) + global avg reference line  
 **Data Source**: `prisonData` from World Prison Brief (ICPR)  
 **Chart Specs**: SVG 600×480, padding {t:30, r:60, b:30, l:200}, barH=18, gap=6  
@@ -258,7 +258,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 **Reference Line**: Amber #f59e0b dashed at global average
 
 **Static Cards** (below chart):
-- "ADHD prevalence in prisons: 25–40% vs ~3.5% general population. Up to 8× overrepresentation across studies."
+- "ADHD prevalence in prisons: 8–40% vs ~3.5% general population. About 2× to 11× overrepresentation depending on the study."
 - "Only 7% had childhood diagnosis. Most ADHD prisoners were never identified or treated — a systemic failure of screening and support."
 
 **Insight**: Top incarceration nations (US, El Salvador, Turkmenistan) overlap with Tier 1/2 treatment access but prison ADHD screening absent — criminal justice system becomes de facto mental health provider
@@ -267,7 +267,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 10. PrisonPrevalence.svelte
 
-**Title**: ADHD in Prison Populations  
+**Title**: Prisoners have 2–11× the ADHD rate of the public  
 **Type**: Horizontal bar chart with 95% CI error bars + general population reference line  
 **Data**: JSON-driven (`data/prison_adhd_studies.json`, 3 studies, vs 3.5% general population):
 | Study | Prevalence | 95% CI | n | Note |
@@ -282,7 +282,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 **Cards**:
 - "1 in 12 prisoners (random sampling) — Fazel 2024 corrected for selection bias"
-- "Up to 8× overrepresentation — Ginsberg 2010 40% in long-term male inmates"
+- "Up to 11× overrepresentation — Ginsberg 2010 40% in long-term male inmates"
 
 **Insight**: Methodology drives prevalence — unselected samples ~8%, selected/high-security ~25–40%; even lowest estimate 2.4× general population
 
@@ -290,7 +290,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 11. ComorbidityBreakdown.svelte
 
-**Title**: Comorbidities in Prison ADHD  
+**Title**: Here, pure ADHD almost doesn't exist  
 **Type**: Horizontal bar chart (% of ADHD prisoners with each comorbidity)  
 **Data**: JSON-driven (`data/comorbidities.json`; Ginsberg 2010, n=30 confirmed ADHD of 34 assessed from 315 screened, Swedish high-security):
 | Comorbidity | % |
@@ -317,7 +317,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 12. SUDbySubstance.svelte
 
-**Title**: ADHD in Substance Use Disorder  
+**Title**: 1 in 5 people in drug and alcohol treatment has ADHD  
 **Type**: Horizontal bars with 95% CI + overall reference line  
 **Data**: JSON-driven (`data/sud_by_substance.json`; Rohner 2023 meta-analysis, n=12,524 across 31 studies):
 | Substance | % ADHD | 95% CI | n Studies |
@@ -341,7 +341,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 13. SexComparison.svelte
 
-**Title**: ADHD by Sex  
+**Title**: Boys are diagnosed 2.5× more often than girls  
 **Type**: Grouped vertical bar chart (LayerChart wrapper) — Prevalence & Incidence per 100k (ages 10–24, 2021)  
 **Data**: Embedded static (GBD 2021):
 | Sex | Prevalence | Incidence |
@@ -361,7 +361,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 14. AgePyramid.svelte
 
-**Title**: ADHD Prevalence by Age Group  
+**Title**: ADHD peaks at 10–14, then fades  
 **Type**: Vertical bar chart (LayerChart) — 3 age bands per 100k  
 **Data**: Embedded static (GBD 2021):
 | Age Group | Prevalence | Incidence |
@@ -376,7 +376,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 15. SDIScatter.svelte
 
-**Title**: SDI vs ADHD Prevalence  
+**Title**: Wealthier regions report more ADHD — but only loosely  
 **Type**: Scatter plot (7 regional points) — SDI (0–1) vs prevalence % (under-20, 2021)  
 **Data**: JSON-driven (`data/sdi_regions.json`) regional aggregates:
 | Region | SDI | Prevalence % | Label |
@@ -396,7 +396,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 16. RegionalRanking.svelte
 
-**Title**: ADHD Prevalence by Region  
+**Title**: Australasia reports the most ADHD — 1.5× North America  
 **Type**: Horizontal progress bars (4 regions)  
 **Data**: `data/adolescents_young_adults_10_24.json` → `regional_2021_highest_rates` (GBD 2021, ages 10–24):
 | Region | Prevalence/100k | Incidence/100k |
@@ -414,7 +414,7 @@ Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapp
 
 ### 17. TreatmentAccessIndex.svelte
 
-**Title**: Treatment Access Index  
+**Title**: Health systems ranked by capacity to deliver care  
 **Type**: Ranked horizontal progress bars with country flags (composite score 0–100)  
 **Data**: Computed in `data.ts`:
 ```typescript
@@ -493,7 +493,7 @@ const tierCounts = $derived.by(() => {
 
 ### 21. SexDiffSUD.svelte
 
-**Title**: SUD in ADHD by Sex  
+**Title**: More cases in men, sharper relative risk in women  
 **Type**: Grouped vertical bar chart (4 substance categories × 2 sexes) + HR labels  
 **Data**: JSON-driven (`data/sud_by_sex.json`; Moldekleiv 2025, Norwegian cohort n=49,815 ADHD ages 18–31):
 | SUD Type | Male % | Female % | Male HR | Female HR |
@@ -513,12 +513,12 @@ const tierCounts = $derived.by(() => {
 
 ### 22. TrendLine.svelte
 
-**Title**: ADHD Global Trends  
+**Title**: ADHD rates slipped since 1990 — disability fell fastest  
 **Type**: 3 stat cards with start→end values, % change, progress bar  
 **Data**: Embedded static (GBD 2021, ages 10–24, 1990→2021):
 | Metric | 1990 | 2021 | Change | Unit |
 |--------|------|------|--------|------|
-| Prevalence | 2,382 | 2,173 | -5.7% | per 100k |
+| Prevalence | 2,382 | 2,173 | -8.8% | per 100k |
 | Incidence | 12.6 | 11.9 | -5.7% | per 100k |
 | DALYs | 30.3 | 26.6 | -12.4% | per 100k |
 
@@ -530,7 +530,7 @@ const tierCounts = $derived.by(() => {
 
 ### 23. SuicideRisk.svelte
 
-**Title**: ADHD & Suicide Risk  
+**Title**: ADHD triples the odds of suicide — attempts and deaths alike  
 **Type**: Horizontal bar cards with OR + 95% CI visualization + summary cards  
 **Data**: `data/suicide_risk_studies.json` (Garas 2025 meta-analysis, per-item sources included):
 | Outcome | OR | 95% CI | n Studies | p |
@@ -552,7 +552,7 @@ const tierCounts = $derived.by(() => {
 
 ### 24. DataExplorer.svelte
 
-**Title**: Data Files  
+**Title**: Every chart traces to a file you can open here  
 **Type**: Searchable card grid of all 22 data files with metadata viewer  
 **Implementation**: Dynamic imports via `import.meta.glob`:
 ```typescript
