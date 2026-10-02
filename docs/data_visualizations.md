@@ -3,7 +3,7 @@
 **Project**: Single-page SvelteKit 2 + Svelte 5 (runes) dashboard visualizing global ADHD epidemiology, treatment access, and comorbidities  
 **Data Pipeline**: `src/lib/data.ts` imports 7 API-sourced JSON files from `data/`, filters World Bank aggregates, deduplicates to latest year per country, exports typed Maps/functions  
 **No runtime fetching** — all data bundled at build time  
-**24 visualization components** in `src/lib/components/` (README lists 23; `DataExplorer` is undocumented)
+**25 visualization components** in `src/lib/components/` (README lists 26 incl. `present` MapPresentation player; `DataExplorer` is documented)
 
 ---
 
@@ -30,6 +30,8 @@
 | `sud_by_substance.json` | Rohner et al. 2023 meta-analysis (n=12,524, 31 studies) | ADHD prevalence in SUD patients by substance + 95% CIs + overall pooled estimate (21%) | SUDbySubstance.svelte — ECharts bar + custom CI whisker series + overall markLine |
 | `prison_adhd_studies.json` | Fazel 2024, Young 2014, Ginsberg 2010 | ADHD prevalence in prison (8.3% / 25.5% / 40.0%) vs 3.5% general population | PrisonPrevalence.svelte — ECharts bar + custom CI whiskers + general-pop markLine |
 | `sdi_regions.json` | GBD 2021 under-20 (Cortese et al. 2026) + regional breakdowns | SDI vs ADHD prevalence for 7 regions | SDIScatter.svelte — ECharts scatter with region labels |
+| `presentation_adhd_timeline.json` | Curated ADHD history (57 events 1775–2022 + Tier-1 closing wave, stable step ids) | Step sequence: iso2/tier/year/label/talkingPoints per step | MapPresentation.svelte via `attachDiffusion()` in `src/lib/presentation.ts` (present view) |
+| `presentation_adhd_diffusion.json` | Sourced per-step enrichment (`entries`: step id → alsoLit iso2 + source) | Diffusion claims beyond event location, every entry source-enforced by test | Merged onto timeline at load; `diffusion.test.ts` fails on missing source/unknown id/country |
 
 Shared chart infra: `src/lib/components/EChart.svelte` (lifecycle + resize wrapper) and `src/lib/echartsTheme.ts` (dark palette, tooltip/axis/series helpers) used by all migrated views.
 
@@ -564,6 +566,16 @@ Merges with `README_DATA.json` metadata by filename key
 **Modal Click**: Opens formatted JSON (syntax highlighted via `<pre>`) or rendered Markdown
 
 **Insight**: Developer transparency tool — every dataset documented, browsable, traceable to source
+
+---
+
+### 25. MapPresentation.svelte (World ADHD present view)
+
+**Title**: World ADHD (default view)
+**Type**: Step-by-step choropleth reveal — map starts all-unknown, each step lights the event country (+ sourced alsoLit), Tier-1 closing wave lights the full tier
+**Data**: `data/presentation_adhd_timeline.json` + `data/presentation_adhd_diffusion.json` merged by `attachDiffusion()` in `src/lib/presentation.ts`; tiers from `data/countryStatus.json`
+**Interaction**: Comma/period step, Space play/pause (2.2s/step autoplay), Home/End jump, clickable step list, tier-circle filter preview, click active step again for the full map
+**Insight**: The event order is the narrative — reorder the JSON steps to match the script, then screen-record for video; narrative beats with no single country leave the map unchanged
 
 ---
 
