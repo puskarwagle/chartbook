@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from './EChart.svelte';
+	import EChart from '$lib/components/EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import { happinessYears, happinessForYear, gdpPerCapita, giniIndex, countryNameToCode3 } from '$lib/data';
 	import { t } from '$lib/i18n/store.svelte';
