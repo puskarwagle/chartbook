@@ -17,6 +17,7 @@ export const COLLECTIONS: Collection[] = [
 		title: 'All views',
 		blurb: 'Everything in the chartbook, grouped by topic.',
 		viewIds: [
+			'present',
 			'worldmap',
 			'brain',
 			'mhmap',
@@ -49,6 +50,7 @@ export const COLLECTIONS: Collection[] = [
 		title: 'ADHD',
 		blurb: 'Prevalence, treatment access, comorbidities, and justice-system overlap.',
 		viewIds: [
+			'present',
 			'worldmap',
 			'brain',
 			'stats',
