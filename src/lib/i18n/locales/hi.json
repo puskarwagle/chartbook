@@ -7,6 +7,7 @@
 	},
 	"nav": {
 		"worldmap": "",
+		"present": "",
 		"brain": "",
 		"mhmap": "",
 		"stats": "",
@@ -126,6 +127,14 @@
 		"limitation": ""
 	},
 	"viewInfo": {
+		"present": {
+			"what": "",
+			"howToRead": "",
+			"source": "",
+			"coverage": "",
+			"insight": "",
+			"limitation": ""
+		},
 		"worldmap": {
 			"what": "",
 			"howToRead": "",

@@ -6,7 +6,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 
 ## What It Does
 
-- **25 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
+- **26 visualization views** accessible from a collapsible sidebar with drag-and-drop reordering
 - World map with Natural Earth projection (D3-geo + TopoJSON) — color-coded by ADHD medication access tier
 - Statistics, timelines, age pyramids, sex comparisons, regional rankings
 - Trend lines, SDI scatter plots, comorbidity breakdowns, substance use data
@@ -18,6 +18,7 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 
 | ID | Label | Description |
 |----|-------|-------------|
+| `present` | World ADHD | Step-by-step presentation player lighting one country per event |
 | `worldmap` | World Map | ADHD medication access tiers by country |
 | `brain` | Brain Regions | Interactive ADHD brain-region/function explorer |
 | `stats` | Stats | Global ADHD statistics overview |
@@ -65,11 +66,13 @@ Interactive multi-view dashboard for exploring **curated chart collections** —
 │   │   ├── mapData.ts           # GeoJSON → SVG path conversion, country lookup helpers
 │   │   ├── colors.ts            # Tier color palette and tier label mapping
 │   │   ├── data.ts              # Data pipeline — imports from root data/, exports datasets & helpers
-│   │   ├── Sidebar.svelte       # Collapsible sidebar with drag-and-drop reordering
+  │   │   ├── presentation.ts        # Step-player engine (reveal, tier waves, diffusion merge)
+  │   │   ├── Sidebar.svelte       # Collapsible sidebar with drag-and-drop reordering
 │   │   ├── countryStatus.json   # Tier data per country (schema v2.0)
 │   │   ├── countryStatus.bak.json # Backup
-│   │   ├── components/          # 25 views + shared helpers (EChart, CustomPage, CustomPagePreview, ViewInfo)
-│   │   │   ├── WorldMap.svelte
+  │   │   ├── components/          # 26 views + shared helpers (EChart, CustomPage, CustomPagePreview, ViewInfo)
+  │   │   │   ├── MapPresentation.svelte # Reusable step-by-step map player (present view)
+  │   │   │   ├── WorldMap.svelte
 │   │   │   ├── StatsView.svelte
 │   │   │   ├── TimelineView.svelte
 │   │   │   ├── AgePyramid.svelte
@@ -147,6 +150,8 @@ Dashboard shell. Renders the sidebar and active component. Handles keyboard navi
 | `world_prison_brief.json` | World Prison Brief |
 | `education_indicators.json` | Education data |
 | `countryStatus.json` | Research-sourced ADHD medication access tiers |
+| `presentation_adhd_timeline.json` | 57-event ADHD history sequence + Tier-1 closing wave (present view) |
+| `presentation_adhd_diffusion.json` | Sourced per-step diffusion enrichment keyed by step id |
 
 ## Tech Stack
 

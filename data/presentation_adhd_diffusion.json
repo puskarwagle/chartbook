@@ -1,0 +1,6 @@
+{
+  "id": "adhd-diffusion",
+  "for_sequence": "adhd-history",
+  "_help": "Optional diffusion enrichment for presentation_adhd_timeline.json, keyed by step id. Each entry MUST have iso2 + source (enforced by diffusion.test.ts — an unsourced claim is a red build). Only add countries where access by that point is actually known; leave steps out entirely where the facts aren't known. Reveal is cumulative union: origin + all alsoLit up to the clicked step.",
+  "entries": {}
+}

@@ -12,7 +12,7 @@ export interface NavGroup {
 }
 
 export const NAV_GROUPS: NavGroup[] = [
-	{ key: 'categories.overview', ids: ['worldmap', 'brain', 'mhmap', 'stats', 'timeline'] },
+	{ key: 'categories.overview', ids: ['present', 'worldmap', 'brain', 'mhmap', 'stats', 'timeline'] },
 	{ key: 'categories.demographics', ids: ['age', 'sex', 'region', 'trends', 'sdi'] },
 	{ key: 'categories.adhd', ids: ['prison', 'comorbid', 'sud', 'sudsex', 'suicide', 'prisonmh'] },
 	{
