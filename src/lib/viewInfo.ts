@@ -62,15 +62,15 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		source: 'data/adolescents_young_adults_10_24.json (Global Burden of Disease–derived adolescent/young-adult dataset).',
 		coverage: 'Global, 2021, age bands 10–14 / 15–19 / 20–24',
 		insight: 'Prevalence is highest in early adolescence and tapers with age — consistent with developmental remission patterns reported in longitudinal studies.',
-		limitation: 'Global modeled estimates; age bands and diagnostic thresholds differ across source studies. Rates are per 100k, not absolute case counts.'
+		limitation: 'Global modeled estimates, not headcounts. Studies define age bands and diagnoses differently, so treat small gaps between bands with caution.'
 	},
 	sex: {
 		what: 'Side-by-side comparison of ADHD prevalence in males vs females (ages 10–24, per 100k).',
-		howToRead: 'Paired bars per region or age band: compare lengths to see the male–female gap. Ratios above 1 mean higher male prevalence.',
+		howToRead: 'Two bar pairs compare males vs females worldwide: blue is prevalence, green is incidence (both per 100k, ages 10–24, 2021). Compare the two bars of the same color — the colors use different scales, so equal heights are not equal values.',
 		source: 'data/adolescents_young_adults_10_24.json, split by sex.',
 		coverage: 'Global, 2021, male vs female',
 		insight: 'Males show substantially higher diagnosed prevalence at these ages — partly true difference, partly referral and diagnostic bias toward externalizing presentations.',
-		limitation: 'Female ADHD is widely considered underdiagnosed, especially inattentive presentations. Gaps likely overstate the true biological difference.'
+		limitation: 'These are diagnosed cases, not necessarily true cases — girls with quieter, inattentive ADHD are missed most, so the gap overstates any real biological difference.'
 	},
 	region: {
 		what: 'Ranked bar chart of ADHD prevalence by world region (ages 10–24, per 100k, 2021), with incidence where available.',
@@ -78,15 +78,15 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		source: 'Regional aggregates from data/adolescents_young_adults_10_24.json (GBD-based).',
 		coverage: '2021; Australasia, Caribbean, East Asia, North America',
 		insight: 'Australasia and high-income regions report the highest rates — reflecting both awareness/screening intensity and true variation.',
-		limitation: 'Only a subset of regions is shown and regional aggregates hide large within-region differences. Higher reported rates partly reflect better detection.'
+		limitation: 'Only four regions are shown and each hides big differences inside it. Higher numbers partly mean better detection, not just more ADHD.'
 	},
 	trends: {
 		what: 'Three cards tracking global ADHD prevalence, incidence, and DALYs (disability-adjusted life years) from 1990 to 2021 for ages 10–24.',
-		howToRead: 'Each card shows the 1990 value → 2021 value and the percent change. Negative change means a decline in the age-standardized rate.',
+		howToRead: 'Three cards for prevalence, incidence, and DALYs (disability-adjusted life years — lost years of healthy life). Each shows the 1990 value → 2021 value and the percent change. Only the two endpoints are shown, not the path between.',
 		source: 'GBD-derived trend data (1990–2021) bundled with the adolescent dataset.',
 		coverage: '1990 → 2021, global',
 		insight: 'Age-standardized rates declined modestly even as absolute case counts grew with population — DALYs fell fastest, suggesting better management.',
-		limitation: 'Rates are age-standardized modeled estimates. Absolute numbers of people with ADHD rose over the same period due to population growth.'
+		limitation: 'Modeled, age-adjusted estimates. The absolute number of people with ADHD rose over this period because the population grew — the rate fell, the headcount did not.'
 	},
 	sdi: {
 		what: 'Scatter plot of Sociodemographic Index (SDI, 0–1) against ADHD prevalence (%) by region for under-20s in 2021.',
@@ -94,42 +94,42 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		source: 'data/sdi_regions.json (SDI vs prevalence by region).',
 		coverage: '2021, under-20s, SDI 0.5–0.9',
 		insight: 'Higher-SDI regions report higher ADHD prevalence — a nonlinear positive correlation, with the largest 1990–2021 increases in high-SDI regions.',
-		limitation: 'Ecological correlation: it does not prove development causes ADHD. Detection, screening, and diagnostic culture rise with SDI and inflate the gradient.'
+		limitation: 'Each dot is a whole region, not a person, so regional patterns can mislead about individuals. Reported rates also rise with screening, which rises with wealth.'
 	},
 	prison: {
 		what: 'ADHD prevalence found in prison populations across published meta-analyses, compared against general-population prevalence.',
-		howToRead: 'Each bar is one study or pooled estimate. Compare prison bars against the general-population baseline to see the overrepresentation multiple.',
+		howToRead: 'Each bar is one study or pooled estimate. Compare prison bars against the general-population baseline to see the overrepresentation multiple. Whiskers show the 95% confidence interval: the range the true rate likely falls in.',
 		source: 'data/prison_adhd_studies.json (meta-analyses of prison ADHD prevalence).',
 		coverage: '3 studies vs 3.5% general-population baseline',
-		sample: 'Fazel n=3,919; Young n=26,641; Ginsberg n=30',
-		insight: 'ADHD is roughly 4–10× more common in prison populations than in the general public — one of the strongest overrepresentations in psychiatry.',
-		limitation: 'Studies vary in screening tools, diagnostic cutoffs, and prison types. Pooled figures blend heterogeneous methods and settings.'
+		sample: 'Fazel n=3,919; Young n=26,641; Ginsberg one prison (315 screened, 34 assessed)',
+		insight: 'ADHD is roughly 2–11× more common in prison populations than in the general public — one of the strongest overrepresentations in psychiatry.',
+		limitation: 'Three different studies with different tests, cutoffs and prisons — the spread from 8% to 40% reflects methods as well as reality.'
 	},
 	comorbid: {
 		what: 'Breakdown of psychiatric comorbidities among 30 confirmed ADHD cases in a high-security Swedish prison sample.',
-		howToRead: 'Bars show the share of the ADHD group meeting criteria for each additional condition (e.g. substance use, mood, personality disorders).',
-		source: 'Ginsberg et al. 2010 via data/comorbidities.json (n=30 confirmed ADHD cases).',
-		coverage: '2010; 30 confirmed ADHD of 34 assessed from 315 screened',
+		howToRead: 'Bars show the share meeting criteria for each additional condition, with the assessed count under each percentage. One person can appear in several bars. Rows marked ↳ are personality-disorder ([PD]) subtypes counted inside the Personality Disorders bar; PCL-R is the psychopathy rating scale used here (30 or more marks psychopathy).',
+		source: 'Ginsberg et al. 2010 via data/comorbidities.json (n=30 confirmed ADHD cases; personality-disorder items assessed in 23).',
+		coverage: '2010; 30 confirmed ADHD of 34 assessed from 315 screened; personality-disorder items assessed in 23',
 		insight: '"Pure" ADHD is the exception here — most incarcerated individuals with ADHD meet criteria for multiple additional disorders, compounding outcomes.',
-		limitation: 'Very small, single-site, all-high-security sample (n=30). Not generalizable to community ADHD or other justice systems.'
+		limitation: 'Thirty people, one high-security prison, one country. Nothing here describes ADHD in general.'
 	},
 	sud: {
 		what: 'Prevalence of comorbid ADHD among people with substance use disorders, split by primary substance type.',
-		howToRead: 'Each bar is one substance category. Higher bars mean a larger share of people with that SUD also meet ADHD criteria.',
+		howToRead: 'Each bar is one substance category. Higher bars mean a larger share of people with that SUD also meet ADHD criteria. Whiskers show the 95% confidence interval: the range the true share likely falls in.',
 		source: 'Rohner et al. 2023 via data/sud_by_substance.json.',
 		coverage: '31 studies; alcohol (7), cocaine (7), opioid (3)',
 		sample: 'n=12,524 SUD patients; overall pooled ADHD prevalence 21% [17.4–25.5]',
-		insight: 'Stimulant and cannabis use disorders show among the highest ADHD comorbidity — consistent with self-medication and shared impulsivity pathways.',
-		limitation: 'Treatment-seeking samples overrepresent severe cases. Direction of causality (ADHD → SUD vs shared risk) cannot be read from these bars.'
+		insight: 'About 1 in 5 people in SUD treatment also have ADHD (21% pooled across 31 studies). Differences between substances sit inside wide, overlapping confidence intervals, so no single substance stands out reliably.',
+		limitation: 'These are people already in treatment — the most severe cases. The bars cannot say whether ADHD leads to drug use or both share deeper causes.'
 	},
 	sudsex: {
 		what: 'Sex-split view of substance use disorder comorbidity in ADHD, from a large Norwegian cohort aged 18–31.',
-		howToRead: 'Paired bars compare males vs females with ADHD on each SUD outcome. Gaps show where one sex carries higher comorbid burden.',
+		howToRead: 'Paired bars compare males vs females with ADHD on each SUD outcome. The sub-labels give the hazard ratio ([HR]) — how many times higher the SUD rate is for people with ADHD versus without, e.g. 8.0× means eight times the rate.',
 		source: 'Moldekleiv et al. 2025 via data/sud_by_sex.json (n=49,815 with ADHD, Norway, ages 18–31).',
 		coverage: 'Ages 18–31; Any SUD, cannabis, stimulant, opioid',
 		sample: 'n=49,815 with ADHD (31,146 males, 18,669 females)',
-		insight: 'Both sexes with ADHD carry elevated SUD risk, with substance-specific sex differences — males skew toward alcohol/drug dependence in this cohort.',
-		limitation: 'Single-country registry cohort (Norway). Prescription, cultural, and ascertainment patterns may not transfer to other settings.'
+		insight: 'Males show higher prevalence on every outcome; females show the larger relative increase (hazard ratio) for cannabis, stimulants, and SUD overall — while absolute SUD rates remain higher in males. Opioids are the exception: 7.6× in men vs 7.4× in women.',
+		limitation: 'One country (Norway) and registry diagnoses only. Undiagnosed ADHD and untreated SUD are invisible here — especially in women.'
 	},
 	suicide: {
 		what: 'Odds ratios linking ADHD to suicidal ideation, suicide attempt, suicide death, and overall suicidality from a longitudinal meta-analysis.',
@@ -138,15 +138,15 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		coverage: '9 studies; ideation, attempt, death + overall suicidality',
 		sample: '~140k ADHD youth vs ~4.3M controls; overall OR 3.34 [2.20–5.06]',
 		insight: 'ADHD roughly triples the odds of suicidality across all outcomes — ideation, attempt, and death alike — making risk screening a core part of ADHD care.',
-		limitation: 'Odds ratios pool heterogeneous studies; confounding (e.g. comorbid depression, impulsivity) is only partly adjusted. Some outcomes rest on few studies (n=2).'
+		limitation: 'Nine pooled studies with different methods; depression and impulsivity explain part of the link. Two of the four outcomes rest on only two studies each.'
 	},
 	prisonmh: {
-		what: 'Global incarceration rates per 100k joined with the ADHD-in-prison story — how many people are imprisoned and why ADHD screening there matters.',
-		howToRead: 'Bars rank countries by prisoners per 100k. Read alongside the Prison ADHD view: high-incarceration settings concentrate ADHD at high rates.',
+		what: 'Ranking of incarceration rates (prisoners per 100k) across 168 jurisdictions — country names are not in the source, so rows show rank numbers only. It contains no ADHD or mental-health data itself.',
+		howToRead: 'Bars show the 20 highest jurisdictions by prisoners per 100k. Read alongside the Prison ADHD view: high-incarceration settings concentrate ADHD at high rates.',
 		source: 'World Prison Brief via data/world_prison_brief.json (prison population totals and rates per 100k).',
-		coverage: '~200 jurisdictions, rate per 100k, filtered to rate > 0',
-		insight: 'Incarceration rates vary enormously by country, and ADHD is concentrated wherever incarceration is high — prison mental-health services are ADHD services.',
-		limitation: 'Prison census data varies in year and definition across countries. Rates reflect policy and sentencing, not crime or ADHD prevalence alone.'
+		coverage: '168 jurisdictions, rate per 100k',
+		insight: 'Incarceration rates differ enormously between jurisdictions, and ADHD is concentrated wherever incarceration is high — prison mental-health services are ADHD services.',
+		limitation: 'Prison censuses differ by year and by what each country counts. High rates reflect laws and sentencing, not crime — and say nothing about ADHD on their own.'
 	},
 	wealth: {
 		what: 'Scatter of GDP per capita (log scale) against World Happiness Report life-evaluation scores, colored by income inequality (Gini). Outliers labeled; dashed line is the OLS trend in log-GDP space.',
@@ -205,12 +205,12 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		limitation: 'Top-10-by-GDP framing skews toward large economies. Older years have thinner country coverage, shifting the global average.'
 	},
 	treatment: {
-		what: 'Composite Treatment Access Index ranking countries by combining healthcare spending effort and health outcomes into a single 0–100 score.',
+		what: 'Composite health-system capacity index ranking countries by combining healthcare spending effort and health outcomes into a single 0–100 score. It measures general system capacity, not ADHD-specific treatment availability.',
 		howToRead: 'Higher scores (left/top of ranking) mean better structural access. The score averages each country\u2019s percentile ranks on health expenditure (% of GDP) and life expectancy.',
-		source: 'Computed in src/lib/data.ts (computeTreatmentAccessIndex) from World Bank health expenditure and life expectancy; governance/HDI used as context.',
-		coverage: 'Countries with both inputs; score 0–100 from percentile ranks',
+		source: 'Computed in src/lib/data.ts (computeTreatmentAccessIndex) from World Bank health expenditure (% of GDP) and life expectancy — each country’s percentile ranks on the two inputs, averaged.',
+		coverage: 'Countries with both inputs (see subtitle for current scored/excluded counts); score 0–100 from percentile ranks',
 		insight: 'The index separates structural capacity from wealth alone — some mid-income countries outrank richer ones on access-efficiency.',
-		limitation: 'A rough proxy: it measures system inputs/outcomes, not ADHD-specific availability, affordability, or prescribing practice. Equal weighting of components is a judgment call.'
+		limitation: 'A rough proxy, not a measurement: it scores whole health systems, not ADHD care, and weighs its two ingredients equally by choice rather than proof. Countries missing an input are excluded entirely.'
 	},
 	dataexplorer: {
 		what: 'Browser for the raw JSON datasets powering every view — inspect files, fields, and row counts directly.',
@@ -218,6 +218,6 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		source: 'All files under data/ plus their documentation in data/README_DATA.json.',
 		coverage: 'All bundled datasets with source, schema and consumer metadata',
 		insight: 'Every chart in this dashboard traces back to a file you can open here — the fastest way to answer "where did that number come from?".',
-		limitation: 'Raw files include mixed vintages, missing values, and aggregate codes; the views apply cleaning (e.g. dropping World Bank aggregates) that you must replicate for exact matches.'
+		limitation: 'Raw files mix years, units and missing values, and the charts clean them first (e.g. dropping aggregates) — exact matches need the same cleaning.'
 	}
 };

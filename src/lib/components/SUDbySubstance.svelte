@@ -3,8 +3,9 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import sudRaw from '../../../data/sud_by_substance.json';
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 
 	// JSON-driven: values come from data/sud_by_substance.json (Rohner 2023).
 	interface Substance {
@@ -21,6 +22,8 @@
 	};
 	const substances = raw.substances;
 	const overall = raw.overall;
+
+	const howToRead = $derived(getViewInfo('sud', currentLocale())?.howToRead ?? '');
 
 	// CI whiskers rendered as a custom series (horizontal line + caps).
 	const ciData = substances.map((s, i) => [s.ci_low, s.ci_high, i]);
@@ -67,7 +70,14 @@
 			}
 		},
 		grid: { left: 8, right: 88, top: 32, bottom: 32, containLabel: true },
-		xAxis: { ...valueXAxis(), max: 40 },
+		xAxis: {
+			...valueXAxis(),
+			max: 40,
+			name: t('views.sud.axisX'),
+			nameLocation: 'middle',
+			nameGap: 30,
+			nameTextStyle: { color: PALETTE.muted, fontSize: 11 }
+		},
 		yAxis: {
 			type: 'category',
 			data: substances.map((s) => s.name),
@@ -115,6 +125,21 @@
 				tooltip: { show: false },
 				z: 3
 			}
+		],
+		// Narrow screens: truncate long substance names (full name stays in the tooltip)
+		// and hide the x-axis tick numbers (each bar carries its own value).
+		media: [
+			{
+				query: { maxWidth: 560 },
+				option: {
+					yAxis: {
+						axisLabel: { overflow: 'truncate', width: 110 }
+					},
+					xAxis: {
+						axisLabel: { show: false }
+					}
+				}
+			}
 		]
 	});
 
@@ -124,11 +149,20 @@
 			studies: raw.meta_analysis.n_studies
 		})
 	);
+
+	// Headline "1 in N", computed from the pooled rate so it can't go stale.
+	const title = $derived(
+		interpolate(t('views.sud.title'), { n: Math.round(100 / overall.percent) })
+	);
 </script>
 
 <div class="view">
-	<h1 class="title">{t('views.sud.title')}</h1>
+	<h1 class="title">{title}</h1>
 	<p class="subtitle">{t('views.sud.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.sud.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="chart-container">
 		<EChart {option} />
@@ -150,15 +184,43 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
 	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
+	}
 	.title { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; color: #e0e0e0; }
-	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 2rem; }
+	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 0.75rem; }
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1.25rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
+	}
 	.chart-container {
 		width: 100%;
 		max-width: 620px;

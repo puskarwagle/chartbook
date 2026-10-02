@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
 	import { formatSummaryValue, type SummaryValue } from '$lib/summaryFormat';
 	import suicideRaw from '../../../data/suicide_risk_studies.json';
+	import RichText from './RichText.svelte';
 
 	interface StudyFinding {
 		id: string;
@@ -40,6 +41,13 @@
 
 	const maxOr = 8;
 
+	// Headline range, computed from the findings so it can't go stale.
+	const orMin = Math.min(...risks.map((r) => r.or)).toFixed(1);
+	const orMax = Math.max(...risks.map((r) => r.or)).toFixed(1);
+	const sowhat = $derived(
+		interpolate(t('views.suicide.sowhat'), { lo: orMin, hi: orMax })
+	);
+
 	function orWidth(or: number) {
 		return (or / maxOr) * 100;
 	}
@@ -51,11 +59,20 @@
 	function ciOffset(ciLow: number) {
 		return (ciLow / maxOr) * 100;
 	}
+
+	// Position of the "no difference" marker, derived from the bar scale.
+	const nullLeft = (1 / maxOr) * 100;
+
+	const howToRead = $derived(getViewInfo('suicide', currentLocale())?.howToRead ?? '');
 </script>
 
 <div class="view">
 	<h1 class="title">{t('views.suicide.title')}</h1>
 	<p class="subtitle">{t('views.suicide.subtitle')}</p>
+	<p class="sowhat"><RichText text={sowhat} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="cards">
 		{#each risks as r}
@@ -63,6 +80,7 @@
 				<div class="card-bar-track">
 					<div class="card-bar-ci" style="left:{ciOffset(r.ciLow)}%;width:{ciWidth(r.ciLow, r.ciHigh)}%"></div>
 					<div class="card-bar-or" style="width:{orWidth(r.or)}%"></div>
+					<div class="card-bar-null" style="left:{nullLeft}%" title={t('views.suicide.nullLabel')}></div>
 				</div>
 				<div class="card-or">{r.or.toFixed(1)}×</div>
 				<div class="card-label">{interpolate(t('views.suicide.higherRisk'), { name: t(r.nameKey).toLowerCase() })}</div>
@@ -70,6 +88,7 @@
 			</div>
 		{/each}
 	</div>
+	<p class="scale-note"><span class="scale-tick"></span>{t('views.suicide.nullLabel')}</p>
 
 	<div class="summary">
 		{#each summary as s}
@@ -86,15 +105,43 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
 	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
+	}
 	.title { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; color: #e0e0e0; }
-	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 2.5rem; }
+	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 0.75rem; }
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1.25rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
+	}
 	.cards {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -134,6 +181,28 @@
 		background: #8b5cf6;
 		border-radius: 4px;
 		transition: width 0.6s ease;
+	}
+	.card-bar-null {
+		position: absolute;
+		top: -2px;
+		bottom: -2px;
+		width: 2px;
+		background: rgba(255, 255, 255, 0.65);
+	}
+	.scale-note {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		font-size: 0.75rem;
+		color: #888;
+		margin: 0.75rem 0 0;
+	}
+	.scale-tick {
+		display: inline-block;
+		width: 2px;
+		height: 12px;
+		background: rgba(255, 255, 255, 0.65);
 	}
 	.card-or {
 		font-size: 1.6rem;
