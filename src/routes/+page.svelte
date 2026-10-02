@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Sidebar from '$lib/Sidebar.svelte';
+	import Sidebar from '$lib/shell/Sidebar.svelte';
 	import { NAV_GROUPS } from '$lib/navGroups';
 	import WorldMap from '$lib/components/WorldMap.svelte';
 	import MapPresentation from '$lib/components/MapPresentation.svelte';
@@ -36,8 +36,8 @@
 	import EconomicSnapshot from '$lib/components/EconomicSnapshot.svelte';
 	import DataExplorer from '$lib/components/DataExplorer.svelte';
 	import CustomPage from '$lib/components/CustomPage.svelte';
-	import Settings from '$lib/Settings.svelte';
-	import PageInspector from '$lib/PageInspector.svelte';
+	import Settings from '$lib/shell/Settings.svelte';
+	import PageInspector from '$lib/shell/PageInspector.svelte';
 	import LanguageSwitcher from '$lib/i18n/LanguageSwitcher.svelte';
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/format';
