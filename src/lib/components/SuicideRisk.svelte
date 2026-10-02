@@ -2,7 +2,7 @@
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
 	import { formatSummaryValue, type SummaryValue } from '$lib/summaryFormat';
-	import suicideRaw from '../../../data/suicide_risk_studies.json';
+	import suicideRaw from '$data/suicide_risk_studies.json';
 
 	interface StudyFinding {
 		id: string;

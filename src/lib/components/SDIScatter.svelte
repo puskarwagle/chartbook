@@ -2,7 +2,7 @@
 	import type * as echarts from 'echarts';
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
-	import sdiRaw from '../../../data/sdi_regions.json';
+	import sdiRaw from '$data/sdi_regions.json';
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
 

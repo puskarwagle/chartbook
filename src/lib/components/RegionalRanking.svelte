@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
-	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+	import adolescentsRaw from '$data/adolescents_young_adults_10_24.json';
 
 	interface RegionalRates {
 		prevalence_rate_per_100k: number;

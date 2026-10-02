@@ -1,15 +1,15 @@
 <script lang="ts">
-	import readme from '../../../data/README_DATA.json';
+	import readme from '$data/README_DATA.json';
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
 	import { VIEW_DATA_SOURCES } from '$lib/dataSources';
 
 	const dataModules = import.meta.glob<{
 		default: unknown;
-	}>('../../../data/*.json', { eager: true });
+	}>('$data/*.json', { eager: true });
 	const mdModules = import.meta.glob<{
 		default: string;
-	}>('../../../data/*.md', { query: '?raw', eager: true });
+	}>('$data/*.md', { query: '?raw', eager: true });
 
 	interface DataFile {
 		key: string;

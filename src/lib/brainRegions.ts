@@ -11,7 +11,7 @@
  * function's group explanation alongside the ADHD note.
  */
 
-import raw from '../../data/brain_regions.json';
+import raw from '$data/brain_regions.json';
 
 export interface BrainFunctionGroup {
 	/** e.g. 'Cognitive / Executive Functions' */

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import timelineRaw from '../../../data/presentation_adhd_timeline.json';
-import diffusionRaw from '../../../data/presentation_adhd_diffusion.json';
-import statusRaw from '../../../data/countryStatus.json';
+import timelineRaw from '$data/presentation_adhd_timeline.json';
+import diffusionRaw from '$data/presentation_adhd_diffusion.json';
+import statusRaw from '$data/countryStatus.json';
 import { countryFeatures } from '$lib/mapData';
 import type { AlsoLitEntry, PresentationSequence } from '$lib/presentation';
 

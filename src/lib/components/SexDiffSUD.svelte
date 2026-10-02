@@ -10,7 +10,7 @@
 		legendBottom,
 		barSeries
 	} from '$lib/echartsTheme';
-	import sudBySexRaw from '../../../data/sud_by_sex.json';
+	import sudBySexRaw from '$data/sud_by_sex.json';
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/index';
 
