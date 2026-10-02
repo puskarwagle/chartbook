@@ -4,10 +4,10 @@ import path from 'node:path';
 import type { RequestHandler } from './$types';
 
 // Tiny personal-use persistence: writes custom page list/meta to
-// src/lib/customPages.json so pages survive localStorage clears.
+// data/customPages.json so pages survive localStorage clears.
 // No auth — this app is local-only for video production.
 
-const JSON_PATH = path.resolve('src/lib/customPages.json');
+const JSON_PATH = path.resolve('data/customPages.json');
 
 interface CustomPageEntry {
 	id: string;

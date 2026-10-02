@@ -43,7 +43,7 @@
 	import { interpolate } from '$lib/i18n/format';
 	import { VIEW_INFO } from '$lib/viewInfo';
 	import { COLLECTIONS, DEFAULT_COLLECTION_ID } from '$lib/collections';
-	import customDefaults from '$lib/customPages.json';
+	import customDefaults from '$data/customPages.json';
 
 	interface ComponentEntry {
 		id: string;
