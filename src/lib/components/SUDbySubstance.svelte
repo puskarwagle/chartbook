@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from '$lib/components/EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import sudRaw from '$data/sud_by_substance.json';
 	import { t } from '$lib/i18n/store.svelte';

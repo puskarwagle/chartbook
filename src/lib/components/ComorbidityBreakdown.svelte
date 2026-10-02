@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from '$lib/components/EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import comorbiditiesRaw from '$data/comorbidities.json';
 	import { t } from '$lib/i18n/store.svelte';

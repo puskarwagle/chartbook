@@ -3,7 +3,7 @@
 	// per page; the JSON entry + this generic renderer is the page).
 	// Image + script notes persist per-page in localStorage; title + small
 	// meta also sync to customPages.json on disk via /api/custom-pages.
-	import CustomPagePreview from './CustomPagePreview.svelte';
+	import CustomPagePreview from '$lib/shared/CustomPagePreview.svelte';
 
 	let {
 		pageId,

@@ -2,7 +2,7 @@
 	import Sidebar from '$lib/shell/Sidebar.svelte';
 	import { NAV_GROUPS } from '$lib/navGroups';
 	import WorldMap from '$lib/components/WorldMap.svelte';
-	import MapPresentation from '$lib/components/MapPresentation.svelte';
+	import MapPresentation from '$lib/shared/MapPresentation.svelte';
 	import { attachDiffusion, type DiffusionMap, type PresentationSequence } from '$lib/presentation';
 	import adhdSequenceRaw from '$data/presentation_adhd_timeline.json';
 	import adhdDiffusionRaw from '$data/presentation_adhd_diffusion.json';
