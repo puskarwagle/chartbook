@@ -48,7 +48,7 @@ describe('locale store + dictionary', () => {
 	});
 
 	it('offers exactly the supported locales', () => {
-		expect(LOCALES.map((l) => l.code).sort()).toEqual(['en', 'hi', 'ne']);
+		expect(LOCALES.map((l) => l.code).sort()).toEqual(['en', 'ne']);
 	});
 });
 

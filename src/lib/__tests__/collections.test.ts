@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { COLLECTIONS, DEFAULT_COLLECTION_ID } from '$lib/collections';
+import { NAV_GROUPS } from '$lib/navGroups';
+import { VIEW_DATA_SOURCES } from '$lib/dataSources';
 
 describe('collections', () => {
 	it('has unique ids and a valid default', () => {
@@ -31,6 +33,26 @@ describe('collections', () => {
 	it('includes dataexplorer in every collection', () => {
 		for (const c of COLLECTIONS) {
 			expect(c.viewIds, c.id).toContain('dataexplorer');
+		}
+	});
+
+	it('keeps every sidebar view reachable via the all collection', () => {
+		const all = COLLECTIONS.find((c) => c.id === DEFAULT_COLLECTION_ID);
+		expect(all).toBeDefined();
+		const allIds = new Set(all!.viewIds);
+		for (const group of NAV_GROUPS) {
+			for (const id of group.ids) {
+				expect(allIds.has(id), `'${id}' in navGroups missing from 'all'`).toBe(true);
+			}
+		}
+	});
+
+	it('has a data-source registry entry for every collected view', () => {
+		const registry = new Set(VIEW_DATA_SOURCES.map((v) => v.viewId));
+		for (const c of COLLECTIONS) {
+			for (const id of c.viewIds) {
+				expect(registry.has(id), `'${id}' from '${c.id}' missing in VIEW_DATA_SOURCES`).toBe(true);
+			}
 		}
 	});
 });
