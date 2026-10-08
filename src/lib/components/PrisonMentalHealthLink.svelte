@@ -3,20 +3,19 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { prisonData } from '$lib/data';
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 
 	const sorted = [...prisonData].sort(
 		(a, b) => b.prison_population_rate_per_100k - a.prison_population_rate_per_100k
 	);
 	const top20 = sorted.slice(0, 20);
 	const maxRate = Math.max(...top20.map((r) => r.prison_population_rate_per_100k), 1);
-	const globalAvg = (() => {
-		const vals = prisonData.map((r) => r.prison_population_rate_per_100k);
-		return vals.reduce((a, b) => a + b, 0) / vals.length;
-	})();
 
 	const names = top20.map((r) => `#${r.rank}`);
+
+	const howToRead = $derived(getViewInfo('prisonmh', currentLocale())?.howToRead ?? '');
 
 	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
@@ -64,16 +63,6 @@
 					fontSize: 10,
 					fontWeight: 600,
 					formatter: (p: { value: number }) => interpolate(t('views.prisonmh.barLabel'), { value: p.value })
-				},
-				markLine: {
-					symbol: 'none',
-					lineStyle: { color: PALETTE.amber, type: 'dashed', width: 1.5 },
-					label: {
-						color: PALETTE.amber,
-						fontSize: 9,
-						formatter: () => interpolate(t('views.prisonmh.globalAvg'), { value: globalAvg.toFixed(0) })
-					},
-					data: [{ xAxis: globalAvg }]
 				}
 			}
 		]
@@ -83,6 +72,10 @@
 <div class="view">
 	<h1 class="title">{t('views.prisonmh.title')}</h1>
 	<p class="subtitle">{t('views.prisonmh.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.prisonmh.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="chart-container">
 		<EChart {option} />
@@ -104,15 +97,43 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
 	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
+	}
 	.title { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; color: #e0e0e0; }
-	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 1.5rem; }
+	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 0.75rem; }
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
+	}
 	.chart-container {
 		width: 100%;
 		max-width: 640px;

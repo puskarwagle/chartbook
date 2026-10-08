@@ -1,12 +1,24 @@
 <script lang="ts">
-	import { computeTreatmentAccessIndex, countryName, iso3ToIso2 } from '$lib/data';
-	import { t } from '$lib/i18n/store.svelte';
+	import { computeTreatmentAccessIndex, treatmentAccessCoverage, countryName, iso3ToIso2 } from '$lib/data';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 
 	type ViewMode = 'top20' | 'bottom20' | 'all';
 
 	let mode = $state<ViewMode>('top20');
 
 	const allData = computeTreatmentAccessIndex();
+	const coverage = treatmentAccessCoverage();
+	const subtitle = $derived(
+		interpolate(t('views.treatment.subtitle'), {
+			scored: coverage.scored.toLocaleString(),
+			total: coverage.total.toLocaleString(),
+			excluded: coverage.excluded.toLocaleString()
+		})
+	);
+
+	const howToRead = $derived(getViewInfo('treatment', currentLocale())?.howToRead ?? '');
 
 	const displayData = $derived(() => {
 		if (mode === 'top20') return allData.slice(0, 20);
@@ -25,7 +37,11 @@
 
 <div class="view">
 	<h1 class="title">{t('views.treatment.title')}</h1>
-	<p class="subtitle">{t('views.treatment.subtitle')}</p>
+	<p class="subtitle">{subtitle}</p>
+	<p class="sowhat"><RichText text={t('views.treatment.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="controls">
 		<button class="mode-btn" class:active={mode === 'top20'} onclick={() => mode = 'top20'}>{t('views.treatment.modeTop')}</button>
@@ -73,15 +89,43 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
 	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
+	}
 	.title { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; color: #e0e0e0; }
-	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 1.5rem; }
+	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 0.75rem; }
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
+	}
 	.controls {
 		display: flex;
 		gap: 0.3rem;

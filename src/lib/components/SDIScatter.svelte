@@ -3,14 +3,17 @@
 	import EChart from './EChart.svelte';
 	import { PALETTE, BASE_ANIMATION } from '$lib/echartsTheme';
 	import sdiRaw from '../../../data/sdi_regions.json';
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 
 	// JSON-driven: values come from data/sdi_regions.json.
 	const raw = sdiRaw as unknown as {
 		regions: { region: string; sdi: number; prevalence_pct: number }[];
 	};
 	const sdiData = raw.regions;
+
+	const howToRead = $derived(getViewInfo('sdi', currentLocale())?.howToRead ?? '');
 
 	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
@@ -60,6 +63,15 @@
 				},
 				emphasis: { scale: 1.4 }
 			}
+		],
+		// Narrow screens: hide point labels (region names stay in the tooltip).
+		media: [
+			{
+				query: { maxWidth: 560 },
+				option: {
+					series: [{ label: { show: false }, symbolSize: 13 }]
+				}
+			}
 		]
 	});
 </script>
@@ -67,9 +79,14 @@
 <div class="view">
 	<h1 class="title">{t('views.sdi.title')}</h1>
 	<p class="subtitle">{t('views.sdi.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.sdi.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="chart-container">
 		<EChart {option} />
+		<p class="chart-note">{t('views.sdi.chartNote')}</p>
 	</div>
 
 	<div class="card">
@@ -82,12 +99,22 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
+	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
 	}
 	.title {
 		font-size: 1.8rem;
@@ -98,17 +125,41 @@
 	.subtitle {
 		font-size: 0.9rem;
 		color: #888;
-		margin: 0 0 2rem;
+		margin: 0 0 0.75rem;
+	}
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1.25rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
 	}
 	.chart-container {
 		width: 100%;
 		max-width: 600px;
 		height: 400px;
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		background: rgba(255,255,255,0.04);
+		border: 1px solid rgba(255,255,255,0.08);
 		border-radius: 12px;
 		padding: 1.5rem;
 		box-sizing: border-box;
+	}
+	.chart-note {
+		font-size: 0.72rem;
+		color: #777;
+		margin: 0.4rem 0 0;
+		text-align: center;
 	}
 	.card {
 		margin-top: 1.5rem;

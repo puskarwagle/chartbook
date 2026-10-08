@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
 
 	interface RegionalRates {
@@ -31,11 +32,17 @@
 	});
 
 	const maxPrevalence = Math.max(...regions.map((r) => r.prevalence));
+
+	const howToRead = $derived(getViewInfo('region', currentLocale())?.howToRead ?? '');
 </script>
 
 <div class="view">
 	<h1 class="title">{t('views.region.title')}</h1>
 	<p class="subtitle">{t('views.region.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.region.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="chart">
 		{#each regions as r}
@@ -67,12 +74,22 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
+	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
 	}
 	.title {
 		font-size: 1.8rem;
@@ -83,7 +100,25 @@
 	.subtitle {
 		font-size: 0.9rem;
 		color: #888;
-		margin: 0 0 2.5rem;
+		margin: 0 0 0.75rem;
+	}
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1.25rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
 	}
 	.chart {
 		width: 100%;

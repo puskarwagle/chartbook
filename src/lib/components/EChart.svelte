@@ -16,10 +16,13 @@
 		if (!el) return;
 		chart = echarts.init(el, 'dark');
 		chart.setOption(option);
-		const onResize = () => chart?.resize();
-		window.addEventListener('resize', onResize);
+		// ResizeObserver (not just window resize): sidebar toggles and other
+		// in-DOM layout changes don't fire window resize, which used to leave
+		// charts stuck at their init size — notably on narrow screens.
+		const ro = new ResizeObserver(() => chart?.resize());
+		ro.observe(el);
 		return () => {
-			window.removeEventListener('resize', onResize);
+			ro.disconnect();
 			chart?.dispose();
 			chart = null;
 		};

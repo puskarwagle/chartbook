@@ -11,8 +11,9 @@
 		barSeries
 	} from '$lib/echartsTheme';
 	import sudBySexRaw from '../../../data/sud_by_sex.json';
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 
 	// JSON-driven: values come from data/sud_by_sex.json (Moldekleiv 2025).
 	interface Category {
@@ -28,6 +29,8 @@
 	};
 	const categories = raw.categories;
 	const hrByName = new Map(categories.map((c) => [c.name, c]));
+
+	const howToRead = $derived(getViewInfo('sudsex', currentLocale())?.howToRead ?? '');
 
 	const hrText = (hr: { hr_male: number; hr_female: number }) =>
 		interpolate(t('views.sudsex.tooltipHr'), { male: hr.hr_male, female: hr.hr_female });
@@ -84,9 +87,14 @@
 <div class="view">
 	<h1 class="title">{t('views.sudsex.title')}</h1>
 	<p class="subtitle">{t('views.sudsex.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.sudsex.sowhat')} /></p>
+	<p class="howtoread">
+		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+	</p>
 
 	<div class="chart-container">
 		<EChart {option} />
+		<p class="chart-note">{t('views.sudsex.chartNote')}</p>
 	</div>
 
 	<div class="legend">
@@ -110,15 +118,43 @@
 	.view {
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 2rem;
 		box-sizing: border-box;
 	}
+	/* Safe centering: content is vertically centered when it fits, and
+	   top-aligned with a working scrollbar when it overflows. Plain
+	   justify-content:center clips the top unreachable when overflowing. */
+	.view > :first-child {
+		margin-top: auto;
+	}
+	.view > :last-child {
+		margin-bottom: auto;
+	}
 	.title { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; color: #e0e0e0; }
-	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 2rem; }
+	.subtitle { font-size: 0.9rem; color: #888; margin: 0 0 0.75rem; }
+	.sowhat {
+		font-size: 0.95rem;
+		color: #c9c9c9;
+		margin: 0 0 0.4rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread {
+		font-size: 0.8rem;
+		color: #888;
+		margin: 0 0 1.25rem;
+		max-width: 640px;
+		text-align: center;
+	}
+	.howtoread-label {
+		font-weight: 600;
+		color: #aaa;
+	}
 	.chart-container {
 		width: 100%;
 		max-width: 620px;
@@ -128,6 +164,12 @@
 		border-radius: 12px;
 		padding: 1.5rem;
 		box-sizing: border-box;
+	}
+	.chart-note {
+		font-size: 0.72rem;
+		color: #777;
+		margin: 0.4rem 0 0;
+		text-align: center;
 	}
 	.legend { display: flex; gap: 1.5rem; margin-top: 1rem; }
 	.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: #aaa; }

@@ -468,8 +468,8 @@
 
   "comorbidities.json": {
     "source": "Ginsberg et al. 2010, high-security Swedish prison (30 confirmed ADHD cases)",
-    "description": "Psychiatric comorbidity percentages in prison ADHD cases",
-    "format": "JSON object with study meta + comorbidities array (name, percent)",
+    "description": "Psychiatric comorbidity percentages in prison ADHD cases (personality-disorder items n=23, all other items n=30; paper Table 2)",
+    "format": "JSON object with study meta + comorbidities array (name, percent, count, n_total)",
     "consumed_by": ["ComorbidityBreakdown.svelte — horizontal ECharts bar with value-mapped opacity"]
   },
 

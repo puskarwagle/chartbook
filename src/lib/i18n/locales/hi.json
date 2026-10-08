@@ -3,7 +3,9 @@
 		"canonical": false,
 		"locale": "hi",
 		"description": "Untranslated overlay. Empty-string values fall back to en at runtime. Fill in progressively; do not rename keys.",
-		"status": "untranslated"
+		"status": "untranslated",
+		"coverage": "",
+		"placeholders": ""
 	},
 	"nav": {
 		"worldmap": "",
@@ -116,6 +118,7 @@
 		"language": "",
 		"male": "",
 		"female": "",
+		"howToRead": "कैसे पढ़ें",
 		"males": "",
 		"females": ""
 	},
@@ -350,7 +353,10 @@
 			"tooltip": "",
 			"note": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": "",
+			"axisX": "",
+			"countLabel": ""
 		},
 		"timeline": {
 			"title": "",
@@ -370,7 +376,9 @@
 			"axisPrevalence": "",
 			"axisIncidence": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": "",
+			"chartNote": ""
 		},
 		"sdi": {
 			"title": "",
@@ -379,7 +387,9 @@
 			"axisX": "",
 			"axisY": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": "",
+			"chartNote": ""
 		},
 		"sex": {
 			"title": "",
@@ -390,18 +400,20 @@
 			"axisPrevalence": "",
 			"axisIncidence": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": "",
+			"chartNote": ""
 		},
 		"prisonmh": {
 			"title": "",
 			"subtitle": "",
 			"tooltip": "",
 			"barLabel": "",
-			"globalAvg": "",
 			"card1Label": "",
 			"card1Note": "",
 			"card2Label": "",
-			"card2Note": ""
+			"card2Note": "",
+			"sowhat": ""
 		},
 		"sudsex": {
 			"title": "",
@@ -409,14 +421,17 @@
 			"tooltipHr": "",
 			"cohortLabel": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": "",
+			"chartNote": ""
 		},
 		"region": {
 			"title": "",
 			"subtitle": "",
 			"incidence": "",
 			"cardLabel": "",
-			"cardNote": ""
+			"cardNote": "",
+			"sowhat": ""
 		},
 		"healthtrends": {
 			"title": "",
@@ -436,12 +451,15 @@
 			"card1Label": "",
 			"card1Note": "",
 			"card2Label": "",
-			"card2Note": ""
+			"card2Note": "",
+			"sowhat": "",
+			"axisX": ""
 		},
 		"prison": {
 			"title": "",
 			"subtitle": "",
 			"tooltip": "",
+			"estimateTag": "",
 			"tooltipCi": "",
 			"tooltipNoCi": "",
 			"barSub": "",
@@ -449,7 +467,9 @@
 			"card1Label": "",
 			"card1Note": "",
 			"card2Label": "",
-			"card2Note": ""
+			"card2Note": "",
+			"sowhat": "",
+			"axisX": ""
 		},
 		"trends": {
 			"title": "",
@@ -458,7 +478,9 @@
 			"labelIncidence": "",
 			"labelDalys": "",
 			"unit": "",
-			"decline": ""
+			"decline": "",
+			"sowhat": "",
+			"ratioLabel": ""
 		},
 		"happiness": {
 			"title": "",
@@ -486,7 +508,9 @@
 			"sum2Label": "",
 			"sum2Note": "",
 			"sum3Label": "",
-			"sum3Note": ""
+			"sum3Note": "",
+			"sowhat": "",
+			"nullLabel": ""
 		},
 		"economy": {
 			"title": "",
@@ -504,7 +528,8 @@
 			"card1Label": "",
 			"card1Note": "",
 			"card2Label": "",
-			"card2Note": ""
+			"card2Note": "",
+			"sowhat": ""
 		},
 		"education": {
 			"title": "",
@@ -571,7 +596,8 @@
 			"inlineData": "",
 			"exemptTimeline": "",
 			"pendingTrends": "",
-			"exemptMeta": ""
+			"exemptMeta": "",
+			"sowhat": ""
 		},
 		"mhmap": {
 			"tipDepression": "",

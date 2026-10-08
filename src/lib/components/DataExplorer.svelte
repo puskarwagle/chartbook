@@ -1,7 +1,8 @@
 <script lang="ts">
 	import readme from '../../../data/README_DATA.json';
-	import { t } from '$lib/i18n/store.svelte';
-	import { interpolate } from '$lib/i18n/index';
+	import { t, currentLocale } from '$lib/i18n/store.svelte';
+	import { interpolate, getViewInfo } from '$lib/i18n/index';
+	import RichText from './RichText.svelte';
 	import { VIEW_DATA_SOURCES } from '$lib/dataSources';
 
 	const dataModules = import.meta.glob<{
@@ -104,6 +105,8 @@
 	}
 
 	const subtitle = $derived(interpolate(t('views.dataexplorer.subtitle'), { count: files.length }));
+
+	const howToRead = $derived(getViewInfo('dataexplorer', currentLocale())?.howToRead ?? '');
 </script>
 
 <div class="explorer">
@@ -128,6 +131,10 @@
 	{:else}
 		<h1 class="explorer-title">{t('views.dataexplorer.title')}</h1>
 		<p class="explorer-subtitle">{subtitle}</p>
+		<p class="sowhat"><RichText text={t('views.dataexplorer.sowhat')} /></p>
+		<p class="howtoread">
+			<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
+		</p>
 		<h2 class="section-heading">{t('views.dataexplorer.byView')}</h2>
 		<div class="card-grid">
 			{#each viewCards as card}
@@ -179,9 +186,25 @@
 	}
 
 	.explorer-subtitle {
-		margin: 0 0 1.5rem;
+		margin: 0 0 0.5rem;
 		opacity: 0.6;
 		font-size: 0.85rem;
+	}
+
+	.sowhat {
+		margin: 0 0 0.35rem;
+		font-size: 0.9rem;
+		opacity: 0.85;
+	}
+
+	.howtoread {
+		margin: 0 0 1.5rem;
+		font-size: 0.8rem;
+		opacity: 0.6;
+	}
+
+	.howtoread-label {
+		font-weight: 600;
 	}
 
 	.section-heading {
