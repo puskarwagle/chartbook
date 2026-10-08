@@ -1,0 +1,75 @@
+The medical journey of diagnosing and treating ADHD has evolved over nearly 250 years. It has shifted from being viewed as a moral failing to a brain injury, a hyperactive physical disruption, and finally, the modern understanding of a complex neurodevelopmental executive functioning disorder. [1, 2, 3, 4, 5] 
+The detailed history and medical timeline of ADHD unfolds as follows:
+------------------------------
+## Phase 1: The Pre-Modern Observations (1775–1890s)
+Before it was a medical diagnosis, physicians noted a specific cluster of behaviors involving extreme restlessness and an inability to focus. [1, 2] 
+
+* 
+* 1775 – The First Written Account: German physician [Melchior Adam Weikard](https://www.google.com/search?q=melchior+adam+weikard&kgmid=/g/122t1bws) published a medical textbook describing adults and children who were easily distracted by every sound, made careless mistakes, and had a total "lack of attention". [2] 
+* 1798 – "Mental Restlessness": Scottish physician [Sir Alexander Crichton](https://www.google.com/search?q=sir+alexander+crichton&kgmid=/m/04y7x71) documented an "incapacity of attending" in his medical journals. He noted that this restlessness came from within the nervous system, was often evident early in life, and that these children required special educational adjustments. [2] 
+* 1844 – "Fidgety Phil": German psychiatrist [Heinrich Hoffmann](https://www.google.com/search?q=heinrich+hoffmann&kgmid=/m/08v67j) created a famous children's poem about a boy named "Zappel-Philipp" (Fidgety Phil), capturing a highly accurate societal and cultural illustration of hyperactive ADHD. [1] 
+* 
+
+## Phase 2: The "Moral" and "Physical" Damage Era (1900–1950s)
+In the early 20th century, science began trying to pinpoint an exact physical or physiological cause for this behavior. [1, 6] 
+
+* 
+* 1902 – "Defect of Moral Control": British pediatrician [Sir George Frederic Still](https://www.google.com/search?q=sir+george+frederic+still&kgmid=/m/0fsm8q) gave a series of lectures to the Royal College of Physicians. He studied a group of children who defied discipline but had normal intelligence. He concluded they had a genetic, biological "defect of moral control" over their own behavior.
+* 1917–1918 – The Encephalitis Epidemic: A global outbreak of lethargic encephalitis left thousands of surviving children with severe behavioral issues: impulsivity, hyperactivity, and distractibility. Because this behavior was a direct result of brain infections, doctors concluded that children displaying these traits without an infection must have sustained a hidden head injury.
+* 1930s–1950s – The "Brain Damage" Labels: This sparked decades where the condition was formally termed "Minimal Brain Damage" or "Minimal Brain Dysfunction" (MBD).
+* 1937 – The Benzedrine Breakthrough: As established, [Dr. Charles Bradley](https://www.google.com/search?q=dr.+charles+bradley&kgmid=/m/0h7lzdv) accidentally discovered that amphetamines drastically normalized behavior, focus, and emotional control in these children. [1, 4, 7, 8, 9] 
+* 
+
+## Phase 3: The Birth of Modern Pharmaceuticals (1940s–1960s)
+The middle of the century shifted the medical landscape from institutional therapy to targeted outpatient medication. [6] 
+
+* 
+* 1944 – Synthesis of Methylphenidate: Swiss chemist [Leandro Panizzon](https://www.google.com/search?q=leandro+panizzon&kgmid=/g/11j_68b2zl) synthesized a new chemical compound. He named it Ritalin after his wife, Marguerite (nicknamed "Rita"), who used it to boost her blood pressure before playing tennis. [1, 3] 
+* 1955 – FDA Approves Ritalin: The Food and Drug Administration approved Ritalin. While initially targeted for chronic fatigue and depression, by the early 1960s, it became the leading clinical choice for treating children with behavioral struggles. [7, 10, 11] 
+* 1957 – "Hyperkinetic Impulse Disorder": Medical literature coined this term, mapping out for the first time that the condition was an issue of a hyper-active physical drive. [4, 6] 
+* 
+
+## Phase 4: Formal Diagnostic Codification (1968–1994)
+As psychiatric medicine institutionalized its terminology, the condition went through a series of name changes in the American Psychiatric Association's [Diagnostic and Statistical Manual of Mental Disorders (DSM)](https://www.google.com/search?q=diagnostic+and+statistical+manual+of+mental+disorders+%28dsm%29&kgmid=/m/02cd9). [11, 12] 
+
+* 
+* 1968 (DSM-II) – Hyperkinetic Reaction of Childhood: The condition made its very first appearance in the official diagnostic manual. It focused entirely on physical movement, defining the condition by a child's short attention span, restlessness, and constant involuntary motion. [7, 10, 11] 
+* 1980 (DSM-III) – Attention Deficit Disorder (ADD): A massive paradigm shift occurred. Psychiatrists realized that physical hyperactivity wasn’t the core issue—inattention was. The manual officially introduced ADD, which could present with or without hyperactivity. [4, 10] 
+* 1987 (DSM-III-R) – The "ADHD" We Know Today: In a revised edition, the manual combined the elements into a single name: Attention-Deficit/Hyperactivity Disorder (ADHD). [10, 13] 
+* 1994 (DSM-IV) – The Three Distinct Subtypes: The manual evolved to break ADHD down into three clear presentations used by clinicians to diagnose patients:
+1. Predominantly Inattentive Type
+   2. Predominantly Hyperactive-Impulsive Type
+   3. Combined Type [13, 14, 15] 
+* 
+
+## Phase 5: The Global Boom and Extended-Release (1996–Present)
+The late 1990s through the 2020s saw an explosion in neuroimaging research, modern public awareness, and advanced chemical delivery systems. [6, 7, 14] 
+
+* 
+* 1996 – Adderall Enters the Market: The FDA approved Adderall (a mixture of four amphetamine salts) for ADHD. It provided a longer-acting alternative to early immediate-release Ritalin formulations.
+* 2000s – The Extended-Release Revolution: Major pharmaceutical innovations shifted away from immediate-release "math pills" that kids had to take midway through the school day. Medications like Concerta (2000) and Vyvanse (2007) utilized sophisticated capsule engineering to release stimulants smoothly over 10 to 14 hours.
+* 2002 – First Non-Stimulant Treatment: The FDA approved Strattera (atomoxetine), offering the first non-habit-forming, non-stimulant option for patients who experienced severe side effects or anxiety with traditional stimulants.
+* 2013 (DSM-5) – Adult ADHD and New Timelines: The current diagnostic manual updated the criteria to officially reflect how ADHD impacts adults. It adjusted the symptom criteria for adults and changed the age threshold—stating that symptoms must simply have been present before age 12 (up from the previous age 7 limit), opening the door for millions of adult diagnoses. [14, 15, 16, 17, 18, 19] 
+* 
+
+Today, neuroimaging confirms that ADHD is a structural and chemical variance in the brain—specifically involving a lack of dopamine and norepinephrine in the prefrontal cortex—vindicating Dr. Bradley's accidental discovery nearly a century prior. [1, 16] 
+
+[1] [https://pmc.ncbi.nlm.nih.gov](https://pmc.ncbi.nlm.nih.gov/articles/PMC3000907/)
+[2] [https://www.adhd.je](https://www.adhd.je/historyofadhd)
+[3] [https://www.therecoveryvillage.com](https://www.therecoveryvillage.com/mental-health/adhd/history-of-adhd/)
+[4] [https://www.adhdevidence.org](https://www.adhdevidence.org/blog/a-brief-history-of-adhd)
+[5] [https://en.wikipedia.org](https://en.wikipedia.org/wiki/History_of_attention_deficit_hyperactivity_disorder)
+[6] [https://pmc.ncbi.nlm.nih.gov](https://pmc.ncbi.nlm.nih.gov/articles/PMC4564067/)
+[7] [https://www.healthline.com](https://www.healthline.com/health/adhd/history)
+[8] [https://www.news-medical.net](https://www.news-medical.net/health/ADHD-History.aspx)
+[9] [https://theautismservice.co.uk](https://theautismservice.co.uk/history-of-adhd/)
+[10] [https://en.wikipedia.org](https://en.wikipedia.org/wiki/History_of_attention_deficit_hyperactivity_disorder)
+[11] [https://www.healthline.com](https://www.healthline.com/health/adhd/history)
+[12] [https://pmc.ncbi.nlm.nih.gov](https://pmc.ncbi.nlm.nih.gov/articles/PMC3000907/)
+[13] [https://theautismservice.co.uk](https://theautismservice.co.uk/history-of-adhd/)
+[14] [https://www.verywellmind.com](https://www.verywellmind.com/adhd-history-of-adhd-2633127)
+[15] [https://www.therecoveryvillage.com](https://www.therecoveryvillage.com/mental-health/adhd/history-of-adhd/)
+[16] [https://www.understood.org](https://www.understood.org/en/articles/history-adhd-medications)
+[17] [https://www.verywellmind.com](https://www.verywellmind.com/adhd-history-of-adhd-2633127)
+[18] [https://www.youtube.com](https://www.youtube.com/watch?v=54StUBMgOxc&t=237)
+[19] [https://www.youtube.com](https://www.youtube.com/watch?v=5JXw7vVm3KU&t=429)
