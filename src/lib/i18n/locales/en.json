@@ -8,6 +8,7 @@
 	},
 	"nav": {
 		"worldmap": "World Map",
+		"present": "World ADHD",
 		"brain": "Brain Regions",
 		"mhmap": "Mental Health Map",
 		"stats": "Stats",
@@ -127,6 +128,14 @@
 		"limitation": "Limitations"
 	},
 	"viewInfo": {
+		"present": {
+			"what": "Step-by-step presentation player: the map starts all-unknown and each timeline event lights the country where it happened.",
+			"howToRead": "Keyboard: comma = back, period = forward, Space = play/pause. Or click an event in the side list to jump. Color circles filter tiers.",
+			"source": "Sequence: data/presentation_adhd_timeline.json (57 events + Tier-1 closing wave) plus sourced diffusion data, rendered by the reusable MapPresentation component.",
+			"coverage": "19 steps, 1775–Today",
+			"insight": "The event order is the narrative — reorder the JSON steps to match your script.",
+			"limitation": "Event-to-country mapping is editorial; narrative beats with no single country leave the map unchanged."
+		},
 		"worldmap": {
 			"what": "World map color-coded by each country’s ADHD medication access tier — from full amphetamine availability (Tier 1) to no approved pharmacological treatment (Tier 4).",
 			"howToRead": "Hover a country for a quick summary, click to pin its detail card. Use the tier buttons below the map to isolate one tier, and toggle Names to label countries. The tooltip shows confidence, evidence level, verification date, and per-drug approvals.",

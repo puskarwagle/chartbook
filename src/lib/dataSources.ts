@@ -24,6 +24,7 @@ export interface ViewDataSource {
 
 export const VIEW_DATA_SOURCES: ViewDataSource[] = [
 	{ viewId: 'worldmap', files: ['countryStatus.json'] },
+	{ viewId: 'present', files: ['presentation_adhd_timeline.json', 'presentation_adhd_diffusion.json', 'countryStatus.json'] },
 	{ viewId: 'brain', files: ['brain_regions.json'] },
 	{ viewId: 'mhmap', files: ['who_health_indicators.json'] },
 	{ viewId: 'stats', files: ['countryStatus.json'] },

@@ -19,7 +19,7 @@ Single-page app. `src/routes/+page.svelte` is the dashboard shell — it renders
 
 1. Create `src/lib/components/YourView.svelte`
 2. Import it in `src/routes/+page.svelte` and add entries to `COMPONENTS`, `CATEGORIES`, and the if/else block. Labels are i18n keys — add `nav.<id>` (+ `viewInfo.<id>` prose) to `src/lib/i18n/locales/en.json` (canonical; `ne.json`/`hi.json` overlays fall back to English when empty)
-3. Data helpers live in `src/lib/data.ts` — import JSON datasets from `data/` (root-level) or `src/lib/data/` (lib-level)
+3. Data helpers live in `src/lib/data.ts` — import JSON datasets from `data/` (root-level) or `src/lib/data/` (lib-level). Presentation sequences are the exception: one JSON per topic under `data/presentation_*.json`, rendered by the reusable `src/lib/components/MapPresentation.svelte` + `src/lib/presentation.ts` engine (no pipeline change needed).
 
 Locale state lives in `src/lib/i18n/store.svelte.ts` (persisted under `app-locale`, synced to `<html lang>`); locale-aware number helpers in `src/lib/i18n/format.ts`.
 
@@ -35,4 +35,4 @@ All data is static JSON imported at build time (not fetched). Raw datasets live 
 - `src/lib/index.ts` is a barrel re-export; prefer importing directly from the specific module.
 - `adapter-auto` is used — deployment target determines the adapter. Switch if deploying to a specific platform.
 - The sidebar order is persisted in `localStorage` under key `sidebar-component-order`.
-- 24 visualization components exist in `src/lib/components/`; the README lists 23 views (DataExplorer is undocumented there).
+- 30 Svelte files exist in `src/lib/components/` (26 views incl. the `present` MapPresentation player + shared helpers); the README lists 26 views (DataExplorer is documented there).

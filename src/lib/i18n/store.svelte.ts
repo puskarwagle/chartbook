@@ -24,10 +24,12 @@ export interface LocaleOption {
 	short: string;
 }
 
+// Switcher buttons. 'hi' stays a valid Locale (dictionary + fallback intact,
+// used as a programmatic-only blank-overlay fixture in tests) but has no
+// button — see readStored legacy mapping below.
 export const LOCALES: LocaleOption[] = [
 	{ code: 'en', label: 'English', short: 'EN' },
-	{ code: 'ne', label: 'Nepali', short: 'NE' },
-	{ code: 'hi', label: 'Hindi', short: 'HI' }
+	{ code: 'ne', label: 'Nepali', short: 'NE' }
 ];
 
 export const DEFAULT_LOCALE: Locale = 'en';
@@ -105,7 +107,19 @@ function readStored(): Locale | null {
 	try {
 		if (typeof localStorage === 'undefined') return null;
 		const raw = localStorage.getItem(STORAGE_KEY);
-		return isLocale(raw) ? raw : null;
+		if (!isLocale(raw)) return null;
+		// 'hi' has no switcher button anymore — fall back to default
+		// instead of stranding the UI on a buttonless locale. Migrate the
+		// stored value once so we don't re-apply the fallback every load.
+		if (raw === 'hi') {
+			try {
+				localStorage.setItem(STORAGE_KEY, DEFAULT_LOCALE);
+			} catch {
+				// private mode / no storage — session fallback still applies
+			}
+			return null;
+		}
+		return raw;
 	} catch {
 		return null;
 	}

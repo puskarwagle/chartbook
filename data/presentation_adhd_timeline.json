@@ -1,0 +1,725 @@
+{
+  "id": "adhd-history",
+  "title": "ADHD — 250 years in 57 events",
+  "startAllUnknown": true,
+  "autoplayMs": 2200,
+  "_help": "Merged from adhd-timeline.json (57 sourced steps: description | concept | tool | neuroscience | drug | diagnosis | genetics | theory | adoption) plus the Tier-1 closing wave. Each event lights the country where it happened (iso2); steps with iso2:null are narrative beats (map unchanged). `confidence` is high | medium | verify per adhd-timeline.json: medium = year/detail worth double-checking, verify = must be sourced before it goes on video. `sourceHint` is where to confirm, not a full citation. Ranges (1917–18, 1930s–50s) are folded into `year` because the player renders year only. Diffusion enrichment (alsoLit) lives in presentation_adhd_diffusion.json, keyed by step id — never hand-edit alsoLit here.",
+  "steps": [
+    {
+      "id": "weikard-1775",
+      "year": 1775,
+      "iso2": "DE",
+      "category": "description",
+      "label": "Weikard: first written account",
+      "talkingPoints": [
+        "Melchior Adam Weikard describes 'attentio volubilis' (inattention) in his medical text.",
+        "Not called ADHD, but the symptoms are recognizable."
+      ],
+      "confidence": "high",
+      "sourceHint": "Barkley & Peters 2012, J Atten Disord"
+    },
+    {
+      "id": "crichton-1798",
+      "year": 1798,
+      "iso2": "GB",
+      "category": "description",
+      "label": "Crichton: 'mental restlessness'",
+      "talkingPoints": [
+        "Scottish physician Alexander Crichton describes inability to attend with constancy.",
+        "Often cited as the first English-language description."
+      ],
+      "confidence": "high",
+      "sourceHint": "Palmer & Finger 2001; Crichton 1798"
+    },
+    {
+      "id": "hoffmann-1844",
+      "year": 1844,
+      "iso2": "DE",
+      "category": "description",
+      "label": "Hoffmann: 'Fidgety Phil'",
+      "talkingPoints": [
+        "Heinrich Hoffmann, a doctor, writes Struwwelpeter with Zappelphilipp, a child who cannot sit still.",
+        "Written 1844, first published 1845. A children's book, not a clinical paper."
+      ],
+      "confidence": "high",
+      "sourceHint": "Struwwelpeter publication history"
+    },
+    {
+      "id": "alles-edeleanu-1887",
+      "year": 1887,
+      "iso2": "DE",
+      "category": "drug",
+      "label": "Amphetamine first synthesized",
+      "talkingPoints": [
+        "Lazar Edeleanu synthesizes amphetamine in Berlin.",
+        "No medical use for decades."
+      ],
+      "confidence": "high",
+      "sourceHint": "Edeleanu 1887"
+    },
+    {
+      "id": "james-1890",
+      "year": 1890,
+      "iso2": "US",
+      "category": "concept",
+      "label": "William James on attention",
+      "talkingPoints": [
+        "Principles of Psychology frames attention as a core mental faculty and discusses its disorders."
+      ],
+      "confidence": "medium",
+      "sourceHint": "James 1890, ch. 11"
+    },
+    {
+      "id": "still-1902",
+      "year": 1902,
+      "iso2": "GB",
+      "category": "description",
+      "label": "Still: 'defect of moral control'",
+      "talkingPoints": [
+        "George Still's Goulstonian Lectures in The Lancet describe 43 children with impulsivity and poor attention.",
+        "Considered the first formal clinical description."
+      ],
+      "confidence": "high",
+      "sourceHint": "Still 1902, The Lancet"
+    },
+    {
+      "id": "encephalitis-1917",
+      "year": "1917–18",
+      "iso2": null,
+      "category": "concept",
+      "label": "Encephalitis epidemic",
+      "talkingPoints": [
+        "Survivors, including children, show hyperactivity and behavior change.",
+        "Behavior problems are first linked to brain injury."
+      ],
+      "confidence": "high",
+      "sourceHint": "Hohman 1922; Ebaugh 1923"
+    },
+    {
+      "id": "berger-eeg-1924",
+      "year": 1924,
+      "iso2": "DE",
+      "category": "tool",
+      "label": "First human EEG recorded",
+      "talkingPoints": [
+        "Hans Berger records electrical brain activity from a human scalp.",
+        "Published in 1929. EEG later becomes the first brain tool used on ADHD."
+      ],
+      "confidence": "high",
+      "sourceHint": "Berger 1929"
+    },
+    {
+      "id": "alles-1927",
+      "year": 1927,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Alles rediscovers amphetamine",
+      "talkingPoints": [
+        "Gordon Alles, searching for an ephedrine substitute, finds amphetamine's stimulant effect."
+      ],
+      "confidence": "high",
+      "sourceHint": "Alles 1927; history of amphetamine"
+    },
+    {
+      "id": "mbd-era-1930s",
+      "year": "1930s–50s",
+      "iso2": null,
+      "category": "concept",
+      "label": "'Minimal brain damage' era",
+      "talkingPoints": [
+        "Hyperactive children are assumed to have undetectable brain injury.",
+        "Term later softened to 'dysfunction'."
+      ],
+      "confidence": "high",
+      "sourceHint": "Lange et al. 2010 history of ADHD"
+    },
+    {
+      "id": "benzedrine-1932",
+      "year": 1932,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Benzedrine inhaler goes on sale",
+      "talkingPoints": [
+        "Smith, Kline & French markets amphetamine as a decongestant inhaler.",
+        "Tablets follow in 1935."
+      ],
+      "confidence": "high",
+      "sourceHint": "Rasmussen 2008, On Speed"
+    },
+    {
+      "id": "kramer-pollnow-1932",
+      "year": 1932,
+      "iso2": "DE",
+      "category": "diagnosis",
+      "label": "Kramer & Pollnow: hyperkinetic disorder",
+      "talkingPoints": [
+        "Franz Kramer and Hans Pollnow describe 'hyperkinetic disease' in children in Berlin."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Kramer & Pollnow 1932"
+    },
+    {
+      "id": "bradley-1937",
+      "year": 1937,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Bradley: Benzedrine calms children",
+      "talkingPoints": [
+        "Charles Bradley gives Benzedrine to children at a Rhode Island home and sees better behavior and school performance.",
+        "First documented stimulant treatment of what becomes ADHD. Largely ignored for years."
+      ],
+      "confidence": "high",
+      "sourceHint": "Bradley 1937, Am J Psychiatry"
+    },
+    {
+      "id": "panizzon-1944",
+      "year": 1944,
+      "iso2": "CH",
+      "category": "drug",
+      "label": "Methylphenidate synthesized",
+      "talkingPoints": [
+        "Chemist Leandro Panizzon at Ciba creates it. Named Ritalin after his wife, Marguerite 'Rita'.",
+        "Patented 1954."
+      ],
+      "confidence": "high",
+      "sourceHint": "Ciba / Novartis history"
+    },
+    {
+      "id": "strauss-1947",
+      "year": 1947,
+      "iso2": "US",
+      "category": "concept",
+      "label": "Strauss: 'brain-injured child'",
+      "talkingPoints": [
+        "Strauss and Lehtinen's book links hyperactivity to presumed brain damage, even without proof.",
+        "Sets up the 'minimal brain damage' era."
+      ],
+      "confidence": "high",
+      "sourceHint": "Strauss & Lehtinen 1947"
+    },
+    {
+      "id": "ritalin-1955",
+      "year": 1955,
+      "iso2": "US",
+      "category": "drug",
+      "label": "FDA approves Ritalin",
+      "talkingPoints": [
+        "Marketed from 1954 and approved by the FDA in 1955, at first for fatigue and other uses.",
+        "Use in children with hyperactivity grows through the 1960s."
+      ],
+      "confidence": "medium",
+      "sourceHint": "FDA label history; Novartis"
+    },
+    {
+      "id": "carlsson-1957",
+      "year": 1957,
+      "iso2": "SE",
+      "category": "neuroscience",
+      "label": "Dopamine shown to be a brain neurotransmitter",
+      "talkingPoints": [
+        "Arvid Carlsson shows dopamine is a signaling molecule in the brain, not just a precursor to noradrenaline.",
+        "Wins the 2000 Nobel Prize."
+      ],
+      "confidence": "high",
+      "sourceHint": "Carlsson Nobel lecture 2000"
+    },
+    {
+      "id": "laufer-1957",
+      "year": 1957,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "'Hyperkinetic impulse disorder' coined",
+      "talkingPoints": [
+        "Maurice Laufer and colleagues name a behavioral syndrome instead of a brain injury."
+      ],
+      "confidence": "high",
+      "sourceHint": "Laufer, Denhoff & Solomons 1957"
+    },
+    {
+      "id": "hornykiewicz-1960",
+      "year": 1960,
+      "iso2": "AT",
+      "category": "neuroscience",
+      "label": "Dopamine deficit found in Parkinson's",
+      "talkingPoints": [
+        "Oleh Hornykiewicz shows dopamine is depleted in Parkinson's brains.",
+        "Proves dopamine matters for behavior and movement."
+      ],
+      "confidence": "high",
+      "sourceHint": "Ehringer & Hornykiewicz 1960"
+    },
+    {
+      "id": "clements-1962",
+      "year": 1962,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "'Minimal brain dysfunction'",
+      "talkingPoints": [
+        "Clements and Peters formalize MBD with a long symptom list.",
+        "Too vague to be useful, which drives later reform."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Clements & Peters 1962"
+    },
+    {
+      "id": "dsm2-1968",
+      "year": 1968,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "DSM-II: 'Hyperkinetic reaction of childhood'",
+      "talkingPoints": [
+        "First official US diagnosis. Assumed to fade by adolescence."
+      ],
+      "confidence": "high",
+      "sourceHint": "DSM-II"
+    },
+    {
+      "id": "douglas-1972",
+      "year": 1972,
+      "iso2": "CA",
+      "category": "concept",
+      "label": "Douglas: attention, not activity, is the core problem",
+      "talkingPoints": [
+        "Virginia Douglas in Montreal argues sustained attention and impulse control matter more than hyperactivity."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Douglas 1972, Can J Behav Sci"
+    },
+    {
+      "id": "feingold-1973",
+      "year": 1973,
+      "iso2": "US",
+      "category": "theory",
+      "label": "Feingold diet",
+      "talkingPoints": [
+        "Ben Feingold claims food additives cause hyperactivity.",
+        "Studies since have not supported it as a general cause."
+      ],
+      "confidence": "high",
+      "sourceHint": "Feingold 1975; Kavale & Forness 1983"
+    },
+    {
+      "id": "mri-1973",
+      "year": 1973,
+      "iso2": "US",
+      "category": "tool",
+      "label": "MRI imaging invented",
+      "talkingPoints": [
+        "Paul Lauterbur produces the first MR image.",
+        "Peter Mansfield in the UK develops fast imaging. They share the 2003 Nobel Prize."
+      ],
+      "confidence": "high",
+      "sourceHint": "Nobel Prize 2003, Physiology or Medicine"
+    },
+    {
+      "id": "shaywitz-1976",
+      "year": 1976,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "First dopamine model of hyperactivity",
+      "talkingPoints": [
+        "Shaywitz and colleagues damage dopamine neurons in rat pups and get hyperactivity that stimulants reduce."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Shaywitz et al. 1976, Science"
+    },
+    {
+      "id": "mri-human-1977",
+      "year": 1977,
+      "iso2": "US",
+      "category": "tool",
+      "label": "First human MRI scans",
+      "talkingPoints": [
+        "Whole-body human scans appear in 1977, with Damadian's team in the US and Mansfield's fast imaging in the UK around the same time."
+      ],
+      "confidence": "medium",
+      "sourceHint": "History of MRI"
+    },
+    {
+      "id": "dsm3-1980",
+      "year": 1980,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "DSM-III: ADD",
+      "talkingPoints": [
+        "Renamed 'attention deficit disorder', with or without hyperactivity. Attention moves to the center."
+      ],
+      "confidence": "high",
+      "sourceHint": "DSM-III"
+    },
+    {
+      "id": "dsm3r-1987",
+      "year": 1987,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "DSM-III-R: ADHD",
+      "talkingPoints": [
+        "The name becomes ADHD, with one combined symptom list."
+      ],
+      "confidence": "high",
+      "sourceHint": "DSM-III-R"
+    },
+    {
+      "id": "ogawa-bold-1990",
+      "year": 1990,
+      "iso2": "US",
+      "category": "tool",
+      "label": "BOLD contrast discovered",
+      "talkingPoints": [
+        "Seiji Ogawa at Bell Labs shows MRI can detect blood oxygen changes, the basis of fMRI."
+      ],
+      "confidence": "high",
+      "sourceHint": "Ogawa et al. 1990, PNAS"
+    },
+    {
+      "id": "zametkin-1990",
+      "year": 1990,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "PET: lower frontal metabolism in ADHD adults",
+      "talkingPoints": [
+        "Zametkin at NIMH finds reduced brain glucose metabolism in parents of ADHD children."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Zametkin et al. 1990, NEJM"
+    },
+    {
+      "id": "fmri-1992",
+      "year": 1992,
+      "iso2": "US",
+      "category": "tool",
+      "label": "First human fMRI",
+      "talkingPoints": [
+        "Teams at Massachusetts General Hospital, Minnesota and Wisconsin independently publish the first human functional MRI studies."
+      ],
+      "confidence": "high",
+      "sourceHint": "Kwong 1992; Ogawa 1992; Bandettini 1992"
+    },
+    {
+      "id": "hartmann-1993",
+      "year": 1993,
+      "iso2": "US",
+      "category": "theory",
+      "label": "Hunter vs. farmer theory",
+      "talkingPoints": [
+        "Thom Hartmann proposes ADHD people are 'hunters in a farmer's world'.",
+        "A popular idea, not an established scientific finding. Evolutionary hypotheses are still debated."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Hartmann 1993; Jensen et al. 1997"
+    },
+    {
+      "id": "dsm4-1994",
+      "year": 1994,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "DSM-IV: three subtypes",
+      "talkingPoints": [
+        "Inattentive, hyperactive-impulsive and combined presentations."
+      ],
+      "confidence": "high",
+      "sourceHint": "DSM-IV"
+    },
+    {
+      "id": "hallowell-1994",
+      "year": 1994,
+      "iso2": "US",
+      "category": "concept",
+      "label": "Adult ADHD enters public awareness",
+      "talkingPoints": [
+        "Hallowell and Ratey's 'Driven to Distraction' brings adult ADHD to a mass audience."
+      ],
+      "confidence": "high",
+      "sourceHint": "Hallowell & Ratey 1994"
+    },
+    {
+      "id": "cook-dat1-1995",
+      "year": 1995,
+      "iso2": "US",
+      "category": "genetics",
+      "label": "Dopamine transporter gene linked to ADHD",
+      "talkingPoints": [
+        "Cook et al. report an association with DAT1, the target of methylphenidate."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Cook et al. 1995, Am J Hum Genet"
+    },
+    {
+      "id": "adderall-1996",
+      "year": 1996,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Adderall approved for ADHD",
+      "talkingPoints": [
+        "Mixed amphetamine salts become a first-line option."
+      ],
+      "confidence": "medium",
+      "sourceHint": "FDA label history"
+    },
+    {
+      "id": "castellanos-1996",
+      "year": 1996,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "Structural MRI: smaller brain regions in ADHD",
+      "talkingPoints": [
+        "Castellanos finds smaller volumes in frontal and basal ganglia regions in boys with ADHD."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Castellanos et al. 1996, Arch Gen Psychiatry"
+    },
+    {
+      "id": "drd4-1996",
+      "year": 1996,
+      "iso2": "US",
+      "category": "genetics",
+      "label": "DRD4 gene linked to ADHD",
+      "talkingPoints": [
+        "LaHoste et al. link the DRD4 7-repeat allele to ADHD, fueling the evolutionary 'novelty-seeking' story.",
+        "Effect sizes are small."
+      ],
+      "confidence": "medium",
+      "sourceHint": "LaHoste et al. 1996, Mol Psychiatry"
+    },
+    {
+      "id": "volkow-dat-1998",
+      "year": 1998,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "Methylphenidate shown to block dopamine transporter in humans",
+      "talkingPoints": [
+        "Volkow's PET work shows therapeutic doses occupy most DAT sites and raise dopamine levels."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Volkow et al. 1998, Am J Psychiatry; 2001"
+    },
+    {
+      "id": "fmri-adhd-1999",
+      "year": 1999,
+      "iso2": "US",
+      "category": "tool",
+      "label": "First fMRI studies of ADHD",
+      "talkingPoints": [
+        "Bush (US) and Rubia (UK) report underactive frontal and cingulate regions during attention tasks."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Bush et al. 1999; Rubia et al. 1999"
+    },
+    {
+      "id": "mta-1999",
+      "year": 1999,
+      "iso2": "US",
+      "category": "drug",
+      "label": "NIMH MTA study",
+      "talkingPoints": [
+        "Largest ADHD treatment trial. Careful medication management beat behavioral therapy alone at 14 months."
+      ],
+      "confidence": "high",
+      "sourceHint": "MTA Cooperative Group 1999"
+    },
+    {
+      "id": "concerta-2000",
+      "year": 2000,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Concerta: once-daily extended release",
+      "talkingPoints": [
+        "Extended-release methylphenidate means no school-day dosing. Adderall XR and others follow in 2001."
+      ],
+      "confidence": "high",
+      "sourceHint": "FDA label history"
+    },
+    {
+      "id": "strattera-2002",
+      "year": 2002,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Atomoxetine (Strattera): first non-stimulant",
+      "talkingPoints": [
+        "Eli Lilly's noradrenaline reuptake inhibitor gets FDA approval for ADHD in 2002.",
+        "Non-controlled, with slower onset than stimulants."
+      ],
+      "confidence": "high",
+      "sourceHint": "FDA approval Nov 2002"
+    },
+    {
+      "id": "strattera-eu-2004",
+      "year": 2004,
+      "iso2": "GB",
+      "category": "adoption",
+      "label": "Atomoxetine reaches Europe",
+      "talkingPoints": [
+        "Launched in the UK and other European markets around 2004."
+      ],
+      "confidence": "verify",
+      "sourceHint": "EMA / MHRA; mutual recognition procedure dates"
+    },
+    {
+      "id": "faraone-2005",
+      "year": 2005,
+      "iso2": "US",
+      "category": "genetics",
+      "label": "ADHD heritability about 75%",
+      "talkingPoints": [
+        "Meta-analyses of twin studies put heritability around 0.76, among the highest for psychiatric conditions."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Faraone et al. 2005, Biol Psychiatry"
+    },
+    {
+      "id": "concerta-jp-2007",
+      "year": 2007,
+      "iso2": "JP",
+      "category": "adoption",
+      "label": "Japan approves Concerta for ADHD",
+      "talkingPoints": [
+        "Japan's approach to stimulants stays tightly regulated. Atomoxetine follows in 2009."
+      ],
+      "confidence": "verify",
+      "sourceHint": "PMDA approval records"
+    },
+    {
+      "id": "shaw-2007",
+      "year": 2007,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "Delayed cortical maturation",
+      "talkingPoints": [
+        "NIMH finds the cortex thickens later in ADHD, by about three years, rather than being absent."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Shaw et al. 2007, PNAS"
+    },
+    {
+      "id": "vyvanse-2007",
+      "year": 2007,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Vyvanse (lisdexamfetamine)",
+      "talkingPoints": [
+        "A prodrug of dextroamphetamine, designed to lower abuse potential."
+      ],
+      "confidence": "high",
+      "sourceHint": "FDA label history"
+    },
+    {
+      "id": "eisenberg-2008",
+      "year": 2008,
+      "iso2": "KE",
+      "category": "theory",
+      "label": "Nomads and DRD4: evolutionary evidence",
+      "talkingPoints": [
+        "Among Ariaal people in Kenya, 7-repeat carriers did better as nomads, a data point for the hunter-gatherer idea.",
+        "One study, so treat it as suggestive."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Eisenberg et al. 2008, BMC Evol Biol"
+    },
+    {
+      "id": "nice-2008",
+      "year": 2008,
+      "iso2": "GB",
+      "category": "adoption",
+      "label": "NICE issues first UK ADHD guideline",
+      "talkingPoints": [
+        "Sets out treatment pathways for children and adults. Updated in 2018."
+      ],
+      "confidence": "medium",
+      "sourceHint": "NICE CG72 (2008); NG87 (2018)"
+    },
+    {
+      "id": "strattera-jp-2009",
+      "year": 2009,
+      "iso2": "JP",
+      "category": "adoption",
+      "label": "Japan approves atomoxetine",
+      "talkingPoints": [
+        "A non-stimulant option arrives where stimulant access is limited."
+      ],
+      "confidence": "verify",
+      "sourceHint": "PMDA approval records"
+    },
+    {
+      "id": "volkow-2009",
+      "year": 2009,
+      "iso2": "US",
+      "category": "neuroscience",
+      "label": "Dopamine reward pathway deficits in ADHD adults",
+      "talkingPoints": [
+        "Volkow's PET study finds lower dopamine receptor and transporter availability linked to motivation."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Volkow et al. 2009, JAMA"
+    },
+    {
+      "id": "dsm5-2013",
+      "year": 2013,
+      "iso2": "US",
+      "category": "diagnosis",
+      "label": "DSM-5: adult ADHD recognized",
+      "talkingPoints": [
+        "Onset by age 12 instead of 7, with symptom criteria adjusted for adults."
+      ],
+      "confidence": "high",
+      "sourceHint": "DSM-5"
+    },
+    {
+      "id": "neba-2013",
+      "year": 2013,
+      "iso2": "US",
+      "category": "tool",
+      "label": "FDA clears first EEG-based ADHD aid",
+      "talkingPoints": [
+        "The NEBA system uses the theta/beta ratio as a diagnostic aid. It cannot diagnose alone, and the evidence is debated."
+      ],
+      "confidence": "medium",
+      "sourceHint": "FDA clearance, July 2013"
+    },
+    {
+      "id": "qelbree-2021",
+      "year": 2021,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Viloxazine (Qelbree) approved",
+      "talkingPoints": [
+        "Another non-stimulant, joining atomoxetine, guanfacine and clonidine."
+      ],
+      "confidence": "medium",
+      "sourceHint": "FDA approval April 2021"
+    },
+    {
+      "id": "wfa-consensus-2021",
+      "year": 2021,
+      "iso2": null,
+      "category": "concept",
+      "label": "International consensus statement",
+      "talkingPoints": [
+        "The World Federation of ADHD publishes 208 evidence-based conclusions confirming ADHD as a valid, treatable condition."
+      ],
+      "confidence": "medium",
+      "sourceHint": "Faraone et al. 2021, Neurosci Biobehav Rev"
+    },
+    {
+      "id": "shortage-2022",
+      "year": 2022,
+      "iso2": "US",
+      "category": "drug",
+      "label": "Adderall shortage",
+      "talkingPoints": [
+        "Supply problems follow rising diagnoses and manufacturing limits, and continue for years."
+      ],
+      "confidence": "high",
+      "sourceHint": "FDA / ASHP shortage listings"
+    },
+    {
+      "id": "today-tier1",
+      "kind": "tierWave",
+      "tier": "1",
+      "year": "Today",
+      "label": "Today: stimulant-first access in 41 countries",
+      "talkingPoints": [
+        "The story so far ends here: 41 countries with amphetamine-class access lit at once. This claims the present, from the tier dataset — not a dated history. The rest of the map is still grey."
+      ]
+    }
+  ]
+}

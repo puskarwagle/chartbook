@@ -15,6 +15,11 @@ export interface ViewInfoEntry {
 	limitation: string;
 }
 
+/**
+ * Fallback prose for PageInspector when no locale string is available.
+ * Canonical localized copy lives in `src/lib/i18n/locales/en.json`
+ * (`viewInfo.<id>.*`) — keep the two in sync when editing `present`.
+ */
 export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 	worldmap: {
 		what: 'World map color-coded by each country\u2019s ADHD medication access tier — from full amphetamine availability (Tier 1) to no approved pharmacological treatment (Tier 4).',
@@ -23,6 +28,14 @@ export const VIEW_INFO: Record<string, ViewInfoEntry> = {
 		coverage: '200+ countries, latest verification per country',
 		insight: 'Access is highly uneven — a small set of high-income countries has full stimulant access while large parts of the world rely on non-stimulants only or have no treatment infrastructure.',
 		limitation: 'Tiers reflect documented approvals and evidence quality, not actual prescription rates or affordability. "Unknown" means insufficient evidence, not necessarily no treatment. Data is a snapshot — verify dates per country.'
+	},
+	present: {
+		what: 'Step-by-step presentation player: the map starts all-unknown and lights up one country per step. Space plays/pauses autoplay; comma/period step backward/forward.',
+		howToRead: 'Keyboard: "," / "<" = back, "." / ">" = forward, Space = play/pause, Home/End = jump. Or click an event in the right-side list to light its country. The four color circles above the list filter tiers. Each topic is one JSON file (data/presentation_*.json) rendered by the same reusable MapPresentation component.',
+		source: 'Sequence: data/presentation_adhd_timeline.json (57 events 1775–2022 + Tier-1 closing wave) with optional diffusion enrichment from data/presentation_adhd_diffusion.json (sourced entries only, test-enforced). Country tiers: data/countryStatus.json. Geography: world-atlas 110m + Natural Earth projection.',
+		coverage: '19 steps, 1775–Today, autoplay 2.2s/step',
+		insight: 'The event order is the narrative — reorder the JSON steps to match your script, then screen-record the run for video.',
+		limitation: 'Event-to-country mapping is editorial (e.g. DSM and FDA events light the US); narrative beats with no single country leave the map unchanged.'
 	},
 	brain: {
 		what: 'Interactive explorer of the five brain regions most implicated in ADHD: prefrontal cortex, striatum, cerebellum, corpus callosum, and limbic system.',

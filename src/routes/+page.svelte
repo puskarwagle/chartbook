@@ -2,6 +2,15 @@
 	import Sidebar from '$lib/Sidebar.svelte';
 	import { NAV_GROUPS } from '$lib/navGroups';
 	import WorldMap from '$lib/components/WorldMap.svelte';
+	import MapPresentation from '$lib/components/MapPresentation.svelte';
+	import { attachDiffusion, type DiffusionMap, type PresentationSequence } from '$lib/presentation';
+	import adhdSequenceRaw from '../../data/presentation_adhd_timeline.json';
+	import adhdDiffusionRaw from '../../data/presentation_adhd_diffusion.json';
+
+	const adhdSequence = attachDiffusion(
+		adhdSequenceRaw as unknown as PresentationSequence,
+		((adhdDiffusionRaw as unknown as { entries?: DiffusionMap }).entries ?? {}) as DiffusionMap
+	);
 	import BrainRegions from '$lib/components/BrainRegions.svelte';
 	import StatsView from '$lib/components/StatsView.svelte';
 	import TimelineView from '$lib/components/TimelineView.svelte';
@@ -59,6 +68,7 @@
 	// re-renders on locale change; untranslated keys fall back to English.
 	const COMPONENTS = $derived<ComponentEntry[]>([
 		{ id: 'worldmap', label: t('nav.worldmap'), component: WorldMap },
+		{ id: 'present', label: t('nav.present'), component: MapPresentation },
 		{ id: 'brain', label: t('nav.brain'), component: BrainRegions },
 		{ id: 'mhmap', label: t('nav.mhmap'), component: MentalHealthWorldMap },
 		{ id: 'stats', label: t('nav.stats'), component: StatsView },
@@ -223,7 +233,7 @@
 	]);
 
 	// Static default — ids never change across locales, so this stays a const.
-	const defaultId = 'worldmap';
+	const defaultId = 'present';
 	let activeId = $state(defaultId);
 	let sidebarCollapsed = $state(false);
 	let settingsOpen = $state(false);
@@ -425,6 +435,8 @@
 				<CustomPage pageId={activeCustom.id} title={activeCustom.title} onRename={handleRenamePage} />
 			{:else if activeId === 'worldmap'}
 				<WorldMap />
+			{:else if activeId === 'present'}
+				<MapPresentation sequence={adhdSequence} />
 			{:else if activeId === 'brain'}
 				<BrainRegions />
 			{:else if activeId === 'stats'}
