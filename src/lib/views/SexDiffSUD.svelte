@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from './EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import {
 		PALETTE,
 		BASE_ANIMATION,
@@ -10,10 +10,10 @@
 		legendBottom,
 		barSeries
 	} from '$lib/echartsTheme';
-	import sudBySexRaw from '../../../data/sud_by_sex.json';
+	import sudBySexRaw from '$data/sud_by_sex.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
+	import RichText from '$lib/shared/RichText.svelte';
 
 	// JSON-driven: values come from data/sud_by_sex.json (Moldekleiv 2025).
 	interface Category {

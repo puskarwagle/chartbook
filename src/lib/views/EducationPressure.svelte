@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from './EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
 	import { educationData, getIncomeGroup, countryName } from '$lib/data';
 	import { t } from '$lib/i18n/store.svelte';

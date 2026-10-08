@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
-	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+	import RichText from '$lib/shared/RichText.svelte';
+	import adolescentsRaw from '$data/adolescents_young_adults_10_24.json';
 
 	interface RegionalRates {
 		prevalence_rate_per_100k: number;

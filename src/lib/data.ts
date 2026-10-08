@@ -1,10 +1,10 @@
-import worldbankRaw from '../../data/worldbank_indicators.json';
-import whoRaw from '../../data/who_health_indicators.json';
-import whrRaw from '../../data/world_happiness_report_2026.json';
-import undpRaw from '../../data/undp_hdi.json';
-import governanceRaw from '../../data/transparency_cpi_2024.json';
-import prisonRaw from '../../data/world_prison_brief.json';
-import educationRaw from '../../data/education_indicators.json';
+import worldbankRaw from '$data/worldbank_indicators.json';
+import whoRaw from '$data/who_health_indicators.json';
+import whrRaw from '$data/world_happiness_report_2026.json';
+import undpRaw from '$data/undp_hdi.json';
+import governanceRaw from '$data/transparency_cpi_2024.json';
+import prisonRaw from '$data/world_prison_brief.json';
+import educationRaw from '$data/education_indicators.json';
 import { nameToIso2 } from './mapData';
 
 const WB = worldbankRaw as Record<string, { country_code: string; country: string; year: string; value: number }[]>;

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from './EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import { PALETTE, BASE_ANIMATION, baseTooltip, valueXAxis } from '$lib/echartsTheme';
-	import sudRaw from '../../../data/sud_by_substance.json';
+	import sudRaw from '$data/sud_by_substance.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
+	import RichText from '$lib/shared/RichText.svelte';
 
 	// JSON-driven: values come from data/sud_by_substance.json (Rohner 2023).
 	interface Substance {

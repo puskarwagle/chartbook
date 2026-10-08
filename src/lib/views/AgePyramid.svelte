@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as echarts from 'echarts';
-	import EChart from './EChart.svelte';
+	import EChart from '$lib/shared/EChart.svelte';
 	import {
 		PALETTE,
 		BASE_ANIMATION,
@@ -10,61 +10,58 @@
 		legendBottom,
 		barSeries
 	} from '$lib/echartsTheme';
-	import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+	import adolescentsRaw from '$data/adolescents_young_adults_10_24.json';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
+	import RichText from '$lib/shared/RichText.svelte';
 
-	// JSON-driven: values come from data/adolescents_young_adults_10_24.json (by_sex),
-	// not hardcoded. Edit the JSON and this chart updates.
-	const bySex = (adolescentsRaw as unknown as Record<string, Record<string, Record<string, number>>>).by_sex;
-	const source = (adolescentsRaw as unknown as Record<string, string>).source;
-	const sexData = [
+	// JSON-driven: values come from data/adolescents_young_adults_10_24.json (by_age_group).
+	const byAge = (
+		adolescentsRaw as unknown as Record<string, Record<string, Record<string, number>>>
+	).by_age_group;
+	const ageData = [
 		{
-			sexKey: 'male' as const,
-			prevalence: bySex.male.prevalence_rate_2021_per_100k,
-			incidence: bySex.male.incidence_rate_2021_per_100k
+			group: '10–14',
+			prevalence: byAge['10_to_14'].prevalence_rate_2021_per_100k,
+			incidence: byAge['10_to_14'].incidence_rate_2021_per_100k ?? 0
 		},
-		{
-			sexKey: 'female' as const,
-			prevalence: bySex.female.prevalence_rate_2021_per_100k,
-			incidence: bySex.female.incidence_rate_2021_per_100k
-		}
+		{ group: '15–19', prevalence: byAge['15_to_19'].prevalence_rate_2021_per_100k, incidence: 0 },
+		{ group: '20–24', prevalence: byAge['20_to_24'].prevalence_rate_2021_per_100k, incidence: 0 }
 	];
 
-	const sexLabel = (key: 'male' | 'female') => t(`common.${key}`);
+	const howToRead = $derived(getViewInfo('age', currentLocale())?.howToRead ?? '');
 
-	// Headline ratio, computed from the data so it can't go stale.
-	const title = $derived(
-		interpolate(t('views.sex.title'), {
-			ratio: (sexData[0].prevalence / sexData[1].prevalence).toFixed(1)
+	// Scale key for narrow screens, where the green axis labels are hidden.
+	const chartNote = $derived(
+		interpolate(t('views.age.chartNote'), {
+			max: Math.max(...ageData.map((d) => d.incidence)).toFixed(0)
 		})
 	);
 
 	const option = $derived<echarts.EChartsCoreOption>({
 		backgroundColor: 'transparent',
 		...BASE_ANIMATION,
-		tooltip: baseTooltip((v) => interpolate(t('views.sex.tooltip'), { value: v.toLocaleString() })),
-		legend: legendBottom([t('views.sex.legendPrevalence'), t('views.sex.legendIncidence')]),
+		tooltip: baseTooltip((v) => interpolate(t('views.age.tooltip'), { value: v.toLocaleString() })),
+		legend: legendBottom([t('views.age.legendPrevalence'), t('views.age.legendIncidence')]),
 		grid: { left: 64, right: 56, top: 32, bottom: 56 },
-		xAxis: categoryXAxis(sexData.map((d) => sexLabel(d.sexKey))),
+		xAxis: categoryXAxis(ageData.map((d) => d.group)),
 		yAxis: [
-			valueYAxis(t('views.sex.axisPrevalence')),
+			valueYAxis(t('views.age.axisPrevalence')),
 			{
-				...valueYAxis(t('views.sex.axisIncidence')),
+				...valueYAxis(t('views.age.axisIncidence')),
 				position: 'right',
 				axisLabel: { color: PALETTE.green }
 			}
 		],
 		series: [
-			barSeries(t('views.sex.legendPrevalence'), sexData.map((d) => d.prevalence), PALETTE.blue, (v) =>
+			barSeries(t('views.age.legendPrevalence'), ageData.map((d) => d.prevalence), PALETTE.blue, (v) =>
 				v.toFixed(0)
 			),
 			barSeries(
-				t('views.sex.legendIncidence'),
-				sexData.map((d) => d.incidence),
+				t('views.age.legendIncidence'),
+				ageData.map((d) => d.incidence),
 				PALETTE.green,
-				(v) => v.toFixed(1),
+				(v) => v.toFixed(v > 0 ? 2 : 0),
 				1
 			)
 		],
@@ -88,31 +85,12 @@
 			}
 		]
 	});
-
-	const cardNote = $derived(
-		interpolate(t('views.sex.cardNote'), {
-			male: sexData[0].prevalence.toLocaleString(),
-			female: sexData[1].prevalence.toLocaleString(),
-			source
-		})
-	);
-
-	const howToRead = $derived(getViewInfo('sex', currentLocale())?.howToRead ?? '');
-
-	// Scale key for narrow screens, where the green axis labels are hidden.
-	const chartNote = $derived(
-		interpolate(t('views.sex.chartNote'), {
-			max: Math.max(...sexData.map((d) => d.incidence)).toFixed(0)
-		})
-	);
 </script>
 
 <div class="view">
-	<h1 class="title">{title}</h1>
-	<p class="subtitle">
-		{t('views.sex.subtitle')}
-	</p>
-	<p class="sowhat"><RichText text={t('views.sex.sowhat')} /></p>
+	<h1 class="title">{t('views.age.title')}</h1>
+	<p class="subtitle">{t('views.age.subtitle')}</p>
+	<p class="sowhat"><RichText text={t('views.age.sowhat')} /></p>
 	<p class="howtoread">
 		<span class="howtoread-label">{t('common.howToRead')}: </span><RichText text={howToRead} />
 	</p>
@@ -123,8 +101,8 @@
 	</div>
 
 	<div class="card">
-		<span class="card-label">{t('views.sex.cardLabel')}</span>
-		<span class="card-note">{cardNote}</span>
+		<span class="card-label">{t('views.age.cardLabel')}</span>
+		<span class="card-note">{t('views.age.cardNote')}</span>
 	</div>
 </div>
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import adolescentsRaw from '../../../data/adolescents_young_adults_10_24.json';
+import adolescentsRaw from '$data/adolescents_young_adults_10_24.json';
 
 interface RegionalRates {
 	prevalence_rate_per_100k: number;

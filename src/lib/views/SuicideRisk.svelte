@@ -2,8 +2,8 @@
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
 	import { formatSummaryValue, type SummaryValue } from '$lib/summaryFormat';
-	import suicideRaw from '../../../data/suicide_risk_studies.json';
-	import RichText from './RichText.svelte';
+	import suicideRaw from '$data/suicide_risk_studies.json';
+	import RichText from '$lib/shared/RichText.svelte';
 
 	interface StudyFinding {
 		id: string;

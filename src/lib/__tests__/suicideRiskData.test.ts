@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import suicideRaw from '../../../data/suicide_risk_studies.json';
+import suicideRaw from '$data/suicide_risk_studies.json';
 import { formatSummaryValue } from '$lib/summaryFormat';
 import { setLocale } from '$lib/i18n/store.svelte';
 import { getViewInfo } from '$lib/i18n/index';

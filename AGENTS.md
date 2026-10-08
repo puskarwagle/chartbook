@@ -15,11 +15,13 @@ ESLint 10 (flat config), Vitest 4 + jsdom. No Prettier configured.
 
 ## Architecture
 
-Single-page app. `src/routes/+page.svelte` is the dashboard shell — it renders a sidebar and switches views via an if/else chain keyed on `activeId`. Adding a new view requires:
+Single-page app. `src/routes/+page.svelte` is the dashboard shell — it renders a sidebar and switches views via a `VIEWS: Record<id, Component>` lookup keyed on `activeId` (Svelte 5 dynamic `<View />`, inside `{#key activeId}`). Two special cases stay out of the map: custom pages (`CustomPage` with pageId/title/onRename) and `present` (`MapPresentation` with its `sequence` prop). Adding a new view requires:
 
-1. Create `src/lib/components/YourView.svelte`
-2. Import it in `src/routes/+page.svelte` and add entries to `COMPONENTS`, `CATEGORIES`, and the if/else block. Labels are i18n keys — add `nav.<id>` (+ `viewInfo.<id>` prose) to `src/lib/i18n/locales/en.json` (canonical; `ne.json`/`hi.json` overlays fall back to English when empty)
-3. Data helpers live in `src/lib/data.ts` — import JSON datasets from `data/` (root-level) or `src/lib/data/` (lib-level). Presentation sequences are the exception: one JSON per topic under `data/presentation_*.json`, rendered by the reusable `src/lib/components/MapPresentation.svelte` + `src/lib/presentation.ts` engine (no pipeline change needed).
+1. Create `src/lib/views/YourView.svelte` (prop-less; needs-props views stay special-cased in `+page.svelte`)
+2. Import it in `src/routes/+page.svelte` and add one entry each to `VIEWS` and `COMPONENTS` (labels), plus its id to `NAV_GROUPS` in `src/lib/navGroups.ts`. Labels are i18n keys — add `nav.<id>` (+ `viewInfo.<id>` prose) to `src/lib/i18n/locales/en.json` (canonical; `ne.json`/`hi.json` overlays fall back to English when empty)
+3. Data helpers live in `src/lib/data.ts` — import JSON datasets via the `$data` alias (root-level `data/`, configured in `svelte.config.js` `kit.alias`), never via relative `../data` paths. Presentation sequences are the exception: one JSON per topic under `data/presentation_*.json`, rendered by the reusable `src/lib/shared/MapPresentation.svelte` + `src/lib/presentation.ts` engine (no pipeline change needed).
+
+Folder layout: `src/lib/views/` (26 view components incl. `CustomPage`), `src/lib/shared/` (`EChart`, `ViewInfo`, `MapPresentation`, `CustomPagePreview`), `src/lib/shell/` (`Sidebar`, `Settings`, `PageInspector`). Views import shared/shell only via `$lib/...`; never import each other.
 
 Locale state lives in `src/lib/i18n/store.svelte.ts` (persisted under `app-locale`, synced to `<html lang>`); locale-aware number helpers in `src/lib/i18n/format.ts`.
 
@@ -27,14 +29,14 @@ Shared view text: `src/lib/glossary.ts` is the glossary source of truth (`GLOSSA
 
 ## Data
 
-All data is static JSON imported at build time (not fetched). Raw datasets live in `data/` (root-level). `src/lib/data.ts` is the pipeline — it imports directly from root `data/`, filters out World Bank aggregates, deduplicates per country, and exports typed helpers for views.
+All data is static JSON imported at build time (not fetched) via the `$data` alias (`svelte.config.js` → root `data/`). `src/lib/data.ts` is the pipeline — it imports via `$data`, filters out World Bank aggregates, deduplicates per country, and exports typed helpers for views. Custom pages persist to `data/customPages.json` through `src/routes/api/custom-pages/+server.ts` (runtime write; keep it under `data/`, not `src/`, to avoid dev HMR reloads).
 
 `data/countryStatus.json` is the tier dataset (schema v2.0). `src/lib/colors.ts` re-exports tier colors/labels from its `_meta` block.
 
 ## Gotchas
 
 - `.npmrc` has `engine-strict=true` — ensure your Node version matches `package.json` engines.
-- `src/lib/index.ts` is a barrel re-export; prefer importing directly from the specific module.
-- `adapter-auto` is used — deployment target determines the adapter. Switch if deploying to a specific platform.
+- SvelteKit options (adapter, `$data` alias, runes mode) live in `svelte.config.js`; keep `vite.config.ts` as plain `sveltekit()` — inline plugin options cause the config file to be ignored.
+- `adapter-node` is used — deployment target determines the adapter. Switch if deploying to a specific platform.
 - The sidebar order is persisted in `localStorage` under key `sidebar-component-order`.
-- 30 Svelte files exist in `src/lib/components/` (26 views incl. the `present` MapPresentation player + shared helpers); the README lists 26 views (DataExplorer is documented there).
+- 26 Svelte files exist in `src/lib/views/` (+ 4 shared in `src/lib/shared/`); the README lists 26 views (DataExplorer is documented there).

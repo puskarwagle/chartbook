@@ -1,56 +1,54 @@
 <script lang="ts">
-	import Sidebar from '$lib/Sidebar.svelte';
+	import Sidebar from '$lib/shell/Sidebar.svelte';
 	import { NAV_GROUPS } from '$lib/navGroups';
-	import WorldMap from '$lib/components/WorldMap.svelte';
-	import MapPresentation from '$lib/components/MapPresentation.svelte';
+	import WorldMap from '$lib/views/WorldMap.svelte';
+	import MapPresentation from '$lib/shared/MapPresentation.svelte';
 	import { attachDiffusion, type DiffusionMap, type PresentationSequence } from '$lib/presentation';
-	import adhdSequenceRaw from '../../data/presentation_adhd_timeline.json';
-	import adhdDiffusionRaw from '../../data/presentation_adhd_diffusion.json';
+	import adhdSequenceRaw from '$data/presentation_adhd_timeline.json';
+	import adhdDiffusionRaw from '$data/presentation_adhd_diffusion.json';
 
 	const adhdSequence = attachDiffusion(
 		adhdSequenceRaw as unknown as PresentationSequence,
 		((adhdDiffusionRaw as unknown as { entries?: DiffusionMap }).entries ?? {}) as DiffusionMap
 	);
-	import BrainRegions from '$lib/components/BrainRegions.svelte';
-	import StatsView from '$lib/components/StatsView.svelte';
-	import TimelineView from '$lib/components/TimelineView.svelte';
-	import AgePyramid from '$lib/components/AgePyramid.svelte';
-	import SexComparison from '$lib/components/SexComparison.svelte';
-	import RegionalRanking from '$lib/components/RegionalRanking.svelte';
-	import TrendLine from '$lib/components/TrendLine.svelte';
-	import SDIScatter from '$lib/components/SDIScatter.svelte';
-	import PrisonPrevalence from '$lib/components/PrisonPrevalence.svelte';
-	import ComorbidityBreakdown from '$lib/components/ComorbidityBreakdown.svelte';
-	import SUDbySubstance from '$lib/components/SUDbySubstance.svelte';
-	import SuicideRisk from '$lib/components/SuicideRisk.svelte';
-	import SexDiffSUD from '$lib/components/SexDiffSUD.svelte';
-	import MentalHealthWorldMap from '$lib/components/MentalHealthWorldMap.svelte';
-	import WealthVsWellbeing from '$lib/components/WealthVsWellbeing.svelte';
-	import TreatmentAccessIndex from '$lib/components/TreatmentAccessIndex.svelte';
-	import EducationPressure from '$lib/components/EducationPressure.svelte';
-	import PrisonMentalHealthLink from '$lib/components/PrisonMentalHealthLink.svelte';
-	import HappinessRankings from '$lib/components/HappinessRankings.svelte';
-	import HDIExplorer from '$lib/components/HDIExplorer.svelte';
-	import GovernanceRadar from '$lib/components/GovernanceRadar.svelte';
-	import GlobalHealthTrends from '$lib/components/GlobalHealthTrends.svelte';
-	import EconomicSnapshot from '$lib/components/EconomicSnapshot.svelte';
-	import DataExplorer from '$lib/components/DataExplorer.svelte';
-	import CustomPage from '$lib/components/CustomPage.svelte';
-	import Settings from '$lib/Settings.svelte';
-	import PageInspector from '$lib/PageInspector.svelte';
+	import BrainRegions from '$lib/views/BrainRegions.svelte';
+	import StatsView from '$lib/views/StatsView.svelte';
+	import TimelineView from '$lib/views/TimelineView.svelte';
+	import AgePyramid from '$lib/views/AgePyramid.svelte';
+	import SexComparison from '$lib/views/SexComparison.svelte';
+	import RegionalRanking from '$lib/views/RegionalRanking.svelte';
+	import TrendLine from '$lib/views/TrendLine.svelte';
+	import SDIScatter from '$lib/views/SDIScatter.svelte';
+	import PrisonPrevalence from '$lib/views/PrisonPrevalence.svelte';
+	import ComorbidityBreakdown from '$lib/views/ComorbidityBreakdown.svelte';
+	import SUDbySubstance from '$lib/views/SUDbySubstance.svelte';
+	import SuicideRisk from '$lib/views/SuicideRisk.svelte';
+	import SexDiffSUD from '$lib/views/SexDiffSUD.svelte';
+	import MentalHealthWorldMap from '$lib/views/MentalHealthWorldMap.svelte';
+	import WealthVsWellbeing from '$lib/views/WealthVsWellbeing.svelte';
+	import TreatmentAccessIndex from '$lib/views/TreatmentAccessIndex.svelte';
+	import EducationPressure from '$lib/views/EducationPressure.svelte';
+	import PrisonMentalHealthLink from '$lib/views/PrisonMentalHealthLink.svelte';
+	import HappinessRankings from '$lib/views/HappinessRankings.svelte';
+	import HDIExplorer from '$lib/views/HDIExplorer.svelte';
+	import GovernanceRadar from '$lib/views/GovernanceRadar.svelte';
+	import GlobalHealthTrends from '$lib/views/GlobalHealthTrends.svelte';
+	import EconomicSnapshot from '$lib/views/EconomicSnapshot.svelte';
+	import DataExplorer from '$lib/views/DataExplorer.svelte';
+	import CustomPage from '$lib/views/CustomPage.svelte';
+	import Settings from '$lib/shell/Settings.svelte';
+	import PageInspector from '$lib/shell/PageInspector.svelte';
 	import LanguageSwitcher from '$lib/i18n/LanguageSwitcher.svelte';
 	import { t } from '$lib/i18n/store.svelte';
 	import { interpolate } from '$lib/i18n/format';
 	import { VIEW_INFO } from '$lib/viewInfo';
 	import { COLLECTIONS, DEFAULT_COLLECTION_ID } from '$lib/collections';
-	import customDefaults from '$lib/customPages.json';
+	import type { Component } from 'svelte';
+	import customDefaults from '$data/customPages.json';
 
 	interface ComponentEntry {
 		id: string;
 		label: string;
-		// Svelte components with differing prop types — dynamic render uses
-		// if/else, so unknown avoids generic variance errors.
-		component: unknown;
 	}
 
 	interface Category {
@@ -67,33 +65,64 @@
 	// locales/ne.json + hi.json overlays). $derived so the sidebar
 	// re-renders on locale change; untranslated keys fall back to English.
 	const COMPONENTS = $derived<ComponentEntry[]>([
-		{ id: 'worldmap', label: t('nav.worldmap'), component: WorldMap },
-		{ id: 'present', label: t('nav.present'), component: MapPresentation },
-		{ id: 'brain', label: t('nav.brain'), component: BrainRegions },
-		{ id: 'mhmap', label: t('nav.mhmap'), component: MentalHealthWorldMap },
-		{ id: 'stats', label: t('nav.stats'), component: StatsView },
-		{ id: 'timeline', label: t('nav.timeline'), component: TimelineView },
-		{ id: 'age', label: t('nav.age'), component: AgePyramid },
-		{ id: 'sex', label: t('nav.sex'), component: SexComparison },
-		{ id: 'region', label: t('nav.region'), component: RegionalRanking },
-		{ id: 'trends', label: t('nav.trends'), component: TrendLine },
-		{ id: 'sdi', label: t('nav.sdi'), component: SDIScatter },
-		{ id: 'prison', label: t('nav.prison'), component: PrisonPrevalence },
-		{ id: 'comorbid', label: t('nav.comorbid'), component: ComorbidityBreakdown },
-		{ id: 'sud', label: t('nav.sud'), component: SUDbySubstance },
-		{ id: 'sudsex', label: t('nav.sudsex'), component: SexDiffSUD },
-		{ id: 'suicide', label: t('nav.suicide'), component: SuicideRisk },
-		{ id: 'prisonmh', label: t('nav.prisonmh'), component: PrisonMentalHealthLink },
-		{ id: 'wealth', label: t('nav.wealth'), component: WealthVsWellbeing },
-		{ id: 'happiness', label: t('nav.happiness'), component: HappinessRankings },
-		{ id: 'hdi', label: t('nav.hdi'), component: HDIExplorer },
-		{ id: 'economy', label: t('nav.economy'), component: EconomicSnapshot },
-		{ id: 'education', label: t('nav.education'), component: EducationPressure },
-		{ id: 'governance', label: t('nav.governance'), component: GovernanceRadar },
-		{ id: 'healthtrends', label: t('nav.healthtrends'), component: GlobalHealthTrends },
-		{ id: 'treatment', label: t('nav.treatment'), component: TreatmentAccessIndex },
-		{ id: 'dataexplorer', label: t('nav.dataexplorer'), component: DataExplorer }
+		{ id: 'worldmap', label: t('nav.worldmap') },
+		{ id: 'present', label: t('nav.present') },
+		{ id: 'brain', label: t('nav.brain') },
+		{ id: 'mhmap', label: t('nav.mhmap') },
+		{ id: 'stats', label: t('nav.stats') },
+		{ id: 'timeline', label: t('nav.timeline') },
+		{ id: 'age', label: t('nav.age') },
+		{ id: 'sex', label: t('nav.sex') },
+		{ id: 'region', label: t('nav.region') },
+		{ id: 'trends', label: t('nav.trends') },
+		{ id: 'sdi', label: t('nav.sdi') },
+		{ id: 'prison', label: t('nav.prison') },
+		{ id: 'comorbid', label: t('nav.comorbid') },
+		{ id: 'sud', label: t('nav.sud') },
+		{ id: 'sudsex', label: t('nav.sudsex') },
+		{ id: 'suicide', label: t('nav.suicide') },
+		{ id: 'prisonmh', label: t('nav.prisonmh') },
+		{ id: 'wealth', label: t('nav.wealth') },
+		{ id: 'happiness', label: t('nav.happiness') },
+		{ id: 'hdi', label: t('nav.hdi') },
+		{ id: 'economy', label: t('nav.economy') },
+		{ id: 'education', label: t('nav.education') },
+		{ id: 'governance', label: t('nav.governance') },
+		{ id: 'healthtrends', label: t('nav.healthtrends') },
+		{ id: 'treatment', label: t('nav.treatment') },
+		{ id: 'dataexplorer', label: t('nav.dataexplorer') }
 	]);
+
+	// Prop-less views render via lookup below. Two special cases stay out
+	// of this map: `present` (needs `sequence`) and custom pages (need
+	// pageId/title/onRename). Keys must match COMPONENTS ids and NAV_GROUPS.
+	const VIEWS: Record<string, Component> = {
+		worldmap: WorldMap,
+		brain: BrainRegions,
+		mhmap: MentalHealthWorldMap,
+		stats: StatsView,
+		timeline: TimelineView,
+		age: AgePyramid,
+		sex: SexComparison,
+		region: RegionalRanking,
+		trends: TrendLine,
+		sdi: SDIScatter,
+		prison: PrisonPrevalence,
+		comorbid: ComorbidityBreakdown,
+		sud: SUDbySubstance,
+		sudsex: SexDiffSUD,
+		suicide: SuicideRisk,
+		prisonmh: PrisonMentalHealthLink,
+		wealth: WealthVsWellbeing,
+		happiness: HappinessRankings,
+		hdi: HDIExplorer,
+		economy: EconomicSnapshot,
+		education: EducationPressure,
+		governance: GovernanceRadar,
+		healthtrends: GlobalHealthTrends,
+		treatment: TreatmentAccessIndex,
+		dataexplorer: DataExplorer
+	};
 
 	const CATEGORIES = $derived<Category[]>(
 		NAV_GROUPS.map((g) => ({ name: t(g.key), ids: g.ids }))
@@ -170,7 +199,7 @@
 
 	const ALL_COMPONENTS = $derived<ComponentEntry[]>([
 		...COMPONENTS,
-		...customPages.map((p) => ({ id: p.id, label: p.title, component: CustomPage }))
+		...customPages.map((p) => ({ id: p.id, label: p.title }))
 	]);
 
 	const VISIBLE_IDS = $derived(
@@ -433,58 +462,13 @@
 			<div class="component-wrapper">
 			{#if activeCustom}
 				<CustomPage pageId={activeCustom.id} title={activeCustom.title} onRename={handleRenamePage} />
-			{:else if activeId === 'worldmap'}
-				<WorldMap />
 			{:else if activeId === 'present'}
 				<MapPresentation sequence={adhdSequence} />
-			{:else if activeId === 'brain'}
-				<BrainRegions />
-			{:else if activeId === 'stats'}
-				<StatsView />
-			{:else if activeId === 'timeline'}
-				<TimelineView />
-			{:else if activeId === 'age'}
-				<AgePyramid />
-			{:else if activeId === 'sex'}
-				<SexComparison />
-			{:else if activeId === 'region'}
-				<RegionalRanking />
-			{:else if activeId === 'trends'}
-				<TrendLine />
-			{:else if activeId === 'sdi'}
-				<SDIScatter />
-			{:else if activeId === 'prison'}
-				<PrisonPrevalence />
-			{:else if activeId === 'comorbid'}
-				<ComorbidityBreakdown />
-			{:else if activeId === 'sud'}
-				<SUDbySubstance />
-			{:else if activeId === 'suicide'}
-				<SuicideRisk />
-			{:else if activeId === 'sudsex'}
-				<SexDiffSUD />
-			{:else if activeId === 'mhmap'}
-				<MentalHealthWorldMap />
-			{:else if activeId === 'wealth'}
-				<WealthVsWellbeing />
-			{:else if activeId === 'treatment'}
-				<TreatmentAccessIndex />
-			{:else if activeId === 'education'}
-				<EducationPressure />
-			{:else if activeId === 'prisonmh'}
-				<PrisonMentalHealthLink />
-			{:else if activeId === 'happiness'}
-				<HappinessRankings />
-			{:else if activeId === 'hdi'}
-				<HDIExplorer />
-			{:else if activeId === 'governance'}
-				<GovernanceRadar />
-			{:else if activeId === 'healthtrends'}
-				<GlobalHealthTrends />
-			{:else if activeId === 'economy'}
-				<EconomicSnapshot />
-			{:else if activeId === 'dataexplorer'}
-				<DataExplorer />
+			{:else}
+				{@const View = VIEWS[activeId]}
+				{#if View}
+					<View />
+				{/if}
 			{/if}
 			</div>
 		{/key}

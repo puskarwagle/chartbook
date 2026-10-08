@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
+	import RichText from '$lib/shared/RichText.svelte';
 
 	const metrics = $derived([
 		{

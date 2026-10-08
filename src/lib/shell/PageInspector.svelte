@@ -1,7 +1,7 @@
 <script lang="ts">
 	// PageInspector — per-page gear drawer (top-right of every view).
 	// Shows the "About this chart" info for the active built-in view.
-	import ViewInfo from '$lib/components/ViewInfo.svelte';
+	import ViewInfo from '$lib/shared/ViewInfo.svelte';
 	import type { ViewInfoEntry } from '$lib/viewInfo';
 
 	let {

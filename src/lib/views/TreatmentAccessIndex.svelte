@@ -2,7 +2,7 @@
 	import { computeTreatmentAccessIndex, treatmentAccessCoverage, countryName, iso3ToIso2 } from '$lib/data';
 	import { t, currentLocale } from '$lib/i18n/store.svelte';
 	import { interpolate, getViewInfo } from '$lib/i18n/index';
-	import RichText from './RichText.svelte';
+	import RichText from '$lib/shared/RichText.svelte';
 
 	type ViewMode = 'top20' | 'bottom20' | 'all';
 
